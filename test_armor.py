@@ -39,4 +39,4 @@ class TestArmor:
 
     def test_armor_magic_penalty(self):
         ar = Armor(magic_penalty=10)
-        ar.magic_penalty == 10
+        assert ar.magic_penalty == 10
