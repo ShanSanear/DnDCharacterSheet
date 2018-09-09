@@ -2,25 +2,31 @@ import pytest
 
 from item import *
 
+from item_exceptions import *
+
 class TestItem:
     def test_name(self):
         it = Item(name="Some_weapon")
         assert it.name == "Some_weapon"
 
     def test_weight(self):
-        it = Item("", 2)
+        it = Item(weight=2)
         assert it.weight == 2
 
+    def test_negative_weight(self):
+        with pytest.raises(NegativeWeight):
+            Item(name="", weight=-1)
+
     def test_category(self):
-        it = Item(name="", weight=0, category="food")
+        it = Item(category="food")
         assert it.category == "food"
 
     def test_invalid_category(self):
-        with pytest.raises(CategoryError):
-            Item(name="", weight=0, category="Olaboga")
+        with pytest.raises(IncorrectCategory):
+            Item(category="Olaboga")
 
     def test_incorrect_item_cost(self):
-        with pytest.raises(IncorrectCost):
+        with pytest.raises(NegativeCost):
             Item(cost=-1)
 
     def test_descritpion(self):

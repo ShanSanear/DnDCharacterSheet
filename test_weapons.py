@@ -2,6 +2,8 @@ import pytest
 
 from weapons import *
 
+from item_exceptions import *
+
 
 class TestWeapons:
     def test_weapon_name(self):

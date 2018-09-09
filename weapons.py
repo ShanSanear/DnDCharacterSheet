@@ -1,25 +1,11 @@
 from item import Item
+from item_exceptions import IncorrectWeaponType, IncorrectAttackRange, IncorrectDamage, IncorrectCritical
 import re
 
 DICE_RE = re.compile(r'(?P<count>\d{1,2})([kK]|[dD])(?P<dice>\d{1,3})$')
 CRITICAL_RE = re.compile(r'((?P<low_range>\d{2})-(?P<high_range>\d{2}))?/?([xX](?P<multiplier>\d))$')
 weapon_types = ('ranged', 'melee')
 
-
-class IncorrectWeaponType(Exception):
-    pass
-
-
-class IncorrectAttackRange(Exception):
-    pass
-
-
-class IncorrectDamage(Exception):
-    pass
-
-
-class IncorrectCritical(Exception):
-    pass
 
 
 class Weapon(Item):
