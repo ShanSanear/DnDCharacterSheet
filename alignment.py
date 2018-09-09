@@ -1,0 +1,2 @@
+class Alignement:
+    pass
