@@ -1,0 +1,12 @@
+
+*.iml
+*.xml
+.svn/entries
+.svn/format
+*.svn-base
+.svn/wc.db
+.svn/wc.db-journal
+*.pyc
+.pytest_cache/v/cache/nodeids
+.pytest_cache/v/cache/lastfailed
+.pytest_cache/README.md
