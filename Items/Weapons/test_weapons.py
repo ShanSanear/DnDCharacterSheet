@@ -1,8 +1,8 @@
 import pytest
 
-from weapons import *
+from Items.Weapons.weapons import *
 
-from item_exceptions import *
+from possible_exceptions import *
 
 
 class TestWeapons:
@@ -11,7 +11,7 @@ class TestWeapons:
         assert weapon.name == "Test_name"
 
     def test_weapon_category(self):
-        weapon = Weapon(weight=0, )
+        weapon = Weapon(weight=0)
         assert weapon.category == 'weapon'
 
     def test_weapon_damage(self):

@@ -1,7 +1,7 @@
 import pytest
 
-from shield import *
-from item_exceptions import *
+from Items.Armor.shield import *
+from possible_exceptions import *
 
 
 class TestShield:

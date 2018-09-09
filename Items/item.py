@@ -1,6 +1,6 @@
-from item_exceptions import IncorrectCategory, NegativeCost, NegativeWeight
+from possible_exceptions import IncorrectCategory, NegativeCost, NegativeWeight
 
-possible_categories = ("weapon", "food", "other", "armor")
+possible_categories = ("weapon", "food", "other", "armor", "jewelry")
 
 
 class Item:

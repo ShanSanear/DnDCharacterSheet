@@ -1,5 +1,5 @@
-from weapons import Weapon
-from item_exceptions import LightWeaponCheck, HandlingError
+from Items.Weapons.weapons import Weapon
+from possible_exceptions import LightWeaponCheck, HandlingError
 import re
 from patterns import HANDLING_RE
 

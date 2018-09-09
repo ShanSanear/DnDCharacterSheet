@@ -1,4 +1,4 @@
-from attributes import Attributes
+from Character.attributes import Attributes
 
 class Character:
     def __init__(self, name, attributes = None):

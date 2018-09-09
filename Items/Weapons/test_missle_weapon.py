@@ -1,6 +1,6 @@
 import pytest
 
-from missle_weapon import *
+from Items.Weapons.missle_weapon import *
 
 class TestMissleWeapon:
     def test_name(self):

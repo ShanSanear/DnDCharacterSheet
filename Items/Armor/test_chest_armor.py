@@ -1,8 +1,8 @@
 import pytest
 
-from item_exceptions import *
+from possible_exceptions import *
 
-from chest_armor import *
+from Items.Armor.chest_armor import *
 
 
 class TestChestArmor:

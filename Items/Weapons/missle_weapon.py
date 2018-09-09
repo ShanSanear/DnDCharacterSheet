@@ -1,5 +1,5 @@
-from weapons import Weapon
-from item_exceptions import *
+from Items.Weapons.weapons import Weapon
+from possible_exceptions import *
 
 possible_ammo = ('belt', 'arrow', 'rock', 'bullets')
 

@@ -1,8 +1,8 @@
 import pytest
 
-from item import *
+from Items.item import *
 
-from item_exceptions import *
+from possible_exceptions import *
 
 class TestItem:
     def test_name(self):

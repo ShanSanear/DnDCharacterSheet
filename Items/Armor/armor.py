@@ -1,5 +1,5 @@
-from item import Item
-from item_exceptions import NegativeArmorBonus, NegativeDexBonus, NegativePenalty
+from Items.item import Item
+from possible_exceptions import NegativeArmorBonus, NegativeDexBonus, NegativePenalty
 
 class Armor(Item):
     def __init__(self, name='', bonus=0, magic_bonus=0, max_dex_bonus=0,

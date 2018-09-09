@@ -1,4 +1,4 @@
-from armor import Armor
+from Items.Armor.armor import Armor
 
 
 class Shield(Armor):

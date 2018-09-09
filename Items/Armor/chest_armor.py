@@ -1,5 +1,5 @@
-from armor import Armor
-from item_exceptions import IncorrectArmorType
+from Items.Armor.armor import Armor
+from possible_exceptions import IncorrectArmorType
 
 possible_armor_types = ('light', 'medium', 'heavy')
 

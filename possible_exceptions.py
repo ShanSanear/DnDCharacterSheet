@@ -49,3 +49,6 @@ class IncorrectAmmoType(Exception):
 
 class NegativeAmmoCount(Exception):
     pass
+
+class NoAttributesInstance(Exception):
+    pass

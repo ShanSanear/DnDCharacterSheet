@@ -1,5 +1,5 @@
-from item import Item
-from item_exceptions import IncorrectDamage, IncorrectCritical
+from Items.item import Item
+from possible_exceptions import IncorrectDamage, IncorrectCritical
 from patterns import CRITICAL_RE, DICE_RE
 
 import re

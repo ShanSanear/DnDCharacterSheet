@@ -1,8 +1,8 @@
 import pytest
 
-from melee_weapon import *
+from Items.Weapons.melee_weapon import *
 
-from item_exceptions import *
+from possible_exceptions import *
 
 class TestMeleeWeapon:
         def test_melee_weapon_name(self):

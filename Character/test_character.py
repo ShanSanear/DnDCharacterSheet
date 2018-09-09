@@ -1,5 +1,4 @@
-from character import Character
-import pytest
+from Character.character import Character
 
 
 class TestCharacter:
@@ -11,5 +10,4 @@ class TestCharacter:
     def test_attributes(self):
         attributes = {"dex": 12}
         pc = Character(name="Shan", attributes=attributes)
-        assert pc.attributes.dex == 12
-        assert pc.attributes.dex_mod == 1
+        assert pc.attributes.dex == {"value" : 12, "mod" : 1}
