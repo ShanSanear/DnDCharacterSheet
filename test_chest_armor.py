@@ -4,6 +4,7 @@ from item_exceptions import *
 
 from chest_armor import *
 
+
 class TestChestArmor:
     def test_chest_armor_name(self):
         chest_ar = ChestArmor(name='DUMMY_NAME')
@@ -24,7 +25,6 @@ class TestChestArmor:
     def test_negative_cost(self):
         with pytest.raises(NegativeCost):
             ChestArmor(cost=-1)
-
 
     def test_chest_armor_type(self):
         chest_ar = ChestArmor(armor_type='light')
@@ -55,10 +55,3 @@ class TestChestArmor:
             ChestArmor(test_penalty=-1)
         with pytest.raises(NegativePenalty):
             ChestArmor(magic_penalty=-1)
-
-
-
-
-
-
-

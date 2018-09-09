@@ -1,17 +1,14 @@
 from item import Item
-from item_exceptions import IncorrectWeaponType, IncorrectAttackRange, IncorrectDamage, IncorrectCritical
+from item_exceptions import IncorrectDamage, IncorrectCritical
+from patterns import CRITICAL_RE, DICE_RE
+
 import re
-
-DICE_RE = re.compile(r'(?P<count>\d{1,2})([kK]|[dD])(?P<dice>\d{1,3})$')
-CRITICAL_RE = re.compile(r'((?P<low_range>\d{2})-(?P<high_range>\d{2}))?/?([xX](?P<multiplier>\d))$')
-weapon_types = ('ranged', 'melee')
-
 
 
 class Weapon(Item):
-    def __init__(self, name='', weapon_type='melee', damage='1d4',
-                 critical='x2', attack_range=0, weight=0, description=''):
-        super().__init__(name=name, weight=weight, category='weapon', description=description)
+    def __init__(self, name='', damage='1d4',
+                 critical='x2', attack_range=0, weight=0, description='', cost=0):
+        super().__init__(name=name, weight=weight, category='weapon', description=description, cost=cost)
 
         self.min_damage = 0
         self.max_damage = 0
@@ -19,39 +16,44 @@ class Weapon(Item):
         if not damage_match:
             raise IncorrectDamage("Incorrect damage passed: {}".format(damage))
         else:
-            self.fill_damage_range(damage_match)
+            self._fill_damage_range(damage_match)
 
-        if attack_range < 0 or (attack_range == 0 and weapon_type == 'ranged'):
-            raise IncorrectAttackRange("Incorrect range: {} for weapon type: {}".format(attack_range, weapon_type))
-
-        if weapon_type not in weapon_types:
-            raise IncorrectWeaponType("Invalid weapon type: {}".format(weapon_type))
-
-        self.critical_multiplier = 0
+        self.critical_multiplier = 2
         self.critical_range = (20, 20)
 
         crit_match = re.match(CRITICAL_RE, critical)
         if crit_match:
-            self.fill_critical_range(crit_match)
+            self._fill_critical_range(crit_match)
         else:
             raise IncorrectCritical("Incorrect critical value passed: {}".format(critical))
 
-        self.type = weapon_type
         self.range = attack_range
 
-    def fill_damage_range(self, match):
-        self.min_damage = int(match['count'])
-        self.max_damage = int(match['dice']) * int(match['count'])
+    def _fill_damage_range(self, match):
+        count = int(match['count'])
+        dice = int(match['dice'])
+        try:
+            bonus = int(match['bonus'])
+        except TypeError:
+            bonus = 0
+        self.min_damage = count + bonus
+        self.max_damage = dice * count + bonus
 
-    @property
-    def get_weapon_damage(self):
+    def _get_weapon_damage(self):
         return {"min": self.min_damage, "max": self.max_damage}
 
-    def fill_critical_range(self, match):
+    def _set_weapon_damage(self, damage):
+        damage_match = re.match(DICE_RE, damage)
+        if damage_match:
+            self._fill_damage_range(damage_match)
+        else:
+            raise IncorrectDamage("Incorrect damage passed: {}".format(damage))
+
+    def _fill_critical_range(self, match):
         self.critical_multiplier = int(match['multiplier'])
         try:
             self.critical_range = (int(match['low_range']), int(match['high_range']))
         except TypeError:
             pass
 
-    damage = get_weapon_damage
+    damage = property(_get_weapon_damage, _set_weapon_damage)

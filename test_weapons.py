@@ -14,18 +14,6 @@ class TestWeapons:
         weapon = Weapon(weight=0, )
         assert weapon.category == 'weapon'
 
-    def test_ranged_weapon_type(self):
-        weapon = Weapon(weapon_type='ranged', attack_range=1)
-        assert weapon.type == 'ranged'
-
-    def test_incorrect_weapon_type(self):
-        with pytest.raises(IncorrectWeaponType):
-            Weapon(name='', weapon_type='omnomnomnom')
-
-    def test_ranged_weapon_without_range(self):
-        with pytest.raises(IncorrectAttackRange):
-            Weapon(name='', weapon_type='ranged', attack_range=0)
-
     def test_weapon_damage(self):
         weapon = Weapon(damage='1d6')
         assert weapon.damage == {"min": 1, "max": 6}
@@ -33,15 +21,31 @@ class TestWeapons:
         assert weapon.damage == {"min": 2, "max": 12}
         weapon = Weapon(damage='3K4')
         assert weapon.damage == {"min": 3, "max": 12}
+        weapon = Weapon(damage='2D6')
+        assert weapon.damage == {"min": 2, "max": 12}
+        weapon = Weapon(damage='2k4+1')
+        assert weapon.damage == {'min': 3, "max": 9}
 
     def test_inccorect_weapon_damage(self):
         with pytest.raises(IncorrectDamage):
             Weapon(damage='1s6')
 
-    def test_cant_change_damage(self):
-        with pytest.raises(AttributeError):
-            weapon = Weapon(damage='1d6')
-            weapon.damage = {'min': 3, 'max': 8}
+        with pytest.raises(IncorrectDamage):
+            Weapon(damage='1k4+')
+
+        with pytest.raises(IncorrectDamage):
+            Weapon(damage='4w8+')
+
+    def test_change_weapon_damage(self):
+        wep = Weapon(damage='1k8')
+        assert wep.damage == {'min': 1, 'max': 8}
+        wep.damage = '1k12+1'
+        assert wep.damage == {'min': 2, 'max': 13}
+
+    def test_wrong_change_weapon_damage(self):
+        wep = Weapon(damage="1k12")
+        with pytest.raises(IncorrectDamage):
+            wep.damage = '1k8x'
 
     def test_critical_range(self):
         weapon = Weapon(critical='x3')
@@ -67,3 +71,6 @@ class TestWeapons:
         weapon = Weapon(description="DESC")
         assert weapon.description == "DESC"
 
+    def test_weapon_cost(self):
+        weapon = Weapon(cost=1)
+        assert weapon.cost == 1

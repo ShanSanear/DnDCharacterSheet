@@ -38,3 +38,14 @@ class NegativeWeight(Exception):
 class IncorrectArmorType(Exception):
     pass
 
+class LightWeaponCheck(Exception):
+    pass
+
+class HandlingError(Exception):
+    pass
+
+class IncorrectAmmoType(Exception):
+    pass
+
+class NegativeAmmoCount(Exception):
+    pass
