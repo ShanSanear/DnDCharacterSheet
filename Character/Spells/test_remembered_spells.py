@@ -12,10 +12,10 @@ class TestRememberedSpells:
 
     def test_added_spell(self):
         sb = SpellBook()
-        sb.add_spell("Fireball", "Fireball_Desc", 3)
+        sb.add_spell("Fireballs", "Fireball_Desc", 3)
         rs = RememberedSpells(sb)
-        rs.remember("Fireball")
-        assert rs.remembered[3] == {"Fireball": {"Description": "Fireball_Desc", "level": 3}}
+        rs.remember("Fireballs")
+        assert rs.remembered[3] == {"Fireballs": {"Description": "Fireball_Desc", "level": 3}}
 
     def test_removed_spell(self):
         sb = SpellBook()
