@@ -25,6 +25,7 @@ class IncorrectDamage(Exception):
 class IncorrectCritical(Exception):
     pass
 
+
 class IncorrectCategory(Exception):
     pass
 
@@ -32,23 +33,41 @@ class IncorrectCategory(Exception):
 class NegativeCost(Exception):
     pass
 
+
 class NegativeWeight(Exception):
     pass
+
 
 class IncorrectArmorType(Exception):
     pass
 
+
 class LightWeaponCheck(Exception):
     pass
+
 
 class HandlingError(Exception):
     pass
 
+
 class IncorrectAmmoType(Exception):
     pass
+
 
 class NegativeAmmoCount(Exception):
     pass
 
+
 class NoAttributesInstance(Exception):
+    pass
+
+
+class NoSpellException(Exception):
+    pass
+
+
+class SpellNotInSpellBook(Exception):
+    pass
+
+class SpellNotRemembered(Exception):
     pass
