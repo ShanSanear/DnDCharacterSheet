@@ -3,13 +3,17 @@ class InvalidAttribute(Exception):
 
 
 class Attributes:
-    def __init__(self, attributes):
+    def __init__(self, attributes=None):
+        if not attributes:
+            attributes = {}
+
         self._str = 10
         self._dex = 10
         self._con = 10
         self._wis = 10
         self._int = 10
         self._cha = 10
+
         self.decreases = {}
 
         for key, val in attributes.items():
@@ -24,45 +28,45 @@ class Attributes:
         self.decreases[attr] = decrease_value
         setattr(self, attr, current_value - decrease_value)
 
-    def get_str(self):
+    def _get_str(self):
         return {"value": self._str, "mod": (self._str - 10) // 2}
 
-    def get_dex(self):
+    def _get_dex(self):
         return {"value": self._dex, "mod": (self._dex - 10) // 2}
 
-    def get_con(self):
+    def _get_con(self):
         return {"value": self._con, "mod": (self._con - 10) // 2}
 
-    def get_wis(self):
+    def _get_wis(self):
         return {"value": self._wis, "mod": (self._wis - 10) // 2}
 
-    def get_int(self):
+    def _get_int(self):
         return {"value": self._int, "mod": (self._int - 10) // 2}
 
-    def get_cha(self):
+    def _get_cha(self):
         return {"value": self._cha, "mod": (self._cha - 10) // 2}
 
-    def set_str(self, val):
+    def _set_str(self, val):
         self._str = val
 
-    def set_dex(self, val):
+    def _set_dex(self, val):
         self._dex = val
 
-    def set_con(self, val):
+    def _set_con(self, val):
         self._con = val
 
-    def set_wis(self, val):
+    def _set_wis(self, val):
         self._wis = val
 
-    def set_int(self, val):
+    def _set_int(self, val):
         self._int = val
 
-    def set_cha(self, val):
+    def _set_cha(self, val):
         self._cha = val
 
-    str = property(get_str, set_str)
-    dex = property(get_dex, set_dex)
-    con = property(get_con, set_con)
-    wis = property(get_wis, set_wis)
-    int = property(get_int, set_int)
-    cha = property(get_cha, set_cha)
+    str = property(_get_str, _set_str)
+    dex = property(_get_dex, _set_dex)
+    con = property(_get_con, _set_con)
+    wis = property(_get_wis, _set_wis)
+    int = property(_get_int, _set_int)
+    cha = property(_get_cha, _set_cha)

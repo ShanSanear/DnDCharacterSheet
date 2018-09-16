@@ -1,3 +1,4 @@
+from birdseye import eye
 import pytest
 from Character.attributes import *
 
