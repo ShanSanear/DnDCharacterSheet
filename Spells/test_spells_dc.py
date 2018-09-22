@@ -1,6 +1,5 @@
-from Character.Spells.spells_dc import *
 from Character.attributes import Attributes
-
+from Spells.spells_dc import *
 
 class TestSpepllsDc:
     def test_init_spells_dc(self):

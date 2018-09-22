@@ -1,4 +1,4 @@
-from Character.Spells.spells_per_day import *
+from Spells.spells_per_day import *
 from Character.attributes import Attributes
 
 

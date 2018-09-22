@@ -13,8 +13,9 @@ class RememberedSpells:
                 continue
 
     def remember(self, name_to_remember):
-        found_spell = getattr(self._spell_book, name_to_remember, None)
-        if not found_spell:
+        try:
+            found_spell = getattr(self._spell_book, name_to_remember)
+        except KeyError:
             raise SpellNotInSpellBook("There is no spell named {} in spellbook.".format(name_to_remember))
 
         setattr(self, name_to_remember, found_spell)
@@ -22,7 +23,7 @@ class RememberedSpells:
     def forget(self, name_to_forget):
         try:
             delattr(self, name_to_forget)
-        except AttributeError:
+        except (AttributeError, KeyError):
             raise SpellNotRemembered("No spell named: {} in remembered spells.".format(name_to_forget))
 
     def _get_remembered_spells(self):

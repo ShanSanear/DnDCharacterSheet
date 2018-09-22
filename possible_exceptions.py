@@ -71,3 +71,6 @@ class SpellNotInSpellBook(Exception):
 
 class SpellNotRemembered(Exception):
     pass
+
+class IncorrectSpellSchool(Exception):
+    pass

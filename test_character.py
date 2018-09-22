@@ -1,4 +1,4 @@
-from Character.character import Character
+from character import Character
 
 
 class TestCharacter:

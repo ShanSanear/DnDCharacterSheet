@@ -1,6 +1,6 @@
 import pytest
 
-from Character.Spells.known_spells import *
+from Spells.known_spells import *
 
 
 class TestKnownSpells:
