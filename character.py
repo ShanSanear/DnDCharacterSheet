@@ -1,7 +1,8 @@
 from Character.attributes import Attributes
 
+
 class Character:
-    def __init__(self, name, attributes = None):
+    def __init__(self, name, attributes=None):
         if not attributes:
             attributes = {}
         self.name = name
