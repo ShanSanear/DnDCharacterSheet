@@ -69,8 +69,14 @@ class NoSpellException(Exception):
 class SpellNotInSpellBook(Exception):
     pass
 
+
 class SpellNotRemembered(Exception):
     pass
 
+
 class IncorrectSpellSchool(Exception):
+    pass
+
+
+class IncorrectAlignementError(Exception):
     pass

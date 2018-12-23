@@ -1,4 +1,4 @@
-from possible_exceptions import *
+from possible_exceptions import NoAttributesInstance
 
 
 class Skill:
