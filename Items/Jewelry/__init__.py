@@ -1,2 +1,2 @@
 from . import rings
-from . import test_rings
+from Items.Jewelry.Tests import test_rings
