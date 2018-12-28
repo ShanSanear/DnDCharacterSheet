@@ -1,15 +1,15 @@
-from Character.Throws.misc_saving_throw import *
+from core.throws.magic_saving_throw import *
 
-class TestMiscSavingThrow:
+class TestMagicSavingThrow:
 
     def testBaseValues(self):
-        mst = MiscSavingThrow()
+        mst = MagicSavingThrow()
         assert mst.fortitude == 0
         assert mst.reflex == 0
         assert mst.will == 0
 
     def testSetValue(self):
-        mst = MiscSavingThrow()
+        mst = MagicSavingThrow()
         mst.will = 12
         assert mst.will == 12
         mst.fortitude = 12

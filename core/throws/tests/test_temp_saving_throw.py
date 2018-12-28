@@ -1,4 +1,4 @@
-from Character.Throws.temp_saving_throw import *
+from core.throws.temp_saving_throw import *
 
 class TestTempSavingThrow:
 
@@ -16,5 +16,3 @@ class TestTempSavingThrow:
         assert tst.fortitude == 12
         tst.reflex = 12
         assert tst.reflex == 12
-
-

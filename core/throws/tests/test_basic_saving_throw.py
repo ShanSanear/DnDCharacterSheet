@@ -1,4 +1,4 @@
-from Character.Throws.basic_saving_throw import *
+from core.throws.basic_saving_throw import *
 
 
 class TestBasicSavingThrow:
@@ -17,5 +17,3 @@ class TestBasicSavingThrow:
         assert bst.fortitude == 12
         bst.reflex = 12
         assert bst.reflex == 12
-
-
