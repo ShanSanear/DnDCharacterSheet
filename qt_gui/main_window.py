@@ -9,9 +9,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-# noinspection PyAttributeOutsideInit,PyAttributeOutsideInit
+# noinspection PyAttributeOutsideInit
 class MainWindowUi(object):
-    def setupUi(self, MainWindow):
+    def setup_ui(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1748, 1267)
         MainWindow.setSizeIncrement(QtCore.QSize(1, 0))
@@ -77,6 +77,9 @@ class MainWindowUi(object):
         self.menuBar.addAction(self.menuAbout.menuAction())
 
     def create_weapon_statistics_box(self):
+        min_size_def = (60, 23)
+        max_size_def = (60, 20)
+        max_label_size = (16777215, 20)
         self.WeaponStatisticsBox = QtWidgets.QGroupBox(self.centralwidget)
         self.WeaponStatisticsBox.setGeometry(QtCore.QRect(1240, 160, 261, 121))
         self.WeaponStatisticsBox.setObjectName("WeaponStatisticsBox")
@@ -87,57 +90,38 @@ class MainWindowUi(object):
         self.WeaponStatisticsLayout.setContentsMargins(9, 9, 9, 9)
         self.WeaponStatisticsLayout.setSpacing(6)
         self.WeaponStatisticsLayout.setObjectName("WeaponStatisticsLayout")
-        self.weapon_statistics_attack_bonus_label = QtWidgets.QLabel(self.gridLayoutWidget_13)
-        self.weapon_statistics_attack_bonus_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.weapon_statistics_attack_bonus_label.setObjectName("weapon_statistics_attack_bonus_label")
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_attack_bonus_label, 0, 1, 1, 1)
-        self.weapon_statistics_ranged_damage = QtWidgets.QLineEdit(self.gridLayoutWidget_13)
-        self.weapon_statistics_ranged_damage.setMinimumSize(QtCore.QSize(60, 23))
-        self.weapon_statistics_ranged_damage.setMaximumSize(QtCore.QSize(60, 20))
-        self.weapon_statistics_ranged_damage.setObjectName("weapon_statistics_ranged_damage")
+
+        self.weapon_statistics_ranged_damage = self.create_qline_edit(min_size_def, max_size_def,  self.gridLayoutWidget_13, "weapon_statistics_ranged_damage")
         self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_damage, 2, 2, 1, 1)
-        self.weapon_statistics_ranged_attack_bonus = QtWidgets.QLineEdit(self.gridLayoutWidget_13)
-        self.weapon_statistics_ranged_attack_bonus.setMinimumSize(QtCore.QSize(60, 23))
-        self.weapon_statistics_ranged_attack_bonus.setMaximumSize(QtCore.QSize(60, 20))
-        self.weapon_statistics_ranged_attack_bonus.setObjectName("weapon_statistics_ranged_attack_bonus")
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_attack_bonus, 2, 1, 1, 1)
-        self.weapon_statistics_ranged_crit = QtWidgets.QLineEdit(self.gridLayoutWidget_13)
-        self.weapon_statistics_ranged_crit.setMinimumSize(QtCore.QSize(60, 23))
-        self.weapon_statistics_ranged_crit.setMaximumSize(QtCore.QSize(60, 20))
-        self.weapon_statistics_ranged_crit.setObjectName("weapon_statistics_ranged_crit")
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_crit, 2, 3, 1, 1)
-        self.weapon_statistics_melee_attack_bonus = QtWidgets.QLineEdit(self.gridLayoutWidget_13)
-        self.weapon_statistics_melee_attack_bonus.setMinimumSize(QtCore.QSize(60, 23))
-        self.weapon_statistics_melee_attack_bonus.setMaximumSize(QtCore.QSize(60, 20))
-        self.weapon_statistics_melee_attack_bonus.setObjectName("weapon_statistics_melee_attack_bonus")
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_attack_bonus, 1, 1, 1, 1)
-        self.weapon_statistics_melee_crit = QtWidgets.QLineEdit(self.gridLayoutWidget_13)
-        self.weapon_statistics_melee_crit.setMinimumSize(QtCore.QSize(60, 23))
-        self.weapon_statistics_melee_crit.setMaximumSize(QtCore.QSize(60, 20))
-        self.weapon_statistics_melee_crit.setObjectName("weapon_statistics_melee_crit")
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_crit, 1, 3, 1, 1)
-        self.weapon_statistics_damage_label = QtWidgets.QLabel(self.gridLayoutWidget_13)
-        self.weapon_statistics_damage_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.weapon_statistics_damage_label.setObjectName("weapon_statistics_damage_label")
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_damage_label, 0, 2, 1, 1)
-        self.weapon_statistics_crit_label = QtWidgets.QLabel(self.gridLayoutWidget_13)
-        self.weapon_statistics_crit_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.weapon_statistics_crit_label.setObjectName("weapon_statistics_crit_label")
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_crit_label, 0, 3, 1, 1)
-        self.weapon_statistics_melee_damage = QtWidgets.QLineEdit(self.gridLayoutWidget_13)
-        self.weapon_statistics_melee_damage.setMinimumSize(QtCore.QSize(60, 23))
-        self.weapon_statistics_melee_damage.setMaximumSize(QtCore.QSize(60, 20))
-        self.weapon_statistics_melee_damage.setObjectName("weapon_statistics_melee_damage")
+
+        self.weapon_statistics_melee_damage = self.create_qline_edit(min_size_def, max_size_def,  self.gridLayoutWidget_13, "weapon_statistics_melee_damage")
         self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_damage, 1, 2, 1, 1)
-        self.weapon_statistics_melee_label = QtWidgets.QLabel(self.gridLayoutWidget_13)
-        self.weapon_statistics_melee_label.setMinimumSize(QtCore.QSize(0, 20))
-        self.weapon_statistics_melee_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.weapon_statistics_melee_label.setObjectName("weapon_statistics_melee_label")
+
+        self.weapon_statistics_ranged_attack_bonus = self.create_qline_edit(min_size_def, max_size_def,  self.gridLayoutWidget_13, "weapon_statistics_ranged_attack_bonus")
+        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_attack_bonus, 2, 1, 1, 1)
+
+        self.weapon_statistics_ranged_crit = self.create_qline_edit(min_size_def, max_size_def,  self.gridLayoutWidget_13, "weapon_statistics_ranged_crit")
+        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_crit, 2, 3, 1, 1)
+
+        self.weapon_statistics_melee_attack_bonus = self.create_qline_edit(min_size_def, max_size_def,  self.gridLayoutWidget_13, "weapon_statistics_melee_attack_bonus")
+        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_attack_bonus, 1, 1, 1, 1)
+
+        self.weapon_statistics_melee_crit = self.create_qline_edit(min_size_def, max_size_def,  self.gridLayoutWidget_13, "weapon_statistics_melee_crit")
+        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_crit, 1, 3, 1, 1)
+
+        self.weapon_statistics_attack_bonus_label = self.create_qlabel([], max_label_size, self.gridLayoutWidget_13, "weapon_statistics_attack_bonus_label")
+        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_attack_bonus_label, 0, 1, 1, 1)
+
+        self.weapon_statistics_damage_label = self.create_qlabel([], max_label_size, self.gridLayoutWidget_13, "weapon_statistics_damage_label")
+        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_damage_label, 0, 2, 1, 1)
+
+        self.weapon_statistics_crit_label = self.create_qlabel([], max_label_size, self.gridLayoutWidget_13, "weapon_statistics_crit_label")
+        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_crit_label, 0, 3, 1, 1)
+
+        self.weapon_statistics_melee_label = self.create_qlabel([], max_label_size, self.gridLayoutWidget_13, "weapon_statistics_melee_label")
         self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_label, 1, 0, 1, 1)
-        self.weapon_statistics_ranged_label = QtWidgets.QLabel(self.gridLayoutWidget_13)
-        self.weapon_statistics_ranged_label.setMinimumSize(QtCore.QSize(0, 20))
-        self.weapon_statistics_ranged_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.weapon_statistics_ranged_label.setObjectName("weapon_statistics_ranged_label")
+
+        self.weapon_statistics_ranged_label = self.create_qlabel([], max_label_size, self.gridLayoutWidget_13, "weapon_statistics_ranged_label")
         self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_label, 2, 0, 1, 1)
 
     def create_skills_layout(self):
@@ -232,6 +216,8 @@ class MainWindowUi(object):
         self.SkillsLayout.addWidget(self.skills_total_label, 0, 2, 1, 1)
 
     def create_number_of_spells_box(self):
+        min_size_label = (0, 23)
+        min_size_qline = (0, 23)
         self.NumberOfSpellsBox = QtWidgets.QGroupBox(self.centralwidget)
         self.NumberOfSpellsBox.setGeometry(QtCore.QRect(840, 560, 581, 131))
         self.NumberOfSpellsBox.setObjectName("NumberOfSpellsBox")
@@ -242,80 +228,69 @@ class MainWindowUi(object):
         self.NumberOfSpellsLayout.setContentsMargins(9, 9, 9, 9)
         self.NumberOfSpellsLayout.setSpacing(6)
         self.NumberOfSpellsLayout.setObjectName("NumberOfSpellsLayout")
-        self.number_of_spells_0th_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_0th_label.setObjectName("number_of_spells_0th_label")
+
+        self.number_of_spells_0th_label = self.create_qlabel(min_size_label, [], self.gridLayoutWidget_10, "number_of_spells_0th_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_0th_label, 1, 0, 1, 1)
-        self.number_of_spells_1 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_1.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_1.setObjectName("number_of_spells_1")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_1, 1, 3, 1, 1)
-        self.number_of_spells_4th_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_4th_label.setObjectName("number_of_spells_4th_label")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_4th_label, 1, 8, 1, 1)
-        self.number_of_spells_4 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_4.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_4.setObjectName("number_of_spells_4")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_4, 1, 9, 1, 1)
-        self.number_of_spells_2nd_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_2nd_label.setObjectName("number_of_spells_2nd_label")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_2nd_label, 1, 4, 1, 1)
-        self.number_of_spells_2 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_2.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_2.setObjectName("number_of_spells_2")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_2, 1, 5, 1, 1)
-        self.number_of_spells_3rd_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_3rd_label.setObjectName("number_of_spells_3rd_label")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_3rd_label, 1, 6, 1, 1)
-        self.number_of_spells_3 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_3.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_3.setObjectName("number_of_spells_3")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_3, 1, 7, 1, 1)
-        self.number_of_spells_0 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_0.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_0.setObjectName("number_of_spells_0")
+
+        self.number_of_spells_0 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_0")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_0, 1, 1, 1, 1)
-        self.number_of_spells_1st_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_1st_label.setObjectName("number_of_spells_1st_label")
+
+        self.number_of_spells_1st_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_1st_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_1st_label, 1, 2, 1, 1)
-        self.number_of_spells_5th_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_5th_label.setObjectName("number_of_spells_5th_label")
+
+        self.number_of_spells_1 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_1")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_1, 1, 3, 1, 1)
+
+        self.number_of_spells_2nd_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_2nd_label")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_2nd_label, 1, 4, 1, 1)
+
+        self.number_of_spells_2 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_2")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_2, 1, 5, 1, 1)
+
+        self.number_of_spells_3rd_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_3rd_label")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_3rd_label, 1, 6, 1, 1)
+
+        self.number_of_spells_3 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_3")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_3, 1, 7, 1, 1)
+
+        self.number_of_spells_4th_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_4th_label")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_4th_label, 1, 8, 1, 1)
+
+        self.number_of_spells_4 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_4")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_4, 1, 9, 1, 1)
+
+        self.number_of_spells_5th_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_5th_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_5th_label, 2, 0, 1, 1)
-        self.number_of_spells_5 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_5.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_5.setObjectName("number_of_spells_5")
+
+        self.number_of_spells_5 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_5")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_5, 2, 1, 1, 1)
-        self.number_of_spells_6 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_6.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_6.setObjectName("number_of_spells_6")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_6, 2, 3, 1, 1)
-        self.number_of_spells_7 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_7.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_7.setObjectName("number_of_spells_7")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_7, 2, 5, 1, 1)
-        self.number_of_spells_8 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_8.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_8.setObjectName("number_of_spells_8")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_8, 2, 7, 1, 1)
-        self.number_of_spells_9 = QtWidgets.QLineEdit(self.gridLayoutWidget_10)
-        self.number_of_spells_9.setMinimumSize(QtCore.QSize(0, 23))
-        self.number_of_spells_9.setObjectName("number_of_spells_9")
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_9, 2, 9, 1, 1)
-        self.number_of_spells_6th_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_6th_label.setObjectName("number_of_spells_6th_label")
+
+        self.number_of_spells_6th_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_6th_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_6th_label, 2, 2, 1, 1)
-        self.number_of_spells_7th_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_7th_label.setObjectName("number_of_spells_7th_label")
+
+        self.number_of_spells_6 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_6")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_6, 2, 3, 1, 1)
+
+        self.number_of_spells_7th_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_7th_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_7th_label, 2, 4, 1, 1)
-        self.number_of_spells_8th_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_8th_label.setObjectName("number_of_spells_8th_label")
+
+        self.number_of_spells_7 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_7")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_7, 2, 5, 1, 1)
+
+        self.number_of_spells_8th_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_8th_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_8th_label, 2, 6, 1, 1)
-        self.number_of_spells_9th_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
-        self.number_of_spells_9th_label.setObjectName("number_of_spells_9th_label")
+
+        self.number_of_spells_8 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_8")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_8, 2, 7, 1, 1)
+
+        self.number_of_spells_9th_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_9th_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_9th_label, 2, 8, 1, 1)
-        self.number_of_spells_known_number_of_spells_label = QtWidgets.QLabel(self.gridLayoutWidget_10)
+
+        self.number_of_spells_9 = self.create_qline_edit(min_size_qline, [], self.gridLayoutWidget_10, "number_of_spells_9")
+        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_9, 2, 9, 1, 1)
+
+        self.number_of_spells_known_number_of_spells_label = self.create_qlabel([], [], self.gridLayoutWidget_10, "number_of_spells_known_number_of_spells_label")
         self.number_of_spells_known_number_of_spells_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.number_of_spells_known_number_of_spells_label.setObjectName(
-            "number_of_spells_known_number_of_spells_label")
         self.NumberOfSpellsLayout.addWidget(self.number_of_spells_known_number_of_spells_label, 0, 2, 1, 6)
 
     def create_spells_per_day_box(self):
@@ -329,6 +304,7 @@ class MainWindowUi(object):
         self.SpellsPerDayLayout.setContentsMargins(9, 9, 9, 9)
         self.SpellsPerDayLayout.setSpacing(6)
         self.SpellsPerDayLayout.setObjectName("SpellsPerDayLayout")
+
         self.spells_per_day_dc_lvl_0 = QtWidgets.QLineEdit(self.gridLayoutWidget_9)
         self.spells_per_day_dc_lvl_0.setMinimumSize(QtCore.QSize(0, 23))
         self.spells_per_day_dc_lvl_0.setAlignment(QtCore.Qt.AlignCenter)
@@ -2077,28 +2053,6 @@ class MainWindowUi(object):
         self.character_level_label.setObjectName("character_level_label")
         self.BasicInfoLayout.addWidget(self.character_level_label, 4, 0, 1, 1)
 
-    def create_palette(self):
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        return palette
-
     def retranslate_ui(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -2499,4 +2453,45 @@ class MainWindowUi(object):
         self.actionOpen_character.setText(_translate("MainWindow", "Open"))
         self.actionSave.setText(_translate("MainWindow", "Save"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
+
+    def create_palette(self):
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
+        return palette
+
+    def create_qlabel(self, min_size, max_size, parent, name):
+        label = QtWidgets.QLabel(parent)
+        label = self.resize_element(label, min_size, max_size)
+        label.setObjectName(name)
+        return label
+
+    def create_qline_edit(self, min_size, max_size, parent, name):
+        qline = QtWidgets.QLineEdit(parent)
+        qline = self.resize_element(qline, min_size, max_size)
+        qline.setObjectName(name)
+        return qline
+
+    def resize_element(self, element, min_size, max_size):
+        if min_size:
+            element.setMinimumSize(QtCore.QSize(*min_size))
+        if max_size:
+            element.setMaximumSize(QtCore.QSize(*max_size))
+        return element
 
