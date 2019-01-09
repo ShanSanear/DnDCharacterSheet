@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'main_window.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtWidgets
 
 from qt_gui.boxes.armor_items import ArmorItems
@@ -27,15 +19,7 @@ from qt_gui.boxes.spells_per_day import SpellsPerDayBox
 from qt_gui.boxes.weapon_statistics import WeaponStatisticsBox
 from qt_gui.boxes.weapons_box import WeaponsBox
 
-
-
-#translator
-#_translate = QtCore.QCoreApplication.translate
-
-
 # noinspection PyAttributeOutsideInit,PyArgumentList
-
-
 class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
@@ -70,7 +54,7 @@ class MainWindowUi:
         self.retranslate_ui(main_window)
         QtCore.QMetaObject.connectSlotsByName(main_window)
 
-    def retranslate_ui(self, MainWindow):
+    def retranslate_ui(self, main_window):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        main_window.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.push_button.setText(_translate("MainWindow", "ClickMe"))
