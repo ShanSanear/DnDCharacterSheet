@@ -11,8 +11,8 @@ class MyApp(QMainWindow, MainWindowUi):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.setup_ui(self)
-        self.pushButton.clicked.connect(self.do_stuff)
-        self.character_name.textChanged.connect(partial(self.changed_text, self.FeatsBox))
+        self.push_button.clicked.connect(self.do_stuff)
+        self.basic_info_box.character_name.textChanged.connect(partial(self.changed_text, self.feats_box))
 
     def do_stuff(self):
         print("Doing stuff")
