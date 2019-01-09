@@ -8,8 +8,20 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from qt_gui.boxes.initiative_speed import InitiativeSpeedBox
+from qt_gui.boxes.number_of_spells import NumberOfSpellsBox
+from qt_gui.boxes.skills import SkillsBox
+from qt_gui.boxes.spells_per_day import SpellsPerDayBox
+from qt_gui.boxes.weapon_statistics import WeaponStatisticsBox
+from qt_gui.qt_line_edits import create_qlabel, create_qline_edit
+
 
 # noinspection PyAttributeOutsideInit,PyArgumentList
+
+#translator
+#_translate = QtCore.QCoreApplication.translate
+
+
 class MainWindowUi(object):
     def setup_ui(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -77,415 +89,16 @@ class MainWindowUi(object):
         self.menuBar.addAction(self.menuAbout.menuAction())
 
     def create_weapon_statistics_box(self):
-        min_size_def = (60, 23)
-        max_size_def = (60, 20)
-        max_label_size = (16777215, 20)
-        self.WeaponStatisticsBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.WeaponStatisticsBox.setGeometry(QtCore.QRect(1240, 160, 261, 121))
-        self.WeaponStatisticsBox.setObjectName("WeaponStatisticsBox")
-        self.gridLayoutWidget_13 = QtWidgets.QWidget(self.WeaponStatisticsBox)
-        self.gridLayoutWidget_13.setGeometry(QtCore.QRect(10, 20, 243, 91))
-        self.gridLayoutWidget_13.setObjectName("gridLayoutWidget_13")
-        self.WeaponStatisticsLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_13)
-        self.WeaponStatisticsLayout.setContentsMargins(9, 9, 9, 9)
-        self.WeaponStatisticsLayout.setSpacing(6)
-        self.WeaponStatisticsLayout.setObjectName("WeaponStatisticsLayout")
-
-        self.weapon_statistics_ranged_damage = self.create_qline_edit(self.gridLayoutWidget_13,
-                                                                      "weapon_statistics_ranged_damage", min_size_def,
-                                                                      max_size_def)
-
-        self.weapon_statistics_melee_damage = self.create_qline_edit(self.gridLayoutWidget_13,
-                                                                     "weapon_statistics_melee_damage", min_size_def,
-                                                                     max_size_def)
-
-        self.weapon_statistics_ranged_attack_bonus = self.create_qline_edit(self.gridLayoutWidget_13,
-                                                                            "weapon_statistics_ranged_attack_bonus",
-                                                                            min_size_def, max_size_def)
-
-        self.weapon_statistics_ranged_crit = self.create_qline_edit(self.gridLayoutWidget_13,
-                                                                    "weapon_statistics_ranged_crit", min_size_def,
-                                                                    max_size_def)
-
-        self.weapon_statistics_melee_attack_bonus = self.create_qline_edit(self.gridLayoutWidget_13,
-                                                                           "weapon_statistics_melee_attack_bonus",
-                                                                           min_size_def, max_size_def)
-
-        self.weapon_statistics_melee_crit = self.create_qline_edit(self.gridLayoutWidget_13,
-                                                                   "weapon_statistics_melee_crit", min_size_def,
-                                                                   max_size_def)
-
-        self.weapon_statistics_attack_bonus_label = self.create_qlabel(self.gridLayoutWidget_13,
-                                                                       "weapon_statistics_attack_bonus_label", [],
-                                                                       max_label_size)
-
-        self.weapon_statistics_damage_label = self.create_qlabel(self.gridLayoutWidget_13,
-                                                                 "weapon_statistics_damage_label", [], max_label_size)
-
-        self.weapon_statistics_crit_label = self.create_qlabel(self.gridLayoutWidget_13, "weapon_statistics_crit_label",
-                                                               [], max_label_size)
-
-        self.weapon_statistics_melee_label = self.create_qlabel(self.gridLayoutWidget_13,
-                                                                "weapon_statistics_melee_label", [], max_label_size)
-
-        self.weapon_statistics_ranged_label = self.create_qlabel(self.gridLayoutWidget_13,
-                                                                 "weapon_statistics_ranged_label", [], max_label_size)
-
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_damage, 2, 2, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_damage, 1, 2, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_attack_bonus, 2, 1, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_crit, 2, 3, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_attack_bonus, 1, 1, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_crit, 1, 3, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_attack_bonus_label, 0, 1, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_damage_label, 0, 2, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_crit_label, 0, 3, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_melee_label, 1, 0, 1, 1)
-        self.WeaponStatisticsLayout.addWidget(self.weapon_statistics_ranged_label, 2, 0, 1, 1)
+        self.WeaponStatisticsBox = WeaponStatisticsBox(self.centralwidget)
 
     def create_skills_layout(self):
-        self.SkillsBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.SkillsBox.setGeometry(QtCore.QRect(840, 290, 581, 191))
-        self.SkillsBox.setMinimumSize(QtCore.QSize(571, 91))
-        self.SkillsBox.setObjectName("SkillsBox")
-        self.gridLayoutWidget_5 = QtWidgets.QWidget(self.SkillsBox)
-        self.gridLayoutWidget_5.setGeometry(QtCore.QRect(10, 20, 561, 61))
-        self.gridLayoutWidget_5.setObjectName("gridLayoutWidget_5")
-        self.SkillsLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_5)
-        self.SkillsLayout.setContentsMargins(9, 9, 9, 9)
-        self.SkillsLayout.setSpacing(6)
-        self.SkillsLayout.setObjectName("SkillsLayout")
-        self.skills_description_label = QtWidgets.QLabel(self.gridLayoutWidget_5)
-        self.skills_description_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.skills_description_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_description_label.setObjectName("skills_description_label")
-        self.skills_1_description_button = QtWidgets.QPushButton(self.gridLayoutWidget_5)
-        self.skills_1_description_button.setObjectName("skills_1_description_button")
-        self.skills_1_misc_mod = QtWidgets.QLineEdit(self.gridLayoutWidget_5)
-        self.skills_1_misc_mod.setMinimumSize(QtCore.QSize(0, 23))
-        self.skills_1_misc_mod.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_1_misc_mod.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_1_misc_mod.setObjectName("skills_1_misc_mod")
-        self.skills_1_attr_mod = QtWidgets.QLineEdit(self.gridLayoutWidget_5)
-        self.skills_1_attr_mod.setEnabled(False)
-        self.skills_1_attr_mod.setMinimumSize(QtCore.QSize(0, 23))
-        self.skills_1_attr_mod.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_1_attr_mod.setAutoFillBackground(False)
-        self.skills_1_attr_mod.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_1_attr_mod.setReadOnly(True)
-        self.skills_1_attr_mod.setObjectName("skills_1_attr_mod")
-        self.skills_1_rank = QtWidgets.QLineEdit(self.gridLayoutWidget_5)
-        self.skills_1_rank.setMinimumSize(QtCore.QSize(0, 23))
-        self.skills_1_rank.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_1_rank.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_1_rank.setObjectName("skills_1_rank")
-        self.skills_1_total = QtWidgets.QLineEdit(self.gridLayoutWidget_5)
-        self.skills_1_total.setMinimumSize(QtCore.QSize(0, 23))
-        self.skills_1_total.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_1_total.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_1_total.setObjectName("skills_1_total")
-        self.skills_1_skill_name = QtWidgets.QLineEdit(self.gridLayoutWidget_5)
-        self.skills_1_skill_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.skills_1_skill_name.setObjectName("skills_1_skill_name")
-        self.skills_rank_label = QtWidgets.QLabel(self.gridLayoutWidget_5)
-        self.skills_rank_label.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_rank_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_rank_label.setObjectName("skills_rank_label")
-        self.skills_attr_mod_label = QtWidgets.QLabel(self.gridLayoutWidget_5)
-        self.skills_attr_mod_label.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_attr_mod_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_attr_mod_label.setObjectName("skills_attr_mod_label")
-        self.skills_misc_label = QtWidgets.QLabel(self.gridLayoutWidget_5)
-        self.skills_misc_label.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_misc_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_misc_label.setObjectName("skills_misc_label")
-        self.skills_1_attr_choice = QtWidgets.QComboBox(self.gridLayoutWidget_5)
-        self.skills_1_attr_choice.setMaximumSize(QtCore.QSize(69, 20))
-        self.skills_1_attr_choice.setObjectName("skills_1_attr_choice")
-        self.skills_1_attr_choice.addItem("")
-        self.skills_1_attr_choice.addItem("")
-        self.skills_1_attr_choice.addItem("")
-        self.skills_1_attr_choice.addItem("")
-        self.skills_1_attr_choice.addItem("")
-        self.skills_1_attr_choice.addItem("")
-        self.skills_skill_name_label = QtWidgets.QLabel(self.gridLayoutWidget_5)
-        self.skills_skill_name_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.skills_skill_name_label.setObjectName("skills_skill_name_label")
-        self.skills_attr_choice_label = QtWidgets.QLabel(self.gridLayoutWidget_5)
-        self.skills_attr_choice_label.setMaximumSize(QtCore.QSize(69, 20))
-        self.skills_attr_choice_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_attr_choice_label.setObjectName("skills_attr_choice_label")
-        self.skills_total_label = QtWidgets.QLabel(self.gridLayoutWidget_5)
-        self.skills_total_label.setMaximumSize(QtCore.QSize(54, 20))
-        self.skills_total_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.skills_total_label.setObjectName("skills_total_label")
-
-        self.SkillsLayout.addWidget(self.skills_description_label, 0, 6, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_1_description_button, 1, 6, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_1_misc_mod, 1, 5, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_1_attr_mod, 1, 3, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_1_rank, 1, 4, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_1_total, 1, 2, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_1_skill_name, 1, 0, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_rank_label, 0, 4, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_attr_mod_label, 0, 3, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_misc_label, 0, 5, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_1_attr_choice, 1, 1, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_skill_name_label, 0, 0, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_attr_choice_label, 0, 1, 1, 1)
-        self.SkillsLayout.addWidget(self.skills_total_label, 0, 2, 1, 1)
+        self.SkillsBox = SkillsBox(self.centralwidget)
 
     def create_number_of_spells_box(self):
-        min_size_label = (0, 23)
-        min_size_qline = (0, 23)
-        self.NumberOfSpellsBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.NumberOfSpellsBox.setGeometry(QtCore.QRect(840, 560, 581, 131))
-        self.NumberOfSpellsBox.setObjectName("NumberOfSpellsBox")
-        self.gridLayoutWidget_10 = QtWidgets.QWidget(self.NumberOfSpellsBox)
-        self.gridLayoutWidget_10.setGeometry(QtCore.QRect(10, 20, 561, 91))
-        self.gridLayoutWidget_10.setObjectName("gridLayoutWidget_10")
-        self.NumberOfSpellsLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_10)
-        self.NumberOfSpellsLayout.setContentsMargins(9, 9, 9, 9)
-        self.NumberOfSpellsLayout.setSpacing(6)
-        self.NumberOfSpellsLayout.setObjectName("NumberOfSpellsLayout")
-
-        self.number_of_spells_0th_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_0th_label",
-                                                             min_size_label)
-
-        self.number_of_spells_0 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_0", min_size_qline)
-
-        self.number_of_spells_1st_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_1st_label")
-
-        self.number_of_spells_1 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_1", min_size_qline)
-
-        self.number_of_spells_2nd_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_2nd_label")
-
-        self.number_of_spells_2 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_2", min_size_qline)
-
-        self.number_of_spells_3rd_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_3rd_label")
-
-        self.number_of_spells_3 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_3", min_size_qline)
-
-        self.number_of_spells_4th_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_4th_label")
-
-        self.number_of_spells_4 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_4", min_size_qline)
-
-        self.number_of_spells_5th_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_5th_label")
-
-        self.number_of_spells_5 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_5", min_size_qline)
-
-        self.number_of_spells_6th_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_6th_label")
-
-        self.number_of_spells_6 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_6", min_size_qline)
-
-        self.number_of_spells_7th_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_7th_label")
-
-        self.number_of_spells_7 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_7", min_size_qline)
-
-        self.number_of_spells_8th_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_8th_label")
-
-        self.number_of_spells_8 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_8", min_size_qline)
-
-        self.number_of_spells_9th_label = self.create_qlabel(self.gridLayoutWidget_10, "number_of_spells_9th_label")
-
-        self.number_of_spells_9 = self.create_qline_edit(self.gridLayoutWidget_10, "number_of_spells_9", min_size_qline)
-
-        self.number_of_spells_known_number_of_spells_label = self.create_qlabel(self.gridLayoutWidget_10,
-                                                                                "number_of_spells_known_number_of_spells_label", align=QtCore.Qt.AlignCenter)
-
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_0th_label, 1, 0, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_0, 1, 1, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_1st_label, 1, 2, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_1, 1, 3, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_2nd_label, 1, 4, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_2, 1, 5, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_3rd_label, 1, 6, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_3, 1, 7, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_4th_label, 1, 8, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_4, 1, 9, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_5th_label, 2, 0, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_5, 2, 1, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_6th_label, 2, 2, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_6, 2, 3, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_7th_label, 2, 4, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_7, 2, 5, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_8th_label, 2, 6, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_8, 2, 7, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_9th_label, 2, 8, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_9, 2, 9, 1, 1)
-        self.NumberOfSpellsLayout.addWidget(self.number_of_spells_known_number_of_spells_label, 0, 2, 1, 6)
+        self.NumberOfSpellsBox = NumberOfSpellsBox(self.centralwidget)
 
     def create_spells_per_day_box(self):
-        qline_min_size = (0, 23)
-        self.SpellsPerDayBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.SpellsPerDayBox.setGeometry(QtCore.QRect(1430, 560, 271, 631))
-        self.SpellsPerDayBox.setObjectName("SpellsPerDayBox")
-        self.gridLayoutWidget_9 = QtWidgets.QWidget(self.SpellsPerDayBox)
-        self.gridLayoutWidget_9.setGeometry(QtCore.QRect(10, 20, 251, 321))
-        self.gridLayoutWidget_9.setObjectName("gridLayoutWidget_9")
-        self.SpellsPerDayLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_9)
-        self.SpellsPerDayLayout.setContentsMargins(9, 9, 9, 9)
-        self.SpellsPerDayLayout.setSpacing(6)
-        self.SpellsPerDayLayout.setObjectName("SpellsPerDayLayout")
-
-        self.spells_per_day_dc_lvl_0 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_0",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_level_label = self.create_qlabel(self.gridLayoutWidget_9, "spells_per_day_level_label",
-                                                             align=QtCore.Qt.AlignCenter)
-        self.spells_per_day_spells_per_day_label = self.create_qlabel(self.gridLayoutWidget_9,
-                                                                      "spells_per_day_spells_per_day_label",
-                                                                      align=QtCore.Qt.AlignCenter)
-
-
-        self.spells_per_day_extra_spells = self.create_qlabel(self.gridLayoutWidget_9, "spells_per_day_extra_spells",
-                                                              align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_0 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_0",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_dc_lvl_1 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_1",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_0 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_0",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_1 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_1",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_2 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_2",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_dc_lvl_2 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_2",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_1 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_1",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_5 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_5",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_2 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_2",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_dc_lvl_3 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_3",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_4 =self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_4",
-                                                                         min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_3 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_3",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-
-        self.spells_per_day_dc_lvl_6 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_6",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-
-        self.spells_per_day_extra_spells_lvl_4 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_4",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-
-        self.spells_per_day_dc_lvl_5 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_5",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-
-        self.spells_per_day_spells_per_day_lvl_3 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_3",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_dc_lvl_4 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_4",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_8 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_8",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_5 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_5",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_dc_lvl_8 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_8",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_dc_lvl_7 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_7",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_7 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_7",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_extra_spells_lvl_6 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_6",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_7 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_7",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_6 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_6",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self.spells_per_day_spells_per_day_lvl_8 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_8",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-        self.spells_per_day_base_spell_dc = self.create_qlabel(self.gridLayoutWidget_9, "spells_per_day_base_spell_dc",
-                                                               align=QtCore.Qt.AlignCenter)
-        self.spells_per_day_dc_lvl_9 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_dc_lvl_9",
-                                                              min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-        self.spells_per_day_spells_per_day_lvl_9 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_spells_per_day_lvl_9",
-                                                                          min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-        self.spells_per_day_extra_spells_lvl_9 = self.create_qline_edit(self.gridLayoutWidget_9, "spells_per_day_extra_spells_lvl_9",
-                                                                        min_size=qline_min_size, align=QtCore.Qt.AlignCenter)
-
-        self._num_0 = self.numeric_label(self.gridLayoutWidget_9, "_num_0", QtCore.Qt.AlignCenter)
-        self._num_1 = self.numeric_label(self.gridLayoutWidget_9, "_num_1", QtCore.Qt.AlignCenter)
-        self._num_2 = self.numeric_label(self.gridLayoutWidget_9, "_num_2", QtCore.Qt.AlignCenter)
-        self._num_3 = self.numeric_label(self.gridLayoutWidget_9, "_num_3", QtCore.Qt.AlignCenter)
-        self._num_4 = self.numeric_label(self.gridLayoutWidget_9, "_num_4", QtCore.Qt.AlignCenter)
-        self._num_5 = self.numeric_label(self.gridLayoutWidget_9, "_num_5", QtCore.Qt.AlignCenter)
-        self._num_6 = self.numeric_label(self.gridLayoutWidget_9, "_num_6", QtCore.Qt.AlignCenter)
-        self._num_7 = self.numeric_label(self.gridLayoutWidget_9, "_num_7", QtCore.Qt.AlignCenter)
-        self._num_8 = self.numeric_label(self.gridLayoutWidget_9, "_num_8", QtCore.Qt.AlignCenter)
-        self._num_9 = self.numeric_label(self.gridLayoutWidget_9, "_num_9", QtCore.Qt.AlignCenter)
-
-        self.SpellsPerDayLayout.addWidget(self._num_0, 1, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_1, 2, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_2, 3, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_3, 4, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_4, 5, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_5, 6, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_6, 7, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_7, 8, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_8, 9, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self._num_9, 10, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_0, 1, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_level_label, 0, 1, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_label, 0, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells, 0, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_0, 1, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_1, 2, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_0, 1, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_1, 2, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_2, 3, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_2, 3, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_1, 2, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_5, 6, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_2, 3, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_3, 4, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_4, 5, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_3, 4, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_6, 7, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_4, 5, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_5, 6, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_3, 4, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_4, 5, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_8, 9, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_5, 6, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_8, 9, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_7, 8, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_7, 8, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_6, 7, 3, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_7, 8, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_6, 7, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_8, 9, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_base_spell_dc, 0, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_spells_per_day_lvl_9, 10, 2, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_dc_lvl_9, 10, 0, 1, 1)
-        self.SpellsPerDayLayout.addWidget(self.spells_per_day_extra_spells_lvl_9, 10, 3, 1, 1)
+        self.SpellsPerDayBox = SpellsPerDayBox(self.centralwidget)
 
     def create_known_spells_layout(self):
         self.KnownSpellsBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -498,39 +111,31 @@ class MainWindowUi(object):
         self.KnownSpellsLayout.setContentsMargins(9, 9, 9, 9)
         self.KnownSpellsLayout.setSpacing(6)
         self.KnownSpellsLayout.setObjectName("KnownSpellsLayout")
-        self.known_spells_2_description_button = QtWidgets.QPushButton(self.gridLayoutWidget_11)
-        self.known_spells_2_description_button.setObjectName("known_spells_2_description_button")
-        self.known_spells_1_lvl = QtWidgets.QLineEdit(self.gridLayoutWidget_11)
-        self.known_spells_1_lvl.setMinimumSize(QtCore.QSize(0, 23))
-        self.known_spells_1_lvl.setMaximumSize(QtCore.QSize(20, 16777215))
-        self.known_spells_1_lvl.setObjectName("known_spells_1_lvl")
-        self.known_spells_2_lvl = QtWidgets.QLineEdit(self.gridLayoutWidget_11)
-        self.known_spells_2_lvl.setMinimumSize(QtCore.QSize(0, 23))
-        self.known_spells_2_lvl.setMaximumSize(QtCore.QSize(20, 16777215))
-        self.known_spells_2_lvl.setObjectName("known_spells_2_lvl")
-        self.known_spells_1_name = QtWidgets.QLineEdit(self.gridLayoutWidget_11)
-        self.known_spells_1_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.known_spells_1_name.setObjectName("known_spells_1_name")
-        self.known_spells_name_label_2 = QtWidgets.QLabel(self.gridLayoutWidget_11)
-        self.known_spells_name_label_2.setObjectName("known_spells_name_label_2")
-        self.known_spells_lvl_label_1 = QtWidgets.QLabel(self.gridLayoutWidget_11)
-        self.known_spells_lvl_label_1.setMaximumSize(QtCore.QSize(20, 16777215))
-        self.known_spells_lvl_label_1.setObjectName("known_spells_lvl_label_1")
-        self.known_spells_lvl_label_2 = QtWidgets.QLabel(self.gridLayoutWidget_11)
-        self.known_spells_lvl_label_2.setMaximumSize(QtCore.QSize(20, 16777215))
-        self.known_spells_lvl_label_2.setObjectName("known_spells_lvl_label_2")
-        self.known_spells_name_label_1 = QtWidgets.QLabel(self.gridLayoutWidget_11)
-        self.known_spells_name_label_1.setObjectName("known_spells_name_label_1")
-        self.known_spells_description_label_1 = QtWidgets.QLabel(self.gridLayoutWidget_11)
-        self.known_spells_description_label_1.setObjectName("known_spells_description_label_1")
-        self.known_spells_description_label_2 = QtWidgets.QLabel(self.gridLayoutWidget_11)
-        self.known_spells_description_label_2.setObjectName("known_spells_description_label_2")
-        self.known_spells_2_name = QtWidgets.QLineEdit(self.gridLayoutWidget_11)
-        self.known_spells_2_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.known_spells_2_name.setObjectName("known_spells_2_name")
+        qline_dict = dict(parent=self.gridLayoutWidget_11, min_size=(0, 23), max_size=(20, 16777215))
+        qline_dict_2 = dict(parent=self.gridLayoutWidget_11, min_size=(0, 23))
+        qlabel_dict = dict(parent=self.gridLayoutWidget_11, max_size=(20, 16777215))
+        qlabel_dict_2 = dict(parent=self.gridLayoutWidget_11)
+
+
+        self.known_spells_lvl_label_1 = create_qlabel("known_spells_lvl_label_1", **qlabel_dict)
+        self.known_spells_lvl_label_2 = create_qlabel("known_spells_lvl_label_2", **qlabel_dict)
+
+        self.known_spells_name_label_1 = create_qlabel("known_spells_name_label_1", **qlabel_dict_2)
+        self.known_spells_name_label_2 = create_qlabel("known_spells_name_label_2", **qlabel_dict_2)
+
+        self.known_spells_description_label_1 = create_qlabel("known_spells_description_label_1", **qlabel_dict_2)
+        self.known_spells_description_label_2 = create_qlabel("known_spells_description_label_2", **qlabel_dict_2)
+
+        self.known_spells_1_lvl = create_qline_edit("known_spells_1_lvl", **qline_dict)
+        self.known_spells_2_lvl = create_qline_edit("known_spells_2_lvl", **qline_dict)
+        self.known_spells_1_name = create_qline_edit("known_spells_1_name", **qline_dict_2)
+        self.known_spells_2_name = create_qline_edit("known_spells_2_name", **qline_dict_2)
+
         self.known_spells_1_description_button = QtWidgets.QPushButton(self.gridLayoutWidget_11)
         self.known_spells_1_description_button.setObjectName("known_spells_1_description_button")
-
+        self.known_spells_2_description_button = QtWidgets.QPushButton(self.gridLayoutWidget_11)
+        self.known_spells_2_description_button.setObjectName("known_spells_2_description_button")
+        
         self.KnownSpellsLayout.addWidget(self.known_spells_2_description_button, 1, 5, 1, 1)
         self.KnownSpellsLayout.addWidget(self.known_spells_1_lvl, 1, 1, 1, 1)
         self.KnownSpellsLayout.addWidget(self.known_spells_2_lvl, 1, 4, 1, 1)
@@ -713,15 +318,17 @@ class MainWindowUi(object):
         self.MeleeWeapon.setContentsMargins(9, 9, 9, 9)
         self.MeleeWeapon.setSpacing(6)
         self.MeleeWeapon.setObjectName("MeleeWeapon")
+        melee_weapon_qedit = dict(parent=self.layoutWidget3, min_size=line_edit_min, max_size=line_edit_max)
+        melee_weapon_qlabel = dict(parent=self.layoutWidget3, max_size=label_max_size)
 
-        self.melee_weapon_name = self.create_qline_edit(self.layoutWidget3, "melee_weapon_name", min_size=line_edit_min, max_size=line_edit_max)
-        self.melee_weapon_attack_bonus = self.create_qline_edit(self.layoutWidget3, "melee_weapon_attack_bonus", min_size=line_edit_min, max_size=line_edit_max)
-        self.melee_weapon_damage_roll = self.create_qline_edit(self.layoutWidget3, "melee_weapon_damage_roll", min_size=line_edit_min, max_size=line_edit_max)
-        self.melee_weapon_crit = self.create_qline_edit(self.layoutWidget3, "melee_weapon_crit", min_size=line_edit_min, max_size=line_edit_max)
-        self.melee_weapon_special = self.create_qline_edit(self.layoutWidget3, "melee_weapon_special", min_size=line_edit_min, max_size=line_edit_max)
-        self.melee_weapon_weight = self.create_qline_edit(self.layoutWidget3, "melee_weapon_weight", min_size=line_edit_min, max_size=line_edit_max)
-        self.melee_weapon_size = self.create_qline_edit(self.layoutWidget3, "melee_weapon_size", min_size=line_edit_min, max_size=line_edit_max)
-        self.melee_weapon_type = self.create_qline_edit(self.layoutWidget3, "melee_weapon_type", min_size=line_edit_min, max_size=line_edit_max)
+        self.melee_weapon_name = create_qline_edit("melee_weapon_name", **melee_weapon_qedit)
+        self.melee_weapon_attack_bonus = create_qline_edit("melee_weapon_attack_bonus", **melee_weapon_qedit)
+        self.melee_weapon_damage_roll = create_qline_edit("melee_weapon_damage_roll", **melee_weapon_qedit)
+        self.melee_weapon_crit = create_qline_edit("melee_weapon_crit", **melee_weapon_qedit)
+        self.melee_weapon_special = create_qline_edit("melee_weapon_special", **melee_weapon_qedit)
+        self.melee_weapon_weight = create_qline_edit("melee_weapon_weight", **melee_weapon_qedit)
+        self.melee_weapon_size = create_qline_edit("melee_weapon_size", **melee_weapon_qedit)
+        self.melee_weapon_type = create_qline_edit("melee_weapon_type", **melee_weapon_qedit)
         self.weapons_melee_weapon_choice = QtWidgets.QComboBox(self.WeaponsBox)
         self.weapons_melee_weapon_choice.setGeometry(QtCore.QRect(20, 30, 171, 22))
         self.weapons_melee_weapon_choice.setObjectName("weapons_melee_weapon_choice")
@@ -729,15 +336,15 @@ class MainWindowUi(object):
         self.weapons_melee_weapon_choice.addItem("")
         self.weapons_melee_weapon_choice.addItem("")
 
-        self.melee_weapon_name_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_name_label", max_size=label_max_size)
-        self.melee_weapon_attack_bonus_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_attack_bonus_label", max_size=label_max_size)
-        self.melee_weapon_damage_roll_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_damage_roll_label", max_size=label_max_size)
-        self.melee_weapon_crit_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_crit_label", max_size=label_max_size)
-        self.melee_weapon_special_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_special_label", max_size=label_max_size)
-        self.melee_weapon_weight_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_weight_label", max_size=label_max_size)
-        self.melee_weapon_size_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_size_label", max_size=label_max_size)
+        self.melee_weapon_name_label = create_qlabel("melee_weapon_name_label", **melee_weapon_qlabel)
+        self.melee_weapon_attack_bonus_label = create_qlabel("melee_weapon_attack_bonus_label", **melee_weapon_qlabel)
+        self.melee_weapon_damage_roll_label = create_qlabel("melee_weapon_damage_roll_label", **melee_weapon_qlabel)
+        self.melee_weapon_crit_label = create_qlabel("melee_weapon_crit_label", **melee_weapon_qlabel)
+        self.melee_weapon_special_label = create_qlabel("melee_weapon_special_label", **melee_weapon_qlabel)
+        self.melee_weapon_weight_label = create_qlabel("melee_weapon_weight_label", **melee_weapon_qlabel)
+        self.melee_weapon_size_label = create_qlabel("melee_weapon_size_label", **melee_weapon_qlabel)
+        self.melee_weapon_type_label = create_qlabel("melee_weapon_type_label", **melee_weapon_qlabel)
 
-        self.melee_weapon_type_label = self.create_qlabel(self.layoutWidget3, "melee_weapon_type_label", max_size=label_max_size)
         self.MeleeWeapon.addWidget(self.melee_weapon_name_label, 0, 0, 1, 1)
         self.MeleeWeapon.addWidget(self.melee_weapon_attack_bonus_label, 0, 1, 1, 1)
         self.MeleeWeapon.addWidget(self.melee_weapon_damage_roll_label, 0, 2, 1, 1)
@@ -772,56 +379,31 @@ class MainWindowUi(object):
         self.RangedWeapon.setContentsMargins(9, 9, 9, 9)
         self.RangedWeapon.setSpacing(6)
         self.RangedWeapon.setObjectName("RangedWeapon")
-        self.ranged_weapon_crit_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_crit_label.setObjectName("ranged_weapon_crit_label")
-        self.ranged_weapon_damage_roll_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_damage_roll_label.setObjectName("ranged_weapon_damage_roll_label")
-        self.ranged_weapon_range_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_range_label.setObjectName("ranged_weapon_range_label")
-        self.ranged_weapon_name_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_name_label.setObjectName("ranged_weapon_name_label")
-        self.ranged_weapon_name = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_name.setObjectName("ranged_weapon_name")
-        self.ranged_weapon_attack_bonus = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_attack_bonus.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_attack_bonus.setObjectName("ranged_weapon_attack_bonus")
-        self.ranged_weapon_crit = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_crit.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_crit.setObjectName("ranged_weapon_crit")
-        self.ranged_weapon_range = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_range.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_range.setObjectName("ranged_weapon_range")
-        self.ranged_weapon_damage_roll = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_damage_roll.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_damage_roll.setObjectName("ranged_weapon_damage_roll")
-        self.ranged_weapon_attack_bonus_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_attack_bonus_label.setObjectName("ranged_weapon_attack_bonus_label")
-        self.ranged_weapon_special_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_special_label.setObjectName("ranged_weapon_special_label")
-        self.ranged_weapon_special = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_special.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_special.setObjectName("ranged_weapon_special")
-        self.ranged_weapon_ammo_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_ammo_label.setObjectName("ranged_weapon_ammo_label")
-        self.ranged_weapon_weight_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_weight_label.setObjectName("ranged_weapon_weight_label")
-        self.ranged_weapon_size_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_size_label.setObjectName("ranged_weapon_size_label")
-        self.ranged_weapon_type_label = QtWidgets.QLabel(self.gridLayoutWidget_17)
-        self.ranged_weapon_type_label.setObjectName("ranged_weapon_type_label")
-        self.ranged_weapon_ammo = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_ammo.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_ammo.setObjectName("ranged_weapon_ammo")
-        self.ranged_weapon_weight = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_weight.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_weight.setObjectName("ranged_weapon_weight")
-        self.ranged_weapon_size = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_size.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_size.setObjectName("ranged_weapon_size")
-        self.ranged_weapon_type = QtWidgets.QLineEdit(self.gridLayoutWidget_17)
-        self.ranged_weapon_type.setMinimumSize(QtCore.QSize(0, 23))
-        self.ranged_weapon_type.setObjectName("ranged_weapon_type")
+
+        ranged_weapon_qlabel = dict(parent=self.gridLayoutWidget_17)
+        ranged_weapon_qedit = dict(parent=self.gridLayoutWidget_17, min_size=(0, 23))
+
+        self.ranged_weapon_crit_label = create_qlabel("ranged_weapon_crit_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_damage_roll_label = create_qlabel("ranged_weapon_damage_roll_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_range_label = create_qlabel("ranged_weapon_range_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_name_label = create_qlabel("ranged_weapon_name_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_attack_bonus_label = create_qlabel("ranged_weapon_attack_bonus_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_special_label = create_qlabel("ranged_weapon_special_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_ammo_label = create_qlabel("ranged_weapon_ammo_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_weight_label = create_qlabel("ranged_weapon_weight_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_size_label = create_qlabel("ranged_weapon_size_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_type_label = create_qlabel("ranged_weapon_type_label", **ranged_weapon_qlabel)
+        
+        self.ranged_weapon_name = create_qline_edit("ranged_weapon_name", **ranged_weapon_qedit)
+        self.ranged_weapon_attack_bonus = create_qline_edit("ranged_weapon_attack_bonus", **ranged_weapon_qedit)
+        self.ranged_weapon_crit = create_qline_edit("ranged_weapon_crit", **ranged_weapon_qedit)
+        self.ranged_weapon_range = create_qline_edit("ranged_weapon_range", **ranged_weapon_qedit)
+        self.ranged_weapon_damage_roll = create_qline_edit("ranged_weapon_damage_roll", **ranged_weapon_qedit)
+        self.ranged_weapon_special = create_qline_edit("ranged_weapon_special", **ranged_weapon_qedit)
+        self.ranged_weapon_ammo = create_qline_edit("ranged_weapon_ammo", **ranged_weapon_qedit)
+        self.ranged_weapon_weight = create_qline_edit("ranged_weapon_weight", **ranged_weapon_qedit)
+        self.ranged_weapon_size = create_qline_edit("ranged_weapon_size", **ranged_weapon_qedit)
+        self.ranged_weapon_type = create_qline_edit("ranged_weapon_type", **ranged_weapon_qedit)
 
         self.RangedWeapon.addWidget(self.ranged_weapon_crit_label, 0, 3, 1, 1)
         self.RangedWeapon.addWidget(self.ranged_weapon_damage_roll_label, 0, 2, 1, 1)
@@ -934,89 +516,7 @@ class MainWindowUi(object):
         self.ItemsLayout.addWidget(self.items_description_label, 0, 3, 1, 1)
 
     def create_initiative_speed_box(self):
-        self.InitiativeSpeedBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.InitiativeSpeedBox.setGeometry(QtCore.QRect(1430, 290, 271, 121))
-        self.InitiativeSpeedBox.setObjectName("InitiativeSpeedBox")
-        self.gridLayoutWidget_7 = QtWidgets.QWidget(self.InitiativeSpeedBox)
-        self.gridLayoutWidget_7.setGeometry(QtCore.QRect(10, 20, 261, 91))
-        self.gridLayoutWidget_7.setObjectName("gridLayoutWidget_7")
-        self.InitiativeSpeedLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_7)
-        self.InitiativeSpeedLayout.setContentsMargins(9, 9, 9, 9)
-        self.InitiativeSpeedLayout.setSpacing(6)
-        self.InitiativeSpeedLayout.setObjectName("InitiativeSpeedLayout")
-        self.initiative_speed_initiative_total = QtWidgets.QLineEdit(self.gridLayoutWidget_7)
-        self.initiative_speed_initiative_total.setMinimumSize(QtCore.QSize(0, 23))
-        self.initiative_speed_initiative_total.setMaximumSize(QtCore.QSize(10000, 20))
-        self.initiative_speed_initiative_total.setObjectName("initiative_speed_initiative_total")
-        self._eq_sign_7 = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self._eq_sign_7.setMinimumSize(QtCore.QSize(8, 20))
-        self._eq_sign_7.setMaximumSize(QtCore.QSize(1000, 20))
-        self._eq_sign_7.setAlignment(QtCore.Qt.AlignCenter)
-        self._eq_sign_7.setObjectName("_eq_sign_7")
-        self.initiative_speed_total_label = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self.initiative_speed_total_label.setMinimumSize(QtCore.QSize(0, 0))
-        self.initiative_speed_total_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.initiative_speed_total_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.initiative_speed_total_label.setObjectName("initiative_speed_total_label")
-        self.initiative_speed_initiative_misc_bonus = QtWidgets.QLineEdit(self.gridLayoutWidget_7)
-        self.initiative_speed_initiative_misc_bonus.setMinimumSize(QtCore.QSize(0, 23))
-        self.initiative_speed_initiative_misc_bonus.setMaximumSize(QtCore.QSize(10000, 20))
-        self.initiative_speed_initiative_misc_bonus.setObjectName("initiative_speed_initiative_misc_bonus")
-        self.initiative_speed_initiative_dex_bonus = QtWidgets.QLineEdit(self.gridLayoutWidget_7)
-        self.initiative_speed_initiative_dex_bonus.setMinimumSize(QtCore.QSize(0, 23))
-        self.initiative_speed_initiative_dex_bonus.setMaximumSize(QtCore.QSize(10000, 20))
-        self.initiative_speed_initiative_dex_bonus.setObjectName("initiative_speed_initiative_dex_bonus")
-        self.initiative_speed_initiative_misc_bonus_label = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self.initiative_speed_initiative_misc_bonus_label.setMinimumSize(QtCore.QSize(0, 0))
-        self.initiative_speed_initiative_misc_bonus_label.setMaximumSize(QtCore.QSize(1000000, 20))
-        self.initiative_speed_initiative_misc_bonus_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.initiative_speed_initiative_misc_bonus_label.setObjectName("initiative_speed_initiative_misc_bonus_label")
-        self.initiative_speed_initiative_dex_bonus_label = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self.initiative_speed_initiative_dex_bonus_label.setMinimumSize(QtCore.QSize(0, 0))
-        self.initiative_speed_initiative_dex_bonus_label.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.initiative_speed_initiative_dex_bonus_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.initiative_speed_initiative_dex_bonus_label.setObjectName("initiative_speed_initiative_dex_bonus_label")
-        self.initiative_speed_initiative_label = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self.initiative_speed_initiative_label.setMinimumSize(QtCore.QSize(0, 20))
-        self.initiative_speed_initiative_label.setMaximumSize(QtCore.QSize(20, 20))
-        self.initiative_speed_initiative_label.setObjectName("initiative_speed_initiative_label")
-        self._plus_sign_10 = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self._plus_sign_10.setMinimumSize(QtCore.QSize(8, 10))
-        self._plus_sign_10.setMaximumSize(QtCore.QSize(10, 10))
-        self._plus_sign_10.setAlignment(QtCore.Qt.AlignCenter)
-        self._plus_sign_10.setObjectName("_plus_sign_10")
-        self.initiative_speed_speed_label = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self.initiative_speed_speed_label.setMinimumSize(QtCore.QSize(0, 20))
-        self.initiative_speed_speed_label.setMaximumSize(QtCore.QSize(64, 20))
-        self.initiative_speed_speed_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.initiative_speed_speed_label.setObjectName("initiative_speed_speed_label")
-        self.initiative_speed_speed_total = QtWidgets.QLineEdit(self.gridLayoutWidget_7)
-        self.initiative_speed_speed_total.setMinimumSize(QtCore.QSize(0, 23))
-        self.initiative_speed_speed_total.setMaximumSize(QtCore.QSize(10000, 20))
-        self.initiative_speed_speed_total.setObjectName("initiative_speed_speed_total")
-        self.initiative_speed_speed_armor_type_label = QtWidgets.QLabel(self.gridLayoutWidget_7)
-        self.initiative_speed_speed_armor_type_label.setMinimumSize(QtCore.QSize(0, 20))
-        self.initiative_speed_speed_armor_type_label.setMaximumSize(QtCore.QSize(100000, 20))
-        self.initiative_speed_speed_armor_type_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.initiative_speed_speed_armor_type_label.setObjectName("initiative_speed_speed_armor_type_label")
-        self.initiative_speed_speed_armor_type = QtWidgets.QLineEdit(self.gridLayoutWidget_7)
-        self.initiative_speed_speed_armor_type.setMinimumSize(QtCore.QSize(0, 23))
-        self.initiative_speed_speed_armor_type.setMaximumSize(QtCore.QSize(1000, 20))
-        self.initiative_speed_speed_armor_type.setObjectName("initiative_speed_speed_armor_type")
-
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_initiative_total, 1, 1, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self._eq_sign_7, 1, 2, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_total_label, 0, 1, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_initiative_misc_bonus, 1, 5, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_initiative_dex_bonus, 1, 3, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_initiative_misc_bonus_label, 0, 5, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_initiative_dex_bonus_label, 0, 3, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_initiative_label, 1, 0, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self._plus_sign_10, 1, 4, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_speed_label, 2, 0, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_speed_total, 2, 1, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_speed_armor_type_label, 2, 2, 1, 1)
-        self.InitiativeSpeedLayout.addWidget(self.initiative_speed_speed_armor_type, 2, 3, 1, 3)
+        self.InitiativeSpeedBox = InitiativeSpeedBox(self.centralwidget)
 
     def create_feats_box(self):
         self.FeatsBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -1029,18 +529,20 @@ class MainWindowUi(object):
         self.FeatsLayout.setContentsMargins(9, 9, 9, 9)
         self.FeatsLayout.setSpacing(6)
         self.FeatsLayout.setObjectName("FeatsLayout")
+
         self.feat_1_name = QtWidgets.QLineEdit(self.gridLayoutWidget_6)
         self.feat_1_name.setMinimumSize(QtCore.QSize(0, 23))
         self.feat_1_name.setObjectName("feat_1_name")
-        self.FeatsLayout.addWidget(self.feat_1_name, 1, 0, 1, 1)
         self.feat_description_label = QtWidgets.QLabel(self.gridLayoutWidget_6)
         self.feat_description_label.setObjectName("feat_description_label")
-        self.FeatsLayout.addWidget(self.feat_description_label, 0, 1, 1, 1)
         self.feat_1_description_button = QtWidgets.QPushButton(self.gridLayoutWidget_6)
         self.feat_1_description_button.setObjectName("feat_1_description_button")
-        self.FeatsLayout.addWidget(self.feat_1_description_button, 1, 1, 1, 1)
         self.feat_name_label = QtWidgets.QLabel(self.gridLayoutWidget_6)
         self.feat_name_label.setObjectName("feat_name_label")
+
+        self.FeatsLayout.addWidget(self.feat_1_name, 1, 0, 1, 1)
+        self.FeatsLayout.addWidget(self.feat_description_label, 0, 1, 1, 1)
+        self.FeatsLayout.addWidget(self.feat_1_description_button, 1, 1, 1, 1)
         self.FeatsLayout.addWidget(self.feat_name_label, 0, 0, 1, 1)
 
     def create_saving_throws_box(self):
@@ -2008,6 +1510,31 @@ class MainWindowUi(object):
     def retranslate_ui(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton.setText(_translate("MainWindow", "ClickMe"))
+
+        self.translate_basic_info_box(_translate)
+        self.translate_attributes_box(_translate)
+        self.translate_hp_ac_box(_translate)
+        self.translate_attacks_box(_translate)
+        self.translate_saving_throws_box(_translate)
+        self.translate_feats_box(_translate)
+        self.translate_items_box(_translate)
+        self.translate_languages_box(_translate)
+        self.translate_notes_box(_translate)
+        self.translate_weapons_box(_translate)
+        self.translate_armor_items_box(_translate)
+        self.translate_known_spells_box(_translate)
+        self.translate_menu_bar(_translate)
+
+    def translate_menu_bar(self, _translate):
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.menuAbout.setTitle(_translate("MainWindow", "About"))
+        self.actionNew_character.setText(_translate("MainWindow", "New character..."))
+        self.actionOpen_character.setText(_translate("MainWindow", "Open"))
+        self.actionSave.setText(_translate("MainWindow", "Save"))
+        self.actionExit.setText(_translate("MainWindow", "Exit"))
+
+    def translate_basic_info_box(self, _translate):
         self.BasicInfoBox.setTitle(_translate("MainWindow", "Basic Info"))
         self.character_class_label.setText(_translate("MainWindow", "Class"))
         self.character_faith_label.setText(_translate("MainWindow", "Faith"))
@@ -2037,7 +1564,8 @@ class MainWindowUi(object):
         self.character_gender_label.setText(_translate("MainWindow", "Gender"))
         self.character_level.setText(_translate("MainWindow", "10"))
         self.character_level_label.setText(_translate("MainWindow", "Level"))
-        self.pushButton.setText(_translate("MainWindow", "ClickMe"))
+
+    def translate_attributes_box(self, _translate):
         self.AttributesBox.setTitle(_translate("MainWindow", "Attributes"))
         self.attr_str_val.setText(_translate("MainWindow", "10"))
         self.attr_head_name.setText(_translate("MainWindow", "Atrribute"))
@@ -2074,6 +1602,8 @@ class MainWindowUi(object):
         self.attr_cha_mod.setText(_translate("MainWindow", "10"))
         self.attr_cha_temp_val.setText(_translate("MainWindow", "10"))
         self.attr_cha_temp_mod.setText(_translate("MainWindow", "10"))
+
+    def translate_hp_ac_box(self, _translate):
         self.HpAcBox.setTitle(_translate("MainWindow", "HP / AC"))
         self.hp_ac_hp_total_label.setText(_translate("MainWindow", "Total HP"))
         self.hp_ac_hp_hp_wounds_current_hp_label.setText(_translate("MainWindow", "Wounds / Current HP"))
@@ -2103,6 +1633,8 @@ class MainWindowUi(object):
         self.hp_ac_hp_hp_wounds_current_hp.setText(_translate("MainWindow", "10/10"))
         self.hp_ac_hp_contusion.setText(_translate("MainWindow", "10"))
         self.hp_ac_contusion_label.setText(_translate("MainWindow", "Contusion"))
+
+    def translate_attacks_box(self, _translate):
         self.AttacksBox.setTitle(_translate("MainWindow", "Attacks"))
         self.attacks_total_label.setText(_translate("MainWindow", "Total"))
         self.attacks_base_label.setText(_translate("MainWindow", "Base"))
@@ -2129,6 +1661,8 @@ class MainWindowUi(object):
         self.attacks_ranged_size.setText(_translate("MainWindow", "10"))
         self._plus_sign_21.setText(_translate("MainWindow", "+"))
         self.attacks_ranged_misc.setText(_translate("MainWindow", "10"))
+
+    def translate_saving_throws_box(self, _translate):
         self.SavingThrowsBox.setTitle(_translate("MainWindow", "Saving throws"))
         self.saving_throws_total_label.setText(_translate("MainWindow", "Total"))
         self.saving_throws_class_base_label.setText(_translate("MainWindow", "Class Base"))
@@ -2165,25 +1699,15 @@ class MainWindowUi(object):
         self.saving_throws_will_size_bonus.setText(_translate("MainWindow", "10"))
         self._plus_sign_9.setText(_translate("MainWindow", "+"))
         self.saving_throws_will_misc_bonus.setText(_translate("MainWindow", "10"))
+
+    def translate_feats_box(self, _translate):
         self.FeatsBox.setTitle(_translate("MainWindow", "Feats"))
         self.feat_1_name.setText(_translate("MainWindow", "Lorem ipsum"))
         self.feat_description_label.setText(_translate("MainWindow", "Description"))
         self.feat_1_description_button.setText(_translate("MainWindow", "DESC"))
         self.feat_name_label.setText(_translate("MainWindow", "Feat name"))
-        self.InitiativeSpeedBox.setTitle(_translate("MainWindow", "Initiative and speed"))
-        self.initiative_speed_initiative_total.setText(_translate("MainWindow", "10"))
-        self._eq_sign_7.setText(_translate("MainWindow", "="))
-        self.initiative_speed_total_label.setText(_translate("MainWindow", "Total"))
-        self.initiative_speed_initiative_misc_bonus.setText(_translate("MainWindow", "10"))
-        self.initiative_speed_initiative_dex_bonus.setText(_translate("MainWindow", "10"))
-        self.initiative_speed_initiative_misc_bonus_label.setText(_translate("MainWindow", "Misc"))
-        self.initiative_speed_initiative_dex_bonus_label.setText(_translate("MainWindow", "Dex"))
-        self.initiative_speed_initiative_label.setText(_translate("MainWindow", "Init."))
-        self._plus_sign_10.setText(_translate("MainWindow", "+"))
-        self.initiative_speed_speed_label.setText(_translate("MainWindow", "Speed"))
-        self.initiative_speed_speed_total.setText(_translate("MainWindow", "10"))
-        self.initiative_speed_speed_armor_type_label.setText(_translate("MainWindow", "Armor"))
-        self.initiative_speed_speed_armor_type.setText(_translate("MainWindow", "Lorem ipsum"))
+
+    def translate_items_box(self, _translate):
         self.ItemsBox.setTitle(_translate("MainWindow", "Items"))
         self.items_weight_label.setText(_translate("MainWindow", "Weight"))
         self.item_1_name.setText(_translate("MainWindow", "Lorem ipsum"))
@@ -2194,18 +1718,24 @@ class MainWindowUi(object):
                                                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo."))
         self.items_count_label.setText(_translate("MainWindow", "Count"))
         self.items_description_label.setText(_translate("MainWindow", "Description"))
+
+    def translate_languages_box(self, _translate):
         self.LanguagesBox.setTitle(_translate("MainWindow", "Languages"))
         self.known_languages_label.setText(_translate("MainWindow", "Known Languages"))
         self.known_languages.setPlainText(_translate("MainWindow",
                                                      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo.\n"
                                                      "\n"
                                                      "Mauris auctor, elit sed tristique maximus, libero quam feugiat dolor, in laoreet massa libero a tortor. Donec molestie pretium tempus. Integer lacinia magna lacus, nec volutpat felis condimentum id. Vivamus orci ante, gravida sed velit vel, venenatis pellentesque est. Maecenas laoreet laoreet ullamcorper. Phasellus rutrum felis non sapien aliquam semper. Morbi tempus, quam in luctus tempor, mauris neque faucibus libero, ut porta justo sem eu orci. Suspendisse consectetur sem ac neque mollis, sed iaculis tellus elementum. Nulla facilisis turpis vel sagittis pharetra. Donec nec odio pharetra, vestibulum lorem accumsan, tempus nulla. Donec blandit nisi in elit pulvinar, nec feugiat metus egestas. "))
+
+    def translate_notes_box(self, _translate):
         self.NotesBox.setTitle(_translate("MainWindow", "Notes"))
         self.notes_label.setText(_translate("MainWindow", "Notes"))
         self.notes.setPlainText(_translate("MainWindow",
                                            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo.\n"
                                            "\n"
                                            "Mauris auctor, elit sed tristique maximus, libero quam feugiat dolor, in laoreet massa libero a tortor. Donec molestie pretium tempus. Integer lacinia magna lacus, nec volutpat felis condimentum id. Vivamus orci ante, gravida sed velit vel, venenatis pellentesque est. Maecenas laoreet laoreet ullamcorper. Phasellus rutrum felis non sapien aliquam semper. Morbi tempus, quam in luctus tempor, mauris neque faucibus libero, ut porta justo sem eu orci. Suspendisse consectetur sem ac neque mollis, sed iaculis tellus elementum. Nulla facilisis turpis vel sagittis pharetra. Donec nec odio pharetra, vestibulum lorem accumsan, tempus nulla. Donec blandit nisi in elit pulvinar, nec feugiat metus egestas. "))
+
+    def translate_weapons_box(self, _translate):
         self.WeaponsBox.setTitle(_translate("MainWindow", "Weapons"))
         self.CurrentMeleeWeaponBox.setTitle(_translate("MainWindow", "Currently chosen melee weapon"))
         self.melee_weapon_name_label.setText(_translate("MainWindow", "Name"))
@@ -2251,6 +1781,8 @@ class MainWindowUi(object):
         self.ranged_weapon_weight.setText(_translate("MainWindow", "10"))
         self.ranged_weapon_size.setText(_translate("MainWindow", "Lorem ipsum"))
         self.ranged_weapon_type.setText(_translate("MainWindow", "Lorem ipsum"))
+
+    def translate_armor_items_box(self, _translate):
         self.ArmorItems.setTitle(_translate("MainWindow", "Armor items"))
         self.Armor2.setTitle(_translate("MainWindow", "Shield / Protective item"))
         self.armor_2_test_penalty.setText(_translate("MainWindow", "10"))
@@ -2290,6 +1822,8 @@ class MainWindowUi(object):
         self.armor_1_speed.setText(_translate("MainWindow", "10"))
         self.armor_1_special.setText(_translate("MainWindow", "Lorem ipsum"))
         self.armor_1_special_label.setText(_translate("MainWindow", "Special"))
+
+    def translate_known_spells_box(self, _translate):
         self.KnownSpellsBox.setTitle(_translate("MainWindow", "Known Spells"))
         self.known_spells_2_description_button.setText(_translate("MainWindow", "DESC"))
         self.known_spells_1_lvl.setText(_translate("MainWindow", "10"))
@@ -2303,112 +1837,9 @@ class MainWindowUi(object):
         self.known_spells_description_label_2.setText(_translate("MainWindow", "Description"))
         self.known_spells_2_name.setText(_translate("MainWindow", "Lorem ipsum"))
         self.known_spells_1_description_button.setText(_translate("MainWindow", "DESC"))
-        self.SpellsPerDayBox.setTitle(_translate("MainWindow", "Spells per day / Spells DC"))
-        self.spells_per_day_dc_lvl_0.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_level_label.setText(_translate("MainWindow", "Level"))
-        self.spells_per_day_spells_per_day_label.setText(_translate("MainWindow", "Spells/Day"))
-        self.spells_per_day_extra_spells.setText(_translate("MainWindow", "Extra spells"))
-        self.spells_per_day_spells_per_day_lvl_0.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_1.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_0.setText(_translate("MainWindow", "10"))
-        self._num_0.setText(_translate("MainWindow", "0"))
-        self.spells_per_day_extra_spells_lvl_1.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_2.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_2.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_1.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_5.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_2.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_3.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_4.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_3.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_6.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_4.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_5.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_3.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_4.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_8.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_5.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_8.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_dc_lvl_7.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_7.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_6.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_7.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_6.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_8.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_base_spell_dc.setText(_translate("MainWindow", "Base Spell DC"))
-        self.spells_per_day_dc_lvl_9.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_spells_per_day_lvl_9.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_extra_spells_lvl_9.setText(_translate("MainWindow", "10"))
-        self._num_1.setText(_translate("MainWindow", "1"))
-        self._num_2.setText(_translate("MainWindow", "2"))
-        self._num_3.setText(_translate("MainWindow", "3"))
-        self._num_4.setText(_translate("MainWindow", "4"))
-        self._num_5.setText(_translate("MainWindow", "5"))
-        self._num_6.setText(_translate("MainWindow", "6"))
-        self._num_7.setText(_translate("MainWindow", "7"))
-        self._num_8.setText(_translate("MainWindow", "8"))
-        self._num_9.setText(_translate("MainWindow", "9"))
-        self.NumberOfSpellsBox.setTitle(_translate("MainWindow", "Number of spells"))
-        self.number_of_spells_0th_label.setText(_translate("MainWindow", "0th lvl"))
-        self.number_of_spells_1.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_4th_label.setText(_translate("MainWindow", "4th lvl"))
-        self.number_of_spells_4.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_2nd_label.setText(_translate("MainWindow", "2nd lvl"))
-        self.number_of_spells_2.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_3rd_label.setText(_translate("MainWindow", "3rd lvl"))
-        self.number_of_spells_3.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_0.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_1st_label.setText(_translate("MainWindow", "1st lvl"))
-        self.number_of_spells_5th_label.setText(_translate("MainWindow", "5th lvl"))
-        self.number_of_spells_5.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_6.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_7.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_8.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_9.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_6th_label.setText(_translate("MainWindow", "6th lvl"))
-        self.number_of_spells_7th_label.setText(_translate("MainWindow", "7th lvl"))
-        self.number_of_spells_8th_label.setText(_translate("MainWindow", "8th lvl"))
-        self.number_of_spells_9th_label.setText(_translate("MainWindow", "9th lvl"))
-        self.number_of_spells_known_number_of_spells_label.setText(
-            _translate("MainWindow", "Known number of spells (Warlock / Bard)"))
-        self.SkillsBox.setTitle(_translate("MainWindow", "Skills"))
-        self.skills_description_label.setText(_translate("MainWindow", "Description"))
-        self.skills_1_description_button.setText(_translate("MainWindow", "DESC"))
-        self.skills_1_misc_mod.setText(_translate("MainWindow", "10"))
-        self.skills_1_attr_mod.setText(_translate("MainWindow", "10"))
-        self.skills_1_rank.setText(_translate("MainWindow", "10"))
-        self.skills_1_total.setText(_translate("MainWindow", "10"))
-        self.skills_1_skill_name.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.skills_rank_label.setText(_translate("MainWindow", "Rank"))
-        self.skills_attr_mod_label.setText(_translate("MainWindow", "Attr mod"))
-        self.skills_misc_label.setText(_translate("MainWindow", "Misc"))
-        self.skills_1_attr_choice.setItemText(0, _translate("MainWindow", "STR"))
-        self.skills_1_attr_choice.setItemText(1, _translate("MainWindow", "DEX"))
-        self.skills_1_attr_choice.setItemText(2, _translate("MainWindow", "CON"))
-        self.skills_1_attr_choice.setItemText(3, _translate("MainWindow", "INT"))
-        self.skills_1_attr_choice.setItemText(4, _translate("MainWindow", "WIS"))
-        self.skills_1_attr_choice.setItemText(5, _translate("MainWindow", "CHA"))
-        self.skills_skill_name_label.setText(_translate("MainWindow", "Skill name"))
-        self.skills_attr_choice_label.setText(_translate("MainWindow", "Attr"))
-        self.skills_total_label.setText(_translate("MainWindow", "Total"))
-        self.WeaponStatisticsBox.setTitle(_translate("MainWindow", "Current weapon statistics"))
-        self.weapon_statistics_attack_bonus_label.setText(_translate("MainWindow", "Attack bonus"))
-        self.weapon_statistics_ranged_damage.setText(_translate("MainWindow", "10"))
-        self.weapon_statistics_ranged_attack_bonus.setText(_translate("MainWindow", "10"))
-        self.weapon_statistics_ranged_crit.setText(_translate("MainWindow", "10"))
-        self.weapon_statistics_melee_attack_bonus.setText(_translate("MainWindow", "10"))
-        self.weapon_statistics_melee_crit.setText(_translate("MainWindow", "10"))
-        self.weapon_statistics_damage_label.setText(_translate("MainWindow", "Damage"))
-        self.weapon_statistics_crit_label.setText(_translate("MainWindow", "Crit range"))
-        self.weapon_statistics_melee_damage.setText(_translate("MainWindow", "10"))
-        self.weapon_statistics_melee_label.setText(_translate("MainWindow", "Melee"))
-        self.weapon_statistics_ranged_label.setText(_translate("MainWindow", "Ranged"))
-        self.menuFile.setTitle(_translate("MainWindow", "File"))
-        self.menuAbout.setTitle(_translate("MainWindow", "About"))
-        self.actionNew_character.setText(_translate("MainWindow", "New character..."))
-        self.actionOpen_character.setText(_translate("MainWindow", "Open"))
-        self.actionSave.setText(_translate("MainWindow", "Save"))
-        self.actionExit.setText(_translate("MainWindow", "Exit"))
+
+
+
 
     def create_palette(self):
         palette = QtGui.QPalette()
@@ -2431,29 +1862,3 @@ class MainWindowUi(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         return palette
-
-    def create_qlabel(self, parent, name, min_size=None, max_size=None, align=None):
-        label = QtWidgets.QLabel(parent)
-        label = self.resize_element(label, min_size, max_size)
-        if align:
-            label.setAlignment(align)
-        label.setObjectName(name)
-        return label
-
-    def create_qline_edit(self, parent, name, min_size=None, max_size=None, align=None):
-        qline = QtWidgets.QLineEdit(parent)
-        qline = self.resize_element(qline, min_size, max_size)
-        if align:
-            qline.setAlignment(align)
-        qline.setObjectName(name)
-        return qline
-
-    def resize_element(self, element, min_size, max_size):
-        if min_size:
-            element.setMinimumSize(QtCore.QSize(*min_size))
-        if max_size:
-            element.setMaximumSize(QtCore.QSize(*max_size))
-        return element
-
-    def numeric_label(self, parent, name, align):
-        return self.create_qlabel(parent, name, align=align)
