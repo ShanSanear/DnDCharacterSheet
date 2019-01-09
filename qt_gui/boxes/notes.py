@@ -1,30 +1,35 @@
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.box import DefaultBox
 
-class NotesBox:
+
+class NotesBox(DefaultBox):
     def __init__(self, centralwidget):
-        self.NotesBox = QtWidgets.QGroupBox(centralwidget)
-        self.NotesBox.setGeometry(QtCore.QRect(330, 200, 491, 231))
-        self.NotesBox.setObjectName("NotesBox")
-        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.NotesBox)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(10, 20, 471, 201))
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        self.NotesLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
-        self.NotesLayout.setContentsMargins(9, 9, 9, 9)
-        self.NotesLayout.setSpacing(6)
-        self.NotesLayout.setObjectName("NotesLayout")
-        self.notes_label = QtWidgets.QLabel(self.verticalLayoutWidget_2)
+        self.root = QtWidgets.QGroupBox(centralwidget)
+        self.root.setGeometry(QtCore.QRect(330, 200, 491, 231))
+        self.root.setObjectName("NotesBox")
+        self.container = QtWidgets.QWidget(self.root)
+        self.container.setGeometry(QtCore.QRect(10, 20, 471, 201))
+        self.container.setObjectName("verticalLayoutWidget_2")
+        self.layout = QtWidgets.QVBoxLayout(self.container)
+        self.layout.setContentsMargins(9, 9, 9, 9)
+        self.layout.setSpacing(6)
+        self.layout.setObjectName("NotesLayout")
+        self.notes_label = QtWidgets.QLabel(self.container)
         self.notes_label.setAlignment(QtCore.Qt.AlignCenter)
         self.notes_label.setObjectName("notes_label")
-        self.NotesLayout.addWidget(self.notes_label)
-        self.notes = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget_2)
+        self.layout.addWidget(self.notes_label)
+        self.notes = QtWidgets.QPlainTextEdit(self.container)
         self.notes.setObjectName("notes")
-        self.NotesLayout.addWidget(self.notes)
-        self.translate_notes_box()
+        self.translate()
+        self.add_to_layout()
 
-    def translate_notes_box(self):
+    def add_to_layout(self):
+        self.layout.addWidget(self.notes)
+
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
-        self.NotesBox.setTitle(_translate("MainWindow", "Notes"))
+        self.root.setTitle(_translate("MainWindow", "Notes"))
         self.notes_label.setText(_translate("MainWindow", "Notes"))
         self.notes.setPlainText(_translate("MainWindow",
                                            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo.\n"

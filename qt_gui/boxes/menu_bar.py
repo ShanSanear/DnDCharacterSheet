@@ -3,14 +3,14 @@ from PyQt5 import QtWidgets, QtCore
 
 class MenuBar:
     def __init__(self, main_window):
-        self.menuBar = QtWidgets.QMenuBar(main_window)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 1748, 21))
-        self.menuBar.setObjectName("menuBar")
-        self.menuFile = QtWidgets.QMenu(self.menuBar)
+        self.root = QtWidgets.QMenuBar(main_window)
+        self.root.setGeometry(QtCore.QRect(0, 0, 1748, 21))
+        self.root.setObjectName("menuBar")
+        self.menuFile = QtWidgets.QMenu(self.root)
         self.menuFile.setObjectName("menuFile")
-        self.menuAbout = QtWidgets.QMenu(self.menuBar)
+        self.menuAbout = QtWidgets.QMenu(self.root)
         self.menuAbout.setObjectName("menuAbout")
-        main_window.setMenuBar(self.menuBar)
+        main_window.setMenuBar(self.root)
         self.actionNew_character = QtWidgets.QAction(main_window)
         self.actionNew_character.setObjectName("actionNew_character")
         self.actionOpen_character = QtWidgets.QAction(main_window)
@@ -23,8 +23,8 @@ class MenuBar:
         self.menuFile.addAction(self.actionOpen_character)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionExit)
-        self.menuBar.addAction(self.menuFile.menuAction())
-        self.menuBar.addAction(self.menuAbout.menuAction())
+        self.root.addAction(self.menuFile.menuAction())
+        self.root.addAction(self.menuAbout.menuAction())
         self.translate_menu_bar()
 
     def translate_menu_bar(self):

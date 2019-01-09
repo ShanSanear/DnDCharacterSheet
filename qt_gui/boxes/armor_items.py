@@ -3,10 +3,10 @@ from PyQt5 import QtWidgets, QtCore
 
 class ArmorItems:
     def __init__(self, centralwidget):
-        self.ArmorItems = QtWidgets.QGroupBox(centralwidget)
-        self.ArmorItems.setGeometry(QtCore.QRect(10, 870, 611, 331))
-        self.ArmorItems.setObjectName("ArmorItems")
-        self.Armor2 = QtWidgets.QGroupBox(self.ArmorItems)
+        self.root = QtWidgets.QGroupBox(centralwidget)
+        self.root.setGeometry(QtCore.QRect(10, 870, 611, 331))
+        self.root.setObjectName("ArmorItems")
+        self.Armor2 = QtWidgets.QGroupBox(self.root)
         self.Armor2.setGeometry(QtCore.QRect(10, 170, 591, 151))
         self.Armor2.setObjectName("Armor2")
         self.gridLayoutWidget_16 = QtWidgets.QWidget(self.Armor2)
@@ -79,7 +79,7 @@ class ArmorItems:
         self.armor_2_special_label = QtWidgets.QLabel(self.gridLayoutWidget_16)
         self.armor_2_special_label.setObjectName("armor_2_special_label")
         self.Armor2Layout.addWidget(self.armor_2_special_label, 2, 0, 1, 2)
-        self.Armor1 = QtWidgets.QGroupBox(self.ArmorItems)
+        self.Armor1 = QtWidgets.QGroupBox(self.root)
         self.Armor1.setGeometry(QtCore.QRect(10, 30, 591, 131))
         self.Armor1.setObjectName("Armor1")
         self.gridLayoutWidget_15 = QtWidgets.QWidget(self.Armor1)
@@ -156,7 +156,7 @@ class ArmorItems:
 
     def translate_armor_items_box(self):
         _translate = QtCore.QCoreApplication.translate
-        self.ArmorItems.setTitle(_translate("MainWindow", "Armor items"))
+        self.root.setTitle(_translate("MainWindow", "Armor items"))
         self.Armor2.setTitle(_translate("MainWindow", "Shield / Protective item"))
         self.armor_2_test_penalty.setText(_translate("MainWindow", "10"))
         self.armor_2_max_dex_bonus_label.setText(_translate("MainWindow", "Max dex. bonus"))

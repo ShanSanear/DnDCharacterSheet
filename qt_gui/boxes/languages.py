@@ -1,31 +1,35 @@
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.box import DefaultBox
 
-class LanguagesBox:
+
+class LanguagesBox(DefaultBox):
     def __init__(self, centralwidget):
-        self.LanguagesBox = QtWidgets.QGroupBox(centralwidget)
-        self.LanguagesBox.setGeometry(QtCore.QRect(630, 440, 191, 251))
-        self.LanguagesBox.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        self.LanguagesBox.setObjectName("LanguagesBox")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.LanguagesBox)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 30, 171, 211))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.LanguagesLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.LanguagesLayout.setContentsMargins(9, 9, 9, 9)
-        self.LanguagesLayout.setSpacing(6)
-        self.LanguagesLayout.setObjectName("LanguagesLayout")
-        self.known_languages_label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.root = QtWidgets.QGroupBox(centralwidget)
+        self.root.setGeometry(QtCore.QRect(630, 440, 191, 251))
+        self.root.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.root.setObjectName("LanguagesBox")
+        self.container = QtWidgets.QWidget(self.root)
+        self.container.setGeometry(QtCore.QRect(10, 30, 171, 211))
+        self.container.setObjectName("verticalLayoutWidget")
+        self.layout = QtWidgets.QVBoxLayout(self.container)
+        self.layout.setContentsMargins(9, 9, 9, 9)
+        self.layout.setSpacing(6)
+        self.layout.setObjectName("LanguagesLayout")
+        self.known_languages_label = QtWidgets.QLabel(self.container)
         self.known_languages_label.setAlignment(QtCore.Qt.AlignCenter)
         self.known_languages_label.setObjectName("known_languages_label")
-        self.LanguagesLayout.addWidget(self.known_languages_label)
-        self.known_languages = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget)
+        self.layout.addWidget(self.known_languages_label)
+        self.known_languages = QtWidgets.QPlainTextEdit(self.container)
         self.known_languages.setObjectName("known_languages")
-        self.LanguagesLayout.addWidget(self.known_languages)
-        self.translate_languages_box()
+        self.translate()
 
-    def translate_languages_box(self):
+    def add_to_layout(self):
+        self.layout.addWidget(self.known_languages)
+
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
-        self.LanguagesBox.setTitle(_translate("MainWindow", "Languages"))
+        self.root.setTitle(_translate("MainWindow", "Languages"))
         self.known_languages_label.setText(_translate("MainWindow", "Known Languages"))
         self.known_languages.setPlainText(_translate("MainWindow",
                                                      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo.\n"
