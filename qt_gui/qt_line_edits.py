@@ -1,10 +1,6 @@
 from PyQt5 import QtCore, QtWidgets
 
 
-def create_qt_line_edit(minimum_size, maximum_size, widget_name):
-    pass
-
-
 def resize_element(element, min_size, max_size):
     if min_size:
         element.setMinimumSize(QtCore.QSize(*min_size))
@@ -22,11 +18,13 @@ def create_qlabel(name, parent, min_size=None, max_size=None, align=None):
     return label
 
 
-def create_qline_edit(name, parent, min_size=None, max_size=None, align=None):
+def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, indent=None):
     qline = QtWidgets.QLineEdit(parent)
     qline = resize_element(qline, min_size, max_size)
     if align:
         qline.setAlignment(align)
+    if indent:
+        qline.setIndent(indent)
     qline.setObjectName(name)
     return qline
 
