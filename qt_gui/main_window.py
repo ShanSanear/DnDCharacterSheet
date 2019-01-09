@@ -9,8 +9,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from qt_gui.boxes.armor_items import ArmorItems
+from qt_gui.boxes.feats import FeatsBox
 from qt_gui.boxes.initiative_speed import InitiativeSpeedBox
+from qt_gui.boxes.items import ItemsBox
 from qt_gui.boxes.known_spells import KnownSpellsBox
+from qt_gui.boxes.languages import LanguagesBox
 from qt_gui.boxes.notes import NotesBox
 from qt_gui.boxes.number_of_spells import NumberOfSpellsBox
 from qt_gui.boxes.skills import SkillsBox
@@ -19,10 +22,12 @@ from qt_gui.boxes.weapon_statistics import WeaponStatisticsBox
 from qt_gui.boxes.weapons_box import WeaponsBox
 
 
-# noinspection PyAttributeOutsideInit,PyArgumentList
 
 #translator
 #_translate = QtCore.QCoreApplication.translate
+
+
+# noinspection PyAttributeOutsideInit,PyArgumentList
 
 
 class MainWindowUi(object):
@@ -115,106 +120,17 @@ class MainWindowUi(object):
     def create_notes_box(self):
         self.NotesBox = NotesBox(self.centralwidget)
 
-
     def create_languages_box(self):
-        self.LanguagesBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.LanguagesBox.setGeometry(QtCore.QRect(630, 440, 191, 251))
-        self.LanguagesBox.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        self.LanguagesBox.setObjectName("LanguagesBox")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.LanguagesBox)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 30, 171, 211))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.LanguagesLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.LanguagesLayout.setContentsMargins(9, 9, 9, 9)
-        self.LanguagesLayout.setSpacing(6)
-        self.LanguagesLayout.setObjectName("LanguagesLayout")
-        self.known_languages_label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.known_languages_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.known_languages_label.setObjectName("known_languages_label")
-        self.LanguagesLayout.addWidget(self.known_languages_label)
-        self.known_languages = QtWidgets.QPlainTextEdit(self.verticalLayoutWidget)
-        self.known_languages.setObjectName("known_languages")
-        self.LanguagesLayout.addWidget(self.known_languages)
+        self.LanguagesBox = LanguagesBox(self.centralwidget)
 
     def create_items_box(self):
-        self.ItemsBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.ItemsBox.setGeometry(QtCore.QRect(840, 900, 581, 291))
-        self.ItemsBox.setObjectName("ItemsBox")
-        self.gridLayoutWidget_8 = QtWidgets.QWidget(self.ItemsBox)
-        self.gridLayoutWidget_8.setGeometry(QtCore.QRect(10, 20, 561, 80))
-        self.gridLayoutWidget_8.setObjectName("gridLayoutWidget_8")
-        self.ItemsLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_8)
-        self.ItemsLayout.setContentsMargins(9, 9, 9, 9)
-        self.ItemsLayout.setSpacing(6)
-        self.ItemsLayout.setObjectName("ItemsLayout")
-        self.items_weight_label = QtWidgets.QLabel(self.gridLayoutWidget_8)
-        self.items_weight_label.setMaximumSize(QtCore.QSize(50, 16777215))
-        self.items_weight_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.items_weight_label.setObjectName("items_weight_label")
-        self.ItemsLayout.addWidget(self.items_weight_label, 0, 1, 1, 1)
-        self.item_1_name = QtWidgets.QLineEdit(self.gridLayoutWidget_8)
-        self.item_1_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.item_1_name.setObjectName("item_1_name")
-        self.ItemsLayout.addWidget(self.item_1_name, 2, 0, 1, 1)
-        self.item_1_weight = QtWidgets.QLineEdit(self.gridLayoutWidget_8)
-        self.item_1_weight.setMinimumSize(QtCore.QSize(0, 23))
-        self.item_1_weight.setMaximumSize(QtCore.QSize(50, 16777215))
-        self.item_1_weight.setObjectName("item_1_weight")
-        self.ItemsLayout.addWidget(self.item_1_weight, 2, 1, 1, 1)
-        self.items_name_label = QtWidgets.QLabel(self.gridLayoutWidget_8)
-        self.items_name_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.items_name_label.setObjectName("items_name_label")
-        self.ItemsLayout.addWidget(self.items_name_label, 0, 0, 1, 1)
-        self.item_1_count = QtWidgets.QLineEdit(self.gridLayoutWidget_8)
-        self.item_1_count.setMinimumSize(QtCore.QSize(0, 23))
-        self.item_1_count.setMaximumSize(QtCore.QSize(40, 16777215))
-        self.item_1_count.setObjectName("item_1_count")
-        self.ItemsLayout.addWidget(self.item_1_count, 2, 2, 1, 1)
-        self.item_1_description = QtWidgets.QPlainTextEdit(self.gridLayoutWidget_8)
-        self.item_1_description.setMaximumSize(QtCore.QSize(16777215, 40))
-        self.item_1_description.setObjectName("item_1_description")
-        self.ItemsLayout.addWidget(self.item_1_description, 2, 3, 1, 1)
-        self.items_count_label = QtWidgets.QLabel(self.gridLayoutWidget_8)
-        self.items_count_label.setMaximumSize(QtCore.QSize(40, 16777215))
-        self.items_count_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.items_count_label.setObjectName("items_count_label")
-        self.ItemsLayout.addWidget(self.items_count_label, 0, 2, 1, 1)
-        self.items_description_label = QtWidgets.QLabel(self.gridLayoutWidget_8)
-        self.items_description_label.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.items_description_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.items_description_label.setIndent(0)
-        self.items_description_label.setObjectName("items_description_label")
-        self.ItemsLayout.addWidget(self.items_description_label, 0, 3, 1, 1)
+        self.ItemsBox = ItemsBox(self.centralwidget)
 
     def create_initiative_speed_box(self):
         self.InitiativeSpeedBox = InitiativeSpeedBox(self.centralwidget)
 
     def create_feats_box(self):
-        self.FeatsBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.FeatsBox.setGeometry(QtCore.QRect(630, 700, 191, 491))
-        self.FeatsBox.setObjectName("FeatsBox")
-        self.gridLayoutWidget_6 = QtWidgets.QWidget(self.FeatsBox)
-        self.gridLayoutWidget_6.setGeometry(QtCore.QRect(10, 20, 171, 61))
-        self.gridLayoutWidget_6.setObjectName("gridLayoutWidget_6")
-        self.FeatsLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_6)
-        self.FeatsLayout.setContentsMargins(9, 9, 9, 9)
-        self.FeatsLayout.setSpacing(6)
-        self.FeatsLayout.setObjectName("FeatsLayout")
-
-        self.feat_1_name = QtWidgets.QLineEdit(self.gridLayoutWidget_6)
-        self.feat_1_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.feat_1_name.setObjectName("feat_1_name")
-        self.feat_description_label = QtWidgets.QLabel(self.gridLayoutWidget_6)
-        self.feat_description_label.setObjectName("feat_description_label")
-        self.feat_1_description_button = QtWidgets.QPushButton(self.gridLayoutWidget_6)
-        self.feat_1_description_button.setObjectName("feat_1_description_button")
-        self.feat_name_label = QtWidgets.QLabel(self.gridLayoutWidget_6)
-        self.feat_name_label.setObjectName("feat_name_label")
-
-        self.FeatsLayout.addWidget(self.feat_1_name, 1, 0, 1, 1)
-        self.FeatsLayout.addWidget(self.feat_description_label, 0, 1, 1, 1)
-        self.FeatsLayout.addWidget(self.feat_1_description_button, 1, 1, 1, 1)
-        self.FeatsLayout.addWidget(self.feat_name_label, 0, 0, 1, 1)
+        self.FeatsBox = FeatsBox(self.centralwidget)
 
     def create_saving_throws_box(self):
         self.SavingThrowsBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -1188,9 +1104,6 @@ class MainWindowUi(object):
         self.translate_hp_ac_box(_translate)
         self.translate_attacks_box(_translate)
         self.translate_saving_throws_box(_translate)
-        self.translate_feats_box(_translate)
-        self.translate_items_box(_translate)
-        self.translate_languages_box(_translate)
         self.translate_menu_bar(_translate)
 
     def translate_menu_bar(self, _translate):
@@ -1366,33 +1279,6 @@ class MainWindowUi(object):
         self.saving_throws_will_size_bonus.setText(_translate("MainWindow", "10"))
         self._plus_sign_9.setText(_translate("MainWindow", "+"))
         self.saving_throws_will_misc_bonus.setText(_translate("MainWindow", "10"))
-
-    def translate_feats_box(self, _translate):
-        self.FeatsBox.setTitle(_translate("MainWindow", "Feats"))
-        self.feat_1_name.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.feat_description_label.setText(_translate("MainWindow", "Description"))
-        self.feat_1_description_button.setText(_translate("MainWindow", "DESC"))
-        self.feat_name_label.setText(_translate("MainWindow", "Feat name"))
-
-    def translate_items_box(self, _translate):
-        self.ItemsBox.setTitle(_translate("MainWindow", "Items"))
-        self.items_weight_label.setText(_translate("MainWindow", "Weight"))
-        self.item_1_name.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.item_1_weight.setText(_translate("MainWindow", "10"))
-        self.items_name_label.setText(_translate("MainWindow", "Item name"))
-        self.item_1_count.setText(_translate("MainWindow", "10"))
-        self.item_1_description.setPlainText(_translate("MainWindow",
-                                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo."))
-        self.items_count_label.setText(_translate("MainWindow", "Count"))
-        self.items_description_label.setText(_translate("MainWindow", "Description"))
-
-    def translate_languages_box(self, _translate):
-        self.LanguagesBox.setTitle(_translate("MainWindow", "Languages"))
-        self.known_languages_label.setText(_translate("MainWindow", "Known Languages"))
-        self.known_languages.setPlainText(_translate("MainWindow",
-                                                     " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo.\n"
-                                                     "\n"
-                                                     "Mauris auctor, elit sed tristique maximus, libero quam feugiat dolor, in laoreet massa libero a tortor. Donec molestie pretium tempus. Integer lacinia magna lacus, nec volutpat felis condimentum id. Vivamus orci ante, gravida sed velit vel, venenatis pellentesque est. Maecenas laoreet laoreet ullamcorper. Phasellus rutrum felis non sapien aliquam semper. Morbi tempus, quam in luctus tempor, mauris neque faucibus libero, ut porta justo sem eu orci. Suspendisse consectetur sem ac neque mollis, sed iaculis tellus elementum. Nulla facilisis turpis vel sagittis pharetra. Donec nec odio pharetra, vestibulum lorem accumsan, tempus nulla. Donec blandit nisi in elit pulvinar, nec feugiat metus egestas. "))
 
     def create_palette(self):
         palette = QtGui.QPalette()
