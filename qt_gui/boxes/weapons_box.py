@@ -1,9 +1,10 @@
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.box import DefaultBox
 from qt_gui.qt_line_edits import create_qline_edit, create_qlabel
 
 
-class WeaponsBox:
+class WeaponsBox(DefaultBox):
     def __init__(self, centralwidget):
         self.root = QtWidgets.QGroupBox(centralwidget)
         self.root.setGeometry(QtCore.QRect(10, 440, 611, 431))
@@ -46,22 +47,6 @@ class WeaponsBox:
         self.melee_weapon_size_label = create_qlabel("melee_weapon_size_label", **melee_weapon_qlabel)
         self.melee_weapon_type_label = create_qlabel("melee_weapon_type_label", **melee_weapon_qlabel)
 
-        self.melee_layout.addWidget(self.melee_weapon_name_label, 0, 0, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_attack_bonus_label, 0, 1, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_damage_roll_label, 0, 2, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_crit_label, 0, 3, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_name, 1, 0, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_attack_bonus, 1, 1, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_damage_roll, 1, 2, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_crit, 1, 3, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_special_label, 2, 0, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_weight_label, 2, 1, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_size_label, 2, 2, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_type_label, 2, 3, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_special, 3, 0, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_weight, 3, 1, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_size, 3, 2, 1, 1)
-        self.melee_layout.addWidget(self.melee_weapon_type, 3, 3, 1, 1)
 
         self.weapons_ranged_weapon_choice = QtWidgets.QComboBox(self.root)
         self.weapons_ranged_weapon_choice.setGeometry(QtCore.QRect(20, 230, 171, 22))
@@ -106,7 +91,10 @@ class WeaponsBox:
         self.ranged_weapon_weight = create_qline_edit("ranged_weapon_weight", **ranged_weapon_qedit)
         self.ranged_weapon_size = create_qline_edit("ranged_weapon_size", **ranged_weapon_qedit)
         self.ranged_weapon_type = create_qline_edit("ranged_weapon_type", **ranged_weapon_qedit)
+        self.add_to_layout()
+        self.translate()
 
+    def add_to_ranged_layout(self):
         self.ranged_layout.addWidget(self.ranged_weapon_crit_label, 0, 3, 1, 1)
         self.ranged_layout.addWidget(self.ranged_weapon_damage_roll_label, 0, 2, 1, 1)
         self.ranged_layout.addWidget(self.ranged_weapon_range_label, 0, 4, 1, 1)
@@ -127,9 +115,26 @@ class WeaponsBox:
         self.ranged_layout.addWidget(self.ranged_weapon_weight, 3, 2, 1, 1)
         self.ranged_layout.addWidget(self.ranged_weapon_size, 3, 3, 1, 1)
         self.ranged_layout.addWidget(self.ranged_weapon_type, 3, 4, 1, 1)
-        self.translate_weapons_box()
 
-    def translate_weapons_box(self):
+    def add_to_melee_layout(self):
+        self.melee_layout.addWidget(self.melee_weapon_name_label, 0, 0, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_attack_bonus_label, 0, 1, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_damage_roll_label, 0, 2, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_crit_label, 0, 3, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_name, 1, 0, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_attack_bonus, 1, 1, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_damage_roll, 1, 2, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_crit, 1, 3, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_special_label, 2, 0, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_weight_label, 2, 1, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_size_label, 2, 2, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_type_label, 2, 3, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_special, 3, 0, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_weight, 3, 1, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_size, 3, 2, 1, 1)
+        self.melee_layout.addWidget(self.melee_weapon_type, 3, 3, 1, 1)
+
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Weapons"))
         self.melee_box.setTitle(_translate("MainWindow", "Currently chosen melee weapon"))
@@ -176,3 +181,7 @@ class WeaponsBox:
         self.ranged_weapon_weight.setText(_translate("MainWindow", "10"))
         self.ranged_weapon_size.setText(_translate("MainWindow", "Lorem ipsum"))
         self.ranged_weapon_type.setText(_translate("MainWindow", "Lorem ipsum"))
+
+    def add_to_layout(self):
+        self.add_to_melee_layout()
+        self.add_to_ranged_layout()
