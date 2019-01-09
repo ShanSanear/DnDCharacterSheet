@@ -39,6 +39,10 @@ class KnownSpellsBox:
         self.known_spells_2_description_button = QtWidgets.QPushButton(self.container)
         self.known_spells_2_description_button.setObjectName("known_spells_2_description_button")
 
+        self.add_to_layout()
+        self.translate()
+
+    def add_to_layout(self):
         self.layout.addWidget(self.known_spells_2_description_button, 1, 5, 1, 1)
         self.layout.addWidget(self.known_spells_1_lvl, 1, 1, 1, 1)
         self.layout.addWidget(self.known_spells_2_lvl, 1, 4, 1, 1)
@@ -51,9 +55,8 @@ class KnownSpellsBox:
         self.layout.addWidget(self.known_spells_description_label_2, 0, 5, 1, 1)
         self.layout.addWidget(self.known_spells_2_name, 1, 3, 1, 1)
         self.layout.addWidget(self.known_spells_1_description_button, 1, 2, 1, 1)
-        self.translate_known_spells_box()
 
-    def translate_known_spells_box(self):
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Known Spells"))
         self.known_spells_2_description_button.setText(_translate("MainWindow", "DESC"))

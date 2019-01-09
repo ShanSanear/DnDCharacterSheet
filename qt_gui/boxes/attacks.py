@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.box import DefaultBox
 
-class AttacksBox:
+
+class AttacksBox(DefaultBox):
     def __init__(self, centralwidget):
         self.root = QtWidgets.QGroupBox(centralwidget)
         self.root.setGeometry(QtCore.QRect(840, 160, 391, 121))
@@ -127,6 +129,12 @@ class AttacksBox:
         self.attacks_ranged_misc.setMaximumSize(QtCore.QSize(167, 20))
         self.attacks_ranged_misc.setObjectName("attacks_ranged_misc")
 
+        self.add_to_layout()
+        self.translate()
+        self.set_signs_labels()
+        self.set_default_values()
+
+    def add_to_layout(self):
         self.layout.addWidget(self.attacks_total_label, 0, 1, 1, 1)
         self.layout.addWidget(self.attacks_base_label, 0, 3, 1, 1)
         self.layout.addWidget(self.attacks_attr_mod_label, 0, 5, 1, 1)
@@ -152,10 +160,8 @@ class AttacksBox:
         self.layout.addWidget(self.attacks_ranged_size, 2, 7, 1, 1)
         self.layout.addWidget(self._plus_sign_21, 2, 8, 1, 1)
         self.layout.addWidget(self.attacks_ranged_misc, 2, 9, 1, 1)
-        self.translate_attacks_box()
 
-
-    def translate_attacks_box(self):
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Attacks"))
         self.attacks_total_label.setText(_translate("MainWindow", "Total"))
@@ -164,22 +170,28 @@ class AttacksBox:
         self.attacks_size_label.setText(_translate("MainWindow", "Size"))
         self.attacks_misc_label.setText(_translate("MainWindow", "Misc"))
         self.attacks_melee_label.setText(_translate("MainWindow", "Melee"))
-        self.attacks_melee_total.setText(_translate("MainWindow", "10"))
-        self._eq_sign.setText(_translate("MainWindow", "="))
-        self.attacks_melee_base.setText(_translate("MainWindow", "10"))
-        self._plus_sign_16.setText(_translate("MainWindow", "+"))
-        self.attacks_melee_attr_mod.setText(_translate("MainWindow", "10"))
-        self._plus_sign_17.setText(_translate("MainWindow", "+"))
-        self.attacks_melee_size.setText(_translate("MainWindow", "10"))
-        self._plus_sign_18.setText(_translate("MainWindow", "+"))
-        self.attacks_melee_misc.setText(_translate("MainWindow", "10"))
         self.attacks_ranged_label.setText(_translate("MainWindow", "Ranged"))
-        self.attacks_ranged_total.setText(_translate("MainWindow", "10"))
+
+    def set_signs_labels(self):
+        _translate = QtCore.QCoreApplication.translate
+        self._eq_sign.setText(_translate("MainWindow", "="))
+        self._plus_sign_16.setText(_translate("MainWindow", "+"))
+        self._plus_sign_17.setText(_translate("MainWindow", "+"))
+        self._plus_sign_18.setText(_translate("MainWindow", "+"))
         self._eq_sign_2.setText(_translate("MainWindow", "="))
-        self.attacks_ranged_base.setText(_translate("MainWindow", "10"))
         self._plus_sign_19.setText(_translate("MainWindow", "+"))
-        self.attacks_ranged_attr_mod.setText(_translate("MainWindow", "10"))
         self._plus_sign_20.setText(_translate("MainWindow", "+"))
-        self.attacks_ranged_size.setText(_translate("MainWindow", "10"))
         self._plus_sign_21.setText(_translate("MainWindow", "+"))
+
+    def set_default_values(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.attacks_melee_total.setText(_translate("MainWindow", "10"))
+        self.attacks_melee_base.setText(_translate("MainWindow", "10"))
+        self.attacks_melee_attr_mod.setText(_translate("MainWindow", "10"))
+        self.attacks_melee_size.setText(_translate("MainWindow", "10"))
+        self.attacks_melee_misc.setText(_translate("MainWindow", "10"))
+        self.attacks_ranged_total.setText(_translate("MainWindow", "10"))
+        self.attacks_ranged_base.setText(_translate("MainWindow", "10"))
+        self.attacks_ranged_attr_mod.setText(_translate("MainWindow", "10"))
+        self.attacks_ranged_size.setText(_translate("MainWindow", "10"))
         self.attacks_ranged_misc.setText(_translate("MainWindow", "10"))

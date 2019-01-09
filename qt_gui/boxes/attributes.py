@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.box import DefaultBox
 
-class AttributesBox:
+
+class AttributesBox(DefaultBox):
     def __init__(self, centralwidget):
         self.root = QtWidgets.QGroupBox(centralwidget)
         self.root.setGeometry(QtCore.QRect(10, 200, 311, 231))
@@ -19,7 +21,6 @@ class AttributesBox:
         self.attr_head_name = QtWidgets.QLabel(self.container)
         self.attr_head_name.setMinimumSize(QtCore.QSize(0, 0))
         self.attr_head_name.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.attr_head_name.setBaseSize(QtCore.QSize(10, 0))
         self.attr_head_name.setAlignment(QtCore.Qt.AlignCenter)
         self.attr_head_name.setObjectName("attr_head_name")
         self.attr_int_label = QtWidgets.QLabel(self.container)
@@ -29,7 +30,6 @@ class AttributesBox:
         sizePolicy.setHeightForWidth(self.attr_int_label.sizePolicy().hasHeightForWidth())
         self.attr_int_label.setSizePolicy(sizePolicy)
         self.attr_int_label.setMinimumSize(QtCore.QSize(40, 0))
-        self.attr_int_label.setBaseSize(QtCore.QSize(10, 0))
         self.attr_int_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.attr_int_label.setObjectName("attr_int_label")
         self.attr_con_mod = QtWidgets.QLineEdit(self.container)
@@ -54,7 +54,6 @@ class AttributesBox:
         sizePolicy.setHeightForWidth(self.attr_dex_label.sizePolicy().hasHeightForWidth())
         self.attr_dex_label.setSizePolicy(sizePolicy)
         self.attr_dex_label.setMinimumSize(QtCore.QSize(40, 0))
-        self.attr_dex_label.setBaseSize(QtCore.QSize(10, 0))
         self.attr_dex_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.attr_dex_label.setObjectName("attr_dex_label")
         self.attr_head_temp_val = QtWidgets.QLabel(self.container)
@@ -94,7 +93,6 @@ class AttributesBox:
         sizePolicy.setHeightForWidth(self.attr_con_label.sizePolicy().hasHeightForWidth())
         self.attr_con_label.setSizePolicy(sizePolicy)
         self.attr_con_label.setMinimumSize(QtCore.QSize(40, 0))
-        self.attr_con_label.setBaseSize(QtCore.QSize(10, 0))
         self.attr_con_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.attr_con_label.setObjectName("attr_con_label")
         self.attr_dex_temp_mod = QtWidgets.QLineEdit(self.container)
@@ -122,7 +120,6 @@ class AttributesBox:
         sizePolicy.setHeightForWidth(self.attr_wis_label.sizePolicy().hasHeightForWidth())
         self.attr_wis_label.setSizePolicy(sizePolicy)
         self.attr_wis_label.setMinimumSize(QtCore.QSize(40, 0))
-        self.attr_wis_label.setBaseSize(QtCore.QSize(10, 0))
         self.attr_wis_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.attr_wis_label.setObjectName("attr_wis_label")
         self.attr_str_temp_mod = QtWidgets.QLineEdit(self.container)
@@ -135,7 +132,6 @@ class AttributesBox:
         sizePolicy.setHeightForWidth(self.attr_str_label.sizePolicy().hasHeightForWidth())
         self.attr_str_label.setSizePolicy(sizePolicy)
         self.attr_str_label.setMinimumSize(QtCore.QSize(40, 0))
-        self.attr_str_label.setBaseSize(QtCore.QSize(10, 0))
         self.attr_str_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.attr_str_label.setObjectName("attr_str_label")
         self.attr_str_mod = QtWidgets.QLineEdit(self.container)
@@ -151,7 +147,6 @@ class AttributesBox:
         sizePolicy.setHeightForWidth(self.attr_cha_label.sizePolicy().hasHeightForWidth())
         self.attr_cha_label.setSizePolicy(sizePolicy)
         self.attr_cha_label.setMinimumSize(QtCore.QSize(40, 0))
-        self.attr_cha_label.setBaseSize(QtCore.QSize(10, 0))
         self.attr_cha_label.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
         self.attr_cha_label.setObjectName("attr_cha_label")
         self.attr_cha_val = QtWidgets.QLineEdit(self.container)
@@ -167,6 +162,11 @@ class AttributesBox:
         self.attr_cha_temp_mod.setMinimumSize(QtCore.QSize(0, 23))
         self.attr_cha_temp_mod.setObjectName("attr_cha_temp_mod")
 
+        self.add_to_layout()
+        self.translate()
+        self.set_default_values()
+
+    def add_to_layout(self):
         self.layout.addWidget(self.attr_str_val, 1, 1, 1, 1)
         self.layout.addWidget(self.attr_head_name, 0, 0, 1, 1)
         self.layout.addWidget(self.attr_int_label, 4, 0, 1, 1)
@@ -201,22 +201,29 @@ class AttributesBox:
         self.layout.addWidget(self.attr_cha_mod, 6, 2, 1, 1)
         self.layout.addWidget(self.attr_cha_temp_val, 6, 3, 1, 1)
         self.layout.addWidget(self.attr_cha_temp_mod, 6, 4, 1, 1)
-        self.translate_attributes_box()
 
-    def translate_attributes_box(self):
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Attributes"))
-        self.attr_str_val.setText(_translate("MainWindow", "10"))
         self.attr_head_name.setText(_translate("MainWindow", "Atrribute"))
         self.attr_int_label.setText(_translate("MainWindow", "INT"))
         self.attr_con_mod.setText(_translate("MainWindow", "10"))
         self.Attr_head_mod.setText(_translate("MainWindow", "Mod"))
-        self.attr_dex_val.setText(_translate("MainWindow", "10"))
         self.attr_head_temp_mod.setText(_translate("MainWindow", "Temp mod"))
         self.attr_dex_label.setText(_translate("MainWindow", "DEX"))
         self.attr_head_temp_val.setText(_translate("MainWindow", "Temp val"))
-        self.attr_con_temp_mod.setText(_translate("MainWindow", "10"))
+        self.attr_con_label.setText(_translate("MainWindow", "CON"))
+        self.attr_head_val.setText(_translate("MainWindow", "Value"))
+        self.attr_wis_label.setText(_translate("MainWindow", "WIS"))
+        self.attr_str_label.setText(_translate("MainWindow", "STR"))
+        self.attr_cha_label.setText(_translate("MainWindow", "CHA"))
+
+    def set_default_values(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.attr_str_val.setText(_translate("MainWindow", "10"))
+        self.attr_dex_val.setText(_translate("MainWindow", "10"))
         self.attr_int_temp_mod.setText(_translate("MainWindow", "10"))
+        self.attr_con_temp_mod.setText(_translate("MainWindow", "10"))
         self.attr_con_val.setText(_translate("MainWindow", "10"))
         self.attr_con_temp_val.setText(_translate("MainWindow", "10"))
         self.attr_wis_mod.setText(_translate("MainWindow", "10"))
@@ -224,19 +231,14 @@ class AttributesBox:
         self.attr_wis_temp_val.setText(_translate("MainWindow", "10"))
         self.attr_dex_mod.setText(_translate("MainWindow", "10"))
         self.attr_dex_temp_val.setText(_translate("MainWindow", "10"))
-        self.attr_con_label.setText(_translate("MainWindow", "CON"))
         self.attr_dex_temp_mod.setText(_translate("MainWindow", "10"))
         self.attr_wis_val.setText(_translate("MainWindow", "10"))
-        self.attr_head_val.setText(_translate("MainWindow", "Value"))
         self.attr_int_temp_val.setText(_translate("MainWindow", "10"))
         self.attr_int_mod.setText(_translate("MainWindow", "10"))
         self.attr_int_val.setText(_translate("MainWindow", "10"))
-        self.attr_wis_label.setText(_translate("MainWindow", "WIS"))
         self.attr_str_temp_mod.setText(_translate("MainWindow", "10"))
-        self.attr_str_label.setText(_translate("MainWindow", "STR"))
         self.attr_str_mod.setText(_translate("MainWindow", "10"))
         self.attr_str_temp_val.setText(_translate("MainWindow", "10"))
-        self.attr_cha_label.setText(_translate("MainWindow", "CHA"))
         self.attr_cha_val.setText(_translate("MainWindow", "10"))
         self.attr_cha_mod.setText(_translate("MainWindow", "10"))
         self.attr_cha_temp_val.setText(_translate("MainWindow", "10"))

@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.box import DefaultBox
 
-class FeatsBox:
+
+class FeatsBox(DefaultBox):
     def __init__(self, centralwidget):
         self.root = QtWidgets.QGroupBox(centralwidget)
         self.root.setGeometry(QtCore.QRect(630, 700, 191, 491))
@@ -24,12 +26,16 @@ class FeatsBox:
         self.feat_name_label = QtWidgets.QLabel(self.container)
         self.feat_name_label.setObjectName("feat_name_label")
 
+        self.add_to_layout()
+        self.translate()
+
+    def add_to_layout(self):
         self.layout.addWidget(self.feat_1_name, 1, 0, 1, 1)
         self.layout.addWidget(self.feat_description_label, 0, 1, 1, 1)
         self.layout.addWidget(self.feat_1_description_button, 1, 1, 1, 1)
         self.layout.addWidget(self.feat_name_label, 0, 0, 1, 1)
 
-    def translate_feats_box(self):
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Feats"))
         self.feat_1_name.setText(_translate("MainWindow", "Lorem ipsum"))

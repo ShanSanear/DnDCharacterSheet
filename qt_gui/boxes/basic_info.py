@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 
+from qt_gui.boxes.box import DefaultBox
 
-class BasicInfoBox:
+
+class BasicInfoBox(DefaultBox):
     def __init__(self, centralwidget):
         self.root = QtWidgets.QGroupBox(centralwidget)
         palette = self.create_palette()
@@ -150,6 +152,10 @@ class BasicInfoBox:
         self.character_level_label.setIndent(-1)
         self.character_level_label.setObjectName("character_level_label")
 
+        self.add_to_layout()
+        self.translate()
+
+    def add_to_layout(self):
         self.layout.addWidget(self.character_class_label, 2, 0, 1, 2)
         self.layout.addWidget(self.character_faith_label, 2, 6, 1, 2)
         self.layout.addWidget(self.character_race_label, 2, 2, 1, 2)
@@ -179,9 +185,7 @@ class BasicInfoBox:
         self.layout.addWidget(self.character_level, 5, 0, 1, 1)
         self.layout.addWidget(self.character_level_label, 4, 0, 1, 1)
 
-        self.translate_basic_info_box()
-
-    def translate_basic_info_box(self):
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Basic Info"))
         self.character_class_label.setText(_translate("MainWindow", "Class"))

@@ -10,11 +10,11 @@ class LanguagesBox(DefaultBox):
         self.root.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.root.setObjectName("LanguagesBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 30, 171, 211))
+        self.container.setGeometry(QtCore.QRect(10, 20, 171, 211))
         self.container.setObjectName("verticalLayoutWidget")
         self.layout = QtWidgets.QVBoxLayout(self.container)
         self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
+        self.layout.setSpacing(0)
         self.layout.setObjectName("LanguagesLayout")
         self.known_languages_label = QtWidgets.QLabel(self.container)
         self.known_languages_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -22,7 +22,9 @@ class LanguagesBox(DefaultBox):
         self.layout.addWidget(self.known_languages_label)
         self.known_languages = QtWidgets.QPlainTextEdit(self.container)
         self.known_languages.setObjectName("known_languages")
+        self.add_to_layout()
         self.translate()
+        self.set_default()
 
     def add_to_layout(self):
         self.layout.addWidget(self.known_languages)
@@ -31,6 +33,9 @@ class LanguagesBox(DefaultBox):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Languages"))
         self.known_languages_label.setText(_translate("MainWindow", "Known Languages"))
+
+    def set_default(self):
+        _translate = QtCore.QCoreApplication.translate
         self.known_languages.setPlainText(_translate("MainWindow",
                                                      " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce in arcu justo.\n"
                                                      "\n"
