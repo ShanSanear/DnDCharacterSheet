@@ -15,7 +15,7 @@ class MyApp(QMainWindow, MainWindowUi):
         self.basic_info_box.character_name.textChanged.connect(partial(self.changed_text, self.feats_box))
 
     def do_stuff(self):
-        self.languages_box.translate_2()
+        self.items_box.add_item()
 
     def changed_text(self, arg):
         print("Changed text")
