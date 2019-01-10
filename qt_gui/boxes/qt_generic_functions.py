@@ -31,3 +31,13 @@ def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, in
 
 def numeric_label(name, parent, align):
     return create_qlabel(name, parent, align=align)
+
+
+def add_to_box_layout_by_row(layout, elements_to_add, row=0, start_column=0, width=1, height=1):
+    for column, element in enumerate(elements_to_add):
+        layout.addWidget(element, row, start_column + column, width, height)
+
+
+def add_to_box_layout_by_column(layout, elements_to_add, column=0, start_row=0, width=1, height=1):
+    for row, element in enumerate(elements_to_add):
+        layout.addWidget(element, start_row + row, column, width, height)
