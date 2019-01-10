@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.box import DefaultBox
 
-class HpAcBox:
+
+class HpAcBox(DefaultBox):
     def __init__(self, centralwidget):
         self.root = QtWidgets.QGroupBox(centralwidget)
         self.root.setGeometry(QtCore.QRect(840, 0, 421, 150))
@@ -195,6 +197,10 @@ class HpAcBox:
         self.hp_ac_contusion_label.setAlignment(QtCore.Qt.AlignCenter)
         self.hp_ac_contusion_label.setObjectName("hp_ac_contusion_label")
 
+        self.add_to_layout()
+        self.translate()
+
+    def add_to_layout(self):
         self.layout.addWidget(self.hp_ac_hp_total_label, 0, 1, 1, 1)
         self.layout.addWidget(self.hp_ac_hp_hp_wounds_current_hp_label, 0, 3, 1, 5)
         self.layout.addWidget(self.hp_ac_hp_label, 1, 0, 1, 1)
@@ -223,9 +229,8 @@ class HpAcBox:
         self.layout.addWidget(self.hp_ac_hp_hp_wounds_current_hp, 1, 3, 1, 5)
         self.layout.addWidget(self.hp_ac_hp_contusion, 1, 9, 1, 5)
         self.layout.addWidget(self.hp_ac_contusion_label, 0, 9, 1, 5)
-        self.translate_hp_ac_box()
 
-    def translate_hp_ac_box(self):
+    def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "HP / AC"))
         self.hp_ac_hp_total_label.setText(_translate("MainWindow", "Total HP"))
