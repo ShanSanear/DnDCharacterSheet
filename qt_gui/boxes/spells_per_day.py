@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 
-from qt_gui.boxes.qt_line_edits import create_qlabel, create_qline_edit, numeric_label
+from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, numeric_label
 from qt_gui.boxes.box import DefaultBox
 
 
