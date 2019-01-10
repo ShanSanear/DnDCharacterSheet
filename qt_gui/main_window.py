@@ -19,6 +19,7 @@ from qt_gui.boxes.spells_per_day import SpellsPerDayBox
 from qt_gui.boxes.weapon_statistics import WeaponStatisticsBox
 from qt_gui.boxes.weapons_box import WeaponsBox
 
+
 # noinspection PyAttributeOutsideInit,PyArgumentList
 class MainWindowUi:
     def setup_ui(self, main_window):
