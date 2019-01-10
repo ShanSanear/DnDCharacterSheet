@@ -41,3 +41,14 @@ def add_to_box_layout_by_row(layout, elements_to_add, row=0, start_column=0, wid
 def add_to_box_layout_by_column(layout, elements_to_add, column=0, start_row=0, width=1, height=1):
     for row, element in enumerate(elements_to_add):
         layout.addWidget(element, start_row + row, column, width, height)
+
+
+def set_text_of_children(root_object, translate_reference):
+    for name, translation in translate_reference.items():
+        obj_ref = getattr(root_object, name)
+        if isinstance(translation, dict):
+            set_text_of_children(obj_ref, translation)
+        else:
+            if not isinstance(translation, str):
+                raise AttributeError("Only strings can be passed to setText")
+            obj_ref.setText(translation)
