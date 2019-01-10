@@ -20,7 +20,7 @@ from qt_gui.boxes.weapon_statistics import WeaponStatisticsBox
 from qt_gui.boxes.weapons_box import WeaponsBox
 
 
-# noinspection PyAttributeOutsideInit,PyArgumentList
+# noinspection PyAttributeOutsideInit
 class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
