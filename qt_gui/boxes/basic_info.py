@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 from qt_gui.boxes.box import DefaultBox
-from qt_gui.qt_line_edits import create_qlabel, create_qline_edit
+from qt_gui.boxes.qt_line_edits import create_qlabel, create_qline_edit
 
 
 class BasicInfoBox(DefaultBox):

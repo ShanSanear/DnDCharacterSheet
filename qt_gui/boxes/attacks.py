@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 
 from qt_gui.boxes.box import DefaultBox
-from qt_gui.qt_line_edits import create_qline_edit, create_qlabel
+from qt_gui.boxes.qt_line_edits import create_qline_edit, create_qlabel
 
 
 class AttacksBox(DefaultBox):
