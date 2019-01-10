@@ -120,8 +120,8 @@ class SkillsBox(DefaultBox):
         self.skills_1_attr_choice.setItemText(5, _translate("MainWindow", "CHA"))
 
     def set_default(self):
-        self.skills_1_misc_mod.setText(_translate("MainWindow", "10"))
-        self.skills_1_attr_mod.setText(_translate("MainWindow", "10"))
-        self.skills_1_rank.setText(_translate("MainWindow", "10"))
-        self.skills_1_total.setText(_translate("MainWindow", "10"))
-        self.skills_1_skill_name.setText(_translate("MainWindow", "Lorem ipsum"))
+        self.skills_1_misc_mod.setText("10")
+        self.skills_1_attr_mod.setText("10")
+        self.skills_1_rank.setText("10")
+        self.skills_1_total.setText("10")
+        self.skills_1_skill_name.setText("Lorem ipsum")
