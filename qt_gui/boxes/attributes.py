@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets, QtCore
 
 from qt_gui.boxes.box import DefaultBox
-from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
+from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, add_to_box_layout_by_row, \
+    add_to_box_layout_by_column
 
 
 class AttributesBox(DefaultBox):
@@ -27,7 +28,7 @@ class AttributesBox(DefaultBox):
 
         self.attr_head_name = create_qlabel("attr_head_name", **qlabel_header_dict)
         self.attr_head_val = create_qlabel("attr_head_val", **qlabel_header_dict)
-        self.Attr_head_mod = create_qlabel("Attr_head_mod", **qlabel_header_dict)
+        self.attr_head_mod = create_qlabel("Attr_head_mod", **qlabel_header_dict)
         self.attr_head_temp_val = create_qlabel("attr_head_temp_val", **qlabel_header_dict)
         self.attr_head_temp_mod = create_qlabel("attr_head_temp_mod", **qlabel_header_dict)
 
@@ -73,55 +74,32 @@ class AttributesBox(DefaultBox):
         self.set_default_values()
 
     def add_to_layout(self):
-        self.layout.addWidget(self.attr_head_name, 0, 0, 1, 1)
-        self.layout.addWidget(self.Attr_head_mod, 0, 2, 1, 1)
-        self.layout.addWidget(self.attr_head_temp_mod, 0, 4, 1, 1)
-        self.layout.addWidget(self.attr_head_temp_val, 0, 3, 1, 1)
-        self.layout.addWidget(self.attr_head_val, 0, 1, 1, 1)
+        header = [self.attr_head_name, self.attr_head_val, self.attr_head_mod,
+                  self.attr_head_temp_val, self.attr_head_temp_mod]
+        add_to_box_layout_by_row(self.layout, header)
 
-        self.layout.addWidget(self.attr_str_label, 1, 0, 1, 1)
-        self.layout.addWidget(self.attr_dex_label, 2, 0, 1, 1)
-        self.layout.addWidget(self.attr_con_label, 3, 0, 1, 1)
-        self.layout.addWidget(self.attr_int_label, 4, 0, 1, 1)
-        self.layout.addWidget(self.attr_wis_label, 5, 0, 1, 1)
-        self.layout.addWidget(self.attr_cha_label, 6, 0, 1, 1)
+        stats_column = [self.attr_str_label, self.attr_dex_label, self.attr_con_label,
+                        self.attr_int_label, self.attr_wis_label, self.attr_cha_label]
+        add_to_box_layout_by_column(self.layout, stats_column, start_row=1)
 
-        self.layout.addWidget(self.attr_str_val, 1, 1, 1, 1)
-        self.layout.addWidget(self.attr_str_mod, 1, 2, 1, 1)
-        self.layout.addWidget(self.attr_str_temp_val, 1, 3, 1, 1)
-        self.layout.addWidget(self.attr_str_temp_mod, 1, 4, 1, 1)
+        attributes_lines = [
+            [self.attr_str_val, self.attr_str_mod, self.attr_str_temp_val, self.attr_str_temp_mod],
+            [self.attr_dex_val, self.attr_dex_mod, self.attr_dex_temp_val, self.attr_dex_temp_mod],
+            [self.attr_con_val, self.attr_con_mod, self.attr_con_temp_val, self.attr_con_temp_mod],
+            [self.attr_int_val, self.attr_int_mod, self.attr_int_temp_val, self.attr_int_temp_mod],
+            [self.attr_wis_val, self.attr_wis_mod, self.attr_wis_temp_val, self.attr_wis_temp_mod],
+            [self.attr_cha_val, self.attr_cha_mod, self.attr_cha_temp_val, self.attr_cha_temp_mod]]
 
-        self.layout.addWidget(self.attr_dex_val, 2, 1, 1, 1)
-        self.layout.addWidget(self.attr_dex_mod, 2, 2, 1, 1)
-        self.layout.addWidget(self.attr_dex_temp_val, 2, 3, 1, 1)
-        self.layout.addWidget(self.attr_dex_temp_mod, 2, 4, 1, 1)
+        for idx, attribute_line in enumerate(attributes_lines):
+            add_to_box_layout_by_row(self.layout, attribute_line, row=idx + 1, start_column=1)
 
-        self.layout.addWidget(self.attr_con_val, 3, 1, 1, 1)
-        self.layout.addWidget(self.attr_con_mod, 3, 2, 1, 1)
-        self.layout.addWidget(self.attr_con_temp_mod, 3, 4, 1, 1)
-        self.layout.addWidget(self.attr_con_temp_val, 3, 3, 1, 1)
-
-        self.layout.addWidget(self.attr_int_val, 4, 1, 1, 1)
-        self.layout.addWidget(self.attr_int_mod, 4, 2, 1, 1)
-        self.layout.addWidget(self.attr_int_temp_mod, 4, 4, 1, 1)
-        self.layout.addWidget(self.attr_int_temp_val, 4, 3, 1, 1)
-
-        self.layout.addWidget(self.attr_wis_val, 5, 1, 1, 1)
-        self.layout.addWidget(self.attr_wis_mod, 5, 2, 1, 1)
-        self.layout.addWidget(self.attr_wis_temp_mod, 5, 4, 1, 1)
-        self.layout.addWidget(self.attr_wis_temp_val, 5, 3, 1, 1)
-
-        self.layout.addWidget(self.attr_cha_val, 6, 1, 1, 1)
-        self.layout.addWidget(self.attr_cha_mod, 6, 2, 1, 1)
-        self.layout.addWidget(self.attr_cha_temp_val, 6, 3, 1, 1)
-        self.layout.addWidget(self.attr_cha_temp_mod, 6, 4, 1, 1)
 
     def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Attributes"))
         self.attr_head_name.setText(_translate("MainWindow", "Atrribute"))
         self.attr_int_label.setText(_translate("MainWindow", "INT"))
-        self.Attr_head_mod.setText(_translate("MainWindow", "Mod"))
+        self.attr_head_mod.setText(_translate("MainWindow", "Mod"))
         self.attr_head_temp_mod.setText(_translate("MainWindow", "Temp mod"))
         self.attr_dex_label.setText(_translate("MainWindow", "DEX"))
         self.attr_head_temp_val.setText(_translate("MainWindow", "Temp val"))
