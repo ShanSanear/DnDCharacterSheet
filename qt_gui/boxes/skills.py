@@ -83,6 +83,7 @@ class SkillsBox(DefaultBox):
 
         self.add_to_layout()
         self.translate()
+        self.set_default()
 
     def add_to_layout(self):
         self.layout.addWidget(self.skills_description_label, 0, 6, 1, 1)
@@ -105,20 +106,22 @@ class SkillsBox(DefaultBox):
         self.root.setTitle(_translate("MainWindow", "Skills"))
         self.skills_description_label.setText(_translate("MainWindow", "Description"))
         self.skills_1_description_button.setText(_translate("MainWindow", "DESC"))
-        self.skills_1_misc_mod.setText(_translate("MainWindow", "10"))
-        self.skills_1_attr_mod.setText(_translate("MainWindow", "10"))
-        self.skills_1_rank.setText(_translate("MainWindow", "10"))
-        self.skills_1_total.setText(_translate("MainWindow", "10"))
-        self.skills_1_skill_name.setText(_translate("MainWindow", "Lorem ipsum"))
         self.skills_rank_label.setText(_translate("MainWindow", "Rank"))
         self.skills_attr_mod_label.setText(_translate("MainWindow", "Attr mod"))
         self.skills_misc_label.setText(_translate("MainWindow", "Misc"))
+        self.skills_skill_name_label.setText(_translate("MainWindow", "Skill name"))
+        self.skills_attr_choice_label.setText(_translate("MainWindow", "Attr"))
+        self.skills_total_label.setText(_translate("MainWindow", "Total"))
         self.skills_1_attr_choice.setItemText(0, _translate("MainWindow", "STR"))
         self.skills_1_attr_choice.setItemText(1, _translate("MainWindow", "DEX"))
         self.skills_1_attr_choice.setItemText(2, _translate("MainWindow", "CON"))
         self.skills_1_attr_choice.setItemText(3, _translate("MainWindow", "INT"))
         self.skills_1_attr_choice.setItemText(4, _translate("MainWindow", "WIS"))
         self.skills_1_attr_choice.setItemText(5, _translate("MainWindow", "CHA"))
-        self.skills_skill_name_label.setText(_translate("MainWindow", "Skill name"))
-        self.skills_attr_choice_label.setText(_translate("MainWindow", "Attr"))
-        self.skills_total_label.setText(_translate("MainWindow", "Total"))
+
+    def set_default(self):
+        self.skills_1_misc_mod.setText(_translate("MainWindow", "10"))
+        self.skills_1_attr_mod.setText(_translate("MainWindow", "10"))
+        self.skills_1_rank.setText(_translate("MainWindow", "10"))
+        self.skills_1_total.setText(_translate("MainWindow", "10"))
+        self.skills_1_skill_name.setText(_translate("MainWindow", "Lorem ipsum"))
