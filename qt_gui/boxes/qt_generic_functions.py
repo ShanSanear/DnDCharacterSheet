@@ -35,12 +35,12 @@ def numeric_label(name, parent, align):
 
 def add_to_box_layout_by_row(layout, elements_to_add, row=0, start_column=0, height=1, width=1):
     for column, element in enumerate(elements_to_add):
-        layout.addWidget(element, row, start_column + column, height, width)
+        layout.addWidget(element, row, start_column + column * width, height, width)
 
 
 def add_to_box_layout_by_column(layout, elements_to_add, column=0, start_row=0, height=1, width=1):
     for row, element in enumerate(elements_to_add):
-        layout.addWidget(element, start_row + row, column, height, width)
+        layout.addWidget(element, start_row + row * height, column, height, width)
 
 
 def set_text_of_children(root_object, translate_reference):
