@@ -43,12 +43,13 @@ class AttributesBox(DefaultBox):
                     }
                 }
         }
-        def_dict = {"val": "10",
-                    "mod": "0",
-                    "temp_val": "10",
-                    "temp_mod": "0", }
-        self.default_values = dict(str=dict(def_dict), dex=dict(def_dict), con=dict(def_dict), int=dict(def_dict),
-                                   wis=dict(def_dict), cha=dict(def_dict), )
+        attr_default = {"val": "10",
+                        "mod": "0",
+                        "temp_val": "10",
+                        "temp_mod": "0", }
+
+        self.default_attribute_values = dict(str=dict(attr_default), dex=dict(attr_default), con=dict(attr_default),
+                                             int=dict(attr_default), wis=dict(attr_default), cha=dict(attr_default), )
         for attr in self.attrs_names:
             setattr(self, f"{attr}", SimpleNamespace())
             self.attrs_references.append(getattr(self, f"{attr}"))
@@ -95,13 +96,13 @@ class AttributesBox(DefaultBox):
     def add_to_layout(self):
         add_to_box_layout_by_row(self.layout, [getattr(self.head, element) for element in self.elements])
 
-        attributes_lines = [[getattr(attr, element) for element in self.elements] for attr in self.attrs_references]
-        for idx, attribute_line in enumerate(attributes_lines):
-            add_to_box_layout_by_row(self.layout, attribute_line, row=idx + 1)
+        attributes_elements = [[getattr(attr, element) for element in self.elements] for attr in self.attrs_references]
+        for idx, attribute_row in enumerate(attributes_elements):
+            add_to_box_layout_by_row(self.layout, attribute_row, row=idx + 1)
 
     def translate(self, language_ref):
         _translate = QtCore.QCoreApplication.translate
         set_text_of_children(self, self.translate_reference[language_ref])
 
     def set_default_values(self):
-        set_text_of_children(self, self.default_values)
+        set_text_of_children(self, self.default_attribute_values)
