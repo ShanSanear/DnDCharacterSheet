@@ -79,6 +79,7 @@ class AttributesBox(DefaultBox):
         self.add_to_layout()
         self.translate("EN")
         self.set_default_values()
+        self.root.setTitle("Attributes")
 
     def generate_head_labels(self):
         for element in self.elements:
@@ -101,7 +102,6 @@ class AttributesBox(DefaultBox):
             add_to_box_layout_by_row(self.layout, attribute_row, row=idx + 1)
 
     def translate(self, language_ref):
-        _translate = QtCore.QCoreApplication.translate
         set_text_of_children(self, self.translate_reference[language_ref])
 
     def set_default_values(self):
