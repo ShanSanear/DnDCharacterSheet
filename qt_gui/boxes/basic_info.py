@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 
 from qt_gui.boxes.box import DefaultBox
-from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
+from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, add_to_box_layout_by_row, \
+    set_text_of_children
 
 
 class BasicInfoBox(DefaultBox):
@@ -16,6 +17,41 @@ class BasicInfoBox(DefaultBox):
         self.layout.setContentsMargins(9, 9, 9, 9)
         self.layout.setSpacing(6)
         self.layout.setObjectName("BasicInfoLayout")
+        self.translate_reference = {
+            "EN":
+                {
+                    "class_label": "Class",
+                    "faith_label": "Faith",
+                    "race_label": "Race",
+                    "alignement_label": "Alignement",
+                    "player_name_label": "Player",
+                    "name_label": "Name",
+                    "height_label": "Height",
+                    "weight_label": "Weight",
+                    "eyes_label": "Eyes",
+                    "hair_label": "Hair",
+                    "size_label": "Size",
+                    "age_label": "Age",
+                    "gender_label": "Gender",
+                    "level_label": "Level",
+                }
+        }
+        self.default_values = {
+            "race": "Lorem ipsum",
+            "alignement": "Lorem ipsum",
+            "char_class": "Lorem ipsum",
+            "faith": "Lorem ipsum",
+            "name": "Lorem ipsum",
+            "height": "10",
+            "weight": "10",
+            "hair": "Lorem ipsum",
+            "player_name": "Lorem ipsum",
+            "eyes": "Lorem ipsum",
+            "gender": "Lorem ipsum",
+            "age": "10",
+            "size": "Lorem ipsum",
+            "level": "10",
+        }
 
         qlabel_dict_1 = dict(parent=self.container,
                              align=QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter,
@@ -40,7 +76,6 @@ class BasicInfoBox(DefaultBox):
         self.age_label = create_qlabel("character_age_label", **qlabel_dict_2)
         self.gender_label = create_qlabel("character_gender_label", **qlabel_dict_2)
         self.level_label = create_qlabel("character_level_label", **qlabel_dict_2)
-        self.player_name_label.setObjectName("player_name_label")
 
         self.race = create_qline_edit("character_race", **qline_dict_1)
         self.alignement = create_qline_edit("character_alignement", **qline_dict_1)
@@ -58,91 +93,32 @@ class BasicInfoBox(DefaultBox):
         self.level = create_qline_edit("character_level", **qline_dict_2)
 
         self.add_to_layout()
-        self.translate()
+        self.translate("EN")
         self.set_default()
+        self.root.setTitle("Basic Info")
 
     def add_to_layout(self):
-        self.layout.addWidget(self.class_label, 2, 0, 1, 2)
-        self.layout.addWidget(self.faith_label, 2, 6, 1, 2)
-        self.layout.addWidget(self.race_label, 2, 2, 1, 2)
-        self.layout.addWidget(self.alignement_label, 2, 4, 1, 2)
-        self.layout.addWidget(self.race, 3, 2, 1, 2)
-        self.layout.addWidget(self.alignement, 3, 4, 1, 2)
-        self.layout.addWidget(self.char_class, 3, 0, 1, 2)
-        self.layout.addWidget(self.faith, 3, 6, 1, 2)
-        self.layout.addWidget(self.name_label, 0, 0, 1, 4)
-        self.layout.addWidget(self.name, 1, 0, 1, 4)
-        self.layout.addWidget(self.player_name_label, 0, 4, 1, 4)
-        self.layout.addWidget(self.height_label, 4, 4, 1, 1)
-        self.layout.addWidget(self.height, 5, 4, 1, 1)
-        self.layout.addWidget(self.weight_label, 4, 5, 1, 1)
-        self.layout.addWidget(self.weight, 5, 5, 1, 1)
-        self.layout.addWidget(self.eyes_label, 4, 6, 1, 1)
-        self.layout.addWidget(self.hair, 5, 7, 1, 1)
-        self.layout.addWidget(self.player_name, 1, 4, 1, 4)
-        self.layout.addWidget(self.eyes, 5, 6, 1, 1)
-        self.layout.addWidget(self.hair_label, 4, 7, 1, 1)
-        self.layout.addWidget(self.gender, 5, 3, 1, 1)
-        self.layout.addWidget(self.age, 5, 2, 1, 1)
-        self.layout.addWidget(self.size_label, 4, 1, 1, 1)
-        self.layout.addWidget(self.size, 5, 1, 1, 1)
-        self.layout.addWidget(self.age_label, 4, 2, 1, 1)
-        self.layout.addWidget(self.gender_label, 4, 3, 1, 1)
-        self.layout.addWidget(self.level, 5, 0, 1, 1)
-        self.layout.addWidget(self.level_label, 4, 0, 1, 1)
+        first_row_labels = [self.name_label, self.player_name_label]
+        add_to_box_layout_by_row(self.layout, first_row_labels, row=0, width=4)
 
-    def translate(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.root.setTitle(_translate("MainWindow", "Basic Info"))
-        self.class_label.setText(_translate("MainWindow", "Class"))
-        self.faith_label.setText(_translate("MainWindow", "Faith"))
-        self.race_label.setText(_translate("MainWindow", "Race"))
-        self.alignement_label.setText(_translate("MainWindow", "Alignement"))
-        self.name_label.setText(_translate("MainWindow", "Character name"))
-        self.player_name_label.setText(_translate("MainWindow", "Player name"))
-        self.height_label.setText(_translate("MainWindow", "Height"))
-        self.weight_label.setText(_translate("MainWindow", "Weight"))
-        self.eyes_label.setText(_translate("MainWindow", "Eyes"))
-        self.hair_label.setText(_translate("MainWindow", "Hair"))
-        self.size_label.setText(_translate("MainWindow", "Size"))
-        self.age_label.setText(_translate("MainWindow", "Age"))
-        self.gender_label.setText(_translate("MainWindow", "Gender"))
-        self.level_label.setText(_translate("MainWindow", "Level"))
+        first_row_input = [self.name, self.player_name]
+        add_to_box_layout_by_row(self.layout, first_row_input, row=1, width=4)
+
+        second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
+        add_to_box_layout_by_row(self.layout, second_row_labels, row=2, width=2)
+
+        second_row_input = [self.char_class, self.race, self.alignement, self.faith]
+        add_to_box_layout_by_row(self.layout, second_row_input, row=3, width=2)
+
+        third_row_labels = [self.level_label, self.size_label, self.age_label, self.gender_label, self.height_label,
+                            self.weight_label, self.eyes_label, self.hair_label]
+        add_to_box_layout_by_row(self.layout, third_row_labels, row=4)
+
+        third_row_input = [self.level, self.size, self.age, self.gender, self.height, self.weight, self.eyes, self.hair]
+        add_to_box_layout_by_row(self.layout, third_row_input, row=5)
+
+    def translate(self, language_ref):
+        set_text_of_children(self, self.translate_reference[language_ref])
 
     def set_default(self):
-        self.race.setText("Lorem ipsum")
-        self.alignement.setText("Lorem ipsum")
-        self.char_class.setText("Lorem ipsum")
-        self.faith.setText("Lorem ipsum")
-        self.name.setText("Lorem ipsum")
-        self.height.setText("10")
-        self.weight.setText("10")
-        self.hair.setText("Lorem ipsum")
-        self.player_name.setText("Lorem ipsum")
-        self.eyes.setText("Lorem ipsum")
-        self.gender.setText("Lorem ipsum")
-        self.age.setText("10")
-        self.size.setText("Lorem ipsum")
-        self.level.setText("10")
-
-    def create_palette(self):
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        return palette
+        set_text_of_children(self, self.default_values)
