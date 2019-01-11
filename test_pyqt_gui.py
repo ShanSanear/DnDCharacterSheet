@@ -12,7 +12,7 @@ class MyApp(QMainWindow, MainWindowUi):
         super(self.__class__, self).__init__()
         self.setup_ui(self)
         self.push_button.clicked.connect(self.do_stuff)
-        self.basic_info_box.character_name.textChanged.connect(partial(self.changed_text, self.feats_box))
+        self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
 
     def do_stuff(self):
         self.items_box.add_item()
