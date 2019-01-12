@@ -32,7 +32,7 @@ class ItemsBox:
         # self.add_item(self.items[2], 3)
         self.translate()
 
-    def create_item(self, item_idx):
+    def create_item_row(self, item_idx):
         item_name = QtWidgets.QLineEdit(self.container)
         item_name.setMinimumSize(QtCore.QSize(0, 23))
         item_name.setObjectName(f"item_{item_idx}_name")
@@ -56,7 +56,7 @@ class ItemsBox:
         self.layout.addWidget(self.items_description_label, 0, 3, 1, 1)
 
     def add_item(self):
-        new_item = self.create_item(self.items_count)
+        new_item = self.create_item_row(self.items_count)
         self.items.append(new_item)
         for el_idx, element in enumerate(new_item):
             self.layout.addWidget(element, self.items_count + 1, el_idx, 1, 1)
