@@ -15,16 +15,10 @@ class FeatsBox(DefaultBox):
         self.layout.setContentsMargins(9, 9, 9, 9)
         self.layout.setSpacing(6)
         self.layout.setObjectName("FeatsLayout")
-
-        self.feat_1_name = QtWidgets.QLineEdit(self.container)
-        self.feat_1_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.feat_1_name.setObjectName("feat_1_name")
-        self.feat_description_label = QtWidgets.QLabel(self.container)
-        self.feat_description_label.setObjectName("feat_description_label")
-        self.feat_1_description_button = QtWidgets.QPushButton(self.container)
-        self.feat_1_description_button.setObjectName("feat_1_description_button")
         self.feat_name_label = QtWidgets.QLabel(self.container)
         self.feat_name_label.setObjectName("feat_name_label")
+
+        self.add_feat()
 
         self.add_to_layout()
         self.translate()
@@ -42,3 +36,12 @@ class FeatsBox(DefaultBox):
         self.feat_description_label.setText(_translate("MainWindow", "Description"))
         self.feat_1_description_button.setText(_translate("MainWindow", "DESC"))
         self.feat_name_label.setText(_translate("MainWindow", "Feat name"))
+
+    def add_feat(self):
+        self.feat_1_name = QtWidgets.QLineEdit(self.container)
+        self.feat_1_name.setMinimumSize(QtCore.QSize(0, 23))
+        self.feat_1_name.setObjectName("feat_1_name")
+        self.feat_description_label = QtWidgets.QLabel(self.container)
+        self.feat_description_label.setObjectName("feat_description_label")
+        self.feat_1_description_button = QtWidgets.QPushButton(self.container)
+        self.feat_1_description_button.setObjectName("feat_1_description_button")
