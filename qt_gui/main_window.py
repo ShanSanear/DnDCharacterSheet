@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QVBoxLayout, QScrollArea
 
 from qt_gui.boxes.armor_items import ArmorItems
 from qt_gui.boxes.attacks import AttacksBox
@@ -29,31 +30,63 @@ class MainWindowUi:
         main_window.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
         self.central_widget = QtWidgets.QWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
+        layout = QtWidgets.QVBoxLayout(self.central_widget)
+
+        self.scrollArea = QtWidgets.QScrollArea(self.central_widget)
+        layout.addWidget(self.scrollArea)
+
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1800, 1500))
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        layout = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents)
+        # add child widgets to this layout...
 
         self.push_button = QtWidgets.QPushButton(self.central_widget)
         self.push_button.setGeometry(QtCore.QRect(1540, 170, 75, 23))
         self.push_button.setObjectName("clickMeButton")
         self.menu_bar = MenuBar(main_window)
-        self.weapons_statistics_box = WeaponStatisticsBox(self.central_widget)
-        self.skills_box = SkillsBox(self.central_widget)
-        self.number_of_spells_box = NumberOfSpellsBox(self.central_widget)
-        self.spells_per_day_box = SpellsPerDayBox(self.central_widget)
-        self.known_spells_box = KnownSpellsBox(self.central_widget)
-        self.armor_items_box = ArmorItems(self.central_widget)
-        self.weapons_box = WeaponsBox(self.central_widget)
-        self.notes_box = NotesBox(self.central_widget)
-        self.languages_box = LanguagesBox(self.central_widget)
-        self.items_box = ItemsBox(self.central_widget)
-        self.initiative_speed_box = InitiativeSpeedBox(self.central_widget)
-        self.feats_box = FeatsBox(self.central_widget)
-        self.saving_throws_box = SavingThrowsBox(self.central_widget)
-        self.attacks_box = AttacksBox(self.central_widget)
-        self.hp_ac_box = HpAcBox(self.central_widget)
-        self.attributes_box = AttributesBox(self.central_widget)
-        self.basic_info_box = BasicInfoBox(self.central_widget)
-        main_window.setCentralWidget(self.central_widget)
+        self.weapons_statistics_box = WeaponStatisticsBox(None)
+        self.skills_box = SkillsBox(None)
+        self.number_of_spells_box = NumberOfSpellsBox(None)
+        self.spells_per_day_box = SpellsPerDayBox(None)
+        self.known_spells_box = KnownSpellsBox(None)
+        self.armor_items_box = ArmorItems(None)
+        self.weapons_box = WeaponsBox(None)
+        self.notes_box = NotesBox(None)
+        self.languages_box = LanguagesBox(None)
+        self.items_box = ItemsBox(None)
+        self.initiative_speed_box = InitiativeSpeedBox(None)
+        self.feats_box = FeatsBox(None)
+        self.saving_throws_box = SavingThrowsBox(None)
+        self.attacks_box = AttacksBox(None)
+        self.hp_ac_box = HpAcBox(None)
+        self.attributes_box = AttributesBox(None)
+        self.basic_info_box = BasicInfoBox(None)
+
+        children = [self.weapons_statistics_box.root,
+        self.skills_box.root,
+        self.number_of_spells_box.root,
+        self.spells_per_day_box.root,
+        self.known_spells_box.root,
+        self.armor_items_box.root,
+        self.weapons_box.root,
+        self.notes_box.root,
+        self.languages_box.root,
+        self.items_box.root,
+        self.initiative_speed_box.root,
+        self.feats_box.root,
+        self.saving_throws_box.root,
+        self.attacks_box.root,
+        self.hp_ac_box.root,
+        self.attributes_box.root,
+        self.basic_info_box.root]
+        for child in children:
+            layout.addChildWidget(child)
+        #main_window.setCentralWidget(self.central_widget)
+        #Xself.scrollArea.setWidgetResizable(True)
         self.retranslate_ui(main_window)
-        QtCore.QMetaObject.connectSlotsByName(main_window)
+        main_window.setCentralWidget(self.central_widget)
 
     def retranslate_ui(self, main_window):
         _translate = QtCore.QCoreApplication.translate

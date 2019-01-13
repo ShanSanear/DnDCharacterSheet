@@ -1,9 +1,12 @@
 from functools import partial
 
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow, QApplication, QGroupBox, QFormLayout, QLabel, QComboBox, QScrollArea, \
+    QVBoxLayout
 
 import sys
+
+from PyQt5.uic.properties import QtGui
 
 from qt_gui.main_window import MainWindowUi
 
@@ -22,9 +25,42 @@ class MyApp(QMainWindow, MainWindowUi):
         print(arg)
 
 
-if __name__ == '__main__':
-    # pyuic5 input -o output for converting ui files
+class Window(QtWidgets.QWidget):
+
+    def __init__(self, val):
+        super(Window, self).__init__()
+        mygroupbox = QGroupBox('this is my groupbox')
+        myform = QFormLayout()
+        labellist = []
+        combolist = []
+        for i in range(val):
+            labellist.append(QLabel('mylabel'))
+            combolist.append(QComboBox())
+            myform.addRow(labellist[i],combolist[i])
+        mygroupbox.setLayout(myform)
+        scroll = QScrollArea()
+        scroll.setWidget(mygroupbox)
+        scroll.setWidgetResizable(True)
+        scroll.setFixedHeight(400)
+        layout = QVBoxLayout(self)
+        layout.addWidget(scroll)
+
+
+def main1():
+    app = QApplication(sys.argv)
+    window = Window(25)
+    window.setGeometry(500, 300, 300, 400)
+    window.show()
+    sys.exit(app.exec_())
+
+def main():
     app = QApplication(sys.argv)
     form = MyApp()
     form.show()
     app.exec_()
+
+
+if __name__ == '__main__':
+    main()
+    #main1()
+
