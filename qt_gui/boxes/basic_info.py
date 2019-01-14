@@ -6,16 +6,17 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, 
 
 
 class BasicInfoBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(10, 0, 811, 201))
+
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("BasicInfoBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 791, 162))
         self.container.setObjectName("gridLayoutWidget_2")
+
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
+        # self.layout.setContentsMargins(2, 2, 2, 10)
+        # self.layout.setSpacing(6)
         self.layout.setObjectName("BasicInfoLayout")
         self.translate_reference = {
             "EN":
@@ -96,6 +97,7 @@ class BasicInfoBox(DefaultBox):
         self.translate("EN")
         self.set_default()
         self.root.setTitle("Basic Info")
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         first_row_labels = [self.name_label, self.player_name_label]

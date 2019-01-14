@@ -5,9 +5,9 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class WeaponStatisticsBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(1240, 160, 261, 121))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("WeaponStatisticsBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setGeometry(QtCore.QRect(10, 20, 243, 91))

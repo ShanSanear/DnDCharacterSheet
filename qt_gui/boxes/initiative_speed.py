@@ -4,16 +4,13 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
 
 
 class InitiativeSpeedBox:
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(1430, 290, 271, 121))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("InitiativeSpeedBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 261, 91))
         self.container.setObjectName("gridLayoutWidget_7")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
         self.layout.setObjectName("InitiativeSpeedLayout")
         qline_dict = dict(parent=self.container, min_size=(0, 23), max_size=(10000, 20))
         qlabel_dict = dict(parent=self.container)
@@ -57,6 +54,7 @@ class InitiativeSpeedBox:
         self.layout.addWidget(self.initiative_speed_speed_armor_type, 2, 3, 1, 3)
 
         self.translate_initiative_speed_box()
+        self.root.setLayout(self.layout)
 
     def translate_initiative_speed_box(self):
         _translate = QtCore.QCoreApplication.translate

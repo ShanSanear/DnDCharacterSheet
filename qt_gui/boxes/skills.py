@@ -4,13 +4,12 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class SkillsBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(840, 290, 581, 191))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setMinimumSize(QtCore.QSize(571, 91))
         self.root.setObjectName("SkillsBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 561, 61))
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setContentsMargins(9, 9, 9, 9)
@@ -84,6 +83,7 @@ class SkillsBox(DefaultBox):
         self.add_to_layout()
         self.translate()
         self.set_default()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.skills_description_label, 0, 6, 1, 1)

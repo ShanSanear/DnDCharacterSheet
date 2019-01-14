@@ -4,17 +4,14 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class HpAcBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(840, 0, 421, 150))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setMaximumSize(QtCore.QSize(2000, 2000))
         self.root.setObjectName("HpAcBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(11, 20, 401, 121))
         self.container.setObjectName("layoutWidget")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
         self.layout.setObjectName("HpAcLayout")
         self.hp_ac_hp_total_label = QtWidgets.QLabel(self.container)
         self.hp_ac_hp_total_label.setMinimumSize(QtCore.QSize(0, 23))
@@ -199,6 +196,7 @@ class HpAcBox(DefaultBox):
 
         self.add_to_layout()
         self.translate()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.hp_ac_hp_total_label, 0, 1, 1, 1)

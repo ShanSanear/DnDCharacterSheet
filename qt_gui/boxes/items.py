@@ -4,16 +4,13 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel
 
 
 class ItemsBox:
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(840, 900, 581, 291))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("ItemsBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 561, 40))
         self.container.setObjectName("gridLayoutWidget_8")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(10)
         self.layout.setObjectName("ItemsLayout")
         qlabel_dict = dict(parent=self.container)
         self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
@@ -27,10 +24,16 @@ class ItemsBox:
         # self.items.append(self.create_item(3))
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80 + len(self.items) * 40))
         self.add_to_layout()
+        self.add_item()
+        self.add_item()
+        self.add_item()
+        self.add_item()
+        self.add_item()
         # self.add_item(self.items[0], 1)
         # self.add_item(self.items[1], 2)
         # self.add_item(self.items[2], 3)
         self.translate()
+        self.root.setLayout(self.layout)
 
     def create_item_row(self, item_idx):
         item_name = QtWidgets.QLineEdit(self.container)

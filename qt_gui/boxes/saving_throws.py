@@ -5,18 +5,15 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
 
 
 class SavingThrowsBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(1270, 0, 461, 150))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setMinimumSize(QtCore.QSize(461, 0))
         self.root.setMaximumSize(QtCore.QSize(461, 150))
         self.root.setObjectName("SavingThrowsBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(11, 21, 431, 121))
         self.container.setObjectName("layoutWidget2")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
         self.layout.setObjectName("SavingThrowsLayout")
         qlabel_dict = dict(parent=self.container, min_size=(60, 20), max_size=(60, 23))
         qlabel_sign_dict = dict(parent=self.container, min_size=(8, 10), max_size=(8, 23))
@@ -62,6 +59,7 @@ class SavingThrowsBox(DefaultBox):
         self.translate()
         self.set_signs_labels()
         self.set_default()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.saving_throws_will_misc_bonus, 3, 9, 1, 1)

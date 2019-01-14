@@ -4,9 +4,9 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class LanguagesBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(630, 440, 191, 251))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.root.setObjectName("LanguagesBox")
         self.container = QtWidgets.QWidget(self.root)

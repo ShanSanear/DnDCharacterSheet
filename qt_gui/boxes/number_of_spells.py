@@ -6,9 +6,9 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class NumberOfSpellsBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(840, 560, 581, 131))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("NumberOfSpellsBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 91))

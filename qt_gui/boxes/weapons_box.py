@@ -5,9 +5,9 @@ from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_qlabel
 
 
 class WeaponsBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(10, 440, 611, 431))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("WeaponsBox")
         self.melee_box = QtWidgets.QGroupBox(self.root)
         self.melee_box.setGeometry(QtCore.QRect(10, 60, 591, 161))
@@ -93,6 +93,7 @@ class WeaponsBox(DefaultBox):
         self.ranged_weapon_type = create_qline_edit("ranged_weapon_type", **ranged_weapon_qedit)
         self.add_to_layout()
         self.translate()
+        # self.root.setLayout(self.layout)
 
     def add_to_ranged_layout(self):
         self.ranged_layout.addWidget(self.ranged_weapon_crit_label, 0, 3, 1, 1)

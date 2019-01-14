@@ -2,9 +2,9 @@ from PyQt5 import QtWidgets, QtCore
 
 
 class ArmorItems:
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(10, 870, 611, 331))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("ArmorItems")
         self.Armor2 = QtWidgets.QGroupBox(self.root)
         self.Armor2.setGeometry(QtCore.QRect(10, 170, 591, 151))

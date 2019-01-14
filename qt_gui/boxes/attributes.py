@@ -8,7 +8,20 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, 
 
 
 class AttributesBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
+
+        self.root = QtWidgets.QGroupBox(centralwidget)
+        self.root.setGeometry(QtCore.QRect(*position, *size))
+        self.root.setObjectName("AttributesBox")
+
+        self.container = QtWidgets.QWidget(self.root)
+        self.container.setObjectName("gridLayoutWidget")
+
+        self.layout = QtWidgets.QGridLayout(self.container)
+        # self.layout.setContentsMargins(9, 9, 9, 9)
+        # self.layout.setSpacing(6)
+        self.layout.setObjectName("AttributesLayout")
+
         self.attrs_names = ('str', 'dex', 'con', 'int', 'wis', 'cha')
         self.attrs_references = []
         self.head = SimpleNamespace()
@@ -55,18 +68,6 @@ class AttributesBox(DefaultBox):
             self.attrs_references.append(getattr(self, f"{attr}"))
         self.elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
 
-        self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(10, 200, 311, 231))
-        self.root.setObjectName("AttributesBox")
-
-        self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(20, 20, 285, 201))
-        self.container.setObjectName("gridLayoutWidget")
-
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
-        self.layout.setObjectName("AttributesLayout")
 
         self.qlabel_dict = dict(parent=self.container,
                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter,
@@ -80,6 +81,7 @@ class AttributesBox(DefaultBox):
         self.translate("EN")
         self.set_default_values()
         self.root.setTitle("Attributes")
+        self.root.setLayout(self.layout)
 
     def generate_head_labels(self):
         for element in self.elements:

@@ -5,9 +5,9 @@ from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_qlabel
 
 
 class AttacksBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(840, 160, 391, 121))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("AttacksBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setGeometry(QtCore.QRect(20, 20, 361, 91))

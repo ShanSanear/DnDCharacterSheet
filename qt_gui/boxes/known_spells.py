@@ -4,9 +4,9 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
 
 
 class KnownSpellsBox:
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(840, 670, 581, 101))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("KnownSpellsBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 61))

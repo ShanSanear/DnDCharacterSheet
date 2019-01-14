@@ -4,16 +4,13 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class NotesBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(330, 200, 491, 231))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("NotesBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 471, 201))
         self.container.setObjectName("verticalLayoutWidget_2")
         self.layout = QtWidgets.QVBoxLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
         self.layout.setObjectName("NotesLayout")
         self.notes_label = QtWidgets.QLabel(self.container)
         self.notes_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -23,6 +20,7 @@ class NotesBox(DefaultBox):
         self.notes.setObjectName("notes")
         self.translate()
         self.add_to_layout()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.notes)

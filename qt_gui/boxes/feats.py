@@ -4,16 +4,13 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class FeatsBox(DefaultBox):
-    def __init__(self, centralwidget):
+    def __init__(self, centralwidget, position, size):
         self.root = QtWidgets.QGroupBox(centralwidget)
-        self.root.setGeometry(QtCore.QRect(630, 700, 191, 491))
+        self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("FeatsBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 171, 61))
         self.container.setObjectName("gridLayoutWidget_6")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
         self.layout.setObjectName("FeatsLayout")
         self.feat_name_label = QtWidgets.QLabel(self.container)
         self.feat_name_label.setObjectName("feat_name_label")
@@ -22,6 +19,7 @@ class FeatsBox(DefaultBox):
 
         self.add_to_layout()
         self.translate()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.feat_1_name, 1, 0, 1, 1)
