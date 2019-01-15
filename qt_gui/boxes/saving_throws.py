@@ -5,6 +5,9 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
 
 
 class SavingThrowsBox(DefaultBox):
+    # TODO - function based widgets and labels
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))

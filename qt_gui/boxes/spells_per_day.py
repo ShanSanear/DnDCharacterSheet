@@ -5,6 +5,9 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class SpellsPerDayBox(DefaultBox):
+    # TODO - function based widgets and labels
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))

@@ -4,6 +4,10 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class SkillsBox(DefaultBox):
+    # TODO - function based widgets and labels
+    # TODO - adding single skill using function, similar to items
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))

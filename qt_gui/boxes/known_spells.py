@@ -4,6 +4,9 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
 
 
 class KnownSpellsBox:
+    # TODO - generalized adding known spells
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
@@ -38,7 +41,6 @@ class KnownSpellsBox:
         self.known_spells_1_description_button.setObjectName("known_spells_1_description_button")
         self.known_spells_2_description_button = QtWidgets.QPushButton(self.container)
         self.known_spells_2_description_button.setObjectName("known_spells_2_description_button")
-
         self.add_to_layout()
         self.translate()
 

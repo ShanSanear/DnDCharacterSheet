@@ -2,6 +2,10 @@ from PyQt5 import QtWidgets, QtCore
 
 
 class MenuBar:
+    # TODO - function based widgets and labels
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
+    # TODO - some basic tests of saving / loading files (probably in main file)
     def __init__(self, main_window):
         self.root = QtWidgets.QMenuBar(main_window)
         self.root.setGeometry(QtCore.QRect(0, 0, 1748, 21))

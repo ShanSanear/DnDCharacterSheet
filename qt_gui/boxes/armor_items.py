@@ -2,6 +2,10 @@ from PyQt5 import QtWidgets, QtCore
 
 
 class ArmorItems:
+    # TODO - function based widgets and labels
+    # TODO - generalized single armor layout (maybe will add option for adding another items here?)
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))

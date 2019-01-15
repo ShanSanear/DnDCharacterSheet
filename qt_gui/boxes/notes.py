@@ -4,6 +4,10 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class NotesBox(DefaultBox):
+    # TODO - function based widgets and labels
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
+    # TODO - saving notes (and, well, everything else anyway)
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))

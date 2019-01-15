@@ -5,6 +5,10 @@ from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_qlabel
 
 
 class WeaponsBox(DefaultBox):
+    # TODO - function based widgets and labels
+    # TODO - generalized translation
+    # TODO - adding widgets by rows/columns
+    # TODO - change in label of ranged/melee weapon depending on choice option
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
