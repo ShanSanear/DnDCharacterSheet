@@ -4,8 +4,8 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class HpAcBox(DefaultBox):
-    def __init__(self, centralwidget, position, size):
-        self.root = QtWidgets.QGroupBox(centralwidget)
+    def __init__(self, parent, position, size):
+        self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setMaximumSize(QtCore.QSize(2000, 2000))
         self.root.setObjectName("HpAcBox")
@@ -231,7 +231,7 @@ class HpAcBox(DefaultBox):
     def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "HP / AC"))
-        self.hp_ac_hp_total_label.setText(_translate("MainWindow", "Total HP"))
+        self.hp_ac_hp_total_label.setText(_translate("MainWindow", "Total"))
         self.hp_ac_hp_hp_wounds_current_hp_label.setText(_translate("MainWindow", "Wounds / Current HP"))
         self.hp_ac_hp_label.setText(_translate("MainWindow", "HP"))
         self.hp_ac_hp_total.setText(_translate("MainWindow", "10"))
@@ -249,7 +249,7 @@ class HpAcBox(DefaultBox):
         self.hp_ac_ac_size_bonus.setText(_translate("MainWindow", "10"))
         self._plus_sign_15.setText(_translate("MainWindow", "+"))
         self.hp_ac_ac_misc_bonus.setText(_translate("MainWindow", "10"))
-        self.hp_ac_ac_total_label.setText(_translate("MainWindow", "Total AC"))
+        self.hp_ac_ac_total_label.setText(_translate("MainWindow", "Total"))
         self.hp_ac_ac_base_bonus_label.setText(_translate("MainWindow", "Base"))
         self.hp_ac_ac_armor_bonus_label.setText(_translate("MainWindow", "Armor"))
         self.hp_ac_ac_shield_bonus_label.setText(_translate("MainWindow", "Shield"))
