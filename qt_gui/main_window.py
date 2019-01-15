@@ -51,7 +51,7 @@ class MyTabWidget(QtWidgets.QWidget):
 class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
-        main_window.resize(1800, 1200)
+        main_window.resize(1300, 800)
         self.central_widget = MyTabWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
 
@@ -62,7 +62,7 @@ class MainWindowUi:
         self.central_widget.setLayout(self.central_widget.layout)
         self.retranslate_ui(main_window)
         main_window.setCentralWidget(self.central_widget)
-        self.central_widget.tabs.setCurrentIndex(0)
+        self.central_widget.tabs.setCurrentIndex(1)
 
         # main_window.setSizeIncrement(QtCore.QSize(1, 0))
         # main_window.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
@@ -99,12 +99,12 @@ class MainWindowUi:
 
     def add_widgets_to_tab_2(self):
         parent_for_boxes = self.central_widget.tab2
-        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 10], size=[600, 400])
-        self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[10, 420], size=[600, 130])
-        self.languages_box = LanguagesBox(parent_for_boxes, position=[650, 10], size=[270, 250])
-        self.feats_box = FeatsBox(parent_for_boxes, position=[10, 580], size=[270, 80])
-        self.spells_per_day_box = SpellsPerDayBox(parent_for_boxes, position=[950, 10], size=[300, 350])
-        self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[650, 380], size=[600, 100])
+        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 10], size=[500, 400])
+        self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
+        self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
+        self.feats_box = FeatsBox(parent_for_boxes, position=[10, 580], size=[500, 100])
+        self.spells_per_day_box = SpellsPerDayBox(parent_for_boxes, position=[1090, 10], size=[150, 350])
+        self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[520, 120], size=[550, 100])
         return parent_for_boxes
 
     def add_widgets_to_tab_3(self):

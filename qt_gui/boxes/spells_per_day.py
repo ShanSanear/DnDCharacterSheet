@@ -16,8 +16,6 @@ class SpellsPerDayBox(DefaultBox):
         self.container.setGeometry(QtCore.QRect(10, 20, 251, 321))
         self.container.setObjectName("gridLayoutWidget_9")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
         self.layout.setObjectName("SpellsPerDayLayout")
 
         qline_dict = dict(parent=self.container, min_size=(0, 23), align=QtCore.Qt.AlignCenter)
@@ -118,6 +116,7 @@ class SpellsPerDayBox(DefaultBox):
 
         self.add_to_layout()
         self.translate()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self._num_0, 1, 1, 1, 1)
@@ -169,9 +168,9 @@ class SpellsPerDayBox(DefaultBox):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Spells per day / Spells DC"))
         self.spells_per_day_dc_lvl_0.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_level_label.setText(_translate("MainWindow", "Level"))
-        self.spells_per_day_spells_per_day_label.setText(_translate("MainWindow", "Spells/Day"))
-        self.spells_per_day_extra_spells.setText(_translate("MainWindow", "Extra spells"))
+        self.spells_per_day_level_label.setText(_translate("MainWindow", "Lvl"))
+        self.spells_per_day_spells_per_day_label.setText(_translate("MainWindow", "/Day"))
+        self.spells_per_day_extra_spells.setText(_translate("MainWindow", "Extra"))
         self.spells_per_day_spells_per_day_lvl_0.setText(_translate("MainWindow", "10"))
         self.spells_per_day_dc_lvl_1.setText(_translate("MainWindow", "10"))
         self.spells_per_day_extra_spells_lvl_0.setText(_translate("MainWindow", "10"))
@@ -199,7 +198,7 @@ class SpellsPerDayBox(DefaultBox):
         self.spells_per_day_spells_per_day_lvl_7.setText(_translate("MainWindow", "10"))
         self.spells_per_day_spells_per_day_lvl_6.setText(_translate("MainWindow", "10"))
         self.spells_per_day_spells_per_day_lvl_8.setText(_translate("MainWindow", "10"))
-        self.spells_per_day_base_spell_dc.setText(_translate("MainWindow", "Base Spell DC"))
+        self.spells_per_day_base_spell_dc.setText(_translate("MainWindow", "DC"))
         self.spells_per_day_dc_lvl_9.setText(_translate("MainWindow", "10"))
         self.spells_per_day_spells_per_day_lvl_9.setText(_translate("MainWindow", "10"))
         self.spells_per_day_extra_spells_lvl_9.setText(_translate("MainWindow", "10"))

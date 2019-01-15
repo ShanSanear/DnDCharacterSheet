@@ -20,7 +20,7 @@ class NumberOfSpellsBox(DefaultBox):
         self.layout.setSpacing(6)
         self.layout.setObjectName("NumberOfSpellsLayout")
 
-        qline_dict = dict(parent=self.container, min_size=(0, 23))
+        qline_dict = dict(parent=self.container, min_size=(0, 10))
         qline_dict_2 = dict(parent=self.container, align=QtCore.Qt.AlignCenter)
 
         self.number_of_spells_0th_label = create_qlabel("number_of_spells_0th_label",
@@ -59,6 +59,7 @@ class NumberOfSpellsBox(DefaultBox):
 
         self.add_to_layout()
         self.translate()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.number_of_spells_0th_label, 1, 0, 1, 1)

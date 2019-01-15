@@ -15,7 +15,6 @@ class LanguagesBox(DefaultBox):
         self.root.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.root.setObjectName("LanguagesBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 171, 211))
         self.container.setObjectName("verticalLayoutWidget")
         self.layout = QtWidgets.QVBoxLayout(self.container)
         self.layout.setContentsMargins(9, 9, 9, 9)
@@ -30,6 +29,7 @@ class LanguagesBox(DefaultBox):
         self.add_to_layout()
         self.translate()
         self.set_default()
+        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.known_languages)

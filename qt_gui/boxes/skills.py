@@ -4,6 +4,7 @@ from qt_gui.boxes.box import DefaultBox
 
 
 class SkillsBox(DefaultBox):
+    # TODO - interclass skills need additional checkbox
     # TODO - function based widgets and labels
     # TODO - adding single skill using function, similar to items
     # TODO - generalized translation
@@ -11,13 +12,13 @@ class SkillsBox(DefaultBox):
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setMinimumSize(QtCore.QSize(571, 91))
         self.root.setObjectName("SkillsBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setContentsMargins(9, 9, 9, 9)
         self.layout.setSpacing(6)
+        self.root.setMaximumHeight(150)
         self.layout.setObjectName("SkillsLayout")
         self.skills_description_label = QtWidgets.QLabel(self.container)
         self.skills_description_label.setMaximumSize(QtCore.QSize(16777215, 20))
@@ -25,6 +26,7 @@ class SkillsBox(DefaultBox):
         self.skills_description_label.setObjectName("skills_description_label")
         self.skills_1_description_button = QtWidgets.QPushButton(self.container)
         self.skills_1_description_button.setObjectName("skills_1_description_button")
+        self.skills_1_description_button.setMaximumWidth(20)
         self.skills_1_misc_mod = QtWidgets.QLineEdit(self.container)
         self.skills_1_misc_mod.setMinimumSize(QtCore.QSize(0, 23))
         self.skills_1_misc_mod.setMaximumSize(QtCore.QSize(54, 20))
@@ -108,8 +110,8 @@ class SkillsBox(DefaultBox):
     def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Skills"))
-        self.skills_description_label.setText(_translate("MainWindow", "Description"))
-        self.skills_1_description_button.setText(_translate("MainWindow", "DESC"))
+        self.skills_description_label.setText(_translate("MainWindow", "DESC"))
+        self.skills_1_description_button.setText(_translate("MainWindow", "..."))
         self.skills_rank_label.setText(_translate("MainWindow", "Rank"))
         self.skills_attr_mod_label.setText(_translate("MainWindow", "Attr mod"))
         self.skills_misc_label.setText(_translate("MainWindow", "Misc"))
@@ -128,4 +130,4 @@ class SkillsBox(DefaultBox):
         self.skills_1_attr_mod.setText("10")
         self.skills_1_rank.setText("10")
         self.skills_1_total.setText("10")
-        self.skills_1_skill_name.setText("Lorem ipsum")
+        self.skills_1_skill_name.setText("Spostrzegawczosc")
