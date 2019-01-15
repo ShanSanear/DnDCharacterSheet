@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 
 from qt_gui.boxes.box import DefaultBox
-from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, add_to_box_layout_by_row, \
+from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
 
 
@@ -15,8 +15,6 @@ class BasicInfoBox(DefaultBox):
         self.container.setObjectName("gridLayoutWidget_2")
 
         self.layout = QtWidgets.QGridLayout(self.container)
-        # self.layout.setContentsMargins(2, 2, 2, 10)
-        # self.layout.setSpacing(6)
         self.layout.setObjectName("BasicInfoLayout")
         self.translate_reference = {
             "EN":
@@ -63,6 +61,7 @@ class BasicInfoBox(DefaultBox):
         qline_dict_1 = dict(parent=self.container, min_size=(177, 23))
         qline_dict_2 = dict(parent=self.container, min_size=(85, 23))
 
+        # TODO - in a long shot - generalize it
         self.class_label = create_qlabel("character_class_label", **qlabel_dict_1)
         self.faith_label = create_qlabel("character_faith_label", **qlabel_dict_1)
         self.race_label = create_qlabel("character_race_label", **qlabel_dict_1)
@@ -78,6 +77,7 @@ class BasicInfoBox(DefaultBox):
         self.gender_label = create_qlabel("character_gender_label", **qlabel_dict_2)
         self.level_label = create_qlabel("character_level_label", **qlabel_dict_2)
 
+        # TODO - in a long shot - generalize it
         self.race = create_qline_edit("character_race", **qline_dict_1)
         self.alignement = create_qline_edit("character_alignement", **qline_dict_1)
         self.char_class = create_qline_edit("character_class", **qline_dict_1)
@@ -101,23 +101,18 @@ class BasicInfoBox(DefaultBox):
 
     def add_to_layout(self):
         first_row_labels = [self.name_label, self.player_name_label]
-        add_to_box_layout_by_row(self.layout, first_row_labels, row=0, width=4)
-
         first_row_input = [self.name, self.player_name]
-        add_to_box_layout_by_row(self.layout, first_row_input, row=1, width=4)
-
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
-        add_to_box_layout_by_row(self.layout, second_row_labels, row=2, width=2)
-
         second_row_input = [self.char_class, self.race, self.alignement, self.faith]
-        add_to_box_layout_by_row(self.layout, second_row_input, row=3, width=2)
-
         third_row_labels = [self.level_label, self.size_label, self.age_label, self.gender_label, self.height_label,
                             self.weight_label, self.eyes_label, self.hair_label]
-        add_to_box_layout_by_row(self.layout, third_row_labels, row=4)
-
         third_row_input = [self.level, self.size, self.age, self.gender, self.height, self.weight, self.eyes, self.hair]
-        add_to_box_layout_by_row(self.layout, third_row_input, row=5)
+
+        elements = [[first_row_labels, 4], [first_row_input, 4], [second_row_labels, 2],
+                    [second_row_input, 2], [third_row_labels, 1], [third_row_input, 1]]
+
+        for row_idx, [row_elements, width] in enumerate(elements):
+            add_multiple_elements_to_layout_by_row(self.layout, row_elements, row=row_idx, width=width)
 
     def translate(self, language_ref):
         set_text_of_children(self, self.translate_reference[language_ref])
