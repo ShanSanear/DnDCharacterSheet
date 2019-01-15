@@ -102,9 +102,9 @@ class MainWindowUi:
         self.skills_box = SkillsBox(parent_for_boxes, position=[10, 10], size=[500, 400])
         self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
-        self.feats_box = FeatsBox(parent_for_boxes, position=[10, 580], size=[500, 100])
+        self.feats_box = FeatsBox(parent_for_boxes, position=[10, 520], size=[500, 100])
         self.spells_per_day_box = SpellsPerDayBox(parent_for_boxes, position=[1090, 10], size=[150, 350])
-        self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[520, 120], size=[550, 100])
+        self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[520, 120], size=[550, 60])
         return parent_for_boxes
 
     def add_widgets_to_tab_3(self):
