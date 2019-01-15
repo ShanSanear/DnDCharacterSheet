@@ -5,8 +5,8 @@ from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_qlabel
 
 
 class WeaponsBox(DefaultBox):
-    def __init__(self, centralwidget, position, size):
-        self.root = QtWidgets.QGroupBox(centralwidget)
+    def __init__(self, parent, position, size):
+        self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("WeaponsBox")
         self.melee_box = QtWidgets.QGroupBox(self.root)
