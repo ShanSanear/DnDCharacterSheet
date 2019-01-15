@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 from PyQt5 import QtWidgets, QtCore
 
 from qt_gui.boxes.qt_generic_functions import create_qlabel
@@ -21,7 +23,6 @@ class ItemsBox:
         self.items_count_label = create_qlabel("items_count_label", **qlabel_dict)
         self.items_description_label = create_qlabel("items_description_label", **qlabel_dict)
         self.items = []
-        self.items_count = 0
         # self.items.append(self.create_item(1))
         # self.items.append(self.create_item(2))
         # self.items.append(self.create_item(3))
@@ -38,22 +39,24 @@ class ItemsBox:
         self.translate()
         self.root.setLayout(self.layout)
 
-    def create_item_row(self, item_idx):
-        item_name = QtWidgets.QLineEdit(self.container)
-        item_name.setMinimumSize(QtCore.QSize(0, 23))
-        item_name.setObjectName(f"item_{item_idx}_name")
-        item_weight = QtWidgets.QLineEdit(self.container)
-        item_weight.setMinimumSize(QtCore.QSize(0, 23))
-        item_weight.setMaximumSize(QtCore.QSize(50, 16777215))
-        item_weight.setObjectName(f"item_{item_idx}_weight")
-        item_count = QtWidgets.QLineEdit(self.container)
-        item_count.setMinimumSize(QtCore.QSize(0, 23))
-        item_count.setMaximumSize(QtCore.QSize(40, 16777215))
-        item_count.setObjectName(f"item_{item_idx}_count")
-        item_description = QtWidgets.QPlainTextEdit(self.container)
-        item_description.setMaximumSize(QtCore.QSize(16777215, 40))
-        item_description.setObjectName(f"item_{item_idx}_description")
-        return [item_name, item_weight, item_count, item_description]
+    def create_new_item(self):
+        new_item = SimpleNamespace()
+        item_idx = len(self.items)
+        new_item.name = QtWidgets.QLineEdit(self.container)
+        new_item.name.setMinimumSize(QtCore.QSize(0, 23))
+        new_item.name.setObjectName(f"item_{item_idx}_name")
+        new_item.weight = QtWidgets.QLineEdit(self.container)
+        new_item.weight.setMinimumSize(QtCore.QSize(0, 23))
+        new_item.weight.setMaximumSize(QtCore.QSize(50, 16777215))
+        new_item.weight.setObjectName(f"item_{item_idx}_weight")
+        new_item.count = QtWidgets.QLineEdit(self.container)
+        new_item.count.setMinimumSize(QtCore.QSize(0, 23))
+        new_item.count.setMaximumSize(QtCore.QSize(40, 16777215))
+        new_item.count.setObjectName(f"item_{item_idx}_count")
+        new_item.description = QtWidgets.QPlainTextEdit(self.container)
+        new_item.description.setMaximumSize(QtCore.QSize(16777215, 40))
+        new_item.description.setObjectName(f"item_{item_idx}_description")
+        return new_item
 
     def add_to_layout(self):
         self.layout.addWidget(self.items_weight_label, 0, 1, 1, 1)
@@ -62,11 +65,11 @@ class ItemsBox:
         self.layout.addWidget(self.items_description_label, 0, 3, 1, 1)
 
     def add_item(self):
-        new_item = self.create_item_row(self.items_count)
+        item_idx = len(self.items)
+        new_item = self.create_new_item()
         self.items.append(new_item)
-        for el_idx, element in enumerate(new_item):
-            self.layout.addWidget(element, self.items_count + 1, el_idx, 1, 1)
-        self.items_count += 1
+        for el_idx, element in enumerate(new_item.__dict__.values()):
+            self.layout.addWidget(element, item_idx + 1, el_idx, 1, 1)
         self.update_container_size()
 
     def translate(self):
