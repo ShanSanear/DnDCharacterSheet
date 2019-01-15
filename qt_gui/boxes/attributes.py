@@ -3,7 +3,7 @@ from types import SimpleNamespace
 from PyQt5 import QtWidgets, QtCore
 
 from qt_gui.boxes.box import DefaultBox
-from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, add_to_box_layout_by_row, \
+from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
 
 
@@ -56,18 +56,10 @@ class AttributesBox(DefaultBox):
                     }
                 }
         }
-        attr_default = {"val": "10",
-                        "mod": "0",
-                        "temp_val": "10",
-                        "temp_mod": "0", }
-
-        self.default_attribute_values = dict(str=dict(attr_default), dex=dict(attr_default), con=dict(attr_default),
-                                             int=dict(attr_default), wis=dict(attr_default), cha=dict(attr_default), )
         for attr in self.attrs_names:
             setattr(self, f"{attr}", SimpleNamespace())
             self.attrs_references.append(getattr(self, f"{attr}"))
         self.elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
-
 
         self.qlabel_dict = dict(parent=self.container,
                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter,
@@ -97,14 +89,21 @@ class AttributesBox(DefaultBox):
         setattr(attr_reference, 'label', create_qlabel(f"attr_{attr_name}_label", **self.qlabel_dict))
 
     def add_to_layout(self):
-        add_to_box_layout_by_row(self.layout, [getattr(self.head, element) for element in self.elements])
+        add_multiple_elements_to_layout_by_row(self.layout, [getattr(self.head, element) for element in self.elements])
 
         attributes_elements = [[getattr(attr, element) for element in self.elements] for attr in self.attrs_references]
         for idx, attribute_row in enumerate(attributes_elements):
-            add_to_box_layout_by_row(self.layout, attribute_row, row=idx + 1)
+            add_multiple_elements_to_layout_by_row(self.layout, attribute_row, row=idx + 1)
 
     def translate(self, language_ref):
         set_text_of_children(self, self.translate_reference[language_ref])
 
     def set_default_values(self):
-        set_text_of_children(self, self.default_attribute_values)
+        attr_default = {"val": "10",
+                        "mod": "0",
+                        "temp_val": "10",
+                        "temp_mod": "0", }
+
+        default_attribute_values = dict(str=dict(attr_default), dex=dict(attr_default), con=dict(attr_default),
+                                        int=dict(attr_default), wis=dict(attr_default), cha=dict(attr_default), )
+        set_text_of_children(self, default_attribute_values)
