@@ -46,12 +46,11 @@ class MyTabWidget(QtWidgets.QWidget):
         self.layout.addWidget(self.tabs)
 
 
-
 # noinspection PyAttributeOutsideInit
 class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
-        main_window.resize(1300, 800)
+        main_window.resize(1270, 750)
         self.central_widget = MyTabWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
 
@@ -62,7 +61,7 @@ class MainWindowUi:
         self.central_widget.setLayout(self.central_widget.layout)
         self.retranslate_ui(main_window)
         main_window.setCentralWidget(self.central_widget)
-        self.central_widget.tabs.setCurrentIndex(1)
+        self.central_widget.tabs.setCurrentIndex(0)
 
         # main_window.setSizeIncrement(QtCore.QSize(1, 0))
         # main_window.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
@@ -87,14 +86,16 @@ class MainWindowUi:
 
     def add_widgets_to_tab_1(self):
         parent_for_boxes = self.central_widget.tab1
-        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[850, 200])
-        self.attributes_box = AttributesBox(parent_for_boxes, position=[10, 220], size=[320, 250])
-        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[10, 480], size=[271, 121])
-        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[350, 220], size=[350, 150])
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[350, 380], size=[450, 150])
-        self.attacks_box = AttacksBox(parent_for_boxes, position=[350, 550], size=[391, 121])
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[870, 10], size=[261, 121])
-        self.weapons_box = WeaponsBox(parent_for_boxes, position=[870, 220], size=[620, 450])
+        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 200])
+        self.attributes_box = AttributesBox(parent_for_boxes, position=[10, 220], size=[250, 220])
+        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[520, 10], size=[200, 100])
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[520, 120], size=[200, 100])
+        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[730, 10], size=[320, 150])
+
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[900, 220], size=[320, 150])
+        self.attacks_box = AttacksBox(parent_for_boxes, position=[900, 370], size=[320, 100])
+
+        self.weapons_box = WeaponsBox(parent_for_boxes, position=[270, 220], size=[620, 450])
         return parent_for_boxes
 
     def add_widgets_to_tab_2(self):

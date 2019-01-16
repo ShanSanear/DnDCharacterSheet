@@ -53,13 +53,11 @@ class BasicInfoBox(DefaultBox):
         }
 
         qlabel_dict_1 = dict(parent=self.container,
-                             align=QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter,
-                             min_size=(178, 16), )
+                             )
         qlabel_dict_2 = dict(parent=self.container,
-                             align=QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter,
-                             min_size=(86, 16), )
-        qline_dict_1 = dict(parent=self.container, min_size=(177, 23))
-        qline_dict_2 = dict(parent=self.container, min_size=(85, 23))
+                             )
+        qline_dict_1 = dict(parent=self.container, )  # min_size=(100, 23))
+        qline_dict_2 = dict(parent=self.container, max_size=(40, 1111111))  # min_size=(50, 23))
 
         # TODO - in a long shot - generalize it
         self.class_label = create_qlabel("character_class_label", **qlabel_dict_1)
@@ -82,15 +80,15 @@ class BasicInfoBox(DefaultBox):
         self.alignement = create_qline_edit("character_alignement", **qline_dict_1)
         self.char_class = create_qline_edit("character_class", **qline_dict_1)
         self.faith = create_qline_edit("character_faith", **qline_dict_1)
-        self.name = create_qline_edit("character_name", **qline_dict_2)
+        self.name = create_qline_edit("character_name", **qline_dict_1)
         self.height = create_qline_edit("character_height", **qline_dict_2)
         self.weight = create_qline_edit("character_weight", **qline_dict_2)
-        self.hair = create_qline_edit("character_hair", **qline_dict_2)
-        self.player_name = create_qline_edit("player_name", **qline_dict_2)
-        self.eyes = create_qline_edit("character_eyes", **qline_dict_2)
-        self.gender = create_qline_edit("character_gender", **qline_dict_2)
+        self.hair = create_qline_edit("character_hair", **qline_dict_1)
+        self.player_name = create_qline_edit("player_name", **qline_dict_1)
+        self.eyes = create_qline_edit("character_eyes", **qline_dict_1)
+        self.gender = create_qline_edit("character_gender", **qline_dict_1)
         self.age = create_qline_edit("character_age", **qline_dict_2)
-        self.size = create_qline_edit("character_size", **qline_dict_2)
+        self.size = create_qline_edit("character_size", **qline_dict_1)
         self.level = create_qline_edit("character_level", **qline_dict_2)
 
         self.add_to_layout()
@@ -104,15 +102,24 @@ class BasicInfoBox(DefaultBox):
         first_row_input = [self.name, self.player_name]
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
         second_row_input = [self.char_class, self.race, self.alignement, self.faith]
-        third_row_labels = [self.level_label, self.size_label, self.age_label, self.gender_label, self.height_label,
-                            self.weight_label, self.eyes_label, self.hair_label]
-        third_row_input = [self.level, self.size, self.age, self.gender, self.height, self.weight, self.eyes, self.hair]
+        third_row_labels_part_1 = [self.level_label, self.age_label, self.weight_label, self.height_label]
+        third_row_labels_part_2 = [self.size_label, self.gender_label, self.eyes_label, self.hair_label]
 
-        elements = [[first_row_labels, 4], [first_row_input, 4], [second_row_labels, 2],
-                    [second_row_input, 2], [third_row_labels, 1], [third_row_input, 1]]
+        third_row_input_part_1 = [self.level, self.age, self.weight, self.height]
+        third_row_input_part_2 = [self.size, self.gender, self.eyes, self.hair]
 
+        elements = [[second_row_labels, 2], [second_row_input, 2]]
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label], width=5)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name_label], start_column=5, width=3)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name], row=1, width=5)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name], row=1, start_column=5, width=3)
         for row_idx, [row_elements, width] in enumerate(elements):
-            add_multiple_elements_to_layout_by_row(self.layout, row_elements, row=row_idx, width=width)
+            add_multiple_elements_to_layout_by_row(self.layout, row_elements, row=row_idx + 2, width=width)
+
+        add_multiple_elements_to_layout_by_row(self.layout, third_row_labels_part_1, row=4)
+        add_multiple_elements_to_layout_by_row(self.layout, third_row_labels_part_2, row=4, start_column=4)
+        add_multiple_elements_to_layout_by_row(self.layout, third_row_input_part_1, row=5)
+        add_multiple_elements_to_layout_by_row(self.layout, third_row_input_part_2, row=5, start_column=4)
 
     def translate(self, language_ref):
         set_text_of_children(self, self.translate_reference[language_ref])

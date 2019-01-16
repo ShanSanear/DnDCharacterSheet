@@ -18,8 +18,6 @@ class AttributesBox(DefaultBox):
         self.container.setObjectName("gridLayoutWidget")
 
         self.layout = QtWidgets.QGridLayout(self.container)
-        # self.layout.setContentsMargins(9, 9, 9, 9)
-        # self.layout.setSpacing(6)
         self.layout.setObjectName("AttributesLayout")
 
         self.attrs_names = ('str', 'dex', 'con', 'int', 'wis', 'cha')
@@ -30,11 +28,11 @@ class AttributesBox(DefaultBox):
             "EN":
                 {
                     "head": {
-                        "label": "Attribute",
-                        "val": "Value",
+                        "label": "Attr",
+                        "val": "Val",
                         "mod": "Mod",
-                        "temp_val": "Temp val",
-                        "temp_mod": "Temp mod",
+                        "temp_val": "Tmp val",
+                        "temp_mod": "Tmp mod",
                     },
                     "str": {
                         "label": "STR"
@@ -57,8 +55,8 @@ class AttributesBox(DefaultBox):
                 }
         }
         for attr in self.attrs_names:
-            setattr(self, f"{attr}", SimpleNamespace())
-            self.attrs_references.append(getattr(self, f"{attr}"))
+            setattr(self, attr, SimpleNamespace())
+            self.attrs_references.append(getattr(self, attr))
         self.elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
 
         self.qlabel_dict = dict(parent=self.container,

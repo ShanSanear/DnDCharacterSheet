@@ -11,8 +11,6 @@ class SavingThrowsBox(DefaultBox):
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setMinimumSize(QtCore.QSize(461, 0))
-        self.root.setMaximumSize(QtCore.QSize(461, 150))
         self.root.setObjectName("SavingThrowsBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setObjectName("layoutWidget2")
@@ -20,7 +18,7 @@ class SavingThrowsBox(DefaultBox):
         self.layout.setObjectName("SavingThrowsLayout")
         qlabel_dict = dict(parent=self.container, min_size=(60, 20), max_size=(60, 23))
         qlabel_sign_dict = dict(parent=self.container, min_size=(8, 10), max_size=(8, 23))
-        qline_dict = dict(parent=self.container, min_size=(60, 23))
+        qline_dict = dict(parent=self.container, min_size=(15, 23))
 
         self.saving_throws_fortitude_total = create_qline_edit("saving_throws_fortitude_total", **qline_dict)
         self.saving_throws_fortitude_class_base = create_qline_edit("saving_throws_fortitude_class_base", **qline_dict)
@@ -105,12 +103,12 @@ class SavingThrowsBox(DefaultBox):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Saving throws"))
         self.saving_throws_total_label.setText(_translate("MainWindow", "Total"))
-        self.saving_throws_class_base_label.setText(_translate("MainWindow", "Class Base"))
+        self.saving_throws_class_base_label.setText(_translate("MainWindow", "Base"))
         self.saving_throws_attr_bonus_label.setText(_translate("MainWindow", "Attr"))
         self.saving_throws_size_bonus_label.setText(_translate("MainWindow", "Size"))
         self.saving_throws_misc_bonus_label.setText(_translate("MainWindow", "Misc"))
-        self.saving_throws_fortitude_label.setText(_translate("MainWindow", "Fortitude"))
-        self.saving_throws_reflex_label.setText(_translate("MainWindow", "Reflex"))
+        self.saving_throws_fortitude_label.setText(_translate("MainWindow", "Fort."))
+        self.saving_throws_reflex_label.setText(_translate("MainWindow", "Rflx."))
         self.saving_throws_will_label.setText(_translate("MainWindow", "Will"))
 
     def set_signs_labels(self):

@@ -14,7 +14,7 @@ class InitiativeSpeedBox:
         self.container.setObjectName("gridLayoutWidget_7")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("InitiativeSpeedLayout")
-        qline_dict = dict(parent=self.container, min_size=(0, 23), max_size=(10000, 20))
+        qline_dict = dict(parent=self.container, min_size=(0, 23), max_size=(10000, 50))
         qlabel_dict = dict(parent=self.container)
         qlabel_eq_sign_dict = dict(parent=self.container, min_size=(8, 20), max_size=(1000, 20),
                                    align=QtCore.Qt.AlignCenter)
@@ -26,12 +26,12 @@ class InitiativeSpeedBox:
         self.initiative_speed_initiative_dex_bonus_label = create_qlabel("initiative_speed_initiative_dex_bonus_label",
                                                                          **qlabel_dict)
         self.initiative_speed_initiative_label = create_qlabel("initiative_speed_initiative_label", **qlabel_dict)
-        self.initiative_speed_speed_label = create_qlabel("initiative_speed_speed_label", **qlabel_plus_sign_dict)
+        self.initiative_speed_speed_label = create_qlabel("initiative_speed_speed_label", **qlabel_dict)
         self.initiative_speed_speed_armor_type_label = create_qlabel("initiative_speed_speed_armor_type_label",
                                                                      **qlabel_dict)
 
         self._eq_sign_7 = create_qlabel("_eq_sign_7", **qlabel_eq_sign_dict)
-        self._plus_sign_10 = create_qlabel("_plus_sign_10", **qlabel_dict)
+        self._plus_sign_10 = create_qlabel("_plus_sign_10", **qlabel_plus_sign_dict)
 
         self.initiative_speed_initiative_total = create_qline_edit("initiative_speed_initiative_total", **qline_dict)
         self.initiative_speed_initiative_misc_bonus = create_qline_edit("initiative_speed_initiative_misc_bonus",
@@ -70,7 +70,7 @@ class InitiativeSpeedBox:
         self.initiative_speed_initiative_dex_bonus_label.setText(_translate("MainWindow", "Dex"))
         self.initiative_speed_initiative_label.setText(_translate("MainWindow", "Init."))
         self._plus_sign_10.setText(_translate("MainWindow", "+"))
-        self.initiative_speed_speed_label.setText(_translate("MainWindow", "Speed"))
+        self.initiative_speed_speed_label.setText(_translate("MainWindow", "Sp."))
         self.initiative_speed_speed_total.setText(_translate("MainWindow", "10"))
         self.initiative_speed_speed_armor_type_label.setText(_translate("MainWindow", "Armor"))
         self.initiative_speed_speed_armor_type.setText(_translate("MainWindow", "Lorem ipsum"))
