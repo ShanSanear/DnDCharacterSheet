@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 
-from qt_gui.boxes.box import DefaultBox
+from qt_gui.boxes.qt_generic_classes import DefaultBox
 
 
 class LanguagesBox(DefaultBox):
