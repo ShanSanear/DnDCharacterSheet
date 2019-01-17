@@ -2,14 +2,16 @@ from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.qt_generic_classes import ResizeableBox
 from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
 
 
-class KnownSpellsBox:
+class KnownSpellsBox(ResizeableBox):
     # TODO - generalized adding known spells
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
+        ResizeableBox.__init__(self, increase_width=0, increase_height=30)
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("KnownSpellsBox")
@@ -56,13 +58,11 @@ class KnownSpellsBox:
         new_spell.description_button.setText("...")
         return new_spell
 
+    def create_new_element(self):
+        return self.create_spell()
+
     def add_spell(self):
-        spell_idx = len(self.spells)
-        new_spell = self.create_spell()
-        self.spells.append(new_spell)
-        for el_idx, element in enumerate(new_spell.__dict__.values()):
-            self.layout.addWidget(element, spell_idx + 1, el_idx, 1, 1)
-        self.update_container_size()
+        self.add_new_element(self.spells, self.layout, 1)
 
     def add_to_layout(self):
         self.layout.addWidget(self.known_spells_lvl_label, 0, 0, 1, 1)
