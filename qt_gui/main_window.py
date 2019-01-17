@@ -21,10 +21,10 @@ from qt_gui.boxes.weapon_statistics import WeaponStatisticsBox
 from qt_gui.boxes.weapons_box import WeaponsBox
 
 
-class MyTabWidget(QtWidgets.QWidget):
+class TabWidget(QtWidgets.QWidget):
 
     def __init__(self, parent):
-        super(MyTabWidget, self).__init__(parent)
+        super(TabWidget, self).__init__(parent)
         self.tabs = QTabWidget()
         self.tab1 = QtWidgets.QWidget()
         self.tab2 = QtWidgets.QWidget()
@@ -51,7 +51,7 @@ class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
         main_window.resize(1270, 750)
-        self.central_widget = MyTabWidget(main_window)
+        self.central_widget = TabWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
 
         self.add_widgets_to_tab_1()
@@ -61,28 +61,7 @@ class MainWindowUi:
         self.central_widget.setLayout(self.central_widget.layout)
         self.retranslate_ui(main_window)
         main_window.setCentralWidget(self.central_widget)
-        self.central_widget.tabs.setCurrentIndex(0)
-
-        # main_window.setSizeIncrement(QtCore.QSize(1, 0))
-        # main_window.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-        # self.central_widget = QtWidgets.QWidget(main_window)
-        # self.layout_v_box = QtWidgets.QVBoxLayout(self.central_widget)
-
-        # self.scroll_area = QtWidgets.QScrollArea(self.central_widget)
-        # self.layout_v_box.addWidget(self.scroll_area)
-
-        # self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        # self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1800, 1500))
-        # self.scroll_area.setWidget(self.scrollAreaWidgetContents)
-        #
-        # self.layout_h_box = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents)
-
-        # self.push_button = QtWidgets.QPushButton(self.central_widget)
-        # self.push_button.setGeometry(QtCore.QRect(100, 20, 75, 23))
-        # self.push_button.setObjectName("clickMeButton")
-        # self.menu_bar = MenuBar(main_window)
-        # main_window.setCentralWidget(self.central_widget)
-        # Xself.scrollArea.setWidgetResizable(True)
+        self.central_widget.tabs.setCurrentIndex(1)
 
     def add_widgets_to_tab_1(self):
         parent_for_boxes = self.central_widget.tab1
@@ -117,4 +96,3 @@ class MainWindowUi:
     def retranslate_ui(self, main_window):
         _translate = QtCore.QCoreApplication.translate
         main_window.setWindowTitle(_translate("MainWindow", "MainWindow"))
-#        self.push_button.setText(_translate("MainWindow", "ClickMe"))
