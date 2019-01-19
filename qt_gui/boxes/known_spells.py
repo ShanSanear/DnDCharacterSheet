@@ -3,7 +3,7 @@ from types import SimpleNamespace
 from PyQt5 import QtWidgets, QtCore
 
 from qt_gui.boxes.qt_generic_classes import ResizeableBox
-from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
+from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button
 
 
 class KnownSpellsBox(ResizeableBox):
@@ -40,22 +40,21 @@ class KnownSpellsBox(ResizeableBox):
         self.root.setLayout(self.layout)
 
     def create_spell(self):
+        idx = len(self.spells)
         qline_dict = dict(parent=self.container, max_size=(20, 16777215))
         qline_dict_2 = dict(parent=self.container, min_size=(0, 10))
         new_spell = SimpleNamespace()
-        new_spell.lvl = create_qline_edit("known_spells_1_lvl", **qline_dict)
+        new_spell.lvl = create_qline_edit(f"known_spells_{idx}_lvl", **qline_dict)
         new_spell.lvl.setText("10")
-        new_spell.name = create_qline_edit("known_spells_1_name", **qline_dict_2)
+        new_spell.name = create_qline_edit(f"known_spells_{idx}_name", **qline_dict_2)
         new_spell.name.setText("Lorem ipsum")
         new_spell.description_field = QtWidgets.QLineEdit(self.container)
-        new_spell.description_field.setObjectName("known_spells_1_description_field")
+        new_spell.description_field.setObjectName(f"known_spells_{idx}_description_field")
         new_spell.description_field.setMinimumSize(QtCore.QSize(350, 23))
         new_spell.description_field.setText(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu.")
-        new_spell.description_button = QtWidgets.QPushButton(self.container)
-        new_spell.description_button.setObjectName("known_spells_1_description_button")
-        new_spell.description_button.setMaximumWidth(20)
-        new_spell.description_button.setText("...")
+        new_spell.description_button = create_push_button(f"known_spells_{idx}_description_button",
+                                                          self.container, max_size=[20, None], text="...")
         return new_spell
 
     def create_new_element(self):
@@ -69,11 +68,6 @@ class KnownSpellsBox(ResizeableBox):
         self.layout.addWidget(self.known_spells_name_label, 0, 1, 1, 1)
         self.layout.addWidget(self.known_spells_description_field_label, 0, 2, 1, 1)
         self.layout.addWidget(self.known_spells_description_button_label, 0, 3, 1, 1)
-
-        # self.layout.addWidget(self.known_spells_1_lvl, 1, 0, 1, 1)
-        # self.layout.addWidget(self.known_spells_1_name, 1, 1, 1, 1)
-        # self.layout.addWidget(self.known_spells_1_description_field, 1, 2, 1, 1)
-        # self.layout.addWidget(self.known_spells_1_description_button, 1, 3, 1, 1)
 
     def translate(self):
         _translate = QtCore.QCoreApplication.translate
