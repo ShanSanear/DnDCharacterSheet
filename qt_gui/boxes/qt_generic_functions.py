@@ -37,6 +37,14 @@ def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, in
     return qline
 
 
+def create_push_button(name, parent, min_size=None, max_size=None, text=None):
+    button = QtWidgets.QPushButton(parent)
+    button.setObjectName(name)
+    button = resize_element(button, min_size, max_size)
+    button.setText(text)
+    return button
+
+
 def numeric_label(name, parent, align):
     return create_qlabel(name, parent, align=align)
 
