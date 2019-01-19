@@ -14,7 +14,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("FeatsBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setObjectName("FeatsGridLayout")
+        self.container.setObjectName("FeatsQwidget")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("FeatsLayout")
         self.name_label = create_qlabel("feat_name_label", self.container)
@@ -30,9 +30,11 @@ class FeatsBox(DefaultBox, ResizeableBox):
                 }
         }
         self.translate_reference_new_element = {
-            "feat":
-                {"description_button": "..."}
+            "EN": {
+                "description_buttn" : "..."
+            }
         }
+
         for _ in range(5):
             self.add_feat()
 
@@ -43,8 +45,8 @@ class FeatsBox(DefaultBox, ResizeableBox):
     def add_feat(self):
         self.add_new_element(elements_list=self.feats, layout=self.layout, row_offset=1)
 
-    def translate(self, language_ref):
-        set_text_of_children(self, self.translate_reference[language_ref])
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
 
     def create_new_element(self):
         return self.create_feat()
@@ -60,5 +62,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
 
         new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
-                                                         self.container, max_size=[20, None], text="...")
+                                                         self.container, max_size=[20, None],)
+        set_text_of_children(new_feat, self.translate_reference_new_element["EN"])
         return new_feat
