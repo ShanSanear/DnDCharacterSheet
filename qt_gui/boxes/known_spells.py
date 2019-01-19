@@ -52,7 +52,8 @@ class KnownSpellsBox(ResizeableBox):
         new_spell.description_field.setObjectName(f"known_spells_{idx}_description_field")
         new_spell.description_field.setMinimumSize(QtCore.QSize(350, 23))
         new_spell.description_field.setText(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu.")
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, "
+            "pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu.")
         new_spell.description_button = create_push_button(f"known_spells_{idx}_description_button",
                                                           self.container, max_size=[20, None], text="...")
         return new_spell
@@ -76,11 +77,6 @@ class KnownSpellsBox(ResizeableBox):
         self.known_spells_name_label.setText(_translate("MainWindow", "Spell name"))
         self.known_spells_description_button_label.setText(_translate("MainWindow", "Desc"))
         self.known_spells_description_field_label.setText("DESC")
-        # self.known_spells_1_lvl.setText(_translate("MainWindow", "10"))
-        # self.known_spells_1_name.setText(_translate("MainWindow", "Oczyszczenie jedzenia i wody"))
-        # self.known_spells_1_description_button.setText(_translate("MainWindow", "..."))
-        # self.known_spells_1_description_field.setText(
-        #     " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus. In malesuada erat tellus, eget efficitur elit convallis eu. Integer consectetur porttitor eros vitae sagittis. Vestibulum commodo suscipit varius. Nulla vitae fringilla velit. Mauris sagittis tellus urna. Class aptent tac")
 
     def update_container_size(self):
         root_width = self.root.width()
