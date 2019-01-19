@@ -24,13 +24,15 @@ def create_qlabel(name, parent, min_size=None, max_size=None, align=None):
     return label
 
 
-def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, indent=None):
+def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, indent=None, text=None):
     qline = QtWidgets.QLineEdit(parent)
     qline = resize_element(qline, min_size, max_size)
     if align:
         qline.setAlignment(align)
     if indent:
         qline.setIndent(indent)
+    if text:
+        qline.setText(text)
     qline.setObjectName(name)
     return qline
 
