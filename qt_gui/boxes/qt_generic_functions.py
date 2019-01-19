@@ -3,9 +3,15 @@ from PyQt5 import QtCore, QtWidgets
 
 def resize_element(element, min_size, max_size):
     if min_size:
-        element.setMinimumSize(QtCore.QSize(*min_size))
+        if min_size[0]:
+            element.setMinimumWidth(min_size[0])
+        if min_size[1]:
+            element.setMinimumHeight(min_size[1])
     if max_size:
-        element.setMaximumSize(QtCore.QSize(*max_size))
+        if max_size[0]:
+            element.setMaximumWidth(max_size[0])
+        if max_size[1]:
+            element.setMaximumHeight(max_size[1])
     return element
 
 
