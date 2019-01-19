@@ -1,63 +1,64 @@
+from types import SimpleNamespace
+
 from PyQt5 import QtWidgets, QtCore
 
-from qt_gui.boxes.qt_generic_classes import DefaultBox
+from qt_gui.boxes.qt_generic_classes import DefaultBox, ResizeableBox
+from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
+    add_multiple_elements_to_layout_by_row, set_text_of_children
 
 
-class FeatsBox(DefaultBox):
-    # TODO - function based widgets and labels
-    # TODO - generalized adding feats
-    # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
+class FeatsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
+        ResizeableBox.__init__(self, increase_width=0, increase_height=25)
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("FeatsBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setObjectName("gridLayoutWidget_6")
+        self.container.setObjectName("FeatsGridLayout")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("FeatsLayout")
-        self.feat_name_label = QtWidgets.QLabel(self.container)
-        self.feat_name_label.setObjectName("feat_name_label")
-        self.feat_description_field_label = QtWidgets.QLabel(self.container)
-        self.feat_name_label.setObjectName("feat_name_label")
-        self.feat_description_label = QtWidgets.QLabel(self.container)
-        self.feat_description_label.setObjectName("feat_description_label")
-        self.add_feat()
+        self.name_label = create_qlabel("feat_name_label", self.container)
+        self.description_field_label = create_qlabel("feat_name_label", self.container)
+        self.description_label = create_qlabel("feat_description_label", self.container)
+        self.feats = []
+        self.translate_reference = {
+            "EN":
+                {
+                    "description_label": "Desc",
+                    "description_field_label": "Desc",
+                    "name_label": "Feat name",
+                }
+        }
+        self.translate_reference_new_element = {
+            "feat":
+                {"description_button": "..."}
+        }
+        for _ in range(5):
+            self.add_feat()
 
         self.add_to_layout()
-        self.translate()
+        self.translate("EN")
         self.root.setLayout(self.layout)
 
     def add_feat(self):
-        self.feat_1_name = QtWidgets.QLineEdit(self.container)
-        self.feat_1_name.setMinimumSize(QtCore.QSize(0, 23))
-        self.feat_1_name.setMaximumWidth(150)
-        self.feat_1_name.setObjectName("feat_1_name")
+        self.add_new_element(elements_list=self.feats, layout=self.layout, row_offset=1)
 
-        self.feat_1_description_edit = QtWidgets.QLineEdit(self.container)
-        self.feat_1_description_edit.setMinimumSize(QtCore.QSize(0, 23))
-        self.feat_1_description_edit.setObjectName("feat_1_description_edit")
+    def translate(self, language_ref):
+        set_text_of_children(self, self.translate_reference[language_ref])
 
-        self.feat_1_description_button = QtWidgets.QPushButton(self.container)
-        self.feat_1_description_button.setObjectName("feat_1_description_button")
-        self.feat_1_description_button.setMaximumWidth(20)
-
-    def translate(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.root.setTitle(_translate("MainWindow", "Feats / Powers / Special abilities"))
-        self.feat_1_name.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.feat_description_label.setText(_translate("MainWindow", "Desc"))
-        self.feat_description_field_label.setText(_translate("MainWindow", "Desc"))
-        self.feat_1_description_button.setText(_translate("MainWindow", "..."))
-        self.feat_name_label.setText(_translate("MainWindow", "Feat name"))
-        self.feat_1_description_edit.setText(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sapien urna, egestas eu tempor at, pretium nec orci. In nec pharetra tellus")
+    def create_new_element(self):
+        return self.create_feat()
 
     def add_to_layout(self):
-        self.layout.addWidget(self.feat_1_name, 1, 0, 1, 1)
-        self.layout.addWidget(self.feat_1_description_edit, 1, 1, 1, 1)
-        self.layout.addWidget(self.feat_1_description_button, 1, 2, 1, 1)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label,
+                                                             self.description_field_label])
 
-        self.layout.addWidget(self.feat_name_label, 0, 0, 1, 1)
-        self.layout.addWidget(self.feat_description_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.feat_description_field_label, 0, 2, 1, 1)
+    def create_feat(self):
+        new_feat = SimpleNamespace()
+        idx = len(self.feats)
+        new_feat.name = create_qline_edit(f"feat{idx}_name", self.container, max_size=(150, None))
+
+        new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
+        new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
+                                                         self.container, max_size=[20, None], text="...")
+        return new_feat
