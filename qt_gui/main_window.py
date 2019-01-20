@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QVBoxLayout, QScrollArea, QTabWidget
+from PyQt5.QtWidgets import QVBoxLayout, QTabWidget
 
 from qt_gui.boxes.armor_items import ArmorItems
 from qt_gui.boxes.attacks import AttacksBox
@@ -50,7 +50,7 @@ class TabWidget(QtWidgets.QWidget):
 class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
-        main_window.resize(1270, 750)
+        main_window.resize(1270, 900)
         self.central_widget = TabWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
 
@@ -60,8 +60,10 @@ class MainWindowUi:
 
         self.central_widget.setLayout(self.central_widget.layout)
         self.retranslate_ui(main_window)
+        self.menu_bar = MenuBar(main_window)
         main_window.setCentralWidget(self.central_widget)
-        self.central_widget.tabs.setCurrentIndex(1)
+        main_window.setMenuBar(self.menu_bar.root)
+        self.central_widget.tabs.setCurrentIndex(2)
 
     def add_widgets_to_tab_1(self):
         parent_for_boxes = self.central_widget.tab1
@@ -82,7 +84,7 @@ class MainWindowUi:
         self.skills_box = SkillsBox(parent_for_boxes, position=[10, 10], size=[500, 400])
         self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
-        self.feats_box = FeatsBox(parent_for_boxes, position=[10, 520], size=[500, 100])
+        self.feats_box = FeatsBox(parent_for_boxes, position=[10, 520], size=[500, 80])
         self.spells_per_day_box = SpellsPerDayBox(parent_for_boxes, position=[1090, 10], size=[150, 350])
         self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[520, 120], size=[550, 60])
         return parent_for_boxes
@@ -90,7 +92,7 @@ class MainWindowUi:
     def add_widgets_to_tab_3(self):
         parent_for_boxes = self.central_widget.tab3
         self.notes_box = NotesBox(parent_for_boxes, position=[10, 350], size=[510, 200])
-        self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 331])
+        self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
         self.items_box = ItemsBox(parent_for_boxes, position=[650, 10], size=[581, 291])
 
     def retranslate_ui(self, main_window):
