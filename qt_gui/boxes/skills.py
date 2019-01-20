@@ -51,7 +51,7 @@ class SkillsBox(DefaultBox):
         new_skill.attr_choice.addItem("INT")
         new_skill.attr_choice.addItem("WIS")
         new_skill.attr_choice.addItem("CHA")
-
+        new_skill.attr_choice.setItemText(0, "STR")
         new_skill.total = QtWidgets.QLineEdit(self.container)
         new_skill.total.setMinimumSize(QtCore.QSize(0, 23))
         new_skill.total.setMaximumSize(QtCore.QSize(54, 20))

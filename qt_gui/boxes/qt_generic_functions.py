@@ -59,12 +59,18 @@ def add_multiple_elements_to_layout_by_column(layout, elements_to_add, column=0,
         layout.addWidget(element, start_row + row * height, column, height, width)
 
 
+def set_combo_box_choices(root_object, choices):
+    for idx, choice_text in enumerate(choices):
+        root_object.setItemText(idx, choice_text)
+
+
 def set_text_of_children(root_object, translate_reference):
     for name, translation in translate_reference.items():
         if name == "title":
             root_object.setTitle(translation)
             continue
-
+        if name == "choices":
+            set_combo_box_choices(root_object, translation)
         obj_ref = getattr(root_object, name)
         if isinstance(translation, dict):
             set_text_of_children(obj_ref, translation)
