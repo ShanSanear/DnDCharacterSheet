@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtWidgets
 
 
 def resize_element(element, min_size, max_size):
@@ -64,6 +64,7 @@ def set_text_of_children(root_object, translate_reference):
         if name == "title":
             root_object.setTitle(translation)
             continue
+
         obj_ref = getattr(root_object, name)
         if isinstance(translation, dict):
             set_text_of_children(obj_ref, translation)
