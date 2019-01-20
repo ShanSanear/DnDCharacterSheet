@@ -31,7 +31,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         }
         self.translate_reference_new_element = {
             "EN": {
-                "description_buttn" : "..."
+                "description_button" : "..."
             }
         }
 
