@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QComboBox
 
 
-def resize_element(element, min_size, max_size):
+def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size: (list, tuple)):
     if min_size:
         if min_size[0]:
             element.setMinimumWidth(min_size[0])
@@ -15,20 +16,23 @@ def resize_element(element, min_size, max_size):
     return element
 
 
-def create_qlabel(name, parent, min_size=None, max_size=None, align=None):
+def create_qlabel(name: str, parent: QtWidgets.QLayout, min_size: (list, tuple) = None, max_size: (list, tuple) = None,
+                  align=None):
     label = QtWidgets.QLabel(parent)
-    label = resize_element(label, min_size, max_size)
+    label: QtWidgets.QLabel = resize_element(label, min_size, max_size)
     if align:
         label.setAlignment(align)
     label.setObjectName(name)
     return label
 
 
-def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, indent=None, text=None, enabled=True):
+def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
+                      max_size: (list, tuple) = None,
+                      align=None, indent: int = None, text: str = None, enabled: bool = True):
     qline = QtWidgets.QLineEdit(parent)
     qline.setEnabled(enabled)
 
-    qline = resize_element(qline, min_size, max_size)
+    qline: QtWidgets.QLineEdit = resize_element(qline, min_size, max_size)
     if align:
         qline.setAlignment(align)
     if indent:
@@ -40,7 +44,9 @@ def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, in
     return qline
 
 
-def create_push_button(name, parent, min_size=None, max_size=None, text=None):
+def create_push_button(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
+                       max_size: (list, tuple) = None,
+                       text: str = None):
     button = QtWidgets.QPushButton(parent)
     button.setObjectName(name)
     button = resize_element(button, min_size, max_size)
@@ -48,8 +54,10 @@ def create_push_button(name, parent, min_size=None, max_size=None, text=None):
     return button
 
 
-def create_combo_box(name, parent, number_of_choices=1, choices_text=None, min_size=None, max_size=None):
-    combo_box = QtWidgets.QComboBox(parent)
+def create_combo_box(name: str, parent: QtWidgets.QWidget, number_of_choices: int = 1,
+                     choices_text: (list, tuple) = None,
+                     min_size: (list, tuple) = None, max_size: (list, tuple) = None):
+    combo_box: QComboBox = QtWidgets.QComboBox(parent)
     combo_box.setObjectName(name)
     for _ in range(number_of_choices):
         combo_box.addItem("")
@@ -65,17 +73,20 @@ def numeric_label(name, parent, align):
     return create_qlabel(name, parent, align=align)
 
 
-def add_multiple_elements_to_layout_by_row(layout, elements_to_add, row=0, start_column=0, height=1, width=1):
+def add_multiple_elements_to_layout_by_row(layout: QtWidgets.QLayout, elements_to_add: (list, tuple), row: int = 0,
+                                           start_column: int = 0, height: int = 1, width: int = 1):
     for column, element in enumerate(elements_to_add):
         add_element_to_layout(layout, element, row, start_column + column * width, height, width)
 
 
-def add_multiple_elements_to_layout_by_column(layout, elements_to_add, column=0, start_row=0, height=1, width=1):
+def add_multiple_elements_to_layout_by_column(layout: QtWidgets.QLayout, elements_to_add: (list, tuple),
+                                              column: int = 0, start_row: int = 0, height: int = 1, width: int = 1):
     for row, element in enumerate(elements_to_add):
         add_element_to_layout(layout, element, start_row + row * height, column, height, width)
 
 
-def add_element_to_layout(layout, element_to_add, row, column, height, width):
+def add_element_to_layout(layout: QtWidgets.QLayout, element_to_add: QtWidgets.QWidget, row: int, column: int,
+                          height: int, width: int):
     layout.addWidget(element_to_add, row, column, height, width)
 
 
@@ -84,7 +95,7 @@ def set_combo_box_choices(root_object, choices):
         root_object.setItemText(idx, choice_text)
 
 
-def set_text_of_children(root_object, translate_reference):
+def set_text_of_children(root_object, translate_reference: dict):
     for name, translation in translate_reference.items():
         if name == "title":
             root_object.setTitle(translation)
