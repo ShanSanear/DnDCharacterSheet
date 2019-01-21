@@ -24,8 +24,10 @@ def create_qlabel(name, parent, min_size=None, max_size=None, align=None):
     return label
 
 
-def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, indent=None, text=None):
+def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, indent=None, text=None, enabled=True):
     qline = QtWidgets.QLineEdit(parent)
+    qline.setEnabled(enabled)
+
     qline = resize_element(qline, min_size, max_size)
     if align:
         qline.setAlignment(align)
@@ -34,6 +36,7 @@ def create_qline_edit(name, parent, min_size=None, max_size=None, align=None, in
     if text:
         qline.setText(text)
     qline.setObjectName(name)
+
     return qline
 
 
@@ -43,6 +46,19 @@ def create_push_button(name, parent, min_size=None, max_size=None, text=None):
     button = resize_element(button, min_size, max_size)
     button.setText(text)
     return button
+
+
+def create_combo_box(name, parent, number_of_choices=1, choices_text=None, min_size=None, max_size=None):
+    combo_box = QtWidgets.QComboBox(parent)
+    combo_box.setObjectName(name)
+    for _ in range(number_of_choices):
+        combo_box.addItem("")
+    if choices_text:
+        for idx, choice_text in enumerate(choices_text):
+            combo_box.setItemText(idx, choice_text)
+    if min_size or max_size:
+        combo_box = resize_element(combo_box, min_size=min_size, max_size=max_size)
+    return combo_box
 
 
 def numeric_label(name, parent, align):
