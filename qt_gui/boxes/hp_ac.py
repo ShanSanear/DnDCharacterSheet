@@ -1,45 +1,77 @@
 from PyQt5 import QtWidgets, QtCore
 
 from qt_gui.boxes.qt_generic_classes import DefaultBox
-from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit
+from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, add_element_to_layout, \
+    add_multiple_elements_to_layout_by_row, set_text_of_children
 
 
 class HpAcBox(DefaultBox):
-    # TODO - function based widgets and labels
-    # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setMaximumSize(QtCore.QSize(2000, 2000))
         self.root.setObjectName("HpAcBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setObjectName("layoutWidget")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("HpAcLayout")
-
-        self.hp_ac_hp_total_label = create_qlabel("hp_ac_hp_total_label", self.container)
-        self.hp_ac_hp_hp_wounds_current_hp_label = create_qlabel("hp_ac_hp_hp_wounds_current_hp_label", self.container)
-        self.hp_ac_hp_label = create_qlabel("hp_ac_hp_label", self.container)
-        self.hp_ac_hp_total = create_qline_edit("hp_ac_hp_total", self.container)
-        self.hp_ac_ac_label = create_qlabel("hp_ac_ac_label", self.container)
-        self.hp_ac_ac_total = create_qline_edit("hp_ac_ac_total", self.container)
-        self.hp_ac_ac_base = create_qline_edit("hp_ac_ac_base", self.container)
-        self.hp_ac_ac_armor_bonus = create_qline_edit("hp_ac_ac_armor_bonus", self.container)
-        self.hp_ac_ac_shield_bonus = create_qline_edit("hp_ac_ac_shield_bonus", self.container)
-        self.hp_ac_ac_dex_bonus = create_qline_edit("hp_ac_ac_dex_bonus", self.container)
-        self.hp_ac_ac_size_bonus = create_qline_edit("hp_ac_ac_size_bonus", self.container)
-        self.hp_ac_ac_misc_bonus = create_qline_edit("hp_ac_ac_misc_bonus", self.container)
-        self.hp_ac_ac_total_label = create_qlabel("hp_ac_ac_total_label", self.container)
-        self.hp_ac_ac_base_bonus_label = create_qlabel("hp_ac_ac_base_bonus_label", self.container)
-        self.hp_ac_ac_armor_bonus_label = create_qlabel("hp_ac_ac_armor_bonus_label", self.container)
-        self.hp_ac_ac_shield_bonus_label = create_qlabel("hp_ac_ac_shield_bonus_label", self.container)
-        self.hp_ac_ac_dex_bonus_label = create_qlabel("hp_ac_ac_dex_bonus_label", self.container)
-        self.hp_ac_ac_size_bonus_label = create_qlabel("hp_ac_ac_size_bonus_label", self.container)
-        self.hp_ac_ac_misc_bonus_label = create_qlabel("hp_ac_ac_misc_bonus_label", self.container)
-        self.hp_ac_hp_hp_wounds_current_hp = create_qline_edit("hp_ac_hp_hp_wounds_current_hp", self.container)
-        self.hp_ac_hp_contusion = create_qline_edit("hp_ac_hp_contusion", self.container)
-        self.hp_ac_contusion_label = create_qlabel("hp_ac_contusion_label", self.container)
+        self.translate_reference = {
+            "EN":
+                {
+                    "root": {
+                        "title": "HP / AC"
+                    },
+                    "hp_total_label": "Total",
+                    "hp_hp_wounds_current_hp_label": "Wounds / Current HP",
+                    "hp_label": "HP",
+                    "hp_total": "10",
+                    "ac_label": "AC",
+                    "ac_total": "10",
+                    "_eq_sign_3": "=",
+                    "ac_base": "10",
+                    "_plus_sign_12": "+",
+                    "ac_armor_bonus": "10",
+                    "_plus_sign_11": "+",
+                    "ac_shield_bonus": "10",
+                    "_plus_sign_13": "+",
+                    "ac_dex_bonus": "10",
+                    "_plus_sign_14": "+",
+                    "ac_size_bonus": "10",
+                    "_plus_sign_15": "+",
+                    "ac_misc_bonus": "10",
+                    "ac_total_label": "Total",
+                    "ac_base_bonus_label": "Base",
+                    "ac_armor_bonus_label": "Armor",
+                    "ac_shield_bonus_label": "Shield",
+                    "ac_dex_bonus_label": "Dex",
+                    "ac_size_bonus_label": "Size",
+                    "ac_misc_bonus_label": "Misc",
+                    "hp_hp_wounds_current_hp": "10/10",
+                    "hp_contusion": "10",
+                    "contusion_label": "Contusion",
+                }
+        }
+        self.hp_total_label = create_qlabel("hp_ac_hp_total_label", self.container)
+        self.hp_hp_wounds_current_hp_label = create_qlabel("hp_ac_hp_hp_wounds_current_hp_label", self.container)
+        self.hp_label = create_qlabel("hp_ac_hp_label", self.container)
+        self.hp_total = create_qline_edit("hp_ac_hp_total", self.container)
+        self.ac_label = create_qlabel("hp_ac_ac_label", self.container)
+        self.ac_total = create_qline_edit("hp_ac_ac_total", self.container)
+        self.ac_base = create_qline_edit("hp_ac_ac_base", self.container)
+        self.ac_armor_bonus = create_qline_edit("hp_ac_ac_armor_bonus", self.container)
+        self.ac_shield_bonus = create_qline_edit("hp_ac_ac_shield_bonus", self.container)
+        self.ac_dex_bonus = create_qline_edit("hp_ac_ac_dex_bonus", self.container)
+        self.ac_size_bonus = create_qline_edit("hp_ac_ac_size_bonus", self.container)
+        self.ac_misc_bonus = create_qline_edit("hp_ac_ac_misc_bonus", self.container)
+        self.ac_total_label = create_qlabel("hp_ac_ac_total_label", self.container)
+        self.ac_base_bonus_label = create_qlabel("hp_ac_ac_base_bonus_label", self.container)
+        self.ac_armor_bonus_label = create_qlabel("hp_ac_ac_armor_bonus_label", self.container)
+        self.ac_shield_bonus_label = create_qlabel("hp_ac_ac_shield_bonus_label", self.container)
+        self.ac_dex_bonus_label = create_qlabel("hp_ac_ac_dex_bonus_label", self.container)
+        self.ac_size_bonus_label = create_qlabel("hp_ac_ac_size_bonus_label", self.container)
+        self.ac_misc_bonus_label = create_qlabel("hp_ac_ac_misc_bonus_label", self.container)
+        self.hp_hp_wounds_current_hp = create_qline_edit("hp_ac_hp_hp_wounds_current_hp", self.container)
+        self.hp_contusion = create_qline_edit("hp_ac_hp_contusion", self.container)
+        self.contusion_label = create_qlabel("hp_ac_contusion_label", self.container)
 
         self._eq_sign_3 = create_qlabel("_eq_sign_3", self.container)
         self._plus_sign_12 = create_qlabel("_plus_sign_12", self.container)
@@ -49,67 +81,28 @@ class HpAcBox(DefaultBox):
         self._plus_sign_15 = create_qlabel("_plus_sign_15", self.container)
 
         self.add_to_layout()
-        self.translate()
+        self.translate("EN")
         self.root.setLayout(self.layout)
 
     def add_to_layout(self):
-        self.layout.addWidget(self.hp_ac_hp_total_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.hp_ac_hp_hp_wounds_current_hp_label, 0, 3, 1, 5)
-        self.layout.addWidget(self.hp_ac_hp_label, 1, 0, 1, 1)
-        self.layout.addWidget(self.hp_ac_hp_total, 1, 1, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_label, 2, 0, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_total, 2, 1, 1, 1)
-        self.layout.addWidget(self._eq_sign_3, 2, 2, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_base, 2, 3, 1, 1)
-        self.layout.addWidget(self._plus_sign_12, 2, 4, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_armor_bonus, 2, 5, 1, 1)
-        self.layout.addWidget(self._plus_sign_11, 2, 6, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_shield_bonus, 2, 7, 1, 1)
-        self.layout.addWidget(self._plus_sign_13, 2, 8, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_dex_bonus, 2, 9, 1, 1)
-        self.layout.addWidget(self._plus_sign_14, 2, 10, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_size_bonus, 2, 11, 1, 1)
-        self.layout.addWidget(self._plus_sign_15, 2, 12, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_misc_bonus, 2, 13, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_total_label, 3, 1, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_base_bonus_label, 3, 3, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_armor_bonus_label, 3, 5, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_shield_bonus_label, 3, 7, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_dex_bonus_label, 3, 9, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_size_bonus_label, 3, 11, 1, 1)
-        self.layout.addWidget(self.hp_ac_ac_misc_bonus_label, 3, 13, 1, 1)
-        self.layout.addWidget(self.hp_ac_hp_hp_wounds_current_hp, 1, 3, 1, 5)
-        self.layout.addWidget(self.hp_ac_hp_contusion, 1, 9, 1, 5)
-        self.layout.addWidget(self.hp_ac_contusion_label, 0, 9, 1, 5)
+        add_element_to_layout(self.layout, self.hp_total_label, 0, 1, 1, 1)
+        add_element_to_layout(self.layout, self.hp_hp_wounds_current_hp_label, 0, 3, 1, 5)
+        add_element_to_layout(self.layout, self.contusion_label, 0, 9, 1, 5)
 
-    def translate(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.root.setTitle(_translate("MainWindow", "HP / AC"))
-        self.hp_ac_hp_total_label.setText(_translate("MainWindow", "Total"))
-        self.hp_ac_hp_hp_wounds_current_hp_label.setText(_translate("MainWindow", "Wounds / Current HP"))
-        self.hp_ac_hp_label.setText(_translate("MainWindow", "HP"))
-        self.hp_ac_hp_total.setText(_translate("MainWindow", "10"))
-        self.hp_ac_ac_label.setText(_translate("MainWindow", "AC"))
-        self.hp_ac_ac_total.setText(_translate("MainWindow", "10"))
-        self._eq_sign_3.setText(_translate("MainWindow", "="))
-        self.hp_ac_ac_base.setText(_translate("MainWindow", "10"))
-        self._plus_sign_12.setText(_translate("MainWindow", "+"))
-        self.hp_ac_ac_armor_bonus.setText(_translate("MainWindow", "10"))
-        self._plus_sign_11.setText(_translate("MainWindow", "+"))
-        self.hp_ac_ac_shield_bonus.setText(_translate("MainWindow", "10"))
-        self._plus_sign_13.setText(_translate("MainWindow", "+"))
-        self.hp_ac_ac_dex_bonus.setText(_translate("MainWindow", "10"))
-        self._plus_sign_14.setText(_translate("MainWindow", "+"))
-        self.hp_ac_ac_size_bonus.setText(_translate("MainWindow", "10"))
-        self._plus_sign_15.setText(_translate("MainWindow", "+"))
-        self.hp_ac_ac_misc_bonus.setText(_translate("MainWindow", "10"))
-        self.hp_ac_ac_total_label.setText(_translate("MainWindow", "Total"))
-        self.hp_ac_ac_base_bonus_label.setText(_translate("MainWindow", "Base"))
-        self.hp_ac_ac_armor_bonus_label.setText(_translate("MainWindow", "Armor"))
-        self.hp_ac_ac_shield_bonus_label.setText(_translate("MainWindow", "Shield"))
-        self.hp_ac_ac_dex_bonus_label.setText(_translate("MainWindow", "Dex"))
-        self.hp_ac_ac_size_bonus_label.setText(_translate("MainWindow", "Size"))
-        self.hp_ac_ac_misc_bonus_label.setText(_translate("MainWindow", "Misc"))
-        self.hp_ac_hp_hp_wounds_current_hp.setText(_translate("MainWindow", "10/10"))
-        self.hp_ac_hp_contusion.setText(_translate("MainWindow", "10"))
-        self.hp_ac_contusion_label.setText(_translate("MainWindow", "Contusion"))
+        add_element_to_layout(self.layout, self.hp_label, 1, 0, 1, 1)
+        add_element_to_layout(self.layout, self.hp_total, 1, 1, 1, 1)
+        add_element_to_layout(self.layout, self.hp_contusion, 1, 9, 1, 5)
+
+        third_row = [self.ac_label, self.ac_total, self._eq_sign_3, self.ac_base, self._plus_sign_12,
+                     self.ac_armor_bonus, self._plus_sign_11, self.ac_shield_bonus, self._plus_sign_13,
+                     self.ac_dex_bonus, self._plus_sign_14, self.ac_size_bonus, self._plus_sign_15, self.ac_misc_bonus]
+        add_multiple_elements_to_layout_by_row(self.layout, third_row, row=2)
+
+        fourth_row = [self.ac_total_label, self.ac_base_bonus_label, self.ac_armor_bonus_label,
+                      self.ac_shield_bonus_label, self.ac_dex_bonus_label, self.ac_size_bonus_label,
+                      self.ac_misc_bonus_label, self.hp_hp_wounds_current_hp, ]
+
+        add_multiple_elements_to_layout_by_row(self.layout, fourth_row, row=3)
+
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
