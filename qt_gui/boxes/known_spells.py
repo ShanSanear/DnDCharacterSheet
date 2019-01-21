@@ -85,11 +85,3 @@ class KnownSpellsBox(ResizeableBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
-    def update_container_size(self):
-        root_width = self.root.width()
-        root_height = self.root.height()
-        container_width = self.container.width()
-        container_height = self.container.height()
-        self.root.setMinimumSize(QtCore.QSize(root_width, root_height + 30))
-        self.container.setMinimumSize(QtCore.QSize(container_width, container_height + 30))
