@@ -39,8 +39,6 @@ class ResizeableBox(ABC):
         elements_list.append(new_element)
         add_multiple_elements_to_layout_by_row(layout, elements_list[-1].__dict__.values(),
                                                row=row_offset+element_idx)
-        #for el_idx, element in enumerate(new_element.__dict__.values()):
-        #    layout.addWidget(element, element_idx + row_offset, el_idx, 1, 1)
         self.update_size()
 
     @abstractmethod

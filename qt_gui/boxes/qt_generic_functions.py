@@ -78,6 +78,7 @@ def add_multiple_elements_to_layout_by_column(layout, elements_to_add, column=0,
 def add_element_to_layout(layout, element_to_add, row, column, height, width):
     layout.addWidget(element_to_add, row, column, height, width)
 
+
 def set_combo_box_choices(root_object, choices):
     for idx, choice_text in enumerate(choices):
         root_object.setItemText(idx, choice_text)
