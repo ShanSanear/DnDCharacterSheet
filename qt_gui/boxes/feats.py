@@ -24,6 +24,9 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.translate_reference = {
             "EN":
                 {
+                    "root": {
+                        "title": "Feats"
+                    },
                     "description_label": "Desc",
                     "description_field_label": "Desc",
                     "name_label": "Feat name",
@@ -31,7 +34,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         }
         self.translate_reference_new_element = {
             "EN": {
-                "description_button" : "..."
+                "description_button": "..."
             }
         }
 
@@ -62,6 +65,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
 
         new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
-                                                         self.container, max_size=[20, None],)
+                                                         self.container, max_size=[20, None], )
         set_text_of_children(new_feat, self.translate_reference_new_element["EN"])
         return new_feat
