@@ -2,14 +2,14 @@ from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
-from qt_gui.boxes.qt_generic_functions import create_qlabel
+from qt_gui.boxes.qt_generic_classes import ResizeableBox
+from qt_gui.boxes.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
+    add_multiple_elements_to_layout_by_row
 
 
-class ItemsBox:
-    # TODO - generalized adding item (looks messy)
-    # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
+class ItemsBox(ResizeableBox):
     def __init__(self, parent, position, size):
+        ResizeableBox.__init__(self, increase_width=0, increase_height=40)
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("ItemsBox")
@@ -22,63 +22,44 @@ class ItemsBox:
         self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
         self.items_count_label = create_qlabel("items_count_label", **qlabel_dict)
         self.items_description_label = create_qlabel("items_description_label", **qlabel_dict)
+        self.translate_reference = {"EN": {
+            "root": {"title": "Items"},
+            "items_weight_label": "Weight",
+            "items_name_label": "Item name",
+            "items_count_label": "Count",
+            "items_description_label": "Description",
+        }}
         self.items = []
-        # self.items.append(self.create_item(1))
-        # self.items.append(self.create_item(2))
-        # self.items.append(self.create_item(3))
-        self.container.setGeometry(QtCore.QRect(10, 20, 561, 80 + len(self.items) * 40))
+        self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
         self.add_to_layout()
-        self.add_item()
-        self.add_item()
-        self.add_item()
-        self.add_item()
-        self.add_item()
-        # self.add_item(self.items[0], 1)
-        # self.add_item(self.items[1], 2)
-        # self.add_item(self.items[2], 3)
-        self.translate()
+        for _ in range(5):
+            self.add_item()
+        self.translate("EN")
         self.root.setLayout(self.layout)
 
     def create_new_item(self):
         new_item = SimpleNamespace()
         item_idx = len(self.items)
-        new_item.name = QtWidgets.QLineEdit(self.container)
-        new_item.name.setMinimumSize(QtCore.QSize(0, 23))
-        new_item.name.setObjectName(f"item_{item_idx}_name")
-        new_item.weight = QtWidgets.QLineEdit(self.container)
-        new_item.weight.setMinimumSize(QtCore.QSize(0, 23))
-        new_item.weight.setMaximumSize(QtCore.QSize(50, 16777215))
-        new_item.weight.setObjectName(f"item_{item_idx}_weight")
-        new_item.count = QtWidgets.QLineEdit(self.container)
-        new_item.count.setMinimumSize(QtCore.QSize(0, 23))
-        new_item.count.setMaximumSize(QtCore.QSize(40, 16777215))
-        new_item.count.setObjectName(f"item_{item_idx}_count")
+
+        new_item.name = create_qline_edit(f"item_{item_idx}_name", self.container, min_size=[0, 23])
+        new_item.weight = create_qline_edit(f"item_{item_idx}_weight", self.container, min_size=[None, 23],
+                                            max_size=[50, None])
+        new_item.count = create_qline_edit(f"item_{item_idx}_count", self.container, min_size=[None, 23],
+                                           max_size=[40, None])
         new_item.description = QtWidgets.QPlainTextEdit(self.container)
         new_item.description.setMaximumSize(QtCore.QSize(16777215, 40))
         new_item.description.setObjectName(f"item_{item_idx}_description")
         return new_item
 
+    def create_new_element(self):
+        return self.create_new_item()
+
     def add_to_layout(self):
-        self.layout.addWidget(self.items_weight_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.items_name_label, 0, 0, 1, 1)
-        self.layout.addWidget(self.items_count_label, 0, 2, 1, 1)
-        self.layout.addWidget(self.items_description_label, 0, 3, 1, 1)
+        labels = [self.items_weight_label, self.items_name_label, self.items_count_label, self.items_description_label]
+        add_multiple_elements_to_layout_by_row(self.layout, labels)
 
     def add_item(self):
-        item_idx = len(self.items)
-        new_item = self.create_new_item()
-        self.items.append(new_item)
-        for el_idx, element in enumerate(new_item.__dict__.values()):
-            self.layout.addWidget(element, item_idx + 1, el_idx, 1, 1)
-        self.update_container_size()
+        self.add_new_element(self.items, self.layout, 1)
 
-    def translate(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.root.setTitle(_translate("MainWindow", "Items"))
-        self.items_weight_label.setText(_translate("MainWindow", "Weight"))
-        self.items_name_label.setText(_translate("MainWindow", "Item name"))
-        self.items_count_label.setText(_translate("MainWindow", "Count"))
-        self.items_description_label.setText(_translate("MainWindow", "Description"))
-
-    def update_container_size(self):
-        self.container.setGeometry(QtCore.QRect(10, 20, 561, 80 + len(self.items) * 40))
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
