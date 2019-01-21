@@ -81,7 +81,7 @@ class MainWindowUi:
 
     def add_widgets_to_tab_2(self):
         parent_for_boxes = self.central_widget.tab2
-        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 10], size=[500, 400])
+        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 10], size=[500, 40])
         self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
         self.feats_box = FeatsBox(parent_for_boxes, position=[10, 520], size=[500, 80])
@@ -93,7 +93,7 @@ class MainWindowUi:
         parent_for_boxes = self.central_widget.tab3
         self.notes_box = NotesBox(parent_for_boxes, position=[10, 350], size=[510, 200])
         self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
-        self.items_box = ItemsBox(parent_for_boxes, position=[650, 10], size=[581, 291])
+        self.items_box = ItemsBox(parent_for_boxes, position=[650, 10], size=[581, 80])
 
     def retranslate_ui(self, main_window):
         _translate = QtCore.QCoreApplication.translate
