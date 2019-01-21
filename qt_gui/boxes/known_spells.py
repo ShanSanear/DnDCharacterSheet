@@ -9,7 +9,7 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, 
 
 class KnownSpellsBox(ResizeableBox):
     def __init__(self, parent, position, size):
-        ResizeableBox.__init__(self, increase_width=0, increase_height=30)
+        ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("KnownSpellsBox")
@@ -62,12 +62,12 @@ class KnownSpellsBox(ResizeableBox):
         idx = len(self.spells)
         new_spell = SimpleNamespace()
         new_spell.lvl = create_qline_edit(f"known_spells_{idx}_lvl", parent=self.container, max_size=[20, None])
-        new_spell.name = create_qline_edit(f"known_spells_{idx}_name", parent=self.container,)
+        new_spell.name = create_qline_edit(f"known_spells_{idx}_name", parent=self.container, min_size=[None, 23])
 
         new_spell.description_field = create_qline_edit(f"known_spells_{idx}_description_field",
                                                         parent=self.container, min_size=[350, 23])
         new_spell.description_button = create_push_button(f"known_spells_{idx}_description_button",
-                                                          parent=self.container, max_size=[20, None])
+                                                          parent=self.container, max_size=[20, None], min_size=[None, 23])
 
         set_text_of_children(new_spell, self.translate_reference_new_element["EN"])
         return new_spell
