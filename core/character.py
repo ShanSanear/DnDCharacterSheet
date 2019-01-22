@@ -1,26 +1,15 @@
 from core.attacks.melee_attack import MeleeAttack
 from core.attributes import Attributes
+from core.character_basic_info import CharacterBasicInfo
 from core.saving_throws import SavingThrows
 
 
-class Character:
+class Character(CharacterBasicInfo):
 
-    def __init__(self, name, player=None, character_class="Fighter", race="Human", faith="", level=1, alignement="NN",
-                 size="Medium", age=18, gender="M", height=180, weight=80, eyes="Blue", hair_color="Bronze"):
+    def __init__(self, name):
+        CharacterBasicInfo.__init__(self)
         self.name = name
-        self.player = player
-        self.character_class = character_class
-        self.race = race
-        self.faith = faith
-        self.level = level
-        self.alignement = alignement
-        self.size = size
-        self.age = age
-        self.gender = gender
-        self.height = height
-        self.weight = weight
-        self.eyes = eyes
-        self.hair_color = hair_color
+
 
     def provide_attributes(self, attributes):
         self.attributes = Attributes(attributes)

@@ -4,24 +4,24 @@ from core.character import Character
 class TestCharacter:
     def test_name(self):
         pc = Character(name="Shan")
-        assert pc.name == "Shan"
+        assert pc._name == "Shan"
 
     def test_default_values(self):
         pc = Character(name="Shan")
         assert pc.name == "Shan"
-        assert pc.player is None
-        assert pc.character_class == "Fighter"
-        assert pc.race == "Human"
+        assert pc.player == ""
+        assert pc.character_class == ""
+        assert pc.race == ""
         assert pc.faith == ""
-        assert pc.level == 1
-        assert pc.alignement == "NN"
-        assert pc.size == "Medium"
-        assert pc.age == 18
-        assert pc.gender == "M"
-        assert pc.height == 180
-        assert pc.weight == 80
-        assert pc.eyes == "Blue"
-        assert pc.hair_color == "Bronze"
+        assert pc.level == ""
+        assert pc.alignement == ""
+        assert pc.size == ""
+        assert pc.age == ""
+        assert pc.gender == ""
+        assert pc.height == ""
+        assert pc.weight == ""
+        assert pc.eyes == ""
+        assert pc.hair == ""
 
     def test_character_attributes(self):
         attributes = {"dex": 12}
