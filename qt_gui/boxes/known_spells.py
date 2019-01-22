@@ -33,6 +33,9 @@ class KnownSpellsBox(ResizeableBox):
 
         self.translate_reference = {
             "EN": {
+                "root" : {
+                    "title" : "Known spells"
+                },
                 "lvl_label": "LVL",
                 "name_label": "Spell name",
                 "description_button_label": "Desc",
