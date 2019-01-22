@@ -14,6 +14,7 @@ from qt_gui.boxes.languages import LanguagesBox
 from qt_gui.boxes.menu_bar import MenuBar
 from qt_gui.boxes.notes import NotesBox
 from qt_gui.boxes.number_of_spells import NumberOfSpellsBox
+from qt_gui.boxes.qt_generic_functions import create_push_button
 from qt_gui.boxes.saving_throws import SavingThrowsBox
 from qt_gui.boxes.skills import SkillsBox
 from qt_gui.boxes.spells_per_day import SpellsPerDayBox
@@ -63,7 +64,10 @@ class MainWindowUi:
         self.menu_bar = MenuBar(main_window)
         main_window.setCentralWidget(self.central_widget)
         main_window.setMenuBar(self.menu_bar.root)
-        self.central_widget.tabs.setCurrentIndex(2)
+        self.push_button = create_push_button("ClickMe", self.central_widget)
+        self.push_button.move(200, 30)
+
+        self.central_widget.tabs.setCurrentIndex(0)
 
     def add_widgets_to_tab_1(self):
         parent_for_boxes = self.central_widget.tab1

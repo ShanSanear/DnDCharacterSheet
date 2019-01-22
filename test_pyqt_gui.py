@@ -1,29 +1,44 @@
+import sys
 from functools import partial
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QGroupBox, QFormLayout, QLabel, QComboBox, QScrollArea, \
-    QVBoxLayout
-
-import sys
-
-from PyQt5.uic.properties import QtGui
+    QVBoxLayout, QFileDialog
 
 from qt_gui.main_window import MainWindowUi
+from qt_gui.popups.feat_full_description import DescriptionDialog
+
 
 class MyApp(QMainWindow, MainWindowUi):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.setup_ui(self)
 
-    #        self.push_button.clicked.connect(self.do_stuff)
-    #        self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
+        self.push_button.clicked.connect(self.do_stuff)
+        self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
 
     def do_stuff(self):
-        self.items_box.add_item()
+        #self.open_file()
+        desc_dialog = DescriptionDialog("Feat description", self.central_widget, self.feats_box.feats[1])
+        desc_dialog.show()
+        pass
+
 
     def changed_text(self, arg):
         print("Changed text")
         print(arg)
+
+    def open_file(self):
+        print("Opening file")
+        fname = QFileDialog.getOpenFileName(self.central_widget, 'Open file', 'c:\\', "Character file (*.json)")[0]
+        print(fname)
+
+
+    def save_file(self):
+        print("Saving file")
+        new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", "c:\\", "Character file (*.json)")
+        print(new_file)
+
 
 
 class Window(QtWidgets.QWidget):
