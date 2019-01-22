@@ -33,8 +33,8 @@ class KnownSpellsBox(ResizeableBox):
 
         self.translate_reference = {
             "EN": {
-                "root" : {
-                    "title" : "Known spells"
+                "root": {
+                    "title": "Known spells"
                 },
                 "lvl_label": "LVL",
                 "name_label": "Spell name",
@@ -70,7 +70,8 @@ class KnownSpellsBox(ResizeableBox):
         new_spell.description_field = create_qline_edit(f"known_spells_{idx}_description_field",
                                                         parent=self.container, min_size=[350, 23])
         new_spell.description_button = create_push_button(f"known_spells_{idx}_description_button",
-                                                          parent=self.container, max_size=[20, None], min_size=[None, 23])
+                                                          parent=self.container, max_size=[20, None],
+                                                          min_size=[None, 23])
 
         set_text_of_children(new_spell, self.translate_reference_new_element["EN"])
         return new_spell
