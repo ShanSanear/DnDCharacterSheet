@@ -49,7 +49,7 @@ def create_push_button(name: str, parent: QtWidgets.QWidget, min_size: (list, tu
                        text: str = None):
     button = QtWidgets.QPushButton(parent)
     button.setObjectName(name)
-    button = resize_element(button, min_size, max_size)
+    button: QtWidgets.QPushButton = resize_element(button, min_size, max_size)
     button.setText(text)
     return button
 
