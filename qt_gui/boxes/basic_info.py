@@ -98,8 +98,6 @@ class BasicInfoBox(DefaultBox):
         self.root.setLayout(self.layout)
 
     def add_to_layout(self):
-        first_row_labels = [self.name_label, self.player_name_label]
-        first_row_input = [self.name, self.player_name]
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
         second_row_input = [self.char_class, self.race, self.alignement, self.faith]
         third_row_labels_part_1 = [self.level_label, self.age_label, self.weight_label, self.height_label]
