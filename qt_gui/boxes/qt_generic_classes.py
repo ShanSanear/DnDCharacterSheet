@@ -37,7 +37,8 @@ class ResizeableBox(ABC):
         element_idx = len(elements_list)
         new_element = self.create_new_element()
         elements_list.append(new_element)
-        add_multiple_elements_to_layout_by_row(layout, elements_list[-1].__dict__.values(),
+        values = [elements_list[-1].__dict__[element] for element in elements_list[-1].__dict__ if not element.startswith("_")]
+        add_multiple_elements_to_layout_by_row(layout, values,
                                                row=row_offset+element_idx)
         self.update_size()
 
