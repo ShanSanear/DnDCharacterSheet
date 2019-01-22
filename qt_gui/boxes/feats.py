@@ -1,3 +1,4 @@
+from functools import partial
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
@@ -5,6 +6,7 @@ from PyQt5 import QtWidgets, QtCore
 from qt_gui.boxes.qt_generic_classes import DefaultBox, ResizeableBox
 from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
     add_multiple_elements_to_layout_by_row, set_text_of_children
+from qt_gui.popups.feat_full_description import DescriptionDialog
 
 
 class FeatsBox(DefaultBox, ResizeableBox):
@@ -58,6 +60,11 @@ class FeatsBox(DefaultBox, ResizeableBox):
         add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label,
                                                              self.description_field_label])
 
+
+    def show_description(self, feat):
+        dialog = DescriptionDialog("Feat description", self.root, feat)
+        dialog.show()
+
     def create_feat(self):
         new_feat = SimpleNamespace()
         idx = len(self.feats)
@@ -66,5 +73,8 @@ class FeatsBox(DefaultBox, ResizeableBox):
         new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
                                                          self.container, max_size=[20, None], )
+        new_feat.description_button.clicked.connect(partial(self.show_description, new_feat))
+        new_feat._full_description = "ABCD"
         set_text_of_children(new_feat, self.translate_reference_new_element["EN"])
+
         return new_feat
