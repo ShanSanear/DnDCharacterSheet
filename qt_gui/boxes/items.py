@@ -18,8 +18,8 @@ class ItemsBox(ResizeableBox):
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("ItemsLayout")
         qlabel_dict = dict(parent=self.container)
-        self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
         self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
+        self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
         self.items_count_label = create_qlabel("items_count_label", **qlabel_dict)
         self.items_description_label = create_qlabel("items_description_label", **qlabel_dict)
         self.translate_reference = {"EN": {
@@ -55,7 +55,7 @@ class ItemsBox(ResizeableBox):
         return self.create_new_item()
 
     def add_to_layout(self):
-        labels = [self.items_weight_label, self.items_name_label, self.items_count_label, self.items_description_label]
+        labels = [self.items_name_label, self.items_weight_label, self.items_count_label, self.items_description_label]
         add_multiple_elements_to_layout_by_row(self.layout, labels)
 
     def add_item(self):
