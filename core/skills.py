@@ -2,7 +2,7 @@ from possible_exceptions import NoAttributesInstance
 
 
 class Skill:
-    def __init__(self, name='', attr_cls=None, related_attribute='str', rank=0, misc_rank=0, description=''):
+    def __init__(self, name='', attr_cls=None, related_attribute='str', rank=0, misc_rank=0):
 
         self.name = name
         if not attr_cls:
@@ -10,11 +10,13 @@ class Skill:
         else:
             self.attrs = attr_cls
 
+        if rank < 0 or misc_rank < 0:
+            raise ValueError(f"Either skill rank: ({rank}) misc rank ({misc_rank}) is negative, couldn't create skill.")
+
         self.related_attribute = related_attribute
         self._base_rank = rank
         self.misc_rank = misc_rank
         self._attr_rank = getattr(self.attrs, self.related_attribute)['mod']
-        self.description = description
 
     def get_rank(self):
         self._attr_rank = getattr(self.attrs, self.related_attribute)['mod']
@@ -24,5 +26,5 @@ class Skill:
     def change_skill_rank(self, val):
         self._base_rank = val
 
-    rank = property(get_rank, change_skill_rank)
+    total = property(get_rank, change_skill_rank)
 
