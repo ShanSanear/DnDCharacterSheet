@@ -15,11 +15,8 @@ class Attributes:
         self._cha = 10
 
         self.decreases = {}
+        self.set_attributes(attributes)
 
-        for key, val in attributes.items():
-            if val < 1:
-                raise InvalidAttribute("{} is equal to : {}".format(key, val))
-            setattr(self, key, val)
 
     def temp_decrease(self, attr, decrease_value):
         current_value = getattr(self, attr)['value']
@@ -70,3 +67,9 @@ class Attributes:
     wis = property(_get_wis, _set_wis)
     int = property(_get_int, _set_int)
     cha = property(_get_cha, _set_cha)
+
+    def set_attributes(self, attributes):
+        for key, val in attributes.items():
+            if val < 1:
+                raise InvalidAttribute("{} is equal to : {}".format(key, val))
+            setattr(self, key, val)

@@ -4,7 +4,7 @@ from core.character import Character
 class TestCharacter:
     def test_name(self):
         pc = Character(name="Shan")
-        assert pc._name == "Shan"
+        assert pc.name == "Shan"
 
     def test_default_values(self):
         pc = Character(name="Shan")
@@ -22,41 +22,38 @@ class TestCharacter:
         assert pc.weight == ""
         assert pc.eyes == ""
         assert pc.hair == ""
+        assert pc.attributes.str['value'] == 10
 
     def test_character_attributes(self):
         attributes = {"dex": 12}
         pc = Character(name="Shan")
-        pc.provide_attributes(attributes=attributes)
+        pc.attributes.set_attributes(attributes)
         assert pc.attributes.dex == {"value": 12, "mod": 1}
 
     def test_character_saving_throws(self):
         attributes = {"dex": 12}
         pc = Character(name="Shan")
-        pc.provide_attributes(attributes)
-        pc.get_saving_throws()
+        pc.attributes.set_attributes(attributes)
         assert pc.saving_throws.reflex == 1
 
     def test_character_saving_throws_with_changes(self):
         attributes = {"dex": 12}
         pc = Character(name="Shan")
-        pc.provide_attributes(attributes)
-        pc.get_saving_throws()
+        pc.attributes.set_attributes(attributes)
         pc.saving_throws.base_mods.reflex = 2
         assert pc.saving_throws.reflex == 3
 
     def test_melee_attack(self):
         attributes = {"str": 14, "dex": 12}
         pc = Character(name="Shan")
-        pc.provide_attributes(attributes)
-        pc.get_melee_attack()
-        assert pc.melee_attack_value == 2
+        pc.attributes.set_attributes(attributes)
+        assert pc.melee_attack.complete == 2
 
     def test_melee_attack_with_changed_misc(self):
         attributes = {"str": 14, "dex": 12}
         pc = Character(name="Shan")
-        pc.provide_attributes(attributes)
-        pc.get_melee_attack()
+        pc.attributes.set_attributes(attributes)
         pc.melee_attack.misc_bonus = 2
-        assert pc.melee_attack_value == 4
+        assert pc.melee_attack.complete == 4
         pc.melee_attack.base_mod = 3
-        assert pc.melee_attack_value == 7
+        assert pc.melee_attack.complete == 7
