@@ -27,6 +27,7 @@ class BasicInfoBox(DefaultBox):
                     "name_label": "Name",
                     "height_label": "Height",
                     "weight_label": "Weight",
+                    "experience_label": "Experience",
                     "eyes_label": "Eyes",
                     "hair_label": "Hair",
                     "size_label": "Size",
@@ -66,6 +67,7 @@ class BasicInfoBox(DefaultBox):
         self.alignement_label = create_qlabel("character_alignement_label", **qlabel_dict_1)
         self.player_name_label = create_qlabel("player_name_label", **qlabel_dict_1)
         self.name_label = create_qlabel("character_name_label", **qlabel_dict_1)
+        self.experience_label = create_qlabel("character_name_label", **qlabel_dict_1)
         self.height_label = create_qlabel("character_height_label", **qlabel_dict_2)
         self.weight_label = create_qlabel("character_weight_label", **qlabel_dict_2)
         self.eyes_label = create_qlabel("character_eyes_label", **qlabel_dict_2)
@@ -81,6 +83,7 @@ class BasicInfoBox(DefaultBox):
         self.char_class = create_qline_edit("character_class", **qline_dict_1)
         self.faith = create_qline_edit("character_faith", **qline_dict_1)
         self.name = create_qline_edit("character_name", **qline_dict_1)
+        self.experience = create_qline_edit("character_expirience", **qline_dict_1)
         self.height = create_qline_edit("character_height", **qline_dict_2)
         self.weight = create_qline_edit("character_weight", **qline_dict_2)
         self.hair = create_qline_edit("character_hair", **qline_dict_1)
@@ -107,10 +110,10 @@ class BasicInfoBox(DefaultBox):
         third_row_input_part_2 = [self.size, self.gender, self.eyes, self.hair]
 
         elements = [[second_row_labels, 2], [second_row_input, 2]]
-        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label], width=5)
-        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name_label], start_column=5, width=3)
-        add_multiple_elements_to_layout_by_row(self.layout, [self.name], row=1, width=5)
-        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name], row=1, start_column=5, width=3)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label], width=4)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name_label, self.experience_label], start_column=4, width=2)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name], row=1, width=4)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name, self.experience], row=1, start_column=4, width=2)
         for row_idx, [row_elements, width] in enumerate(elements):
             add_multiple_elements_to_layout_by_row(self.layout, row_elements, row=row_idx + 2, width=width)
 
