@@ -51,7 +51,7 @@ class TabWidget(QtWidgets.QWidget):
 class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
-        main_window.resize(1270, 900)
+        main_window.resize(1300, 900)
         self.central_widget = TabWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
 
@@ -79,8 +79,7 @@ class MainWindowUi:
 
         self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[900, 220], size=[320, 150])
         self.attacks_box = AttacksBox(parent_for_boxes, position=[900, 370], size=[320, 100])
-
-        self.weapons_box = WeaponsBox(parent_for_boxes, position=[270, 220], size=[620, 450])
+        self.items_box = ItemsBox(parent_for_boxes, position=[270, 220], size=[620, 80])
         return parent_for_boxes
 
     def add_widgets_to_tab_2(self):
@@ -95,9 +94,9 @@ class MainWindowUi:
 
     def add_widgets_to_tab_3(self):
         parent_for_boxes = self.central_widget.tab3
-        self.notes_box = NotesBox(parent_for_boxes, position=[10, 350], size=[510, 200])
+        self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
         self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
-        self.items_box = ItemsBox(parent_for_boxes, position=[650, 10], size=[581, 80])
+        self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450])
 
     def retranslate_ui(self, main_window):
         _translate = QtCore.QCoreApplication.translate
