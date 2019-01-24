@@ -1,11 +1,12 @@
+import json
 import sys
-from functools import partial
 from pathlib import Path
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QGroupBox, QFormLayout, QLabel, QComboBox, QScrollArea, \
     QVBoxLayout, QFileDialog
 
+from qt_gui.boxes.qt_generic_functions import set_text_of_children
 from qt_gui.main_window import MainWindowUi
 
 
@@ -15,7 +16,7 @@ class MyApp(QMainWindow, MainWindowUi):
         self.setup_ui(self)
 
         self.push_button.clicked.connect(self.do_stuff)
-        self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
+        #self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character.triggered.connect(self.save_file)
         self.menu_bar.new_character.triggered.connect(self.save_file)
@@ -34,11 +35,16 @@ class MyApp(QMainWindow, MainWindowUi):
                                             "Character file (*.json)")[0]
         self.character_file = fname
         print(fname)
+        data_to_read = json.load(Path(fname).open())
+        set_text_of_children(self, data_to_read)
 
     def save_file(self):
         print("Saving file")
+        data_to_save = {"basic_info_box": self.basic_info_box.get_dict_repr()}
         new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", Path().cwd().as_posix(),
                                                "Character file (*.json)")[0]
+        if new_file:
+            json.dump(data_to_save, Path(new_file).open('w'), indent=4)
         self.character_file = new_file
         print(new_file)
 

@@ -109,3 +109,13 @@ def set_text_of_children(root_object, translate_reference: dict):
             if not isinstance(translation, str):
                 raise AttributeError("Only strings can be passed to setText")
             obj_ref.setText(translation)
+
+
+def collect_editable_data(elements_to_clean_up):
+    tmp = {element for element in elements_to_clean_up if "label" not in element}
+    commons = ["root", "container", "layout", "translate_reference"]
+    for common in commons:
+        try:
+            tmp.remove(common)
+        except KeyError:
+            pass
