@@ -95,8 +95,8 @@ def set_combo_box_choices(root_object, choices):
         root_object.setItemText(idx, choice_text)
 
 
-def set_text_of_children(root_object, translate_reference: dict):
-    for name, translation in translate_reference.items():
+def set_text_of_children(root_object, to_set: dict):
+    for name, translation in to_set.items():
         if name == "title":
             root_object.setTitle(translation)
             continue
