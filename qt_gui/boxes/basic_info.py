@@ -36,29 +36,12 @@ class BasicInfoBox(DefaultBox):
                     "level_label": "Level",
                 }
         }
-        self.default_values = {
-            "race": "Lorem ipsum",
-            "alignement": "Lorem ipsum",
-            "char_class": "Lorem ipsum",
-            "faith": "Lorem ipsum",
-            "name": "Lorem ipsum",
-            "height": "10",
-            "weight": "10",
-            "hair": "Lorem ipsum",
-            "player_name": "Lorem ipsum",
-            "eyes": "Lorem ipsum",
-            "gender": "Lorem ipsum",
-            "age": "10",
-            "size": "Lorem ipsum",
-            "level": "10",
-        }
-
         qlabel_dict_1 = dict(parent=self.container,
                              )
         qlabel_dict_2 = dict(parent=self.container,
                              )
         qline_dict_1 = dict(parent=self.container, )  # min_size=(100, 23))
-        qline_dict_2 = dict(parent=self.container, max_size=(40, 1111111))  # min_size=(50, 23))
+        qline_dict_2 = dict(parent=self.container, max_size=(40, None))  # min_size=(50, 23))
 
         # TODO - in a long shot - generalize it
         self.class_label = create_qlabel("character_class_label", **qlabel_dict_1)
@@ -126,4 +109,21 @@ class BasicInfoBox(DefaultBox):
         set_text_of_children(self, self.translate_reference[language_ref])
 
     def set_default(self):
-        set_text_of_children(self, self.default_values)
+        default_values = {
+            "race": "Lorem ipsum",
+            "alignement": "Lorem ipsum",
+            "char_class": "Lorem ipsum",
+            "faith": "Lorem ipsum",
+            "name": "Lorem ipsum",
+            "height": "10",
+            "weight": "10",
+            "hair": "Lorem ipsum",
+            "player_name": "Lorem ipsum",
+            "eyes": "Lorem ipsum",
+            "gender": "Lorem ipsum",
+            "age": "10",
+            "size": "Lorem ipsum",
+            "level": "10",
+            "experience": "0/1000",
+        }
+        set_text_of_children(self, default_values)
