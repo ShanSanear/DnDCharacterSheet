@@ -38,7 +38,7 @@ class ArmorItems:
                 "special": "Lorem ipsum",
                 "special_label": "Special"}
         }
-        for _ in range(2):
+        for _ in range(5):
             self.armors.append(self.create_armor())
             self.update_size()
 
