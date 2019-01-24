@@ -96,19 +96,19 @@ def set_combo_box_choices(root_object, choices):
 
 
 def set_text_of_children(root_object, to_set: dict):
-    for name, translation in to_set.items():
+    for name, data_to_set in to_set.items():
         if name == "title":
-            root_object.setTitle(translation)
+            root_object.setTitle(data_to_set)
             continue
         if name == "choices":
-            set_combo_box_choices(root_object, translation)
+            set_combo_box_choices(root_object, data_to_set)
         obj_ref = getattr(root_object, name)
-        if isinstance(translation, dict):
-            set_text_of_children(obj_ref, translation)
+        if isinstance(data_to_set, dict):
+            set_text_of_children(obj_ref, data_to_set)
         else:
-            if not isinstance(translation, str):
+            if not isinstance(data_to_set, str):
                 raise AttributeError("Only strings can be passed to setText")
-            obj_ref.setText(translation)
+            obj_ref.setText(data_to_set)
 
 
 def collect_editable_data(elements_to_clean_up):
