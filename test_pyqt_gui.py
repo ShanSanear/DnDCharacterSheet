@@ -75,8 +75,19 @@ class MyApp(QMainWindow, MainWindowUi):
 
     def save_file(self):
         print("Saving file")
-        data_to_save = {"feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr(),
-                        "known_spells_box" : self.known_spells_box.get_dict_repr()}
+        data_to_save = {"basic_info_box": self.basic_info_box.get_dict_repr(),
+                        "feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr(),
+                        "feats_box_2": self.feats_box_2.get_dict_repr(),
+                        "known_spells_box": self.known_spells_box.get_dict_repr(),
+                        "languages_box": self.languages_box.get_dict_repr(),
+                        "notes_box": self.notes_box.get_dict_repr(),
+                        "attacks_box": self.attacks_box.get_dict_repr(),
+                        "hp_ac_box": self.hp_ac_box.get_dict_repr(),
+                        "saving_throws_box": self.saving_throws_box.get_dict_repr(),
+                        "number_of_spells_box" : self.number_of_spells_box.get_dict_repr(),
+                        "spells_per_day_box" : self.spells_per_day_box.get_dict_repr(),
+                        "skills_box" : self.skills_box.get_dict_repr(),
+                        }
         new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", Path().cwd().as_posix(),
                                                "Character file (*.json)")[0]
         if new_file:
