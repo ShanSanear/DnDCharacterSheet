@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QComboBox
+from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit
 
 
 def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size: (list, tuple)):
@@ -105,10 +105,19 @@ def set_text_of_children(root_object, to_set: dict):
         obj_ref = getattr(root_object, name)
         if isinstance(data_to_set, dict):
             set_text_of_children(obj_ref, data_to_set)
+        elif isinstance(data_to_set, list):
+            for idx, element_data in enumerate(data_to_set):
+                # obj_ref in such case is self.items, self.spells etc.
+                set_text_of_children(obj_ref[idx], element_data)
         else:
             if not isinstance(data_to_set, str):
                 raise AttributeError("Only strings can be passed to setText")
-            obj_ref.setText(data_to_set)
+            if isinstance(obj_ref, QPlainTextEdit):
+                obj_ref.setPlainText(data_to_set)
+            elif isinstance(obj_ref, str):
+                setattr(root_object, name, data_to_set)
+            else:
+                obj_ref.setText(data_to_set)
 
 
 def collect_editable_data(elements_to_clean_up):
@@ -119,3 +128,29 @@ def collect_editable_data(elements_to_clean_up):
             tmp.remove(common)
         except KeyError:
             pass
+    return tmp
+
+
+def get_general_dict_repr(root_object, to_get):
+    d = {}
+
+    print(to_get)
+    for element in to_get:
+        obj_ref = getattr(root_object, element)
+        if isinstance(obj_ref, QLineEdit):
+            d[element] = obj_ref.text()
+        elif isinstance(obj_ref, QPlainTextEdit):
+            d[element] = obj_ref.document().toPlainText()
+        elif isinstance(obj_ref, QComboBox):
+            d[element] = obj_ref.currentIndex()
+        elif isinstance(obj_ref, str):
+            d[element] = obj_ref
+        elif isinstance(obj_ref, list):
+            tmp = []
+            for obj in obj_ref:
+                getting = collect_editable_data(obj.__dict__.keys())
+                tmp.append(get_general_dict_repr(obj, getting))
+            d[element] = list(tmp)
+            pass
+
+    return d
