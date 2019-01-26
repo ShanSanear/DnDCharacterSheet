@@ -14,7 +14,6 @@ from qt_gui.boxes.languages import LanguagesBox
 from qt_gui.boxes.menu_bar import MenuBar
 from qt_gui.boxes.notes import NotesBox
 from qt_gui.boxes.number_of_spells import NumberOfSpellsBox
-from qt_gui.boxes.qt_generic_functions import create_push_button
 from qt_gui.boxes.saving_throws import SavingThrowsBox
 from qt_gui.boxes.skills import SkillsBox
 from qt_gui.boxes.spells_per_day import SpellsPerDayBox
@@ -30,9 +29,9 @@ class TabWidget(QtWidgets.QWidget):
         self.tab1 = QtWidgets.QWidget()
         self.tab2 = QtWidgets.QWidget()
         self.tab3 = QtWidgets.QWidget()
-        self.tabs.addTab(self.tab1, "Tab 1")
-        self.tabs.addTab(self.tab2, "Tab 2")
-        self.tabs.addTab(self.tab3, "Tab 3")
+        self.tabs.addTab(self.tab1, "Basic information")
+        self.tabs.addTab(self.tab2, "Items / Spells")
+        self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
 
         self.tab1.layout = QVBoxLayout(self)
         self.tab1.setLayout(self.tab1.layout)
@@ -51,7 +50,7 @@ class TabWidget(QtWidgets.QWidget):
 class MainWindowUi:
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
-        main_window.resize(1300, 900)
+        main_window.resize(1300, 850)
         self.central_widget = TabWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
 
@@ -64,30 +63,31 @@ class MainWindowUi:
         self.menu_bar = MenuBar(main_window)
         main_window.setCentralWidget(self.central_widget)
         main_window.setMenuBar(self.menu_bar.root)
-        self.push_button = create_push_button("ClickMe", self.central_widget)
-        self.push_button.move(200, 30)
+        #self.push_button = create_push_button("ClickMe", self.central_widget)
+        #self.push_button.move(200, 30)
 
         self.central_widget.tabs.setCurrentIndex(0)
 
     def add_widgets_to_tab_1(self):
         parent_for_boxes = self.central_widget.tab1
-        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 200])
-        self.attributes_box = AttributesBox(parent_for_boxes, position=[10, 220], size=[250, 220])
-        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[520, 10], size=[200, 100])
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[520, 120], size=[200, 100])
-        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[730, 10], size=[320, 150])
+        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
+        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[990, 10], size=[200, 100])
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[780, 10], size=[200, 100])
+        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[880, 230], size=[320, 150])
 
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[900, 220], size=[320, 150])
-        self.attacks_box = AttacksBox(parent_for_boxes, position=[900, 370], size=[320, 100])
-        self.items_box = ItemsBox(parent_for_boxes, position=[270, 220], size=[620, 80])
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[880, 380], size=[320, 130])
+        self.attacks_box = AttacksBox(parent_for_boxes, position=[780, 120], size=[320, 100])
+        self.attributes_box = AttributesBox(parent_for_boxes, position=[520, 10], size=[250, 220])
+
+        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 230], size=[500, 40])
+        self.feats_box = FeatsBox(parent_for_boxes, position=[520, 230], size=[350, 80])
         return parent_for_boxes
 
     def add_widgets_to_tab_2(self):
         parent_for_boxes = self.central_widget.tab2
-        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 10], size=[500, 40])
+        self.items_box = ItemsBox(parent_for_boxes, position=[10, 10], size=[500, 80])
         self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
-        self.feats_box = FeatsBox(parent_for_boxes, position=[10, 520], size=[500, 80])
         self.spells_per_day_box = SpellsPerDayBox(parent_for_boxes, position=[1090, 10], size=[150, 350])
         self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[520, 120], size=[550, 60])
         return parent_for_boxes
