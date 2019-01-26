@@ -32,23 +32,21 @@ class ItemsBox(ResizeableBox):
         self.items = []
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
         self.add_to_layout()
-        for _ in range(5):
+        for _ in range(12):
             self.add_item()
         self.translate("EN")
         self.root.setLayout(self.layout)
 
     def create_new_item(self):
         new_item = SimpleNamespace()
-        item_idx = len(self.items)
-
-        new_item.name = create_qline_edit(f"item_{item_idx}_name", self.container, min_size=[0, 23])
-        new_item.weight = create_qline_edit(f"item_{item_idx}_weight", self.container, min_size=[None, 23],
+        new_item.name = create_qline_edit("item_name", self.container, min_size=[0, 23])
+        new_item.weight = create_qline_edit("item_weight", self.container, min_size=[None, 23],
                                             max_size=[50, None])
-        new_item.count = create_qline_edit(f"item_{item_idx}_count", self.container, min_size=[None, 23],
+        new_item.count = create_qline_edit("item_count", self.container, min_size=[None, 23],
                                            max_size=[40, None])
         new_item.description = QtWidgets.QPlainTextEdit(self.container)
         new_item.description.setMaximumSize(QtCore.QSize(16777215, 40))
-        new_item.description.setObjectName(f"item_{item_idx}_description")
+        new_item.description.setObjectName("item_description")
         return new_item
 
     def create_new_element(self):
