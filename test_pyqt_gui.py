@@ -75,7 +75,8 @@ class MyApp(QMainWindow, MainWindowUi):
 
     def save_file(self):
         print("Saving file")
-        data_to_save = {"feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr()}
+        data_to_save = {"feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr(),
+                        "known_spells_box" : self.known_spells_box.get_dict_repr()}
         new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", Path().cwd().as_posix(),
                                                "Character file (*.json)")[0]
         if new_file:

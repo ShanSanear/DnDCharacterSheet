@@ -2,12 +2,12 @@ from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
-from qt_gui.boxes.qt_generic_classes import ResizeableBox
+from qt_gui.boxes.qt_generic_classes import ResizeableBox, DefaultBox
 from qt_gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
     set_text_of_children, add_multiple_elements_to_layout_by_row
 
 
-class KnownSpellsBox(ResizeableBox):
+class KnownSpellsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.root = QtWidgets.QGroupBox(parent)
