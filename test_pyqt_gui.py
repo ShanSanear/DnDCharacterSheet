@@ -15,15 +15,50 @@ class MyApp(QMainWindow, MainWindowUi):
         super(self.__class__, self).__init__()
         self.setup_ui(self)
 
-        self.push_button.clicked.connect(self.do_stuff)
-        #self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
+        #self.push_button.clicked.connect(self.do_stuff)
+        # self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character.triggered.connect(self.save_file)
         self.menu_bar.new_character.triggered.connect(self.save_file)
         self.character_file = ""
 
     def do_stuff(self):
-        pass
+        d = {
+            "items": [
+                {
+                    "name": "Item 1 name",
+                    "weight": "19",
+                    "count": "3",
+                    "description": "onomatopeja",
+                },
+                {
+                    "name": "Item 2 name",
+                    "weight": "222",
+                    "count": "2",
+                    "description": "onomatopeja 2",
+                },
+                {
+                    "name": "Item 3 name",
+                    "weight": "222",
+                    "count": "2",
+                    "description": "onomatopeja 3",
+                },
+                {
+                    "name": "Item 4 name",
+                    "weight": "444",
+                    "count": "4",
+                    "description": "onomatopeja 4",
+                },
+                {
+                    "name": "Item 5 name",
+                    "weight": "555",
+                    "count": "5",
+                    "description": "onomatopeja 5",
+                },
+
+            ]
+        }
+        set_text_of_children(self.items_box, d)
 
     def changed_text(self, arg):
         print("Changed text")
@@ -40,13 +75,15 @@ class MyApp(QMainWindow, MainWindowUi):
 
     def save_file(self):
         print("Saving file")
-        data_to_save = {"basic_info_box": self.basic_info_box.get_dict_repr()}
-        new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", Path().cwd().as_posix(),
-                                               "Character file (*.json)")[0]
-        if new_file:
-            json.dump(data_to_save, Path(new_file).open('w'), indent=4)
-        self.character_file = new_file
-        print(new_file)
+        # # data_to_save = {"feats_box": self.feats_box.get_dict_repr()}
+        # # new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", Path().cwd().as_posix(),
+        # #                                        "Character file (*.json)")[0]
+        # # if new_file:
+        # #     json.dump(data_to_save, Path(new_file).open('w'), indent=4)
+        # # else:
+        # #     print("No file selected")
+        # self.character_file = new_file
+        # print(new_file)
 
 
 class Window(QtWidgets.QWidget):
