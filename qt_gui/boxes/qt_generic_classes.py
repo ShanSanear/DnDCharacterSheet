@@ -2,7 +2,8 @@ from abc import ABC, abstractmethod
 
 from PyQt5 import QtCore
 
-from qt_gui.boxes.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data
+from qt_gui.boxes.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
+    get_general_dict_repr
 
 
 class DefaultBox(ABC):
@@ -15,14 +16,9 @@ class DefaultBox(ABC):
         pass
 
     def get_dict_repr(self):
-        d = {}
         elements = self.__dict__.keys()
         elements = collect_editable_data(elements)
-        print(elements)
-        for element in elements:
-            d[element] = getattr(self, element).text()
-        print(d)
-        return d
+        return get_general_dict_repr(self, elements)
 
 
 # noinspection PyUnresolvedReferences
