@@ -14,6 +14,8 @@ class InitiativeSpeedBox(DefaultBox):
         self.container.setObjectName("gridLayoutWidget_7")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("InitiativeSpeedLayout")
+        self.layout.setContentsMargins(8, 8, 8, 12)
+        self.layout.setSpacing(10)
         self.translate_reference = {
             "EN": {"root": {"title": "Initiative and speed"},
                    "initiative_total": "10",

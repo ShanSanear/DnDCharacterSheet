@@ -71,16 +71,20 @@ class MainWindowUi:
     def add_widgets_to_tab_1(self):
         parent_for_boxes = self.central_widget.tab1
         self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
-        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[990, 10], size=[200, 100])
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[780, 10], size=[200, 100])
-        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[880, 230], size=[320, 150])
+        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40])
 
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[880, 380], size=[320, 130])
-        self.attacks_box = AttacksBox(parent_for_boxes, position=[780, 120], size=[320, 100])
-        self.attributes_box = AttributesBox(parent_for_boxes, position=[520, 10], size=[250, 220])
+        self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250])
+        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150])
+        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 480], size=[340, 100])
 
-        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 230], size=[500, 40])
-        self.feats_box = FeatsBox(parent_for_boxes, position=[520, 230], size=[350, 80])
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10], size=[180, 110])
+        self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 140], size=[340, 120])
+
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150])
+        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 480], size=[340, 100])
+
+        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1050, 10], size=[200, 110])
+
         return parent_for_boxes
 
     def add_widgets_to_tab_2(self):

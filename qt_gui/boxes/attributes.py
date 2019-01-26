@@ -19,6 +19,9 @@ class AttributesBox(DefaultBox):
 
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("AttributesLayout")
+        #self.layout.setContentsMargins(8,8,8,8)
+        self.layout.setSpacing(10)
+        self.layout.setContentsMargins(20, 10, 10, 20)
 
         self.attrs_names = ('str', 'dex', 'con', 'int', 'wis', 'cha')
         self.attrs_references = []
@@ -63,7 +66,7 @@ class AttributesBox(DefaultBox):
                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter,
                                 )
         self.qlabel_header_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, )
-        self.qline_dict = dict(parent=self.container, min_size=(0, 23), )
+        self.qline_dict = dict(parent=self.container, min_size=(None, None), )
 
         self.generate_head_labels()
         self.generate_attributes_elements()

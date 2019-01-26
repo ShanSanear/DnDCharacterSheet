@@ -14,6 +14,8 @@ class HpAcBox(DefaultBox):
         self.container.setObjectName("layoutWidget")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("HpAcLayout")
+        self.layout.setContentsMargins(20, 10, 10, 20)
+        self.layout.setSpacing(8)
         self.translate_reference = {
             "EN":
                 {

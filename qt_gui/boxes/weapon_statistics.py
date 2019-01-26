@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 
-from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_qlabel
 from qt_gui.boxes.qt_generic_classes import DefaultBox
+from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_qlabel
 
 
 class WeaponStatisticsBox(DefaultBox):
@@ -14,6 +14,8 @@ class WeaponStatisticsBox(DefaultBox):
         self.container = QtWidgets.QWidget(self.root)
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("WeaponStatisticsLayout")
+        self.layout.setContentsMargins(8, 8, 8, 12)
+        self.layout.setSpacing(10)
 
         qline_dict = dict(parent=self.container, )  # min_size=(60, 23), max_size=(50, 20))
         qlabel_dict = dict(parent=self.container, )  # max_size=(16777215, 20))

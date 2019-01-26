@@ -65,6 +65,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         dialog = DescriptionDialog("Feat description", self.root, feat)
         dialog.show()
 
+
     def create_feat(self):
         new_feat = SimpleNamespace()
         idx = len(self.feats)

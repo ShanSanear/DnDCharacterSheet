@@ -14,6 +14,8 @@ class AttacksBox(DefaultBox):
         self.container.setObjectName("layoutWidget1")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("AttacksLayout")
+        self.layout.setSpacing(10)
+        self.layout.setContentsMargins(20, 10, 10, 20)
         self.translate_reference = {
             "EN":
                 {

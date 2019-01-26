@@ -15,6 +15,8 @@ class SavingThrowsBox(DefaultBox):
         self.container.setObjectName("layoutWidget2")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("SavingThrowsLayout")
+        self.layout.setContentsMargins(20, 10, 10, 20)
+        self.layout.setSpacing(10)
         qlabel_dict = dict(parent=self.container, min_size=(60, 18), max_size=(60, 23))
         qlabel_sign_dict = dict(parent=self.container, min_size=(8, 10), max_size=(8, 23))
         qline_dict = dict(parent=self.container, min_size=(15, 23))
