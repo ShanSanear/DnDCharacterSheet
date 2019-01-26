@@ -66,7 +66,8 @@ class AttributesBox(DefaultBox):
                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter,
                                 )
         self.qlabel_header_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, )
-        self.qline_dict = dict(parent=self.container, min_size=(None, None), )
+        self.qline_dict = dict(parent=self.container,)
+        self.qline_dict_mod = dict(parent=self.container, enabled=False)
 
         self.generate_head_labels()
         self.generate_attributes_elements()
@@ -86,7 +87,10 @@ class AttributesBox(DefaultBox):
 
     def _generate_attribute_elemenets(self, attr_reference, attr_name):
         for element in self.elements[1:]:
-            setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict))
+            if "mod" in element:
+                setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict_mod))
+            else:
+                setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict))
         setattr(attr_reference, 'label', create_qlabel(f"attr_{attr_name}_label", **self.qlabel_dict))
 
     def add_to_layout(self):
