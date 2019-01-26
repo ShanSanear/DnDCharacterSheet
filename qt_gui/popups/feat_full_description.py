@@ -13,3 +13,7 @@ class DescriptionDialog(QDialog):
         layout.addWidget(self.p)
         self.setBaseSize(300, 300)
         self.setLayout(layout)
+
+    def closeEvent(self, evnt):
+        self.feat._full_description = self.p.document().toPlainText()
+        super(DescriptionDialog, self).closeEvent(evnt)
