@@ -27,6 +27,7 @@ class AttacksBox(DefaultBox):
                 }
         }
         qline_dict = dict(parent=self.container, )  # min_size=(39, 23), max_size=(167, 20))
+        qline_dict_attr = dict(parent=self.container, enabled=False)
         qlabel_dict = dict(parent=self.container, )  # min_size=(39, 17), max_size=(16777215, 20))
         qlabel_sign_dict = dict(parent=self.container, min_size=(8, 10), max_size=(10, 20))
 
@@ -40,12 +41,13 @@ class AttacksBox(DefaultBox):
 
         self.melee_total = create_qline_edit("attacks_melee_total", **qline_dict)
         self.melee_base = create_qline_edit("attacks_melee_base", **qline_dict)
-        self.melee_attr_mod = create_qline_edit("attacks_melee_attr_mod", **qline_dict)
+        self.melee_attr_mod = create_qline_edit("attacks_melee_attr_mod", **qline_dict_attr)
         self.melee_size = create_qline_edit("attacks_melee_size", **qline_dict)
         self.melee_misc = create_qline_edit("attacks_melee_misc", **qline_dict)
+
         self.ranged_total = create_qline_edit("attacks_ranged_total", **qline_dict)
         self.ranged_base = create_qline_edit("attacks_ranged_base", **qline_dict)
-        self.ranged_attr_mod = create_qline_edit("attacks_ranged_attr_mod", **qline_dict)
+        self.ranged_attr_mod = create_qline_edit("attacks_ranged_attr_mod", **qline_dict_attr)
         self.ranged_size = create_qline_edit("attacks_ranged_size", **qline_dict)
         self.ranged_misc = create_qline_edit("attacks_ranged_misc", **qline_dict)
 
