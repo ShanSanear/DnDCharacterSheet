@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit
+from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
 
 
 def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size: (list, tuple)):
@@ -109,6 +109,11 @@ def set_text_of_children(root_object, to_set: dict):
             for idx, element_data in enumerate(data_to_set):
                 # obj_ref in such case is self.items, self.spells etc.
                 set_text_of_children(obj_ref[idx], element_data)
+        elif isinstance(obj_ref, QComboBox):
+            obj_ref.setCurrentIndex(data_to_set)
+
+        elif isinstance(obj_ref, QCheckBox):
+            obj_ref.setChecked(data_to_set)
         else:
             if not isinstance(data_to_set, str):
                 raise AttributeError("Only strings can be passed to setText")
@@ -143,6 +148,8 @@ def get_general_dict_repr(root_object, to_get):
             d[element] = obj_ref.document().toPlainText()
         elif isinstance(obj_ref, QComboBox):
             d[element] = obj_ref.currentIndex()
+        elif isinstance(obj_ref, QCheckBox):
+            d[element] = obj_ref.isChecked()
         elif isinstance(obj_ref, str):
             d[element] = obj_ref
         elif isinstance(obj_ref, list):
