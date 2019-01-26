@@ -83,7 +83,7 @@ class MainWindowUi:
         self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150])
         self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 480], size=[340, 100])
 
-        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1050, 10], size=[200, 110])
+        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1050, 10], size=[200, 80])
 
         return parent_for_boxes
 
