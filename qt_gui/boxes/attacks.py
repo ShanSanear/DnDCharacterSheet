@@ -28,10 +28,9 @@ class AttacksBox(DefaultBox):
                     "ranged_label": "Ranged",
                 }
         }
-        qline_dict = dict(parent=self.container, )  # min_size=(39, 23), max_size=(167, 20))
+        qline_dict = dict(parent=self.container, )
         qline_dict_attr = dict(parent=self.container, enabled=False)
-        qlabel_dict = dict(parent=self.container, )  # min_size=(39, 17), max_size=(16777215, 20))
-        qlabel_sign_dict = dict(parent=self.container, min_size=(8, 10), max_size=(10, 20))
+        qlabel_dict = dict(parent=self.container, )
 
         self.total_label = create_qlabel("attacks_total_label", **qlabel_dict)
         self.base_label = create_qlabel("attacks_base_label", **qlabel_dict)

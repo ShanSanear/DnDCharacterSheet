@@ -26,7 +26,7 @@ class InitiativeSpeedBox(DefaultBox):
                    "initiative_dex_bonus_label": "Dex",
                    "initiative_label": "Init.",
                    "speed_label": "Speed",
-                   "speed_total": "10",}}
+                   "speed_total": "10", }}
 
         self.total_label = create_qlabel("total_label", parent=self.container)
         self.initiative_misc_bonus_label = create_qlabel("initiative_misc_bonus_label", parent=self.container)
@@ -34,7 +34,6 @@ class InitiativeSpeedBox(DefaultBox):
         self.initiative_label = create_qlabel("initiative_label", parent=self.container)
         self.speed_label = create_qlabel("speed_label", parent=self.container)
         self.speed_armor_type_label = create_qlabel("speed_armor_type_label", parent=self.container)
-
 
         self.initiative_total = create_qline_edit("initiative_total", parent=self.container)
         self.initiative_misc_bonus = create_qline_edit("initiative_misc_bonus", parent=self.container)
@@ -52,10 +51,10 @@ class InitiativeSpeedBox(DefaultBox):
         add_element_to_layout(self.layout, self.initiative_misc_bonus_label, 0, 3, 1, 1)
 
         add_element_to_layout(self.layout, self.speed_label, 0, 4, 1, 1)
-        second_row = [self.initiative_label, self.initiative_total, self.initiative_dex_bonus,self.initiative_misc_bonus]
+        second_row = [self.initiative_label, self.initiative_total, self.initiative_dex_bonus,
+                      self.initiative_misc_bonus]
         add_multiple_elements_to_layout_by_row(self.layout, second_row, row=1)
         add_element_to_layout(self.layout, self.speed_total, 1, 4, 1, 1)
-
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
