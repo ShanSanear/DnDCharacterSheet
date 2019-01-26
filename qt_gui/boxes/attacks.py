@@ -53,49 +53,31 @@ class AttacksBox(DefaultBox):
         self.ranged_size = create_qline_edit("attacks_ranged_size", **qline_dict)
         self.ranged_misc = create_qline_edit("attacks_ranged_misc", **qline_dict)
 
-        self._eq_sign = create_qlabel("_eq_sign", **qlabel_sign_dict)
-        self._plus_sign_16 = create_qlabel("_plus_sign_16", **qlabel_sign_dict)
-        self._plus_sign_17 = create_qlabel("_plus_sign_17", **qlabel_sign_dict)
-        self._plus_sign_18 = create_qlabel("_plus_sign_18", **qlabel_sign_dict)
-        self._eq_sign_2 = create_qlabel("_eq_sign_2", **qlabel_sign_dict)
-        self._plus_sign_19 = create_qlabel("_plus_sign_19", **qlabel_sign_dict)
-        self._plus_sign_20 = create_qlabel("_plus_sign_20", **qlabel_sign_dict)
-        self._plus_sign_21 = create_qlabel("_plus_sign_21", **qlabel_sign_dict)
-
         self.add_to_layout()
         self.translate("EN")
-        self.set_signs_labels()
         self.set_default_values()
         self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         # TODO not sure how to change those to fit some kind of pattern, if at all
         self.layout.addWidget(self.total_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.base_label, 0, 3, 1, 1)
-        self.layout.addWidget(self.attr_mod_label, 0, 5, 1, 1)
-        self.layout.addWidget(self.size_label, 0, 7, 1, 1)
-        self.layout.addWidget(self.misc_label, 0, 9, 1, 1)
+        self.layout.addWidget(self.base_label, 0, 2, 1, 1)
+        self.layout.addWidget(self.attr_mod_label, 0, 3, 1, 1)
+        self.layout.addWidget(self.size_label, 0, 4, 1, 1)
+        self.layout.addWidget(self.misc_label, 0, 5, 1, 1)
 
         first_row = [self.melee_label,
                      self.melee_total,
-                     self._eq_sign,
                      self.melee_base,
-                     self._plus_sign_16,
                      self.melee_attr_mod,
-                     self._plus_sign_17,
                      self.melee_size,
-                     self._plus_sign_18,
                      self.melee_misc, ]
 
         second_row = [self.ranged_label,
                       self.ranged_total,
-                      self._eq_sign_2,
                       self.ranged_base,
-                      self._plus_sign_19,
                       self.ranged_attr_mod,
-                      self._plus_sign_20,
                       self.ranged_size,
-                      self._plus_sign_21,
                       self.ranged_misc, ]
 
         add_multiple_elements_to_layout_by_row(self.layout, first_row, row=1)
@@ -103,17 +85,6 @@ class AttacksBox(DefaultBox):
 
     def translate(self, language_ref):
         set_text_of_children(self, self.translate_reference[language_ref])
-
-    def set_signs_labels(self):
-        # TODO not sure how to bite this one
-        self._eq_sign.setText("=")
-        self._plus_sign_16.setText("+")
-        self._plus_sign_17.setText("+")
-        self._plus_sign_18.setText("+")
-        self._eq_sign_2.setText("=")
-        self._plus_sign_19.setText("+")
-        self._plus_sign_20.setText("+")
-        self._plus_sign_21.setText("+")
 
     def set_default_values(self):
         defaults = {"melee_total": "10",
