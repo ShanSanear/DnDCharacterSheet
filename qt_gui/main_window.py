@@ -30,7 +30,7 @@ class TabWidget(QtWidgets.QWidget):
         self.tab2 = QtWidgets.QWidget()
         self.tab3 = QtWidgets.QWidget()
         self.tabs.addTab(self.tab1, "Basic information")
-        self.tabs.addTab(self.tab2, "Items / Spells")
+        self.tabs.addTab(self.tab2, "Items / Spells / Languages")
         self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
 
         self.tab1.layout = QVBoxLayout(self)
