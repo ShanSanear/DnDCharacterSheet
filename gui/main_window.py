@@ -54,9 +54,9 @@ class MainWindowUi:
         self.central_widget = TabWidget(main_window)
         self.central_widget.setObjectName("centralwidget")
 
-        self.add_widgets_to_tab_1()
-        self.add_widgets_to_tab_2()
-        self.add_widgets_to_tab_3()
+        self.create_tab_1()
+        self.create_tab_2()
+        self.create_tab_3()
 
         self.central_widget.setLayout(self.central_widget.layout)
         self.retranslate_ui(main_window)
@@ -68,7 +68,7 @@ class MainWindowUi:
 
         self.central_widget.tabs.setCurrentIndex(0)
 
-    def add_widgets_to_tab_1(self):
+    def create_tab_1(self):
         parent_for_boxes = self.central_widget.tab1
         self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
         self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40])
@@ -87,7 +87,7 @@ class MainWindowUi:
 
         return parent_for_boxes
 
-    def add_widgets_to_tab_2(self):
+    def create_tab_2(self):
         parent_for_boxes = self.central_widget.tab2
         self.items_box = ItemsBox(parent_for_boxes, position=[10, 10], size=[500, 80])
         self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
@@ -96,7 +96,7 @@ class MainWindowUi:
         self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[520, 120], size=[550, 60])
         return parent_for_boxes
 
-    def add_widgets_to_tab_3(self):
+    def create_tab_3(self):
         parent_for_boxes = self.central_widget.tab3
         self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
         self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
