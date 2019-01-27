@@ -1,24 +1,24 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QVBoxLayout, QTabWidget
 
-from qt_gui.boxes.armor_items import ArmorItems
-from qt_gui.boxes.attacks import AttacksBox
-from qt_gui.boxes.attributes import AttributesBox
-from qt_gui.boxes.basic_info import BasicInfoBox
-from qt_gui.boxes.feats import FeatsBox
-from qt_gui.boxes.hp_ac import HpAcBox
-from qt_gui.boxes.initiative_speed import InitiativeSpeedBox
-from qt_gui.boxes.items import ItemsBox
-from qt_gui.boxes.known_spells import KnownSpellsBox
-from qt_gui.boxes.languages import LanguagesBox
-from qt_gui.boxes.menu_bar import MenuBar
-from qt_gui.boxes.notes import NotesBox
-from qt_gui.boxes.number_of_spells import NumberOfSpellsBox
-from qt_gui.boxes.saving_throws import SavingThrowsBox
-from qt_gui.boxes.skills import SkillsBox
-from qt_gui.boxes.spells_per_day import SpellsPerDayBox
-from qt_gui.boxes.weapon_statistics import WeaponStatisticsBox
-from qt_gui.boxes.weapons_box import WeaponsBox
+from qt_gui.boxes.qt_armor_items import ArmorItems
+from qt_gui.boxes.qt_attacks import AttacksBox
+from qt_gui.boxes.qt_attributes import AttributesBox
+from qt_gui.boxes.qt_basic_info import BasicInfoBox
+from qt_gui.boxes.qt_feats import FeatsBox
+from qt_gui.boxes.qt_hp_ac import HpAcBox
+from qt_gui.boxes.qt_initiative_speed import InitiativeSpeedBox
+from qt_gui.boxes.qt_items import ItemsBox
+from qt_gui.boxes.qt_known_spells import KnownSpellsBox
+from qt_gui.boxes.qt_languages import LanguagesBox
+from qt_gui.boxes.qt_menu_bar import MenuBar
+from qt_gui.boxes.qt_notes import NotesBox
+from qt_gui.boxes.qt_number_of_spells import NumberOfSpellsBox
+from qt_gui.boxes.qt_saving_throws import SavingThrowsBox
+from qt_gui.boxes.qt_skills import SkillsBox
+from qt_gui.boxes.qt_spells_per_day import SpellsPerDayBox
+from qt_gui.boxes.qt_weapon_statistics import WeaponStatisticsBox
+from qt_gui.boxes.qt_weapons import WeaponsBox
 
 
 class TabWidget(QtWidgets.QWidget):
