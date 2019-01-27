@@ -60,7 +60,6 @@ class AttributesBox(DefaultBox):
         for attr in self.attrs_names:
             setattr(self, attr, SimpleNamespace())
             self.attrs_references.append(getattr(self, attr))
-        self.elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
 
         self.qlabel_dict = dict(parent=self.container,
                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter,
@@ -78,7 +77,8 @@ class AttributesBox(DefaultBox):
         self.root.setLayout(self.layout)
 
     def generate_head_labels(self):
-        for element in self.elements:
+        elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
+        for element in elements:
             setattr(self.head, element, create_qlabel(f"attr_head_{element}", **self.qlabel_header_dict))
 
     def generate_attributes_elements(self):
@@ -86,7 +86,8 @@ class AttributesBox(DefaultBox):
             self._generate_attribute_elemenets(attr_reference, attr_name)
 
     def _generate_attribute_elemenets(self, attr_reference, attr_name):
-        for element in self.elements[1:]:
+        elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
+        for element in elements[1:]:
             if "mod" in element:
                 setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict_mod))
             else:
@@ -94,9 +95,10 @@ class AttributesBox(DefaultBox):
         setattr(attr_reference, 'label', create_qlabel(f"attr_{attr_name}_label", **self.qlabel_dict))
 
     def add_to_layout(self):
-        add_multiple_elements_to_layout_by_row(self.layout, [getattr(self.head, element) for element in self.elements])
+        elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
+        add_multiple_elements_to_layout_by_row(self.layout, [getattr(self.head, element) for element in elements])
 
-        attributes_elements = [[getattr(attr, element) for element in self.elements] for attr in self.attrs_references]
+        attributes_elements = [[getattr(attr, element) for element in elements] for attr in self.attrs_references]
         for idx, attribute_row in enumerate(attributes_elements):
             add_multiple_elements_to_layout_by_row(self.layout, attribute_row, row=idx + 1)
 
