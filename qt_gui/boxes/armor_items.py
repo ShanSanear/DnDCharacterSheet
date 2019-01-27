@@ -2,11 +2,12 @@ from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
+from qt_gui.boxes.qt_generic_classes import DefaultBox
 from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
 
 
-class ArmorItems:
+class ArmorItems(DefaultBox):
     def __init__(self, parent, position, size):
         self.increase_height = 140
         self.root = QtWidgets.QGroupBox(parent)
@@ -92,6 +93,9 @@ class ArmorItems:
 
     def translate(self):
         self.root.setTitle("Armor items")
+
+    def add_to_layout(self, **kwargs):
+        pass
 
 
     def _add_new_element_to_layout(self, new_armor):
