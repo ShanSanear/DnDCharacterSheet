@@ -1,24 +1,24 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QVBoxLayout, QTabWidget
 
-from gui.frames.qt_armor_items import ArmorItems
-from gui.frames.qt_attacks import AttacksBox
-from gui.frames.qt_attributes import AttributesBox
-from gui.frames.qt_basic_info import BasicInfoBox
-from gui.frames.qt_feats import FeatsBox
-from gui.frames.qt_hp_ac import HpAcBox
-from gui.frames.qt_initiative_speed import InitiativeSpeedBox
-from gui.frames.qt_items import ItemsBox
-from gui.frames.qt_known_spells import KnownSpellsBox
-from gui.frames.qt_languages import LanguagesBox
 from gui.frames.qt_menu_bar import MenuBar
-from gui.frames.qt_notes import NotesBox
-from gui.frames.qt_number_of_spells import NumberOfSpellsBox
-from gui.frames.qt_saving_throws import SavingThrowsBox
-from gui.frames.qt_skills import SkillsBox
-from gui.frames.qt_spells_per_day import SpellsPerDayBox
-from gui.frames.qt_weapon_statistics import WeaponStatisticsBox
-from gui.frames.qt_weapons import WeaponsBox
+from gui.frames.tab_1.qt_attacks import AttacksBox
+from gui.frames.tab_1.qt_attributes import AttributesBox
+from gui.frames.tab_1.qt_basic_info import BasicInfoBox
+from gui.frames.tab_1.qt_feats import FeatsBox
+from gui.frames.tab_1.qt_hp_ac import HpAcBox
+from gui.frames.tab_1.qt_initiative_speed import InitiativeSpeedBox
+from gui.frames.tab_1.qt_saving_throws import SavingThrowsBox
+from gui.frames.tab_1.qt_skills import SkillsBox
+from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
+from gui.frames.tab_2.qt_items import ItemsBox
+from gui.frames.tab_2.qt_known_spells import KnownSpellsBox
+from gui.frames.tab_2.qt_languages import LanguagesBox
+from gui.frames.tab_2.qt_number_of_spells import NumberOfSpellsBox
+from gui.frames.tab_2.qt_spells_per_day import SpellsPerDayBox
+from gui.frames.tab_3.qt_armor_items import ArmorItems
+from gui.frames.tab_3.qt_notes import NotesBox
+from gui.frames.tab_3.qt_weapons import WeaponsBox
 
 
 class TabWidget(QtWidgets.QWidget):
