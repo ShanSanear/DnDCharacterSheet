@@ -85,6 +85,9 @@ class MyApp(QMainWindow, MainWindowUi):
                         "number_of_spells_box" : self.number_of_spells_box.get_dict_repr(),
                         "spells_per_day_box" : self.spells_per_day_box.get_dict_repr(),
                         "skills_box" : self.skills_box.get_dict_repr(),
+                        "attributes_box" : self.attributes_box.get_dict_repr(),
+                        "armor_items_box" : self.armor_items_box.get_dict_repr(),
+                        "weapons_box" : self.weapons_box.get_dict_repr(),
                         }
         new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", Path().cwd().as_posix(),
                                                "Character file (*.json)")[0]
