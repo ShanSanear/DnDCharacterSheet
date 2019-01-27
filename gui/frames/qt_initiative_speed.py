@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 
-from gui.boxes.qt_generic_classes import DefaultBox
-from gui.boxes.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children, \
+from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children, \
     add_multiple_elements_to_layout_by_row, add_element_to_layout
 
 

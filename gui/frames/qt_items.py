@@ -2,8 +2,8 @@ from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
-from gui.boxes.qt_generic_classes import ResizeableBox, DefaultBox
-from gui.boxes.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
+from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
+from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
     add_multiple_elements_to_layout_by_row
 
 

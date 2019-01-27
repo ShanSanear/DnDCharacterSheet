@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore
 
-from gui.boxes.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox
 
 
 class NotesBox(DefaultBox):
