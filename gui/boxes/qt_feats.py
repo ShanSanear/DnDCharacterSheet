@@ -3,10 +3,10 @@ from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
-from qt_gui.boxes.qt_generic_classes import DefaultBox, ResizeableBox
-from qt_gui.boxes.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
+from gui.boxes.qt_generic_classes import DefaultBox, ResizeableBox
+from gui.boxes.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
     add_multiple_elements_to_layout_by_row, set_text_of_children
-from qt_gui.popups.feat_full_description import DescriptionDialog
+from gui.popups.feat_full_description import DescriptionDialog
 
 
 class FeatsBox(DefaultBox, ResizeableBox):

@@ -4,8 +4,8 @@ from pathlib import Path
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 
-from qt_gui.boxes.qt_generic_functions import set_text_of_children
-from qt_gui.main_window import MainWindowUi
+from gui.boxes.qt_generic_functions import set_text_of_children
+from gui.main_window import MainWindowUi
 
 
 class MyApp(QMainWindow, MainWindowUi):
