@@ -9,7 +9,8 @@ from gui.main_window import MainWindowUi
 
 
 class MyApp(QMainWindow, MainWindowUi):
-    def __init__(self):
+    def __init__(self, char):
+        self.char_core = char
         super(self.__class__, self).__init__()
         self.setup_ui(self)
 
@@ -99,13 +100,13 @@ class MyApp(QMainWindow, MainWindowUi):
         print(new_file)
 
 
-def main():
+def init_gui(char):
     app = QApplication(sys.argv)
-    form = MyApp()
+    form = MyApp(char)
     form.show()
     app.exec_()
 
 
 if __name__ == '__main__':
-    main()
+    init_gui()
     # main1()
