@@ -1,15 +1,17 @@
 import json
 import sys
+from functools import partial
 from pathlib import Path
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 
+from core.character import Character
 from gui.frames.qt_generic_functions import set_text_of_children
 from gui.main_window import MainWindowUi
 
 
 class MyApp(QMainWindow, MainWindowUi):
-    def __init__(self, char):
+    def __init__(self, char: Character):
         self.char_core = char
         super(self.__class__, self).__init__()
         self.setup_ui(self)
@@ -20,6 +22,7 @@ class MyApp(QMainWindow, MainWindowUi):
         self.menu_bar.save_character.triggered.connect(self.save_file)
         self.menu_bar.new_character.triggered.connect(self.save_file)
         self.character_file = ""
+        self.connect_attrs()
 
     def do_stuff(self):
         d = {
@@ -98,6 +101,17 @@ class MyApp(QMainWindow, MainWindowUi):
             print("No file selected")
         self.character_file = new_file
         print(new_file)
+
+    def connect_attrs(self):
+        for attr in self.attributes_box.__dict__:
+            if attr in ['str', 'dex', 'con', 'int', 'wis', 'cha']:
+                attr_box_reference = getattr(self.attributes_box, attr)
+                attr_box_reference.val.textChanged.connect(partial(self.changed_attributes, attr_box_reference, attr))
+
+    def changed_attributes(self, attr_box_reference, attr_name):
+        self.char_core.attributes.set_attribute(attr_name, attr_box_reference.val.text())
+        attr_ref_core = getattr(self.char_core.attributes, attr_name)
+        attr_box_reference.mod.setText(str(attr_ref_core["mod"]))
 
 
 def init_gui(char):

@@ -73,3 +73,9 @@ class Attributes:
             if val < 1:
                 raise InvalidAttribute("{} is equal to : {}".format(key, val))
             setattr(self, key, val)
+
+    def set_attribute(self, attribute, value):
+        try:
+            setattr(self, attribute, int(value))
+        except ValueError:
+            print("Empty or incorrect value passed as value to attribute")
