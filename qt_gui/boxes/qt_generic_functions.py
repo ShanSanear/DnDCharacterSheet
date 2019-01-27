@@ -106,6 +106,7 @@ def set_text_of_children(root_object, to_set: dict):
         if isinstance(data_to_set, dict):
             set_text_of_children(obj_ref, data_to_set)
         elif isinstance(data_to_set, list):
+            # TODO - checking if there is enough space for elements
             for idx, element_data in enumerate(data_to_set):
                 # obj_ref in such case is self.items, self.spells etc.
                 set_text_of_children(obj_ref[idx], element_data)
@@ -143,7 +144,10 @@ def get_general_dict_repr(root_object, to_get):
     for element in to_get:
         obj_ref = getattr(root_object, element)
         if isinstance(obj_ref, QLineEdit):
-            d[element] = obj_ref.text()
+            if not obj_ref.isEnabled():
+                print(obj_ref, "is read only, skipping")
+            else:
+                d[element] = obj_ref.text()
         elif isinstance(obj_ref, QPlainTextEdit):
             d[element] = obj_ref.document().toPlainText()
         elif isinstance(obj_ref, QComboBox):
