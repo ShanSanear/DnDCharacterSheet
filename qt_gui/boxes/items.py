@@ -9,7 +9,7 @@ from qt_gui.boxes.qt_generic_functions import create_qlabel, set_text_of_childre
 
 class ItemsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
-        ResizeableBox.__init__(self, increase_width=0, increase_height=40)
+        ResizeableBox.__init__(self, increase_width=0, increase_height=25)
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("ItemsBox")
@@ -17,6 +17,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("gridLayoutWidget_8")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("ItemsLayout")
+        #Xself.layout.setSpacing(15)
         qlabel_dict = dict(parent=self.container)
         self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
         self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
@@ -32,7 +33,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.items = []
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
         self.add_to_layout()
-        for _ in range(12):
+        for _ in range(20):
             self.add_item()
         self.translate("EN")
         self.root.setLayout(self.layout)
@@ -41,12 +42,11 @@ class ItemsBox(DefaultBox, ResizeableBox):
         new_item = SimpleNamespace()
         new_item.name = create_qline_edit("item_name", self.container, min_size=[0, 23])
         new_item.weight = create_qline_edit("item_weight", self.container, min_size=[None, 23],
-                                            max_size=[50, None])
+                                            max_size=[20, None])
         new_item.count = create_qline_edit("item_count", self.container, min_size=[None, 23],
-                                           max_size=[40, None])
-        new_item.description = QtWidgets.QPlainTextEdit(self.container)
-        new_item.description.setMaximumSize(QtCore.QSize(16777215, 40))
-        new_item.description.setObjectName("item_description")
+                                           max_size=[20, None])
+        new_item.description = create_qline_edit("item_description", self.container, min_size=[None, 23])
+
         return new_item
 
     def create_new_element(self):
