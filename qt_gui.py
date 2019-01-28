@@ -115,6 +115,7 @@ class MyApp(MainWindowUi):
         self.attacks_box.set_values_from_attributes()
         self.weapons_statistics_box.set_values_from_attributes()
         self.saving_throws_box.set_values_from_attributes()
+        self.initiative_speed_box.set_values_from_attributes()
 
 
 def init_gui(char):
