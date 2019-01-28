@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QVBoxLayout, QTabWidget, QMainWindow
 
 from gui.frames.qt_menu_bar import MenuBar
@@ -63,12 +63,10 @@ class MainWindowUi(QMainWindow):
         self.create_tab_3()
 
         self.central_widget.setLayout(self.central_widget.layout)
-        self.retranslate_ui(main_window)
         self.menu_bar = MenuBar(main_window)
         main_window.setCentralWidget(self.central_widget)
         main_window.setMenuBar(self.menu_bar.root)
-        #self.push_button = create_push_button("ClickMe", self.central_widget)
-        #self.push_button.move(200, 30)
+        main_window.setWindowTitle("MainWindow")
 
         self.central_widget.tabs.setCurrentIndex(0)
 
@@ -77,14 +75,17 @@ class MainWindowUi(QMainWindow):
         self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
         self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40], char_core=self.char_core)
 
-        self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250], char_core=self.char_core)
+        self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250],
+                                            char_core=self.char_core)
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150], char_core=self.char_core)
         self.feats_box = FeatsBox(parent_for_boxes, position=[540, 480], size=[340, 100])
 
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10], size=[180, 110], char_core=self.char_core)
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10], size=[180, 110],
+                                                          char_core=self.char_core)
         self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 140], size=[340, 120], char_core=self.char_core)
 
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150], char_core=self.char_core)
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150],
+                                                 char_core=self.char_core)
         self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 480], size=[340, 100])
 
         self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1050, 10], size=[200, 80], char_core=self.char_core)
@@ -105,7 +106,3 @@ class MainWindowUi(QMainWindow):
         self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
         self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
         self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450])
-
-    def retranslate_ui(self, main_window):
-        _translate = QtCore.QCoreApplication.translate
-        main_window.setWindowTitle(_translate("MainWindow", "MainWindow"))

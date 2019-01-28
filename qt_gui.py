@@ -16,8 +16,6 @@ class MyApp(MainWindowUi):
         MainWindowUi.__init__(self, self.char_core)
         self.setup_ui(self)
 
-        # self.push_button.clicked.connect(self.do_stuff)
-        # self.basic_info_box.name.textChanged.connect(partial(self.changed_text, self.feats_box))
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character.triggered.connect(self.save_file)
         self.menu_bar.new_character.triggered.connect(self.save_file)
