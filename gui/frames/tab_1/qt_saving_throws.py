@@ -1,13 +1,17 @@
 from PyQt5 import QtWidgets, QtCore
 
+from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit
 
 
 class SavingThrowsBox(DefaultBox):
+    char_core: Character
+
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
-    def __init__(self, parent, position, size):
+    def __init__(self, parent, position, size, char_core):
+        self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("SavingThrowsBox")
@@ -48,6 +52,7 @@ class SavingThrowsBox(DefaultBox):
         self.translate()
         self.set_default()
         self.root.setLayout(self.layout)
+        self.set_values_from_attributes()
 
     def add_to_layout(self):
         self.layout.addWidget(self.will_misc_bonus, 3, 9, 1, 1)
@@ -102,3 +107,8 @@ class SavingThrowsBox(DefaultBox):
         self.will_attr_bonus.setText("10")
         self.will_size_bonus.setText("10")
         self.will_misc_bonus.setText("10")
+
+    def set_values_from_attributes(self):
+        self.reflex_attr_bonus.setText(str(self.char_core.attributes.dex['mod']))
+        self.will_attr_bonus.setText(str(self.char_core.attributes.wis['mod']))
+        self.fortitude_attr_bonus.setText(str(self.char_core.attributes.con['mod']))
