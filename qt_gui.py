@@ -113,6 +113,7 @@ class MyApp(MainWindowUi):
         attr_ref_core = getattr(self.char_core.attributes, attr_name)
         attr_box_reference.mod.setText(str(attr_ref_core["mod"]))
         self.attacks_box.set_values_from_attributes()
+        self.weapons_statistics_box.set_values_from_attributes()
 
 
 def init_gui(char):

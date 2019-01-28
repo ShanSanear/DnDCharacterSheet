@@ -1,13 +1,17 @@
 from PyQt5 import QtWidgets, QtCore
 
+from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel
 
 
 class WeaponStatisticsBox(DefaultBox):
+    char_core: Character
+
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
-    def __init__(self, parent, position, size):
+    def __init__(self, parent, position, size, char_core):
+        self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("WeaponStatisticsBox")
@@ -22,10 +26,10 @@ class WeaponStatisticsBox(DefaultBox):
 
         self.weapon_statistics_ranged_damage = create_qline_edit("weapon_statistics_ranged_damage", **qline_dict)
         self.weapon_statistics_melee_damage = create_qline_edit("weapon_statistics_melee_damage", **qline_dict)
-        self.weapon_statistics_ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus",
+        self.weapon_statistics_ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus", enabled=False,
                                                                        **qline_dict)
         self.weapon_statistics_ranged_crit = create_qline_edit("weapon_statistics_ranged_crit", **qline_dict)
-        self.weapon_statistics_melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus",
+        self.weapon_statistics_melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus", enabled=False,
                                                                       **qline_dict)
         self.weapon_statistics_melee_crit = create_qline_edit("weapon_statistics_melee_crit", **qline_dict)
 
@@ -38,6 +42,7 @@ class WeaponStatisticsBox(DefaultBox):
         self.add_to_layout()
         self.translate()
         self.root.setLayout(self.layout)
+        self.set_values_from_attributes()
 
     def add_to_layout(self):
         self.layout.addWidget(self.weapon_statistics_ranged_damage, 2, 2, 1, 1)
@@ -66,3 +71,8 @@ class WeaponStatisticsBox(DefaultBox):
         self.weapon_statistics_melee_damage.setText(_translate("MainWindow", "10"))
         self.weapon_statistics_melee_label.setText(_translate("MainWindow", "Melee"))
         self.weapon_statistics_ranged_label.setText(_translate("MainWindow", "Ranged"))
+
+    def set_values_from_attributes(self):
+        self.weapon_statistics_melee_attack_bonus.setText(str(self.char_core.attributes.str['mod']))
+        self.weapon_statistics_ranged_attack_bonus.setText(str(self.char_core.attributes.dex['mod']))
+

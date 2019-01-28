@@ -81,7 +81,7 @@ class MainWindowUi(QMainWindow):
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150])
         self.feats_box = FeatsBox(parent_for_boxes, position=[540, 480], size=[340, 100])
 
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10], size=[180, 110])
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10], size=[180, 110], char_core=self.char_core)
         self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 140], size=[340, 120], char_core=self.char_core)
 
         self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150])
