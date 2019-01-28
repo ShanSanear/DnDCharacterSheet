@@ -1,12 +1,16 @@
 from PyQt5 import QtWidgets, QtCore
 
+from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_element_to_layout, \
     add_multiple_elements_to_layout_by_row, set_text_of_children
 
 
 class HpAcBox(DefaultBox):
-    def __init__(self, parent, position, size):
+    char_core: Character
+
+    def __init__(self, parent, position, size, char_core):
+        self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("HpAcBox")
@@ -76,6 +80,7 @@ class HpAcBox(DefaultBox):
         self.add_to_layout()
         self.translate("EN")
         self.root.setLayout(self.layout)
+        self.set_values_from_attributes()
 
     def add_to_layout(self):
         add_element_to_layout(self.layout, self.hp_total_label, 0, 1, 1, 1)
@@ -105,3 +110,6 @@ class HpAcBox(DefaultBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
+
+    def set_values_from_attributes(self):
+        self.ac_dex_bonus.setText(str(self.char_core.attributes.dex['mod']))
