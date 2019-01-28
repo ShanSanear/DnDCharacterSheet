@@ -75,7 +75,7 @@ class MainWindowUi(QMainWindow):
     def create_tab_1(self):
         parent_for_boxes = self.central_widget.tab1
         self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
-        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40])
+        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40], char_core=self.char_core)
 
         self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250], char_core=self.char_core)
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150], char_core=self.char_core)

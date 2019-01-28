@@ -1,14 +1,19 @@
+from functools import partial
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
+from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
     add_multiple_elements_to_layout_by_row
 
 
 class SkillsBox(DefaultBox, ResizeableBox):
-    def __init__(self, parent, position, size):
+    char_core: Character
+
+    def __init__(self, parent, position, size, char_core):
+        self.char_core = char_core
         ResizeableBox.__init__(self, increase_width=-0, increase_height=28)
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
@@ -40,6 +45,15 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.add_to_layout()
         self.translate("EN")
         self.root.setLayout(self.layout)
+        self._map_choice_to_attr = {
+            0: "str",
+            1: "dex",
+            2: "con",
+            3: "int",
+            4: "wis",
+            5: "cha",
+        }
+        self.set_values_from_attributes()
 
     def create_new_skill(self):
         new_skill = SimpleNamespace()
@@ -53,6 +67,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
                                                  max_size=(69, 20))
+        new_skill.attr_choice.currentIndexChanged.connect(partial(self._set_attr_val_for_skill, new_skill))
         qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None])
         new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, **qdict)
 
@@ -63,7 +78,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
         new_skill.cross_class_checkbox = QtWidgets.QCheckBox(self.container)
         new_skill.cross_class_checkbox.setObjectName(f"skills{skill_idx}description_button")
-
 
         return new_skill
 
@@ -90,3 +104,14 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
+
+    def set_values_from_attributes(self):
+        for skill in self.skills:
+            self._set_attr_val_for_skill(skill)
+
+
+    def _set_attr_val_for_skill(self, skill):
+        chosen_attr_idx = skill.attr_choice.currentIndex()
+        attr_name = self._map_choice_to_attr[chosen_attr_idx]
+        attr_ref_core = getattr(self.char_core.attributes, attr_name)
+        skill.attr_mod.setText(str(attr_ref_core['mod']))
