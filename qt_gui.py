@@ -3,17 +3,17 @@ import sys
 from functools import partial
 from pathlib import Path
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
+from PyQt5.QtWidgets import QApplication, QFileDialog
 
 from core.character import Character
 from gui.frames.qt_generic_functions import set_text_of_children
 from gui.main_window import MainWindowUi
 
 
-class MyApp(QMainWindow, MainWindowUi):
+class MyApp(MainWindowUi):
     def __init__(self, char: Character):
         self.char_core = char
-        super(self.__class__, self).__init__()
+        MainWindowUi.__init__(self, self.char_core)
         self.setup_ui(self)
 
         # self.push_button.clicked.connect(self.do_stuff)
@@ -112,6 +112,7 @@ class MyApp(QMainWindow, MainWindowUi):
         self.char_core.attributes.set_attribute(attr_name, attr_box_reference.val.text())
         attr_ref_core = getattr(self.char_core.attributes, attr_name)
         attr_box_reference.mod.setText(str(attr_ref_core["mod"]))
+        self.attacks_box.set_values_from_attributes()
 
 
 def init_gui(char):

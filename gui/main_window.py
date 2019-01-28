@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QVBoxLayout, QTabWidget
+from PyQt5.QtWidgets import QVBoxLayout, QTabWidget, QMainWindow
 
 from gui.frames.qt_menu_bar import MenuBar
 from gui.frames.tab_1.qt_attacks import AttacksBox
@@ -47,7 +47,11 @@ class TabWidget(QtWidgets.QWidget):
 
 
 # noinspection PyAttributeOutsideInit
-class MainWindowUi:
+class MainWindowUi(QMainWindow):
+    def __init__(self, char_core):
+        super(MainWindowUi, self).__init__()
+        self.char_core = char_core
+
     def setup_ui(self, main_window):
         main_window.setObjectName("MainWindow")
         main_window.resize(1300, 850)
@@ -73,12 +77,12 @@ class MainWindowUi:
         self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
         self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40])
 
-        self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250])
+        self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250], char_core=self.char_core)
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150])
         self.feats_box = FeatsBox(parent_for_boxes, position=[540, 480], size=[340, 100])
 
         self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10], size=[180, 110])
-        self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 140], size=[340, 120])
+        self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 140], size=[340, 120], char_core=self.char_core)
 
         self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150])
         self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 480], size=[340, 100])

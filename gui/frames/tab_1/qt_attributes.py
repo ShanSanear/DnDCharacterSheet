@@ -2,14 +2,18 @@ from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
 
+from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
 
 
 class AttributesBox(DefaultBox):
-    def __init__(self, parent, position, size):
+    char_core: Character
 
+    def __init__(self, parent, position, size, char_core):
+
+        self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("AttributesBox")
@@ -75,6 +79,7 @@ class AttributesBox(DefaultBox):
         self.set_default_values()
         self.root.setTitle("Attributes")
         self.root.setLayout(self.layout)
+        self.set_values_from_attributes()
 
     def generate_head_labels(self):
         elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
@@ -114,3 +119,10 @@ class AttributesBox(DefaultBox):
         default_attribute_values = dict(str=dict(attr_default), dex=dict(attr_default), con=dict(attr_default),
                                         int=dict(attr_default), wis=dict(attr_default), cha=dict(attr_default), )
         set_text_of_children(self, default_attribute_values)
+
+    def set_values_from_attributes(self):
+        for attr in self.attrs_names:
+            attr_core = getattr(self.char_core.attributes, attr)
+            attr_gui = getattr(self, attr)
+            attr_gui.val.setText(str(attr_core['value']))
+            attr_gui.mod.setText(str(attr_core['mod']))

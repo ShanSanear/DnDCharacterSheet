@@ -1,12 +1,16 @@
 from PyQt5 import QtWidgets, QtCore
 
+from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
 
 
 class AttacksBox(DefaultBox):
-    def __init__(self, parent, position, size):
+    char_core: Character
+
+    def __init__(self, parent, position, size, char_core):
+        self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("AttacksBox")
@@ -56,6 +60,7 @@ class AttacksBox(DefaultBox):
         self.translate("EN")
         self.set_default_values()
         self.root.setLayout(self.layout)
+        self.set_values_from_attributes()
 
     def add_to_layout(self):
         # TODO not sure how to change those to fit some kind of pattern, if at all
@@ -98,3 +103,7 @@ class AttacksBox(DefaultBox):
                     "ranged_misc": "10", }
         set_text_of_children(self, defaults)
         self.root.setTitle("Attacks")
+
+    def set_values_from_attributes(self):
+        self.melee_attr_mod.setText(str(self.char_core.attributes.str['mod']))
+        self.ranged_attr_mod.setText(str(self.char_core.attributes.dex['mod']))
