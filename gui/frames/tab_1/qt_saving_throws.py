@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, update_texts
 
 
 class SavingThrowsBox(DefaultBox):
@@ -24,21 +24,30 @@ class SavingThrowsBox(DefaultBox):
         qlabel_dict = dict(parent=self.container, min_size=(60, 18), max_size=(60, 23))
         qline_dict = dict(parent=self.container, min_size=(15, 23))
         qline_dict_disabled = dict(parent=self.container, min_size=(15, 23), enabled=False)
+        qline_update_fortitude = dict(parent=self.container, min_size=(15, 23),
+                                      function_on_text_changed=self._update_fortitude_text)
+        qline_update_reflex = dict(parent=self.container, min_size=(15, 23),
+                                   function_on_text_changed=self._update_reflex_text)
+        qline_update_will = dict(parent=self.container, min_size=(15, 23),
+                                 function_on_text_changed=self._update_will_text)
+
         self.fortitude_total = create_qline_edit("fortitude_total", **qline_dict_disabled)
-        self.fortitude_class_base = create_qline_edit("fortitude_class_base", **qline_dict)
+        self.fortitude_class_bonus = create_qline_edit("fortitude_class_base", **qline_update_fortitude)
         self.fortitude_attr_bonus = create_qline_edit("fortitude_attr_bonus", **qline_dict_disabled)
-        self.fortitude_size_bonus = create_qline_edit("fortitude_size_bonus", **qline_dict)
-        self.fortitude_misc_bonus = create_qline_edit("fortitude_misc_bonus", **qline_dict)
+        self.fortitude_size_bonus = create_qline_edit("fortitude_size_bonus", **qline_update_fortitude)
+        self.fortitude_misc_bonus = create_qline_edit("fortitude_misc_bonus", **qline_update_fortitude)
+
         self.reflex_total = create_qline_edit("reflex_total", **qline_dict_disabled)
-        self.reflex_class_bonus = create_qline_edit("reflex_class_bonus", **qline_dict)
+        self.reflex_class_bonus = create_qline_edit("reflex_class_bonus", **qline_update_reflex)
         self.reflex_attr_bonus = create_qline_edit("reflex_attr_bonus", **qline_dict_disabled)
-        self.reflex_size_bonus = create_qline_edit("reflex_size_bonus", **qline_dict)
-        self.reflex_misc_bonus = create_qline_edit("reflex_misc_bonus", **qline_dict)
+        self.reflex_size_bonus = create_qline_edit("reflex_size_bonus", **qline_update_reflex)
+        self.reflex_misc_bonus = create_qline_edit("reflex_misc_bonus", **qline_update_reflex)
+
         self.will_total = create_qline_edit("will_total", **qline_dict_disabled)
-        self.will_class_bonus = create_qline_edit("will_class_bonus", **qline_dict)
+        self.will_class_bonus = create_qline_edit("will_class_bonus", **qline_update_will)
         self.will_attr_bonus = create_qline_edit("will_attr_bonus", **qline_dict_disabled)
-        self.will_size_bonus = create_qline_edit("will_size_bonus", **qline_dict)
-        self.will_misc_bonus = create_qline_edit("will_misc_bonus", **qline_dict)
+        self.will_size_bonus = create_qline_edit("will_size_bonus", **qline_update_will)
+        self.will_misc_bonus = create_qline_edit("will_misc_bonus", **qline_update_will)
 
         self.reflex_label = create_qlabel("reflex_label", **qlabel_dict)
         self.will_label = create_qlabel("will_label", **qlabel_dict)
@@ -64,7 +73,7 @@ class SavingThrowsBox(DefaultBox):
         self.layout.addWidget(self.misc_bonus_label, 0, 9, 1, 1)
         self.layout.addWidget(self.fortitude_label, 1, 0, 1, 1)
         self.layout.addWidget(self.fortitude_total, 1, 1, 1, 1)
-        self.layout.addWidget(self.fortitude_class_base, 1, 3, 1, 1)
+        self.layout.addWidget(self.fortitude_class_bonus, 1, 3, 1, 1)
         self.layout.addWidget(self.fortitude_attr_bonus, 1, 5, 1, 1)
         self.layout.addWidget(self.fortitude_size_bonus, 1, 7, 1, 1)
         self.layout.addWidget(self.fortitude_misc_bonus, 1, 9, 1, 1)
@@ -94,7 +103,7 @@ class SavingThrowsBox(DefaultBox):
 
     def set_default(self):
         self.fortitude_total.setText("10")
-        self.fortitude_class_base.setText("10")
+        self.fortitude_class_bonus.setText("10")
         self.fortitude_attr_bonus.setText("10")
         self.fortitude_size_bonus.setText("10")
         self.fortitude_misc_bonus.setText("10")
@@ -113,3 +122,21 @@ class SavingThrowsBox(DefaultBox):
         self.reflex_attr_bonus.setText(str(self.char_core.attributes.dex['mod']))
         self.will_attr_bonus.setText(str(self.char_core.attributes.wis['mod']))
         self.fortitude_attr_bonus.setText(str(self.char_core.attributes.con['mod']))
+        self.update_saving_throws_texts()
+
+    def update_saving_throws_texts(self):
+        self._update_fortitude_text()
+        self._update_reflex_text()
+        self._update_will_text()
+
+    def _update_fortitude_text(self):
+        update_texts(self, "fortitude_total", ["fortitude_class_bonus", "fortitude_attr_bonus",
+                                               "fortitude_size_bonus", "fortitude_misc_bonus"])
+
+    def _update_reflex_text(self):
+        update_texts(self, "reflex_total", ["reflex_class_bonus", "reflex_attr_bonus",
+                                            "reflex_size_bonus", "reflex_misc_bonus"])
+
+    def _update_will_text(self):
+        update_texts(self, "will_total", ["will_class_bonus", "will_attr_bonus",
+                                          "will_size_bonus", "will_misc_bonus"])
