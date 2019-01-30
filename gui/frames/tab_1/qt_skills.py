@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, QtCore
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
-    add_multiple_elements_to_layout_by_row
+    add_multiple_elements_to_layout_by_row, update_texts
 
 
 class SkillsBox(DefaultBox, ResizeableBox):
@@ -62,19 +62,23 @@ class SkillsBox(DefaultBox, ResizeableBox):
         new_skill.skill_name.setText(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
             "Praesent sapien urna, egestas eu tempor at, pretium nec orci.")
-        new_skill.attr_choice = create_combo_box(f"skills{skill_idx}attr_choice", self.container,
+        new_skill.attr_choice = create_combo_box(name=f"skills{skill_idx}attr_choice", parent=self.container,
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
                                                  max_size=(69, 20),
                                                  function_on_index_changed=self._set_attr_val_for_skill,
                                                  args_on_index_changed=[new_skill])
+
         qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None])
         new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, **qdict)
 
         new_skill.attr_mod = create_qline_edit(f"skills{skill_idx}attr_mod", **qdict, enabled=False)
-        new_skill.rank = create_qline_edit(f"skills{skill_idx}rank", **qdict)
+        new_skill.rank = create_qline_edit(f"skills{skill_idx}rank", function_on_text_changed=self._update_skill,
+                                           args_on_text_changed=[new_skill], **qdict)
 
-        new_skill.misc_mod = create_qline_edit(f"skills_{skill_idx}_misc_mod", **qdict)
+        new_skill.misc_mod = create_qline_edit(f"skills_{skill_idx}_misc_mod",
+                                               function_on_text_changed=self._update_skill,
+                                               args_on_text_changed=[new_skill], **qdict)
 
         new_skill.cross_class_checkbox = QtWidgets.QCheckBox(self.container)
         new_skill.cross_class_checkbox.setObjectName(f"skills{skill_idx}description_button")
@@ -115,3 +119,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         attr_name = self._map_choice_to_attr[chosen_attr_idx]
         attr_ref_core = getattr(self.char_core.attributes, attr_name)
         skill.attr_mod.setText(str(attr_ref_core['mod']))
+        self._update_skill(skill)
+
+    def _update_skill(self, skill):
+        update_texts(skill, to_set="total", to_get_from=["attr_mod", "rank", "misc_mod"])

@@ -30,7 +30,8 @@ def create_qlabel(name: str, parent: QtWidgets.QLayout, min_size: (list, tuple) 
 
 def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
                       max_size: (list, tuple) = None,
-                      align=None, indent: int = None, text: str = None, enabled: bool = True):
+                      align=None, indent: int = None, text: str = None, enabled: bool = True,
+                      function_on_text_changed=None, args_on_text_changed=None):
     qline = QtWidgets.QLineEdit(parent)
     qline.setEnabled(enabled)
 
@@ -41,6 +42,11 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
         qline.setIndent(indent)
     if text:
         qline.setText(text)
+    if function_on_text_changed:
+        if not args_on_text_changed:
+            qline.textChanged.connect(function_on_text_changed)
+        else:
+            qline.textChanged.connect(partial(function_on_text_changed, *args_on_text_changed))
     qline.setObjectName(name)
 
     return qline
@@ -173,3 +179,18 @@ def get_general_dict_repr(root_object, to_get):
             pass
 
     return d
+
+
+def get_sum_of_elements(skill, to_get_from):
+    tmp = 0
+    for element in to_get_from:
+        try:
+            tmp += int(getattr(skill, element).text())
+        except ValueError:
+            pass
+    return tmp
+
+
+def update_texts(skill, to_set, to_get_from):
+    obj_to_set = getattr(skill, to_set)
+    obj_to_set.setText(str(get_sum_of_elements(skill, to_get_from)))
