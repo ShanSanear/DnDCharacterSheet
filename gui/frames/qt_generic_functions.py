@@ -191,6 +191,6 @@ def get_sum_of_elements(skill, to_get_from):
     return tmp
 
 
-def update_texts(skill, to_set, to_get_from):
-    obj_to_set = getattr(skill, to_set)
-    obj_to_set.setText(str(get_sum_of_elements(skill, to_get_from)))
+def update_texts(root_object, to_set, to_get_from):
+    obj_to_set = getattr(root_object, to_set)
+    obj_to_set.setText(str(get_sum_of_elements(root_object, to_get_from)))
