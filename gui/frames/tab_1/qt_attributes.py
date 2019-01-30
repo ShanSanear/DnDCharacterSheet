@@ -93,7 +93,7 @@ class AttributesBox(DefaultBox):
     def _generate_attribute_elemenets(self, attr_reference, attr_name):
         elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
         for element in elements[1:]:
-            if "mod" in element:
+            if "mod" == element:
                 setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict_mod))
             else:
                 setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict))
