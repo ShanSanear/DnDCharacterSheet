@@ -152,7 +152,7 @@ def collect_editable_data(elements_to_clean_up):
 
 
 def get_general_dict_repr(root_object, to_get):
-    d = {}
+    data = {}
 
     print(to_get)
     for element in to_get:
@@ -161,24 +161,24 @@ def get_general_dict_repr(root_object, to_get):
             if not obj_ref.isEnabled():
                 print(obj_ref, "is read only, skipping")
             else:
-                d[element] = obj_ref.text()
+                data[element] = obj_ref.text()
         elif isinstance(obj_ref, QPlainTextEdit):
-            d[element] = obj_ref.document().toPlainText()
+            data[element] = obj_ref.document().toPlainText()
         elif isinstance(obj_ref, QComboBox):
-            d[element] = obj_ref.currentIndex()
+            data[element] = obj_ref.currentIndex()
         elif isinstance(obj_ref, QCheckBox):
-            d[element] = obj_ref.isChecked()
+            data[element] = obj_ref.isChecked()
         elif isinstance(obj_ref, str):
-            d[element] = obj_ref
+            data[element] = obj_ref
         elif isinstance(obj_ref, list):
             tmp = []
             for obj in obj_ref:
                 getting = collect_editable_data(obj.__dict__.keys())
                 tmp.append(get_general_dict_repr(obj, getting))
-            d[element] = list(tmp)
+            data[element] = list(tmp)
             pass
 
-    return d
+    return data
 
 
 def get_sum_of_elements(skill, to_get_from):
