@@ -42,7 +42,6 @@ class WeaponStatisticsBox(DefaultBox):
         self.add_to_layout()
         self.translate()
         self.root.setLayout(self.layout)
-        self.set_values_from_attributes()
 
     def add_to_layout(self):
         self.layout.addWidget(self.ranged_damage, 2, 2, 1, 1)
@@ -71,8 +70,3 @@ class WeaponStatisticsBox(DefaultBox):
         self.melee_damage.setText(_translate("MainWindow", "10"))
         self.melee_label.setText(_translate("MainWindow", "Melee"))
         self.ranged_label.setText(_translate("MainWindow", "Ranged"))
-
-    def set_values_from_attributes(self):
-        self.melee_attack_bonus.setText(str(self.char_core.attributes.str['mod']))
-        self.ranged_attack_bonus.setText(str(self.char_core.attributes.dex['mod']))
-
