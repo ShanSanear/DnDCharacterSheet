@@ -1,4 +1,3 @@
-from functools import partial
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
@@ -66,8 +65,9 @@ class SkillsBox(DefaultBox, ResizeableBox):
         new_skill.attr_choice = create_combo_box(f"skills{skill_idx}attr_choice", self.container,
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
-                                                 max_size=(69, 20))
-        new_skill.attr_choice.currentIndexChanged.connect(partial(self._set_attr_val_for_skill, new_skill))
+                                                 max_size=(69, 20),
+                                                 function_on_index_changed=self._set_attr_val_for_skill,
+                                                 args_on_index_changed=[new_skill])
         qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None])
         new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, **qdict)
 

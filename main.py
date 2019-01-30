@@ -13,5 +13,6 @@ def main():
 
     qt_gui.init_gui(char)
 
+
 if __name__ == '__main__':
     main()

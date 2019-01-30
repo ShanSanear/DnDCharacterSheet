@@ -1,3 +1,5 @@
+from functools import partial
+
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
 
@@ -56,7 +58,8 @@ def create_push_button(name: str, parent: QtWidgets.QWidget, min_size: (list, tu
 
 def create_combo_box(name: str, parent: QtWidgets.QWidget, number_of_choices: int = 1,
                      choices_text: (list, tuple) = None,
-                     min_size: (list, tuple) = None, max_size: (list, tuple) = None):
+                     min_size: (list, tuple) = None, max_size: (list, tuple) = None, function_on_index_changed=None,
+                     args_on_index_changed=None):
     combo_box: QComboBox = QtWidgets.QComboBox(parent)
     combo_box.setObjectName(name)
     for _ in range(number_of_choices):
@@ -66,6 +69,11 @@ def create_combo_box(name: str, parent: QtWidgets.QWidget, number_of_choices: in
             combo_box.setItemText(idx, choice_text)
     if min_size or max_size:
         combo_box = resize_element(combo_box, min_size=min_size, max_size=max_size)
+    if function_on_index_changed:
+        if not args_on_index_changed:
+            combo_box.currentIndexChanged.connect(function_on_index_changed)
+        else:
+            combo_box.currentIndexChanged.connect(partial(function_on_index_changed, *args_on_index_changed))
     return combo_box
 
 
