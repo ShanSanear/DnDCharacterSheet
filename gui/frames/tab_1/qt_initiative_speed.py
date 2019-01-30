@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets, QtCore
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children, \
-    add_multiple_elements_to_layout_by_row, add_element_to_layout
+    add_multiple_elements_to_layout_by_row, add_element_to_layout, update_texts
 
 
 class InitiativeSpeedBox(DefaultBox):
@@ -32,6 +32,8 @@ class InitiativeSpeedBox(DefaultBox):
                    "speed_label": "Speed",
                    "speed_total": "10", }}
 
+        qline_update = dict(parent=self.container, function_on_text_changed=self._update_initiative)
+
         self.total_label = create_qlabel("total_label", parent=self.container)
         self.initiative_misc_bonus_label = create_qlabel("initiative_misc_bonus_label", parent=self.container)
         self.initiative_dex_bonus_label = create_qlabel("initiative_dex_bonus_label", parent=self.container)
@@ -40,7 +42,7 @@ class InitiativeSpeedBox(DefaultBox):
         self.speed_armor_type_label = create_qlabel("speed_armor_type_label", parent=self.container)
 
         self.initiative_total = create_qline_edit("initiative_total", parent=self.container, enabled=False)
-        self.initiative_misc_bonus = create_qline_edit("initiative_misc_bonus", parent=self.container)
+        self.initiative_misc_bonus = create_qline_edit("initiative_misc_bonus", **qline_update)
         self.initiative_dex_bonus = create_qline_edit("initiative_dex_bonus", parent=self.container, enabled=False)
         self.speed_total = create_qline_edit("speed_total", parent=self.container)
 
@@ -66,3 +68,7 @@ class InitiativeSpeedBox(DefaultBox):
 
     def set_values_from_attributes(self):
         self.initiative_dex_bonus.setText(str(self.char_core.attributes.dex['mod']))
+        self._update_initiative()
+
+    def _update_initiative(self):
+        update_texts(self, "initiative_total", ["initiative_misc_bonus", "initiative_dex_bonus"])
