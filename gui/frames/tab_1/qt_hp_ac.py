@@ -101,14 +101,18 @@ class HpAcBox(DefaultBox):
                      self.ac_dex_bonus, self.ac_size_bonus, self.ac_misc_bonus]
         add_multiple_elements_to_layout_by_row(self.layout, third_row, row=2)
 
-        # TODO need to add them in another fasion (with additional offsets?)
-        self.layout.addWidget(self.ac_total_label, 3, 1, 1, 1)
-        self.layout.addWidget(self.ac_base_bonus_label, 3, 2, 1, 1)
-        self.layout.addWidget(self.ac_armor_bonus_label, 3, 3, 1, 1)
-        self.layout.addWidget(self.ac_shield_bonus_label, 3, 4, 1, 1)
-        self.layout.addWidget(self.ac_dex_bonus_label, 3, 5, 1, 1)
-        self.layout.addWidget(self.ac_size_bonus_label, 3, 6, 1, 1)
-        self.layout.addWidget(self.ac_misc_bonus_label, 3, 7, 1, 1)
+        fourth_row = [self.ac_total_label, self.ac_base_bonus_label, self.ac_armor_bonus_label,
+                      self.ac_shield_bonus_label, self.ac_dex_bonus_label, self.ac_size_bonus_label,
+                      self.ac_misc_bonus_label, ]
+        add_multiple_elements_to_layout_by_row(self.layout, fourth_row, start_column=1, row=3)
+
+        # self.layout.addWidget(self.ac_total_label, 3, 1, 1, 1)
+        # self.layout.addWidget(self.ac_base_bonus_label, 3, 2, 1, 1)
+        # self.layout.addWidget(self.ac_armor_bonus_label, 3, 3, 1, 1)
+        # self.layout.addWidget(self.ac_shield_bonus_label, 3, 4, 1, 1)
+        # self.layout.addWidget(self.ac_dex_bonus_label, 3, 5, 1, 1)
+        # self.layout.addWidget(self.ac_size_bonus_label, 3, 6, 1, 1)
+        # self.layout.addWidget(self.ac_misc_bonus_label, 3, 7, 1, 1)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
