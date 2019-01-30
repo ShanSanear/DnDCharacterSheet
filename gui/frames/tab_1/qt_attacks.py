@@ -3,7 +3,7 @@ from PyQt5 import QtWidgets, QtCore
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children
+    set_text_of_children, update_texts
 
 
 class AttacksBox(DefaultBox):
@@ -34,6 +34,8 @@ class AttacksBox(DefaultBox):
         }
         qline_dict = dict(parent=self.container, )
         qline_dict_disabled = dict(parent=self.container, enabled=False)
+        qline_dict_ranged = dict(parent=self.container, function_on_text_changed=self._update_ranged_attack)
+        qline_dict_melee = dict(parent=self.container, function_on_text_changed=self._update_melee_attack)
         qlabel_dict = dict(parent=self.container, )
 
         self.total_label = create_qlabel("attacks_total_label", **qlabel_dict)
@@ -45,16 +47,16 @@ class AttacksBox(DefaultBox):
         self.ranged_label = create_qlabel("attacks_ranged_label", **qlabel_dict)
 
         self.melee_total = create_qline_edit("attacks_melee_total", **qline_dict_disabled)
-        self.melee_base = create_qline_edit("attacks_melee_base", **qline_dict)
+        self.melee_base = create_qline_edit("attacks_melee_base", **qline_dict_melee)
         self.melee_attr_mod = create_qline_edit("attacks_melee_attr_mod", **qline_dict_disabled)
-        self.melee_size = create_qline_edit("attacks_melee_size", **qline_dict)
-        self.melee_misc = create_qline_edit("attacks_melee_misc", **qline_dict)
+        self.melee_size = create_qline_edit("attacks_melee_size", **qline_dict_melee)
+        self.melee_misc = create_qline_edit("attacks_melee_misc", **qline_dict_melee)
 
         self.ranged_total = create_qline_edit("attacks_ranged_total", **qline_dict_disabled)
-        self.ranged_base = create_qline_edit("attacks_ranged_base", **qline_dict)
+        self.ranged_base = create_qline_edit("attacks_ranged_base", **qline_dict_ranged)
         self.ranged_attr_mod = create_qline_edit("attacks_ranged_attr_mod", **qline_dict_disabled)
-        self.ranged_size = create_qline_edit("attacks_ranged_size", **qline_dict)
-        self.ranged_misc = create_qline_edit("attacks_ranged_misc", **qline_dict)
+        self.ranged_size = create_qline_edit("attacks_ranged_size", **qline_dict_ranged)
+        self.ranged_misc = create_qline_edit("attacks_ranged_misc", **qline_dict_ranged)
 
         self.add_to_layout()
         self.translate("EN")
@@ -107,3 +109,11 @@ class AttacksBox(DefaultBox):
     def set_values_from_attributes(self):
         self.melee_attr_mod.setText(str(self.char_core.attributes.str['mod']))
         self.ranged_attr_mod.setText(str(self.char_core.attributes.dex['mod']))
+        self._update_melee_attack()
+        self._update_ranged_attack()
+    
+    def _update_ranged_attack(self):
+        update_texts(self, "ranged_total", ["ranged_base", "ranged_attr_mod", "ranged_size", "ranged_misc"])
+    
+    def _update_melee_attack(self):
+        update_texts(self, "melee_total", ["melee_base", "melee_attr_mod", "melee_size", "melee_misc"])
