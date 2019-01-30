@@ -14,7 +14,7 @@ class MyApp(MainWindowUi):
     def __init__(self, char: Character):
         self.char_core = char
         MainWindowUi.__init__(self, self.char_core)
-        self.setup_ui(self)
+        self.setup_ui()
 
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character.triggered.connect(self.save_file)
@@ -66,7 +66,7 @@ class MyApp(MainWindowUi):
 
     def open_file(self):
         print("Opening file")
-        fname = QFileDialog.getOpenFileName(self.central_widget, 'Open file', Path().cwd().as_posix(),
+        fname = QFileDialog.getOpenFileName(self.tabs, 'Open file', Path().cwd().as_posix(),
                                             "Character file (*.json)")[0]
         self.character_file = fname
         print(fname)
@@ -91,7 +91,7 @@ class MyApp(MainWindowUi):
                         "armor_items_box" : self.armor_items_box.get_dict_repr(),
                         "weapons_box" : self.weapons_box.get_dict_repr(),
                         }
-        new_file = QFileDialog.getSaveFileName(self.central_widget, "Save file", Path().cwd().as_posix(),
+        new_file = QFileDialog.getSaveFileName(self.tabs, "Save file", Path().cwd().as_posix(),
                                                "Character file (*.json)")[0]
         if new_file:
             json.dump(data_to_save, Path(new_file).open('w'), indent=4)

@@ -1,5 +1,4 @@
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QVBoxLayout, QTabWidget, QMainWindow
+from PyQt5.QtWidgets import QTabWidget, QMainWindow, QScrollArea, QWidget
 
 from gui.frames.qt_menu_bar import MenuBar
 from gui.frames.tab_1.qt_attacks import AttacksBox
@@ -21,57 +20,36 @@ from gui.frames.tab_3.qt_notes import NotesBox
 from gui.frames.tab_3.qt_weapons import WeaponsBox
 
 
-class TabWidget(QtWidgets.QWidget):
-
-    def __init__(self, parent):
-        super(TabWidget, self).__init__(parent)
-        self.tabs = QTabWidget()
-        self.tab1 = QtWidgets.QWidget()
-        self.tab2 = QtWidgets.QWidget()
-        self.tab3 = QtWidgets.QWidget()
-        self.tabs.addTab(self.tab1, "Basic information")
-        self.tabs.addTab(self.tab2, "Items / Spells / Languages")
-        self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
-
-        self.tab1.layout = QVBoxLayout(self)
-        self.tab1.setLayout(self.tab1.layout)
-
-        self.tab2.layout = QVBoxLayout(self)
-        self.tab2.setLayout(self.tab2.layout)
-
-        self.tab3.layout = QVBoxLayout(self)
-        self.tab3.setLayout(self.tab3.layout)
-
-        self.layout = QVBoxLayout(self)
-        self.layout.addWidget(self.tabs)
-
-
 # noinspection PyAttributeOutsideInit
 class MainWindowUi(QMainWindow):
     def __init__(self, char_core):
         super(MainWindowUi, self).__init__()
         self.char_core = char_core
 
-    def setup_ui(self, main_window):
-        main_window.setObjectName("MainWindow")
-        main_window.resize(1300, 850)
-        self.central_widget = TabWidget(main_window)
-        self.central_widget.setObjectName("centralwidget")
-
+    def setup_ui(self):
+        self.setObjectName("MainWindow")
+        self.main_widget = QWidget()
+        self.resize(1320, 850)
+        self.tabs = QTabWidget(self)
+        self.tabs.setFixedSize(1300, 800)
+        self.tab1 = QWidget(self)
+        self.tab2 = QWidget(self)
+        self.tab3 = QWidget(self)
+        self.tabs.addTab(self.tab1, "Basic information")
+        self.tabs.addTab(self.tab2, "Items / Spells / Languages")
+        self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
         self.create_tab_1()
         self.create_tab_2()
         self.create_tab_3()
+        self.menu_bar = MenuBar(self)
 
-        self.central_widget.setLayout(self.central_widget.layout)
-        self.menu_bar = MenuBar(main_window)
-        main_window.setCentralWidget(self.central_widget)
-        main_window.setMenuBar(self.menu_bar.root)
-        main_window.setWindowTitle("MainWindow")
-
-        self.central_widget.tabs.setCurrentIndex(0)
+        scroll = QScrollArea()
+        scroll.setWidget(self.tabs)
+        scroll.setWidgetResizable(True)
+        self.setCentralWidget(scroll)
 
     def create_tab_1(self):
-        parent_for_boxes = self.central_widget.tab1
+        parent_for_boxes = self.tab1
         self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
         self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40], char_core=self.char_core)
 
@@ -93,7 +71,7 @@ class MainWindowUi(QMainWindow):
         return parent_for_boxes
 
     def create_tab_2(self):
-        parent_for_boxes = self.central_widget.tab2
+        parent_for_boxes = self.tab2
         self.items_box = ItemsBox(parent_for_boxes, position=[10, 10], size=[500, 80])
         self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
@@ -102,7 +80,7 @@ class MainWindowUi(QMainWindow):
         return parent_for_boxes
 
     def create_tab_3(self):
-        parent_for_boxes = self.central_widget.tab3
+        parent_for_boxes = self.tab3
         self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
         self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
         self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450])
