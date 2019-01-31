@@ -3,6 +3,7 @@ import sys
 from functools import partial
 from pathlib import Path
 
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QFileDialog
 
 from core.character import Character
@@ -119,6 +120,7 @@ class MyApp(MainWindowUi):
 
 def init_gui(char):
     app = QApplication(sys.argv)
+    app.setAttribute(Qt.AA_EnableHighDpiScaling)
     form = MyApp(char)
     form.show()
     app.exec_()

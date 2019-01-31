@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTabWidget, QMainWindow, QScrollArea, QWidget
+from PyQt5.QtWidgets import QTabWidget, QMainWindow, QScrollArea, QWidget, QSizePolicy
 
 from gui.frames.qt_menu_bar import MenuBar
 from gui.frames.tab_1.qt_attacks import AttacksBox
@@ -20,7 +20,6 @@ from gui.frames.tab_3.qt_notes import NotesBox
 from gui.frames.tab_3.qt_weapons import WeaponsBox
 
 
-# noinspection PyAttributeOutsideInit
 class MainWindowUi(QMainWindow):
     def __init__(self, char_core):
         super(MainWindowUi, self).__init__()
@@ -28,13 +27,17 @@ class MainWindowUi(QMainWindow):
 
     def setup_ui(self):
         self.setObjectName("MainWindow")
-        self.main_widget = QWidget()
-        self.resize(1320, 850)
+        self.resize(1320, 830)
         self.tabs = QTabWidget(self)
-        self.tabs.setFixedSize(1300, 800)
-        self.tab1 = QWidget(self)
-        self.tab2 = QWidget(self)
-        self.tab3 = QWidget(self)
+        self.tabs.setMinimumSize(1300, 780)
+        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        sizePolicy.setHeightForWidth(True)
+        self.tabs.setSizePolicy(sizePolicy)
+        self.tab1 = QWidget(self.tabs)
+        self.tab1.tabs = self.tabs
+        self.tab2 = QWidget(self.tabs)
+        self.tab2.tabs = self.tabs
+        self.tab3 = QWidget(self.tabs)
         self.tabs.addTab(self.tab1, "Basic information")
         self.tabs.addTab(self.tab2, "Items / Spells / Languages")
         self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
@@ -44,14 +47,18 @@ class MainWindowUi(QMainWindow):
         self.menu_bar = MenuBar(self)
 
         scroll = QScrollArea()
+        scroll.setEnabled(True)
         scroll.setWidget(self.tabs)
         scroll.setWidgetResizable(True)
         self.setCentralWidget(scroll)
+        self.add_base_elements()
 
     def create_tab_1(self):
         parent_for_boxes = self.tab1
+        print(self.tab1.parent())
+        print(self.tabs.parent())
         self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
-        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 40], char_core=self.char_core)
+        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 90], char_core=self.char_core)
 
         self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250],
                                             char_core=self.char_core)
@@ -84,3 +91,12 @@ class MainWindowUi(QMainWindow):
         self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
         self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
         self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450])
+
+    def add_base_elements(self):
+        #for _ in range(20):
+        #    self.skills_box.add_skill()
+        # for _ in range(20):
+        #     self.feats_box.add_feat()
+        #     self.feats_box_2.add_feat()
+        for _ in range(30):
+            self.items_box.add_item()
