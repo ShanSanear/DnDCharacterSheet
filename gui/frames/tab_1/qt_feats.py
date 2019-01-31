@@ -11,7 +11,9 @@ from gui.popups.feat_full_description import DescriptionDialog
 
 class FeatsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
-        ResizeableBox.__init__(self, increase_width=0, increase_height=25)
+        ResizeableBox.__init__(self, increase_width=0, increase_height=28)
+        self.parent = parent
+
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("FeatsBox")
@@ -22,6 +24,8 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.name_label = create_qlabel("feat_name_label", self.container)
         self.description_field_label = create_qlabel("feat_name_label", self.container)
         self.description_label = create_qlabel("feat_description_label", self.container)
+        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
+        self.add_new.clicked.connect(self.add_feat)
         self.feats = []
         self.translate_reference = {
             "EN":
@@ -40,10 +44,11 @@ class FeatsBox(DefaultBox, ResizeableBox):
             }
         }
 
-        for _ in range(5):
+        self.add_to_layout()
+
+        for _ in range(1):
             self.add_feat()
 
-        self.add_to_layout()
         self.translate("EN")
         self.root.setLayout(self.layout)
 
@@ -59,6 +64,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label,
                                                              self.description_field_label])
+        self.layout.addWidget(self.add_new, 1, 0, 1, 1)
 
 
     def show_description(self, feat):

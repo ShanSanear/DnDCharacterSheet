@@ -4,12 +4,13 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
-    add_multiple_elements_to_layout_by_row
+    add_multiple_elements_to_layout_by_row, create_push_button
 
 
 class ItemsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
-        ResizeableBox.__init__(self, increase_width=0, increase_height=25)
+        ResizeableBox.__init__(self, increase_width=0, increase_height=28)
+        self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("ItemsBox")
@@ -17,6 +18,8 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("gridLayoutWidget_8")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("ItemsLayout")
+        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
+        self.add_new.clicked.connect(self.add_item)
         #Xself.layout.setSpacing(15)
         qlabel_dict = dict(parent=self.container)
         self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
@@ -33,8 +36,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.items = []
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
         self.add_to_layout()
-        for _ in range(20):
-            self.add_item()
         self.translate("EN")
         self.root.setLayout(self.layout)
 
@@ -55,6 +56,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
     def add_to_layout(self):
         labels = [self.items_name_label, self.items_weight_label, self.items_count_label, self.items_description_label]
         add_multiple_elements_to_layout_by_row(self.layout, labels)
+        self.layout.addWidget(self.add_new, 1, 0, 1, 1)
 
     def add_item(self):
         self.add_new_element(self.items, self.layout, 1)
