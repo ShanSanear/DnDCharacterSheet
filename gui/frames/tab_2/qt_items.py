@@ -51,6 +51,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         new_item.count = create_qline_edit("item_count", self.container, min_size=[None, 23],
                                            max_size=[20, None])
         new_item.description = create_qline_edit("item_description", self.container, min_size=[None, 23])
+        new_item.delete_item = create_push_button("item_delete", self.container, max_size=[20, None], text="-")
 
         return new_item
 

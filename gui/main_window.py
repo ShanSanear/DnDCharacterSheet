@@ -54,6 +54,7 @@ class MainWindowUi(QMainWindow):
         self.add_base_elements()
 
     def create_tab_1(self):
+        # attacks ABOVE weapons
         parent_for_boxes = self.tab1
         print(self.tab1.parent())
         print(self.tabs.parent())
@@ -93,10 +94,11 @@ class MainWindowUi(QMainWindow):
         self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450])
 
     def add_base_elements(self):
+        pass
         #for _ in range(20):
         #    self.skills_box.add_skill()
         # for _ in range(20):
-        #     self.feats_box.add_feat()
-        #     self.feats_box_2.add_feat()
-        for _ in range(30):
-            self.items_box.add_item()
+        #      self.feats_box.add_feat()
+        #      self.feats_box_2.add_feat()
+        # for _ in range(30):
+        #     self.items_box.add_item()
