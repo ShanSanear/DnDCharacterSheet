@@ -64,3 +64,7 @@ class ResizeableBox(ABC):
     @abstractmethod
     def create_new_element(self):
         pass
+
+    @abstractmethod
+    def adding_missing_element(self):
+        pass
