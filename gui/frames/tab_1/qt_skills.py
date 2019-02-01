@@ -16,7 +16,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
         # TODO remove button
         # TODO - scrollbar after achieving certain height
         # TODO - sorting by name
-        ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.translate_reference = {
             "EN": {
                 "root": {
@@ -48,10 +47,12 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
-        self.add_new.clicked.connect(self.add_skill)
         self.layout.setObjectName("SkillsLayout")
         self.skills = []
         self.create_labels()
+        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1,increase_width=0, increase_height=28)
+        self.add_skill = self.add_new_element
+        self.add_new.clicked.connect(self.add_skill)
         for _ in range(1):
             self.add_skill()
 
@@ -90,9 +91,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
         return new_skill
 
-    def add_skill(self):
-        self.add_new_element(elements_list=self.skills, layout=self.layout, row_offset=1)
-        self.set_values_from_attributes()
 
     def create_new_element(self):
         return self.create_new_skill()

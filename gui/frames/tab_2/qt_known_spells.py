@@ -14,7 +14,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         # TODO - scrollbar after achieving certain height
         # TODO - sorting by lvl -> name
         self.parent = parent
-        ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("KnownSpellsBox")
@@ -23,7 +22,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("KnownSpellsLayout")
         self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
-        self.add_new.clicked.connect(self.add_spell)
 
         self.spells = []
         qlabel_dict = dict(parent=self.container, max_size=(20, None))
@@ -60,6 +58,9 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
             }
         }
 
+        ResizeableBox.__init__(self, elements_list=self.spells, row_offset=1, increase_width=0, increase_height=28)
+        self.add_spell = self.add_new_element
+        self.add_new.clicked.connect(self.add_spell)
         for _ in range(15):
             self.add_spell()
 
@@ -87,9 +88,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
 
     def create_new_element(self):
         return self.create_spell()
-
-    def add_spell(self):
-        self.add_new_element(self.spells, self.layout, 1)
 
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=[self.lvl_label, self.name_label,

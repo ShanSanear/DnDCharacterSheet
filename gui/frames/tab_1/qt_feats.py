@@ -13,7 +13,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO remove button
         # TODO - scrollbar after achieving certain height
-        ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.parent = parent
 
         self.root = QtWidgets.QGroupBox(parent)
@@ -27,7 +26,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.description_field_label = create_qlabel("feat_name_label", self.container)
         self.description_label = create_qlabel("feat_description_label", self.container)
         self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
-        self.add_new.clicked.connect(self.add_feat)
         self.feats = []
         self.translate_reference = {
             "EN":
@@ -46,7 +44,10 @@ class FeatsBox(DefaultBox, ResizeableBox):
             }
         }
 
+        ResizeableBox.__init__(self, elements_list=self.feats, row_offset=1, increase_width=0, increase_height=28)
         self.add_to_layout()
+        self.add_feat = self.add_new_element
+        self.add_new.clicked.connect(self.add_feat)
 
         for _ in range(1):
             self.add_feat()
@@ -54,8 +55,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.translate("EN")
         self.root.setLayout(self.layout)
 
-    def add_feat(self):
-        self.add_new_element(elements_list=self.feats, layout=self.layout, row_offset=1)
+
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
