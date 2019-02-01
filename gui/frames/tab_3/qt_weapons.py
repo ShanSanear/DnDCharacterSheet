@@ -10,6 +10,7 @@ class WeaponsBox(DefaultBox):
     # TODO - adding widgets by rows/columns
     # TODO - change in label of ranged/melee weapon depending on choice option
     # TODO - changing selected weapon using combo box
+    # TODO - more than 3 choices for weapons
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
