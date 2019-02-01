@@ -18,7 +18,7 @@ def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size
     return element
 
 
-def create_qlabel(name: str, parent: QtWidgets.QLayout, min_size: (list, tuple) = None, max_size: (list, tuple) = None,
+def create_qlabel(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None, max_size: (list, tuple) = None,
                   align=None):
     label = QtWidgets.QLabel(parent)
     label: QtWidgets.QLabel = resize_element(label, min_size, max_size)
@@ -53,12 +53,16 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
 
 
 def create_push_button(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
-                       max_size: (list, tuple) = None,
-                       text: str = None):
+                       max_size: (list, tuple) = None, text: str = None, function_on_clicked=None, args_on_clicked=None):
     button = QtWidgets.QPushButton(parent)
     button.setObjectName(name)
     button: QtWidgets.QPushButton = resize_element(button, min_size, max_size)
     button.setText(text)
+    if function_on_clicked:
+        if not args_on_clicked:
+            button.clicked.connect(function_on_clicked)
+        else:
+            button.clicked.connect(partial(function_on_clicked, args_on_clicked))
     return button
 
 
@@ -120,10 +124,14 @@ def set_text_of_children(root_object, to_set: dict):
         if isinstance(data_to_set, dict):
             set_text_of_children(obj_ref, data_to_set)
         elif isinstance(data_to_set, list):
-            # TODO - checking if there is enough space for elements
             for idx, element_data in enumerate(data_to_set):
                 # obj_ref in such case is self.items, self.spells etc.
-                set_text_of_children(obj_ref[idx], element_data)
+                try:
+                    set_text_of_children(obj_ref[idx], element_data)
+                except IndexError:
+                    # TODO - Maybe call adding missing elements multiple times, THEN adding objects?
+                    root_object.adding_missing_element()
+                    set_text_of_children(obj_ref[idx], element_data)
         elif isinstance(obj_ref, QComboBox):
             obj_ref.setCurrentIndex(data_to_set)
 
