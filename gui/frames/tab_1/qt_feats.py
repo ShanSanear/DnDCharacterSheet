@@ -85,3 +85,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
         set_text_of_children(new_feat, self.translate_reference_new_element["EN"])
 
         return new_feat
+
+    def adding_missing_element(self):
+        self.add_feat()

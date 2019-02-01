@@ -20,7 +20,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.layout.setObjectName("ItemsLayout")
         self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
         self.add_new.clicked.connect(self.add_item)
-        #Xself.layout.setSpacing(15)
         qlabel_dict = dict(parent=self.container)
         self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
         self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
@@ -44,6 +43,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         new_item.name = create_qline_edit("item_name", self.container, min_size=[0, 23])
         new_item.weight = create_qline_edit("item_weight", self.container, min_size=[None, 23],
                                             max_size=[20, None])
+
         new_item.count = create_qline_edit("item_count", self.container, min_size=[None, 23],
                                            max_size=[20, None])
         new_item.description = create_qline_edit("item_description", self.container, min_size=[None, 23])
@@ -63,3 +63,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
+
+    def adding_missing_element(self):
+        self.add_item()

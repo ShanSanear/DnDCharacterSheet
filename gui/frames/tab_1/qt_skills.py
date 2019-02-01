@@ -12,19 +12,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
-        self.char_core = char_core
-        self.parent = parent
         ResizeableBox.__init__(self, increase_width=0, increase_height=28)
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("SkillsBox")
-        self.container = QtWidgets.QWidget(self.root)
-        self.container.setObjectName("gridLayoutWidget_5")
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
-        self.add_new.clicked.connect(self.add_skill)
-        self.layout.setObjectName("SkillsLayout")
-        self.skills = []
         self.translate_reference = {
             "EN": {
                 "root": {
@@ -39,13 +27,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
                 "total_label": "Total",
             }
         }
-        self.create_labels()
-        for _ in range(1):
-            self.add_skill()
-
-        self.add_to_layout()
-        self.translate("EN")
-        self.root.setLayout(self.layout)
         self._map_choice_to_attr = {
             0: "str",
             1: "dex",
@@ -54,6 +35,25 @@ class SkillsBox(DefaultBox, ResizeableBox):
             4: "wis",
             5: "cha",
         }
+        self.char_core = char_core
+        self.parent = parent
+        self.root = QtWidgets.QGroupBox(parent)
+        self.root.setGeometry(QtCore.QRect(*position, *size))
+        self.root.setObjectName("SkillsBox")
+        self.container = QtWidgets.QWidget(self.root)
+        self.container.setObjectName("gridLayoutWidget_5")
+        self.layout = QtWidgets.QGridLayout(self.container)
+        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
+        self.add_new.clicked.connect(self.add_skill)
+        self.layout.setObjectName("SkillsLayout")
+        self.skills = []
+        self.create_labels()
+        for _ in range(1):
+            self.add_skill()
+
+        self.add_to_layout()
+        self.translate("EN")
+        self.root.setLayout(self.layout)
         self.set_values_from_attributes()
 
     def create_new_skill(self):
@@ -88,6 +88,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def add_skill(self):
         self.add_new_element(elements_list=self.skills, layout=self.layout, row_offset=1)
+        self.set_values_from_attributes()
 
     def create_new_element(self):
         return self.create_new_skill()
@@ -114,6 +115,9 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def set_values_from_attributes(self):
         for skill in self.skills:
             self._set_attr_val_for_skill(skill)
+
+    def adding_missing_element(self):
+        self.add_skill()
 
 
     def _set_attr_val_for_skill(self, skill):
