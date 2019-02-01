@@ -11,6 +11,8 @@ from gui.popups.feat_full_description import DescriptionDialog
 
 class FeatsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
+        # TODO remove button
+        # TODO - scrollbar after achieving certain height
         ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.parent = parent
 

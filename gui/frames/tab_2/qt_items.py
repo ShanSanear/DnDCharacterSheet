@@ -9,6 +9,10 @@ from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children,
 
 class ItemsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
+        # TODO Counting total items weights
+        # TODO remove button
+        # TODO - scrollbar after achieving certain height
+        # TODO - sorting by name
         ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)

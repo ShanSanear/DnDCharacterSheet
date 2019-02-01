@@ -12,6 +12,10 @@ class SkillsBox(DefaultBox, ResizeableBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
+        # TODO count total ranks
+        # TODO remove button
+        # TODO - scrollbar after achieving certain height
+        # TODO - sorting by name
         ResizeableBox.__init__(self, increase_width=0, increase_height=28)
         self.translate_reference = {
             "EN": {
