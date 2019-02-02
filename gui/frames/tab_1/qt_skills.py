@@ -49,8 +49,23 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
         self.layout.setObjectName("SkillsLayout")
         self.skills = []
-        self.create_labels()
+        self.skill_name_label = create_qlabel("skills_skill_name_label", self.container, max_size=(69, 20))
+        self.attr_choice_label = create_qlabel("skills_attr_choice_label", self.container, align=QtCore.Qt.AlignCenter,
+                                               max_size=(69, 20))
+        self.total_label = create_qlabel("skills_total_label", self.container, align=QtCore.Qt.AlignCenter,
+                                         max_size=(69, 20))
+        self.attr_mod_label = create_qlabel("skills_attr_mod_label", self.container, align=QtCore.Qt.AlignCenter,
+                                            max_size=(69, 20))
+        self.rank_label = create_qlabel("skills_rank_label", self.container, align=QtCore.Qt.AlignCenter,
+                                        max_size=(69, 20))
+        self.misc_label = create_qlabel("skills_misc_label", self.container, align=QtCore.Qt.AlignCenter,
+                                        max_size=(69, 20))
+        self.cross_class_label = create_qlabel("skills_description_label", self.container, align=QtCore.Qt.AlignCenter,
+                                               max_size=(69, 20))
+        self.labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
+                       self.rank_label, self.misc_label, self.cross_class_label, ]
         ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1,increase_width=0, increase_height=28, add_new_column=7)
+        self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
         for _ in range(1):
@@ -73,9 +88,9 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
                                                  function_on_index_changed=self._set_attr_val_for_skill,
-                                                 args_on_index_changed=[new_skill]) # max_size=(69, 20),
+                                                 args_on_index_changed=[new_skill], max_size=(69, 20),)
 
-        qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, )#max_size=[30, None]
+        qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None], )
         new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, **qdict)
 
         new_skill.attr_mod = create_qline_edit(f"skills{skill_idx}attr_mod", **qdict, enabled=False)
@@ -96,20 +111,10 @@ class SkillsBox(DefaultBox, ResizeableBox):
         return self.create_new_skill()
 
     def create_labels(self):
-
-        self.skill_name_label = create_qlabel("skills_skill_name_label", self.container,max_size=(69, 20))
-        self.attr_choice_label = create_qlabel("skills_attr_choice_label", self.container, align=QtCore.Qt.AlignCenter, max_size=(69, 20))
-        self.total_label = create_qlabel("skills_total_label", self.container, align=QtCore.Qt.AlignCenter, max_size=(69, 20))
-        self.attr_mod_label = create_qlabel("skills_attr_mod_label", self.container, align=QtCore.Qt.AlignCenter, max_size=(69, 20))
-        self.rank_label = create_qlabel("skills_rank_label", self.container, align=QtCore.Qt.AlignCenter, max_size=(69, 20))
-        self.misc_label = create_qlabel("skills_misc_label", self.container, align=QtCore.Qt.AlignCenter, max_size=(69, 20))
-        self.cross_class_label = create_qlabel("skills_description_label", self.container, align=QtCore.Qt.AlignCenter, max_size=(69, 20))
         self.add_to_layout()
 
     def add_to_layout(self):
-        labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
-                  self.rank_label, self.misc_label, self.cross_class_label, ]
-        add_multiple_elements_to_layout_by_row(self.layout, labels)
+        add_multiple_elements_to_layout_by_row(self.layout, self.labels)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
