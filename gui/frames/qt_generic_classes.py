@@ -29,6 +29,8 @@ class ResizeableBox(ABC):
         self.increase_height = increase_height
         self.root_initial_height = self.root.height()
         self.container_initial_height = self.container.height()
+        if hasattr(self, "parent"):
+            self.initial_tab_height = self.parent.tabs.height()
 
 
     def update_size(self):
@@ -43,36 +45,39 @@ class ResizeableBox(ABC):
             lower_border = vertical_position + new_root_height
             print("Lower border: ", lower_border)
             print("Item:", self)
-            self.parent.tabs.setMinimumHeight(lower_border + self.increase_height*2)
+            if self.initial_tab_height < lower_border:
+                self.parent.tabs.setMinimumHeight(lower_border + self.increase_height*2)
+            else:
+                self.parent.tabs.setMinimumHeight(self.initial_tab_height)
 
             #self.parent.setMinimumHeight(parent_height)
             #self.parent.tabs.setMinimumHeight(self.parent.tabs.height() + self.increase_height/2)
 
 
+
     def add_new_element(self):
         element_idx = len(self.elements_list)
         new_element = self.create_new_element()
-
-        if hasattr(self, "add_new"):
-            self.layout.removeWidget(self.add_new)
         self.elements_list.append(new_element)
-        values = self.elements_for_layout(self.elements_list)
-        add_multiple_elements_to_layout_by_row(self.layout, values,
-                                               row=self.row_offset+element_idx)
-        if hasattr(self, "add_new"):
-            self.layout.addWidget(self.add_new, len(self.elements_list)+1, 0, 1, 1)
-        self.update_size()
+        values = self.elements_for_layout(new_element)
+
+        self.adding_new_element_to_layout(element_idx, values)
         if hasattr(self, "set_values_from_attributes"):
             self.set_values_from_attributes()
+        self.update_size()
 
-    def elements_for_layout(self, elements_list, idx=-1):
-        return [elements_list[idx].__dict__[element] for element in elements_list[-1].__dict__ if
+    def adding_new_element_to_layout(self, element_idx, values):
+        if hasattr(self, "add_new"):
+            self.layout.removeWidget(self.add_new)
+        add_multiple_elements_to_layout_by_row(self.layout, values,
+                                               row=self.row_offset + element_idx)
+        if hasattr(self, "add_new"):
+            self.place_add_button()
+
+    def elements_for_layout(self, new_element):
+        return [new_element.__dict__[element] for element in new_element.__dict__ if
                 not element.startswith("_")]
 
     @abstractmethod
     def create_new_element(self):
-        pass
-
-    @abstractmethod
-    def adding_missing_element(self):
         pass
