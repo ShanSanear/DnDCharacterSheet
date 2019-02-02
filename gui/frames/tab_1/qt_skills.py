@@ -103,6 +103,9 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
         new_skill.cross_class_checkbox = QtWidgets.QCheckBox(self.container)
         new_skill.cross_class_checkbox.setObjectName(f"skills{skill_idx}description_button")
+        new_skill.delete_skill = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
+                                                    function_on_clicked=self._remove_element, args_on_clicked=new_skill)
+
 
         return new_skill
 

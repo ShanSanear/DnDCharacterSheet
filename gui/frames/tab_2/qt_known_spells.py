@@ -59,7 +59,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         }
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         ResizeableBox.__init__(self, elements_list=self.spells, row_offset=1, increase_width=0, increase_height=28,
-                               add_new_column=5)
+                               add_new_column=4)
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
         for _ in range(15):
@@ -85,6 +85,8 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
                                                           function_on_clicked=self.show_description,
                                                           args_on_clicked=new_spell, text="...")
         new_spell._full_description = ""
+        new_spell.delete_spell = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
+                                                  function_on_clicked=self._remove_element, args_on_clicked=new_spell)
 
         set_text_of_children(new_spell, self.translate_reference_new_element["EN"])
         return new_spell
