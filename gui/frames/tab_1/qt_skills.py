@@ -50,7 +50,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.layout.setObjectName("SkillsLayout")
         self.skills = []
         self.create_labels()
-        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1,increase_width=0, increase_height=28)
+        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1,increase_width=0, increase_height=28, add_new_column=7)
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
         for _ in range(1):
@@ -117,10 +117,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def set_values_from_attributes(self):
         for skill in self.skills:
             self._set_attr_val_for_skill(skill)
-
-
-    def place_add_button(self):
-        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, 7, 1, 1)
 
 
     def _set_attr_val_for_skill(self, skill):

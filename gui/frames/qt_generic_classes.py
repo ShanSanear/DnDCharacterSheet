@@ -121,7 +121,7 @@ class ResizeableBox(ABC):
             self.adding_new_element_to_layout(element_idx, values)
 
     def place_add_button(self):
-        self.layout.addWidget(self.add_new, len(self.items_list) + 1, self.add_new_column, 1, 1)
+        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.add_new_column, 1, 1)
 
     @abstractmethod
     def create_new_element(self):

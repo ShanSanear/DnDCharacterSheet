@@ -58,7 +58,8 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
             }
         }
 
-        ResizeableBox.__init__(self, elements_list=self.spells, row_offset=1, increase_width=0, increase_height=28)
+        ResizeableBox.__init__(self, elements_list=self.spells, row_offset=1, increase_width=0, increase_height=28,
+                               add_new_column=5)
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
         for _ in range(15):
@@ -93,8 +94,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=[self.lvl_label, self.name_label,
                                                                              self.short_description_label,
                                                                              self.description_button_label])
-    def place_add_button(self):
-        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, 5, 1, 1)
 
     def show_description(self, spell):
         dialog = DescriptionDialog("Spell description", self.root, spell)
