@@ -22,7 +22,7 @@ class DefaultBox(ABC):
 
 class ResizeableBox(ABC):
 
-    def __init__(self, elements_list, row_offset, increase_width, increase_height):
+    def __init__(self, elements_list, row_offset, increase_width, increase_height, add_new_column=4):
         self.elements_list = elements_list
         self.row_offset = row_offset
         self.increase_width = increase_width
@@ -31,6 +31,7 @@ class ResizeableBox(ABC):
         self.container_initial_height = self.container.height()
         if hasattr(self, "parent"):
             self.initial_tab_height = self.parent.tabs.height()
+        self.add_new_column = add_new_column
 
 
     def update_size(self):
@@ -77,6 +78,50 @@ class ResizeableBox(ABC):
     def elements_for_layout(self, new_element):
         return [new_element.__dict__[element] for element in new_element.__dict__ if
                 not element.startswith("_")]
+
+    def _remove_element(self, element):
+        idx = self._get_element_index(element)
+        print(idx)
+        self._delete_from_layout(element)
+        del self.elements_list[idx]
+        self.update_layout()
+        self.update_size()
+
+    def update_layout(self):
+        self.remove_widgets_from_layout()
+        self.add_widgets_again()
+
+    def _get_element_index(self, element):
+        for idx, searched_for in enumerate(self.elements_list):
+            if element == searched_for:
+                return idx
+
+    def _delete_from_layout(self, element):
+        elements = self.elements_for_layout(element)
+        for element in elements:
+            element.setParent(None)
+
+
+    def remove_widgets_from_layout(self):
+        widgets = self.labels + [self.add_new]
+        for widget in widgets:
+            self.layout.removeWidget(widget)
+        for idx, item in reversed(list(enumerate(self.elements_list))):
+            subwidgets = self.elements_for_layout(item)
+            for widget in subwidgets:
+                self.layout.removeWidget(widget)
+
+    def add_widgets_again(self):
+        self.add_to_layout()
+        self._add_all_elements_to_layout()
+
+    def _add_all_elements_to_layout(self):
+        for element_idx, element in enumerate(self.elements_list):
+            values = self.elements_for_layout(element)
+            self.adding_new_element_to_layout(element_idx, values)
+
+    def place_add_button(self):
+        self.layout.addWidget(self.add_new, len(self.items_list) + 1, self.add_new_column, 1, 1)
 
     @abstractmethod
     def create_new_element(self):
