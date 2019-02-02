@@ -57,7 +57,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
                                      "eget efficitur elit convallis eu."
             }
         }
-
+        self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         ResizeableBox.__init__(self, elements_list=self.spells, row_offset=1, increase_width=0, increase_height=28,
                                add_new_column=5)
         self.add_spell = self.add_new_element
@@ -73,7 +73,8 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
     def create_spell(self):
         idx = len(self.spells)
         new_spell = SimpleNamespace()
-        new_spell.lvl = create_qline_edit(f"known_spells_{idx}_lvl", parent=self.container, max_size=[20, None], min_size=[None, 23])
+        new_spell.lvl = create_qline_edit(f"known_spells_{idx}_lvl", parent=self.container, max_size=[20, None],
+                                          min_size=[None, 23])
         new_spell.name = create_qline_edit(f"known_spells_{idx}_name", parent=self.container, min_size=[None, 23])
 
         new_spell.short_description = create_qline_edit(f"known_spells_{idx}_description_field",
@@ -81,7 +82,8 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         new_spell.description_button = create_push_button(f"known_spells_{idx}_description_button",
                                                           parent=self.container, max_size=[20, None],
                                                           min_size=[None, 23],
-                                                          function_on_clicked=self.show_description, args_on_clicked=new_spell, text="...")
+                                                          function_on_clicked=self.show_description,
+                                                          args_on_clicked=new_spell, text="...")
         new_spell._full_description = ""
 
         set_text_of_children(new_spell, self.translate_reference_new_element["EN"])
@@ -91,9 +93,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         return self.create_spell()
 
     def add_to_layout(self):
-        add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=[self.lvl_label, self.name_label,
-                                                                             self.short_description_label,
-                                                                             self.description_button_label])
+        add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=self.labels)
 
     def show_description(self, spell):
         dialog = DescriptionDialog("Spell description", self.root, spell)
@@ -101,4 +101,3 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
