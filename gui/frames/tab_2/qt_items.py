@@ -36,12 +36,14 @@ class ItemsBox(DefaultBox, ResizeableBox):
         }}
         self.items = []
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
+        self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label, self.items_description_label]
+        ResizeableBox.__init__(self, elements_list=self.items, row_offset=1, increase_width=0, increase_height=28)
         self.add_to_layout()
         self.translate("EN")
-        ResizeableBox.__init__(self, elements_list=self.items, row_offset=1, increase_width=0, increase_height=28)
         self.add_item = self.add_new_element
         self.add_new.clicked.connect(self.add_item)
         self.root.setLayout(self.layout)
+
 
     def create_new_item(self):
         new_item = SimpleNamespace()
@@ -60,21 +62,24 @@ class ItemsBox(DefaultBox, ResizeableBox):
         return self.create_new_item()
 
     def add_to_layout(self):
-        labels = [self.items_name_label, self.items_weight_label, self.items_count_label, self.items_description_label]
-        add_multiple_elements_to_layout_by_row(self.layout, labels)
-        self.layout.addWidget(self.add_new, 1, 0, 1, 1)
+        add_multiple_elements_to_layout_by_row(self.layout, self.labels)
+        self.place_add_button()
+
+
+    def place_add_button(self):
+        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, 4, 1, 1)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
 
-    def adding_missing_element(self):
-        self.add_item()
 
     def _remove_item(self, item):
+        self.update_layout()
         idx = self._get_item_index(item)
         print(idx)
-        self._remove_from_layout(item, idx)
+        self._delete_from_layout(item)
         del self.items[idx]
+        self.add_widgets_again(self.items)
         self.update_size()
 
     def _get_item_index(self, item):
@@ -82,8 +87,28 @@ class ItemsBox(DefaultBox, ResizeableBox):
             if item == searched_for:
                 return idx
 
-    def _remove_from_layout(self, item, idx):
-        elements = self.elements_for_layout(self.items, idx)
+    def _delete_from_layout(self, item):
+        elements = self.elements_for_layout(item)
         for element in elements:
             element.setParent(None)
+
+    def update_layout(self):
+        self.remove_widgets_from_layout(self.layout, self.labels + [self.add_new])
+
+    def remove_widgets_from_layout(self, layout, labels):
+        for element in labels:
+            layout.removeWidget(element)
+        for idx, item in reversed(list(enumerate(self.items))):
+            elements = self.elements_for_layout(item)
+            for element in elements:
+                layout.removeWidget(element)
+
+    def add_widgets_again(self, items):
+        self.add_to_layout()
+        self._add_all_items_to_layout(items)
+
+    def _add_all_items_to_layout(self, items):
+        for element_idx, item in enumerate(items):
+            values = self.elements_for_layout(item)
+            self.adding_new_element_to_layout(element_idx, values)
 

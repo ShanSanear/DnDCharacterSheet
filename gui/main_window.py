@@ -52,6 +52,7 @@ class MainWindowUi(QMainWindow):
         scroll.setWidgetResizable(True)
         self.setCentralWidget(scroll)
         self.add_base_elements()
+        self.tabs.setCurrentIndex(1)
 
     def create_tab_1(self):
         # attacks ABOVE weapons
