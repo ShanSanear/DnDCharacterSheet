@@ -22,7 +22,6 @@ class SavingThrowsBox(DefaultBox):
         self.layout.setContentsMargins(20, 10, 10, 20)
         self.layout.setSpacing(10)
         qlabel_dict = dict(parent=self.container, min_size=(60, 18), max_size=(60, 23))
-        qline_dict = dict(parent=self.container, min_size=(15, 23))
         qline_dict_disabled = dict(parent=self.container, min_size=(15, 23), enabled=False)
         qline_update_fortitude = dict(parent=self.container, min_size=(15, 23),
                                       function_on_text_changed=self._update_fortitude_text)

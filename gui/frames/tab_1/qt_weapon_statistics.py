@@ -27,10 +27,10 @@ class WeaponStatisticsBox(DefaultBox):
         self.ranged_damage = create_qline_edit("weapon_statistics_ranged_damage", **qline_dict)
         self.melee_damage = create_qline_edit("weapon_statistics_melee_damage", **qline_dict)
         self.ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus", enabled=False,
-                                                                       **qline_dict)
+                                                     **qline_dict)
         self.ranged_crit = create_qline_edit("weapon_statistics_ranged_crit", **qline_dict)
         self.melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus", enabled=False,
-                                                                      **qline_dict)
+                                                    **qline_dict)
         self.melee_crit = create_qline_edit("weapon_statistics_melee_crit", **qline_dict)
 
         self.attack_bonus_label = create_qlabel("weapon_statistics_attack_bonus_label", **qlabel_dict)

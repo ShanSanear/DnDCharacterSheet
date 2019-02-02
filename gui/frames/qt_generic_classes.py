@@ -5,6 +5,7 @@ from PyQt5 import QtCore
 from gui.frames.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
     get_general_dict_repr
 
+
 class DefaultBox(ABC):
     @abstractmethod
     def add_to_layout(self, **kwargs):
@@ -33,7 +34,6 @@ class ResizeableBox(ABC):
             self.initial_tab_height = self.parent.tabs.height()
         self.add_new_column = add_new_column
 
-
     def update_size(self):
         new_root_height = self.root_initial_height + self.increase_height * len(self.elements_list)
         new_container_height = self.container_initial_height + self.increase_height * len(self.elements_list)
@@ -47,14 +47,12 @@ class ResizeableBox(ABC):
             print("Lower border: ", lower_border)
             print("Item:", self)
             if self.initial_tab_height < lower_border:
-                self.parent.tabs.setMinimumHeight(lower_border + self.increase_height*2)
+                self.parent.tabs.setMinimumHeight(lower_border + self.increase_height * 2)
             else:
                 self.parent.tabs.setMinimumHeight(self.initial_tab_height)
 
-            #self.parent.setMinimumHeight(parent_height)
-            #self.parent.tabs.setMinimumHeight(self.parent.tabs.height() + self.increase_height/2)
-
-
+            # self.parent.setMinimumHeight(parent_height)
+            # self.parent.tabs.setMinimumHeight(self.parent.tabs.height() + self.increase_height/2)
 
     def add_new_element(self):
         element_idx = len(self.elements_list)
@@ -100,7 +98,6 @@ class ResizeableBox(ABC):
         elements = self.elements_for_layout(element)
         for element in elements:
             element.setParent(None)
-
 
     def remove_widgets_from_layout(self):
         widgets = self.labels + [self.add_new]

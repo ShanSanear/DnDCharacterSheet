@@ -32,7 +32,6 @@ class AttacksBox(DefaultBox):
                     "ranged_label": "Ranged",
                 }
         }
-        qline_dict = dict(parent=self.container, )
         qline_dict_disabled = dict(parent=self.container, enabled=False)
         qline_dict_ranged = dict(parent=self.container, function_on_text_changed=self._update_ranged_attack)
         qline_dict_melee = dict(parent=self.container, function_on_text_changed=self._update_melee_attack)

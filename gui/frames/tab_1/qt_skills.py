@@ -64,7 +64,8 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                max_size=(69, 20))
         self.labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
                        self.rank_label, self.misc_label, self.cross_class_label, ]
-        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1,increase_width=0, increase_height=28, add_new_column=7)
+        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
+                               add_new_column=7)
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
@@ -88,7 +89,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
                                                  function_on_index_changed=self._set_attr_val_for_skill,
-                                                 args_on_index_changed=[new_skill], max_size=(69, 20),)
+                                                 args_on_index_changed=[new_skill], max_size=(69, 20), )
 
         qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None], )
         new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, **qdict)
@@ -106,9 +107,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         new_skill.delete_skill = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
                                                     function_on_clicked=self._remove_element, args_on_clicked=new_skill)
 
-
         return new_skill
-
 
     def create_new_element(self):
         return self.create_new_skill()
@@ -125,7 +124,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def set_values_from_attributes(self):
         for skill in self.skills:
             self._set_attr_val_for_skill(skill)
-
 
     def _set_attr_val_for_skill(self, skill):
         chosen_attr_idx = skill.attr_choice.currentIndex()

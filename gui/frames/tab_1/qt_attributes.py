@@ -23,7 +23,7 @@ class AttributesBox(DefaultBox):
 
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("AttributesLayout")
-        #self.layout.setContentsMargins(8,8,8,8)
+        # self.layout.setContentsMargins(8,8,8,8)
         self.layout.setSpacing(10)
         self.layout.setContentsMargins(20, 10, 10, 20)
 
@@ -69,7 +69,7 @@ class AttributesBox(DefaultBox):
                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter,
                                 )
         self.qlabel_header_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, )
-        self.qline_dict = dict(parent=self.container,)
+        self.qline_dict = dict(parent=self.container, )
         self.qline_dict_mod = dict(parent=self.container, enabled=False)
 
         self.generate_head_labels()
@@ -94,7 +94,8 @@ class AttributesBox(DefaultBox):
         elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
         for element in elements[1:]:
             if "mod" in element:
-                setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict_mod))
+                setattr(attr_reference, element,
+                        create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict_mod))
             else:
                 setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict))
         setattr(attr_reference, 'label', create_qlabel(f"attr_{attr_name}_label", **self.qlabel_dict))

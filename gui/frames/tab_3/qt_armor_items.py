@@ -17,7 +17,7 @@ class ArmorItems(DefaultBox):
         self.armors = []
         self.item_count = len(self.armors)
         self.translate_reference_new_element = {
-            "EN": { "root": {
+            "EN": {"root": {
                 "title": f"Armor_0"
             },
                 "test_penalty": "10",
@@ -96,7 +96,6 @@ class ArmorItems(DefaultBox):
 
     def add_to_layout(self, **kwargs):
         pass
-
 
     def _add_new_element_to_layout(self, new_armor):
         first_row_to_add = [new_armor.name_label, new_armor.type_label, new_armor.ac_bonus_label,

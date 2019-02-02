@@ -30,9 +30,9 @@ class MainWindowUi(QMainWindow):
         self.resize(1320, 830)
         self.tabs = QTabWidget(self)
         self.tabs.setMinimumSize(1300, 780)
-        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
-        sizePolicy.setHeightForWidth(True)
-        self.tabs.setSizePolicy(sizePolicy)
+        size_policy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
+        size_policy.setHeightForWidth(True)
+        self.tabs.setSizePolicy(size_policy)
         self.tab1 = QWidget(self.tabs)
         self.tab1.tabs = self.tabs
         self.tab2 = QWidget(self.tabs)

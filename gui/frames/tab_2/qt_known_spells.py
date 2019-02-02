@@ -86,7 +86,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
                                                           args_on_clicked=new_spell, text="...")
         new_spell._full_description = ""
         new_spell.delete_spell = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
-                                                  function_on_clicked=self._remove_element, args_on_clicked=new_spell)
+                                                    function_on_clicked=self._remove_element, args_on_clicked=new_spell)
 
         set_text_of_children(new_spell, self.translate_reference_new_element["EN"])
         return new_spell
