@@ -1,2 +1,2 @@
-from . import feat_full_description
+from . import qt_full_description
 
