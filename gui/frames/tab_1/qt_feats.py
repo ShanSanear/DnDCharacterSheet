@@ -26,7 +26,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.description_field_label = create_qlabel("feat_name_label", self.container)
         self.description_label = create_qlabel("feat_description_label", self.container)
         self.labels = [self.name_label, self.description_field_label, self.description_label]
-        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         self.feats = []
         self.translate_reference = {
             "EN":
@@ -82,10 +82,10 @@ class FeatsBox(DefaultBox, ResizeableBox):
 
         new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
-                                                         self.container, max_size=[20, None], )
+                                                         self.container, min_size=[20, 20], max_size=[20, 20], )
         new_feat.description_button.clicked.connect(partial(self.show_description, new_feat))
         new_feat._full_description = "ABCD"
-        new_feat.delete_feat = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
+        new_feat.delete_feat = create_push_button("item_delete", self.container,min_size=[20, 20], max_size=[20, 20], text="-",
                                                   function_on_clicked=self._remove_element, args_on_clicked=new_feat)
         set_text_of_children(new_feat, self.translate_reference_new_element["EN"])
 

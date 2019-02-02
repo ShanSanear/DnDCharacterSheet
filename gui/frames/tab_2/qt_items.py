@@ -21,7 +21,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("gridLayoutWidget_8")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("ItemsLayout")
-        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         qlabel_dict = dict(parent=self.container)
         self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
         self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
@@ -55,7 +55,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         new_item.count = create_qline_edit("item_count", self.container, min_size=[None, 23],
                                            max_size=[20, None])
         new_item.description = create_qline_edit("item_description", self.container, min_size=[None, 23])
-        new_item.delete_item = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
+        new_item.delete_item = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
                                                   function_on_clicked=self._remove_element, args_on_clicked=new_item)
 
         return new_item

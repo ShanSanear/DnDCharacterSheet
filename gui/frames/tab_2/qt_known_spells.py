@@ -21,7 +21,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("KnownSpellsQwidget")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("KnownSpellsLayout")
-        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
 
         self.spells = []
         qlabel_dict = dict(parent=self.container, max_size=(20, None))
@@ -80,12 +80,11 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         new_spell.short_description = create_qline_edit(f"known_spells_{idx}_description_field",
                                                         parent=self.container, min_size=[350, 23])
         new_spell.description_button = create_push_button(f"known_spells_{idx}_description_button",
-                                                          parent=self.container, max_size=[20, None],
-                                                          min_size=[None, 23],
+                                                          parent=self.container, min_size=[20, 20], max_size=[20, 20],
                                                           function_on_clicked=self.show_description,
                                                           args_on_clicked=new_spell, text="...")
         new_spell._full_description = ""
-        new_spell.delete_spell = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
+        new_spell.delete_spell = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
                                                     function_on_clicked=self._remove_element, args_on_clicked=new_spell)
 
         set_text_of_children(new_spell, self.translate_reference_new_element["EN"])

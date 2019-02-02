@@ -46,7 +46,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.container = QtWidgets.QWidget(self.root)
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.add_new = create_push_button("add_new_feat", self.container, max_size=[20, None], text="+")
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         self.layout.setObjectName("SkillsLayout")
         self.skills = []
         self.skill_name_label = create_qlabel("skills_skill_name_label", self.container, max_size=(69, 20))
@@ -104,7 +104,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
         new_skill.cross_class_checkbox = QtWidgets.QCheckBox(self.container)
         new_skill.cross_class_checkbox.setObjectName(f"skills{skill_idx}description_button")
-        new_skill.delete_skill = create_push_button("item_delete", self.container, max_size=[20, None], text="-",
+        new_skill.delete_skill = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
                                                     function_on_clicked=self._remove_element, args_on_clicked=new_skill)
 
         return new_skill
