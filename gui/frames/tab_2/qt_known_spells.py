@@ -93,6 +93,8 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=[self.lvl_label, self.name_label,
                                                                              self.short_description_label,
                                                                              self.description_button_label])
+    def place_add_button(self):
+        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, 5, 1, 1)
 
     def show_description(self, spell):
         dialog = DescriptionDialog("Spell description", self.root, spell)
@@ -101,5 +103,3 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
 
-    def adding_missing_element(self):
-        self.add_spell()

@@ -118,8 +118,9 @@ class SkillsBox(DefaultBox, ResizeableBox):
         for skill in self.skills:
             self._set_attr_val_for_skill(skill)
 
-    def adding_missing_element(self):
-        self.add_skill()
+
+    def place_add_button(self):
+        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, 7, 1, 1)
 
 
     def _set_attr_val_for_skill(self, skill):

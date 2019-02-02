@@ -66,7 +66,10 @@ class FeatsBox(DefaultBox, ResizeableBox):
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label,
                                                              self.description_field_label])
-        self.layout.addWidget(self.add_new, 1, 0, 1, 1)
+        self.place_add_button()
+
+    def place_add_button(self):
+        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, 3, 1, 1)
 
 
     def show_description(self, feat):
@@ -87,6 +90,3 @@ class FeatsBox(DefaultBox, ResizeableBox):
         set_text_of_children(new_feat, self.translate_reference_new_element["EN"])
 
         return new_feat
-
-    def adding_missing_element(self):
-        self.add_feat()
