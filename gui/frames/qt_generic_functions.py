@@ -130,7 +130,7 @@ def set_text_of_children(root_object, to_set: dict):
                     set_text_of_children(obj_ref[idx], element_data)
                 except IndexError:
                     # TODO - Maybe call adding missing elements multiple times, THEN adding objects?
-                    root_object.adding_missing_element()
+                    root_object.add_new_element()
                     set_text_of_children(obj_ref[idx], element_data)
         elif isinstance(obj_ref, QComboBox):
             obj_ref.setCurrentIndex(data_to_set)
