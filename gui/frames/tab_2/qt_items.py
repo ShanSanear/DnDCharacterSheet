@@ -21,6 +21,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("ItemsLayout")
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
+        self.last_row = [self.add_new]
         qlabel_dict = dict(parent=self.container)
         self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
         self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)

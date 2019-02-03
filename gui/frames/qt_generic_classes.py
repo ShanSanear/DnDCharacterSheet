@@ -101,7 +101,7 @@ class ResizeableBox(ABC):
             element.setParent(None)
 
     def remove_widgets_from_layout(self):
-        widgets = self.labels + [self.add_new]
+        widgets = self.labels + self.last_row
         for widget in widgets:
             self.layout.removeWidget(widget)
         for idx, item in reversed(list(enumerate(self.elements_list))):

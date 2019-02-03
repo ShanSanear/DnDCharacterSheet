@@ -45,6 +45,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
+        self.last_row = [self.add_new]
         self.layout.setObjectName("SkillsLayout")
         self.skills = []
         self.skill_name_label = create_qlabel("skills_skill_name_label", self.container, max_size=(69, 20))

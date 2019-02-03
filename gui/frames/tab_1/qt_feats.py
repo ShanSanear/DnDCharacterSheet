@@ -28,6 +28,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.labels = [self.name_label, self.description_field_label, self.description_label]
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")
+        self.last_row = [self.add_new]
         self.feats = []
         self.translate_reference = {
             "EN":

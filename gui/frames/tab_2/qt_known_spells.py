@@ -21,6 +21,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.layout.setObjectName("KnownSpellsLayout")
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
+        self.last_row = [self.add_new]
 
         self.spells = []
         qlabel_dict = dict(parent=self.container, max_size=(20, None))
