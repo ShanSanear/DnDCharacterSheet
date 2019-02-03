@@ -15,7 +15,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
         # TODO count total ranks
         # TODO remove button
         # TODO - scrollbar after achieving certain height
-        # TODO - sorting by name
         self.translate_reference = {
             "EN": {
                 "root": {
@@ -81,8 +80,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         new_skill = SimpleNamespace()
         skill_idx = len(self.skills)
         new_skill.name = create_qline_edit(f"skills{skill_idx}skill_name", self.container,
-                                                 align=QtCore.Qt.AlignCenter, min_size=(150, None),
-                                                 function_on_unfocused=self.sort_elements)
+                                                 min_size=(150, None), function_on_unfocused=self.sort_elements)
         new_skill.name.setText(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
             "Praesent sapien urna, egestas eu tempor at, pretium nec orci.")

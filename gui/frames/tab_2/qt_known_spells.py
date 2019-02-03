@@ -12,7 +12,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO remove button
         # TODO - scrollbar after achieving certain height
-        # TODO - sorting by lvl -> name
         self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))

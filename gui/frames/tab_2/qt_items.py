@@ -12,7 +12,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         # TODO Counting total items weights
         # TODO remove button
         # TODO - scrollbar after achieving certain height
-        # TODO - sorting by name
         self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
