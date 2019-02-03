@@ -18,6 +18,17 @@ def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size
     return element
 
 
+def create_checkbox(parent: QtWidgets.QWidget, name: str, function_on_toggle=None, args_on_toggle=None):
+    checkbox = QtWidgets.QCheckBox(parent)
+    checkbox.setObjectName(name)
+    if function_on_toggle:
+        if not args_on_toggle:
+            checkbox.toggled.connect(function_on_toggle)
+        else:
+            checkbox.toggled.connect(partial(function_on_toggle, args_on_toggle))
+    return checkbox
+
+
 def create_qlabel(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None, max_size: (list, tuple) = None,
                   align=None):
     label = QtWidgets.QLabel(parent)
@@ -50,12 +61,12 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
             qline.textChanged.connect(partial(function_on_text_changed, *args_on_text_changed))
     qline.setObjectName(name)
 
-
     return qline
 
 
 def create_push_button(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
-                       max_size: (list, tuple) = None, text: str = None, function_on_clicked=None, args_on_clicked=None):
+                       max_size: (list, tuple) = None, text: str = None, function_on_clicked=None,
+                       args_on_clicked=None):
     button = QtWidgets.QPushButton(parent)
     button.setObjectName(name)
     button: QtWidgets.QPushButton = resize_element(button, min_size, max_size)
@@ -220,4 +231,3 @@ class MyQlineEdit(QLineEdit):
                 self.function_on_unfocused(*self.args_on_unfocused)
         self.setCursorPosition(0)
         super(MyQlineEdit, self).focusOutEvent(q_focus_event)
-
