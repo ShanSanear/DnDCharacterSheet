@@ -96,8 +96,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                  args_on_index_changed=[new_skill], max_size=(69, 20), )
 
         qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None], )
-        new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, **qdict)
-
+        new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, str_format="{:+d}", **qdict)
         new_skill.attr_mod = create_qline_edit(f"skills{skill_idx}attr_mod", **qdict, enabled=False)
         new_skill.rank = create_qline_edit(f"skills{skill_idx}rank", function_on_text_changed=self._update_skill,
                                            args_on_text_changed=[new_skill], **qdict)
