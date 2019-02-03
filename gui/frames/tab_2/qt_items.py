@@ -37,7 +37,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
         self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label, self.items_description_label]
         ResizeableBox.__init__(self, elements_list=self.items, row_offset=1, increase_width=0, increase_height=28,
-                               add_new_column=4)
+                               last_row_column=4)
         self.add_to_layout()
         self.translate("EN")
         self.add_item = self.add_new_element
@@ -65,7 +65,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
 
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, self.labels)
-        self.place_add_button()
+        self.add_last_row()
 
 
     def translate(self, language):

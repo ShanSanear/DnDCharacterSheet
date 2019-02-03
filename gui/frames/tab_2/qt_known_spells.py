@@ -10,7 +10,6 @@ from gui.popups.qt_full_description import DescriptionDialog
 
 class KnownSpellsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
-        # TODO remove button
         # TODO - scrollbar after achieving certain height
         self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)
@@ -59,7 +58,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         }
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         ResizeableBox.__init__(self, elements_list=self.spells, row_offset=1, increase_width=0, increase_height=28,
-                               add_new_column=4)
+                               last_row_column=4)
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
         for _ in range(15):

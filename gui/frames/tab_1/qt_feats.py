@@ -47,7 +47,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         }
 
         ResizeableBox.__init__(self, elements_list=self.feats, row_offset=1, increase_width=0, increase_height=28,
-                               add_new_column=3)
+                               last_row_column=3)
         self.add_to_layout()
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)
@@ -67,7 +67,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label,
                                                              self.description_field_label])
-        self.place_add_button()
+        self.add_last_row()
 
     def show_description(self, feat):
         dialog = DescriptionDialog("Feat description", self.root, feat)

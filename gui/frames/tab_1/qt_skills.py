@@ -63,7 +63,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
                        self.rank_label, self.misc_label, self.cross_class_label, ]
         ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
-                               add_new_column=7)
+                               last_row_column=7)
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)

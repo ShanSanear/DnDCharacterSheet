@@ -24,7 +24,7 @@ class DefaultBox(ABC):
 
 class ResizeableBox(ABC):
 
-    def __init__(self, elements_list, row_offset, increase_width, increase_height, add_new_column=4):
+    def __init__(self, elements_list, row_offset, increase_width, increase_height, last_row_column=4):
         self.elements_list = elements_list
         self.row_offset = row_offset
         self.increase_width = increase_width
@@ -33,7 +33,7 @@ class ResizeableBox(ABC):
         self.container_initial_height = self.container.height()
         if hasattr(self, "parent"):
             self.initial_tab_height = self.parent.tabs.height()
-        self.add_new_column = add_new_column
+        self.last_row_column = last_row_column
 
     def update_size(self):
         new_root_height = self.root_initial_height + self.increase_height * len(self.elements_list)
@@ -72,7 +72,7 @@ class ResizeableBox(ABC):
         add_multiple_elements_to_layout_by_row(self.layout, values,
                                                row=self.row_offset + element_idx)
         if hasattr(self, "add_new"):
-            self.place_add_button()
+            self.add_last_row()
 
     def elements_for_layout(self, new_element):
         return [new_element.__dict__[element] for element in new_element.__dict__ if
@@ -118,8 +118,10 @@ class ResizeableBox(ABC):
             values = self.elements_for_layout(element)
             self.adding_new_element_to_layout(element_idx, values)
 
-    def place_add_button(self):
-        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.add_new_column, 1, 1)
+    def add_last_row(self):
+        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
+        # add_multiple_elements_to_layout_by_row(self.layout, self.last_row, row=len(self.elements_list) + 1,
+        #                                        start_column=self.add_new_column)
 
     def sort_elements(self):
         self.elements_list = sorted(self.elements_list, key=self._sort_element)
