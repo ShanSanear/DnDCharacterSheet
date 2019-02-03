@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QLineEdit
 
 from gui.frames.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
     get_general_dict_repr
@@ -86,7 +87,6 @@ class ResizeableBox(ABC):
         self.update_size()
 
     def update_layout(self):
-        self.sort_elements()
         self.remove_widgets_from_layout()
         self.add_widgets_again()
 
@@ -127,6 +127,7 @@ class ResizeableBox(ABC):
                 self.elements_list = sorted(self.elements_list, key=lambda element: (element.lvl.text(), element.name.text()))
             else:
                 self.elements_list = sorted(self.elements_list, key=lambda element: element.name.text())
+        self.update_layout()
 
 
     @abstractmethod
