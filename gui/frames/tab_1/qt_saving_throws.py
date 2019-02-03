@@ -30,19 +30,19 @@ class SavingThrowsBox(DefaultBox):
         qline_update_will = dict(parent=self.container, min_size=(15, 23),
                                  function_on_text_changed=self._update_will_text)
 
-        self.fortitude_total = create_qline_edit("fortitude_total", **qline_dict_disabled)
+        self.fortitude_total = create_qline_edit("fortitude_total", str_format="{:+d}", **qline_dict_disabled)
         self.fortitude_class_bonus = create_qline_edit("fortitude_class_base", **qline_update_fortitude)
         self.fortitude_attr_bonus = create_qline_edit("fortitude_attr_bonus", **qline_dict_disabled)
         self.fortitude_size_bonus = create_qline_edit("fortitude_size_bonus", **qline_update_fortitude)
         self.fortitude_misc_bonus = create_qline_edit("fortitude_misc_bonus", **qline_update_fortitude)
 
-        self.reflex_total = create_qline_edit("reflex_total", **qline_dict_disabled)
+        self.reflex_total = create_qline_edit("reflex_total", str_format="{:+d}", **qline_dict_disabled)
         self.reflex_class_bonus = create_qline_edit("reflex_class_bonus", **qline_update_reflex)
         self.reflex_attr_bonus = create_qline_edit("reflex_attr_bonus", **qline_dict_disabled)
         self.reflex_size_bonus = create_qline_edit("reflex_size_bonus", **qline_update_reflex)
         self.reflex_misc_bonus = create_qline_edit("reflex_misc_bonus", **qline_update_reflex)
 
-        self.will_total = create_qline_edit("will_total", **qline_dict_disabled)
+        self.will_total = create_qline_edit("will_total", str_format="{:+d}", **qline_dict_disabled)
         self.will_class_bonus = create_qline_edit("will_class_bonus", **qline_update_will)
         self.will_attr_bonus = create_qline_edit("will_attr_bonus", **qline_dict_disabled)
         self.will_size_bonus = create_qline_edit("will_size_bonus", **qline_update_will)

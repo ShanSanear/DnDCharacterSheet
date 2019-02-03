@@ -42,7 +42,7 @@ class InitiativeSpeedBox(DefaultBox):
         self.speed_label = create_qlabel("speed_label", parent=self.container)
         self.speed_armor_type_label = create_qlabel("speed_armor_type_label", parent=self.container)
 
-        self.initiative_total = create_qline_edit("initiative_total", parent=self.container, enabled=False)
+        self.initiative_total = create_qline_edit("initiative_total", parent=self.container, str_format="{:+d}", enabled=False)
         self.initiative_misc_bonus = create_qline_edit("initiative_misc_bonus", **qline_update)
         self.initiative_dex_bonus = create_qline_edit("initiative_dex_bonus", parent=self.container, enabled=False)
         self.speed_total = create_qline_edit("speed_total", parent=self.container)

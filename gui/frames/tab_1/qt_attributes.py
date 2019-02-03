@@ -70,7 +70,7 @@ class AttributesBox(DefaultBox):
                                 )
         self.qlabel_header_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, )
         self.qline_dict = dict(parent=self.container, )
-        self.qline_dict_mod = dict(parent=self.container, enabled=False)
+        self.qline_dict_mod = dict(parent=self.container, str_format="{:+d}", enabled=False)
 
         self.generate_head_labels()
         self.generate_attributes_elements()
