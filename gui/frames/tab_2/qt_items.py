@@ -48,7 +48,8 @@ class ItemsBox(DefaultBox, ResizeableBox):
 
     def create_new_item(self):
         new_item = SimpleNamespace()
-        new_item.name = create_qline_edit("item_name", self.container, min_size=[0, 23])
+        new_item.name = create_qline_edit("item_name", self.container, min_size=[0, 23],
+                                          function_on_unfocused=self.sort_elements)
         new_item.weight = create_qline_edit("item_weight", self.container, min_size=[None, 23],
                                             max_size=[20, None])
 
