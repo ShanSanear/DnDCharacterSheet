@@ -122,12 +122,20 @@ class ResizeableBox(ABC):
         self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.add_new_column, 1, 1)
 
     def sort_elements(self):
-        if len(self.elements_list):
-            if hasattr(self.elements_list[0], 'lvl'):
-                self.elements_list = sorted(self.elements_list, key=lambda element: (element.lvl.text(), element.name.text()))
-            else:
-                self.elements_list = sorted(self.elements_list, key=lambda element: element.name.text())
+        self.elements_list = sorted(self.elements_list, key=self._sort_element)
         self.update_layout()
+
+    def _sort_element(self, element):
+        if hasattr(element, 'lvl'):
+            try:
+                lvl = int(element.lvl.text())
+            except ValueError:
+                lvl = 0
+            return element.name.text() == "", lvl, element.name.text()
+        else:
+            return element.name.text() == "", element.name.text()
+
+
 
 
     @abstractmethod
