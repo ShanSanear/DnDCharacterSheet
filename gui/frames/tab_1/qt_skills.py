@@ -80,9 +80,10 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def create_new_skill(self):
         new_skill = SimpleNamespace()
         skill_idx = len(self.skills)
-        new_skill.skill_name = create_qline_edit(f"skills{skill_idx}skill_name", self.container,
-                                                 align=QtCore.Qt.AlignCenter, min_size=(150, None))
-        new_skill.skill_name.setText(
+        new_skill.name = create_qline_edit(f"skills{skill_idx}skill_name", self.container,
+                                                 align=QtCore.Qt.AlignCenter, min_size=(150, None),
+                                                 function_on_unfocused=self.sort_elements)
+        new_skill.name.setText(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
             "Praesent sapien urna, egestas eu tempor at, pretium nec orci.")
         new_skill.attr_choice = create_combo_box(name=f"skills{skill_idx}attr_choice", parent=self.container,

@@ -21,7 +21,8 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("KnownSpellsQwidget")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("KnownSpellsLayout")
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
+                                          max_size=[20, 20], text="+")
 
         self.spells = []
         qlabel_dict = dict(parent=self.container, max_size=(20, None))
@@ -74,8 +75,9 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         idx = len(self.spells)
         new_spell = SimpleNamespace()
         new_spell.lvl = create_qline_edit(f"known_spells_{idx}_lvl", parent=self.container, max_size=[20, None],
-                                          min_size=[None, 23])
-        new_spell.name = create_qline_edit(f"known_spells_{idx}_name", parent=self.container, min_size=[None, 23])
+                                          min_size=[None, 23], function_on_unfocused=self.sort_elements)
+        new_spell.name = create_qline_edit(f"known_spells_{idx}_name", parent=self.container, min_size=[None, 23],
+                                           function_on_unfocused=self.sort_elements)
 
         new_spell.short_description = create_qline_edit(f"known_spells_{idx}_description_field",
                                                         parent=self.container, min_size=[350, 23])
