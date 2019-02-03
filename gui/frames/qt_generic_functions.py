@@ -31,8 +31,9 @@ def create_qlabel(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) 
 def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
                       max_size: (list, tuple) = None,
                       align=None, indent: int = None, text: str = None, enabled: bool = True,
-                      function_on_text_changed=None, args_on_text_changed=None):
-    qline = QtWidgets.QLineEdit(parent)
+                      function_on_text_changed=None, args_on_text_changed=None, function_on_unfocused=None,
+                      args_on_unfocused=None):
+    qline = MyQlineEdit(parent, function_on_unfocused=function_on_unfocused, args_on_unfocused=args_on_unfocused)
     qline.setEnabled(enabled)
 
     qline: QtWidgets.QLineEdit = resize_element(qline, min_size, max_size)
@@ -48,6 +49,7 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
         else:
             qline.textChanged.connect(partial(function_on_text_changed, *args_on_text_changed))
     qline.setObjectName(name)
+
 
     return qline
 
@@ -202,3 +204,19 @@ def get_sum_of_elements(skill, to_get_from):
 def update_texts(root_object, to_set, to_get_from):
     obj_to_set = getattr(root_object, to_set)
     obj_to_set.setText(str(get_sum_of_elements(root_object, to_get_from)))
+
+
+class MyQlineEdit(QLineEdit):
+    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None):
+        self.function_on_unfocused = function_on_unfocused
+        self.args_on_unfocused = args_on_unfocused
+        super(MyQlineEdit, self).__init__(parent)
+
+    def focusOutEvent(self, q_focus_event):
+        if self.function_on_unfocused:
+            if not self.args_on_unfocused:
+                self.function_on_unfocused()
+            else:
+                self.function_on_unfocused(*self.args_on_unfocused)
+        super(MyQlineEdit, self).focusOutEvent(q_focus_event)
+
