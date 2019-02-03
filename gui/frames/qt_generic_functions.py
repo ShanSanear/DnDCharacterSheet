@@ -218,5 +218,6 @@ class MyQlineEdit(QLineEdit):
                 self.function_on_unfocused()
             else:
                 self.function_on_unfocused(*self.args_on_unfocused)
+        self.setCursorPosition(0)
         super(MyQlineEdit, self).focusOutEvent(q_focus_event)
 
