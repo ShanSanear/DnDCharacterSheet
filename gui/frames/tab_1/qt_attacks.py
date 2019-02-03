@@ -64,12 +64,8 @@ class AttacksBox(DefaultBox):
         self.set_values_from_attributes()
 
     def add_to_layout(self):
-        # TODO not sure how to change those to fit some kind of pattern, if at all
-        self.layout.addWidget(self.total_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.base_label, 0, 2, 1, 1)
-        self.layout.addWidget(self.attr_mod_label, 0, 3, 1, 1)
-        self.layout.addWidget(self.size_label, 0, 4, 1, 1)
-        self.layout.addWidget(self.misc_label, 0, 5, 1, 1)
+        self.labels = [self.total_label, self.base_label, self.attr_mod_label, self.size_label, self.misc_label]
+        add_multiple_elements_to_layout_by_row(self.layout, self.labels, start_column=1)
 
         first_row = [self.melee_label,
                      self.melee_total,
