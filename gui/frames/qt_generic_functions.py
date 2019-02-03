@@ -43,8 +43,9 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
                       max_size: (list, tuple) = None,
                       align=None, indent: int = None, text: str = None, enabled: bool = True,
                       function_on_text_changed=None, args_on_text_changed=None, function_on_unfocused=None,
-                      args_on_unfocused=None):
-    qline = MyQlineEdit(parent, function_on_unfocused=function_on_unfocused, args_on_unfocused=args_on_unfocused)
+                      args_on_unfocused=None, str_format="{}"):
+    qline = MyQlineEdit(parent, function_on_unfocused=function_on_unfocused, args_on_unfocused=args_on_unfocused,
+                        str_format=str_format)
     qline.setEnabled(enabled)
 
     qline: QtWidgets.QLineEdit = resize_element(qline, min_size, max_size)
@@ -218,9 +219,10 @@ def update_texts(root_object, to_set, to_get_from):
 
 
 class MyQlineEdit(QLineEdit):
-    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None):
+    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}"):
         self.function_on_unfocused = function_on_unfocused
         self.args_on_unfocused = args_on_unfocused
+        self.str_format = str_format
         super(MyQlineEdit, self).__init__(parent)
 
     def focusOutEvent(self, q_focus_event):
@@ -231,3 +233,14 @@ class MyQlineEdit(QLineEdit):
                 self.function_on_unfocused(*self.args_on_unfocused)
         self.setCursorPosition(0)
         super(MyQlineEdit, self).focusOutEvent(q_focus_event)
+
+    def setText(self, p_str):
+        if self.str_format != "{}":
+            try:
+                text = self.str_format.format(int(p_str))
+            except ValueError:
+                text = p_str
+                print("Couldnt work with text:", p_str)
+        else:
+            text = p_str
+        super(MyQlineEdit, self).setText(text)
