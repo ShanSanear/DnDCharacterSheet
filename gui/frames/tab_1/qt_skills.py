@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, QtCore
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
-    add_multiple_elements_to_layout_by_row, update_texts, create_push_button
+    add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox
 
 
 class SkillsBox(DefaultBox, ResizeableBox):
@@ -13,7 +13,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def __init__(self, parent, position, size, char_core):
         # TODO count total ranks
-        # TODO remove button
         # TODO - scrollbar after achieving certain height
         self.translate_reference = {
             "EN": {
@@ -101,9 +100,10 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                function_on_text_changed=self._update_skill,
                                                args_on_text_changed=[new_skill], **qdict)
 
-        new_skill.cross_class_checkbox = QtWidgets.QCheckBox(self.container)
-        new_skill.cross_class_checkbox.setObjectName(f"skills{skill_idx}description_button")
-        new_skill.delete_skill = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
+        new_skill.cross_class_checkbox = create_checkbox(self.container, f"skills{skill_idx}description_button",
+                                                         function_on_toggle=self.calculate_ranks)
+        new_skill.delete_skill = create_push_button("item_delete", self.container, min_size=[20, 20],
+                                                    max_size=[20, 20], text="-",
                                                     function_on_clicked=self._remove_element, args_on_clicked=new_skill)
 
         return new_skill
@@ -111,14 +111,24 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def create_new_element(self):
         return self.create_new_skill()
 
-    def create_labels(self):
-        self.add_to_layout()
-
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, self.labels)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
+
+    def calculate_ranks(self):
+        total_ranks = 0
+        for skill in self.skills:
+            try:
+                rank_value = int(skill.rank.text())
+            except ValueError:
+                rank_value = 0
+            if skill.cross_class_checkbox.isChecked():
+                rank_value *= 2
+            total_ranks += rank_value
+        print(total_ranks)
+
 
     def set_values_from_attributes(self):
         for skill in self.skills:
@@ -133,3 +143,4 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def _update_skill(self, skill):
         update_texts(skill, to_set="total", to_get_from=["attr_mod", "rank", "misc_mod"])
+        self.calculate_ranks()
