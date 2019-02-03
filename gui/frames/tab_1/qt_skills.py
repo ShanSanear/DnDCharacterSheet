@@ -26,6 +26,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
                 "skill_name_label": "Skill name",
                 "attr_choice_label": "Attr",
                 "total_label": "Total",
+                "total_rank_calc_label": "Total rank:"
             }
         }
         self._map_choice_to_attr = {
@@ -45,9 +46,10 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
-        self.last_row = [self.add_new]
         self.layout.setObjectName("SkillsLayout")
         self.skills = []
+        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
+                               last_row_column=7)
         self.skill_name_label = create_qlabel("skills_skill_name_label", self.container, max_size=(69, 20))
         self.attr_choice_label = create_qlabel("skills_attr_choice_label", self.container, align=QtCore.Qt.AlignCenter,
                                                max_size=(69, 20))
@@ -61,10 +63,13 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                         max_size=(69, 20))
         self.cross_class_label = create_qlabel("skills_description_label", self.container, align=QtCore.Qt.AlignCenter,
                                                max_size=(69, 20))
+        self.total_rank_calc_label = create_qlabel("skills_total_rank_label", self.container, align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter,
+                                                   max_size=(69, 20))
+        self.total_rank_calc = create_qline_edit("skills_total_rank_calc", self.container, enabled=False,
+                                                 max_size=[30, None])
         self.labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
                        self.rank_label, self.misc_label, self.cross_class_label, ]
-        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
-                               last_row_column=7)
+        self.last_row = [self.add_new, self.total_rank_calc_label, self.total_rank_calc]
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
@@ -129,7 +134,12 @@ class SkillsBox(DefaultBox, ResizeableBox):
                 rank_value *= 2
             total_ranks += rank_value
         print(total_ranks)
+        self.total_rank_calc.setText(str(total_ranks))
 
+    def add_last_row(self):
+        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
+        self.layout.addWidget(self.total_rank_calc_label, len(self.elements_list) + 1, 2, 1, 2)
+        self.layout.addWidget(self.total_rank_calc, len(self.elements_list) + 1, 4, 1, 1)
 
     def set_values_from_attributes(self):
         for skill in self.skills:
