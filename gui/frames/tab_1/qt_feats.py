@@ -26,7 +26,8 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.description_field_label = create_qlabel("feat_name_label", self.container)
         self.description_label = create_qlabel("feat_description_label", self.container)
         self.labels = [self.name_label, self.description_field_label, self.description_label]
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
+                                          text="+")
         self.feats = []
         self.translate_reference = {
             "EN":
@@ -57,8 +58,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.translate("EN")
         self.root.setLayout(self.layout)
 
-
-
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
 
@@ -74,7 +73,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
         dialog = DescriptionDialog("Feat description", self.root, feat)
         dialog.show()
 
-
     def create_feat(self):
         new_feat = SimpleNamespace()
         idx = len(self.feats)
@@ -85,9 +83,9 @@ class FeatsBox(DefaultBox, ResizeableBox):
                                                          self.container, min_size=[20, 20], max_size=[20, 20], )
         new_feat.description_button.clicked.connect(partial(self.show_description, new_feat))
         new_feat._full_description = "ABCD"
-        new_feat.delete_feat = create_push_button("item_delete", self.container,min_size=[20, 20], max_size=[20, 20], text="-",
+        new_feat.delete_feat = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20],
+                                                  text="-",
                                                   function_on_clicked=self._remove_element, args_on_clicked=new_feat)
         set_text_of_children(new_feat, self.translate_reference_new_element["EN"])
-
 
         return new_feat
