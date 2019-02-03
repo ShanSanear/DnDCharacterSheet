@@ -86,6 +86,7 @@ class ResizeableBox(ABC):
         self.update_size()
 
     def update_layout(self):
+        self.sort_elements()
         self.remove_widgets_from_layout()
         self.add_widgets_again()
 
@@ -119,6 +120,14 @@ class ResizeableBox(ABC):
 
     def place_add_button(self):
         self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.add_new_column, 1, 1)
+
+    def sort_elements(self):
+        if len(self.elements_list):
+            if hasattr(self.elements_list[0], 'lvl'):
+                self.elements_list = sorted(self.elements_list, key=lambda element: (element.lvl.text(), element.name.text()))
+            else:
+                self.elements_list = sorted(self.elements_list, key=lambda element: element.name.text())
+
 
     @abstractmethod
     def create_new_element(self):
