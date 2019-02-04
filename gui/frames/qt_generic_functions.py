@@ -134,6 +134,7 @@ def set_text_of_children(root_object, to_set: dict):
             continue
         if name == "choices":
             set_combo_box_choices(root_object, data_to_set)
+            continue
         obj_ref = getattr(root_object, name)
         if isinstance(data_to_set, dict):
             set_text_of_children(obj_ref, data_to_set)
