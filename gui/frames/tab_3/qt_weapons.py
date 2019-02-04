@@ -4,13 +4,10 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
-    add_multiple_elements_to_layout_by_row
+    add_multiple_elements_to_layout_by_row, set_text_of_children
 
 
 class WeaponsBox(DefaultBox):
-    # TODO - function based widgets and labels
-    # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
     # TODO - change in label of ranged/melee weapon depending on choice option
     # TODO - changing selected weapon using combo box
     # TODO - more than 3 choices for weapons
@@ -33,6 +30,43 @@ class WeaponsBox(DefaultBox):
         melee_weapon_qlabel = dict(parent=self.melee_container, max_size=(138, 16))
         self.melee_weapons = []
         self.ranged_weapons = []
+        self.translate_reference = {
+            "EN":
+                {
+                    "root": {
+                        "title": "Weapons"
+                    },
+                    "melee_box": {
+                        "title": "Currently chosen melee weapon"
+                    },
+                    "ranged_box": {
+                        "title": "Currently chosen ranged weapon"
+                    },
+                    "melee_weapon_name_label": "Name",
+                    "melee_weapon_attack_bonus_label": "Attack bonus",
+                    "melee_weapon_damage_roll_label": "Damage roll",
+                    "melee_weapon_crit_label": "Critical roll / multiplier",
+                    "melee_weapon_special_label": "Special",
+                    "melee_weapon_weight_label": "Weight",
+                    "melee_weapon_size_label": "Size",
+                    "melee_weapon_type_label": "Type",
+                    "melee_choice": {
+                        "choices": ["Melee weapon 1", "Melee weapon 2", "Melee weapon 3"]
+                    },
+                    "ranged_choice": {
+                        "choices": ["Ranged weapon 1", "Ranged weapon 2", "Ranged weapon 3"]
+                    },
+
+                    "ranged_weapon_crit_label": "Critical roll / multiplier",
+                    "ranged_weapon_damage_roll_label": "Damage roll",
+                    "ranged_weapon_range_label": "Range",
+                    "ranged_weapon_name_label": "Name",
+                    "ranged_weapon_attack_bonus_label": "Attack bonus",
+                    "ranged_weapon_special_label": "Special",
+                    "ranged_weapon_ammo_label": "Ammo",
+                    "ranged_weapon_weight_label": "Weight",
+                    "ranged_weapon_size_label": "Size",
+                    "ranged_weapon_type_label": "Type"}}
 
         self.current_melee = SimpleNamespace()
 
@@ -97,25 +131,25 @@ class WeaponsBox(DefaultBox):
         self.current_ranged.size = create_qline_edit("ranged_weapon_size", **ranged_weapon_qedit)
         self.current_ranged.type = create_qline_edit("ranged_weapon_type", **ranged_weapon_qedit)
         self.add_to_layout()
-        self.translate()
+        self.translate("EN")
         # self.root.setLayout(self.layout)
 
     def add_to_ranged_layout(self):
         first_row = [self.ranged_weapon_name_label, self.ranged_weapon_attack_bonus_label,
                      self.ranged_weapon_damage_roll_label, self.ranged_weapon_crit_label,
-                     self.ranged_weapon_range_label,]
+                     self.ranged_weapon_range_label, ]
         add_multiple_elements_to_layout_by_row(self.ranged_layout, first_row)
 
         second_row = [self.current_ranged.name, self.current_ranged.attack_bonus, self.current_ranged.damage_roll,
-                      self.current_ranged.crit, self.current_ranged.range,]
+                      self.current_ranged.crit, self.current_ranged.range, ]
         add_multiple_elements_to_layout_by_row(self.ranged_layout, second_row, row=1)
 
-        third_row = [self.ranged_weapon_special_label, self.ranged_weapon_ammo_label,self.ranged_weapon_weight_label,
-                     self.ranged_weapon_size_label, self.ranged_weapon_type_label,]
+        third_row = [self.ranged_weapon_special_label, self.ranged_weapon_ammo_label, self.ranged_weapon_weight_label,
+                     self.ranged_weapon_size_label, self.ranged_weapon_type_label, ]
         add_multiple_elements_to_layout_by_row(self.ranged_layout, third_row, row=2)
 
         fourth_row = [self.current_ranged.special, self.current_ranged.ammo, self.current_ranged.weight,
-                      self.current_ranged.size, self.current_ranged.type,]
+                      self.current_ranged.size, self.current_ranged.type, ]
         add_multiple_elements_to_layout_by_row(self.ranged_layout, fourth_row, row=3)
 
     def add_to_melee_layout(self):
@@ -135,53 +169,8 @@ class WeaponsBox(DefaultBox):
                       self.current_melee.type, ]
         add_multiple_elements_to_layout_by_row(self.melee_layout, fourth_row, row=3)
 
-    def translate(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.root.setTitle(_translate("MainWindow", "Weapons"))
-        self.melee_box.setTitle(_translate("MainWindow", "Currently chosen melee weapon"))
-        self.melee_weapon_name_label.setText(_translate("MainWindow", "Name"))
-        self.melee_weapon_attack_bonus_label.setText(_translate("MainWindow", "Attack bonus"))
-        self.melee_weapon_damage_roll_label.setText(_translate("MainWindow", "Damage roll"))
-        self.melee_weapon_crit_label.setText(_translate("MainWindow", "Critical roll / multiplier"))
-        self.current_melee.name.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.current_melee.attack_bonus.setText(_translate("MainWindow", "10"))
-        self.current_melee.damage_roll.setText(_translate("MainWindow", "10"))
-        self.current_melee.crit.setText(_translate("MainWindow", "10"))
-        self.melee_weapon_special_label.setText(_translate("MainWindow", "Special"))
-        self.melee_weapon_weight_label.setText(_translate("MainWindow", "Weight"))
-        self.melee_weapon_size_label.setText(_translate("MainWindow", "Size"))
-        self.melee_weapon_type_label.setText(_translate("MainWindow", "Type"))
-        self.current_melee.special.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.current_melee.weight.setText(_translate("MainWindow", "10"))
-        self.current_melee.size.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.current_melee.type.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.melee_choice.setItemText(0, _translate("MainWindow", "Melee weapon 1"))
-        self.melee_choice.setItemText(1, _translate("MainWindow", "Melee weapon 2"))
-        self.melee_choice.setItemText(2, _translate("MainWindow", "Melee weapon 3"))
-        self.ranged_choice.setItemText(0, _translate("MainWindow", "Ranged weapon 1"))
-        self.ranged_choice.setItemText(1, _translate("MainWindow", "Ranged weapon 2"))
-        self.ranged_choice.setItemText(2, _translate("MainWindow", "Ranged weapon 3"))
-        self.ranged_box.setTitle(_translate("MainWindow", "Currently chosen ranged weapon"))
-        self.ranged_weapon_crit_label.setText(_translate("MainWindow", "Critical roll / multiplier"))
-        self.ranged_weapon_damage_roll_label.setText(_translate("MainWindow", "Damage roll"))
-        self.ranged_weapon_range_label.setText(_translate("MainWindow", "Range"))
-        self.ranged_weapon_name_label.setText(_translate("MainWindow", "Name"))
-        self.current_ranged.name.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.current_ranged.attack_bonus.setText(_translate("MainWindow", "10"))
-        self.current_ranged.crit.setText(_translate("MainWindow", "10"))
-        self.current_ranged.range.setText(_translate("MainWindow", "10"))
-        self.current_ranged.damage_roll.setText(_translate("MainWindow", "10"))
-        self.ranged_weapon_attack_bonus_label.setText(_translate("MainWindow", "Attack bonus"))
-        self.ranged_weapon_special_label.setText(_translate("MainWindow", "Special"))
-        self.current_ranged.special.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.ranged_weapon_ammo_label.setText(_translate("MainWindow", "Ammo"))
-        self.ranged_weapon_weight_label.setText(_translate("MainWindow", "Weight"))
-        self.ranged_weapon_size_label.setText(_translate("MainWindow", "Size"))
-        self.ranged_weapon_type_label.setText(_translate("MainWindow", "Type"))
-        self.current_ranged.ammo.setText(_translate("MainWindow", "10"))
-        self.current_ranged.weight.setText(_translate("MainWindow", "10"))
-        self.current_ranged.size.setText(_translate("MainWindow", "Lorem ipsum"))
-        self.current_ranged.type.setText(_translate("MainWindow", "Lorem ipsum"))
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
 
     def add_to_layout(self):
         self.add_to_melee_layout()
