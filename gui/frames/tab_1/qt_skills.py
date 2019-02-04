@@ -63,7 +63,8 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                         max_size=(69, 20))
         self.cross_class_label = create_qlabel("skills_description_label", self.container, align=QtCore.Qt.AlignCenter,
                                                max_size=(69, 20))
-        self.total_rank_calc_label = create_qlabel("skills_total_rank_label", self.container, align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter,
+        self.total_rank_calc_label = create_qlabel("skills_total_rank_label", self.container,
+                                                   align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter,
                                                    max_size=(69, 20))
         self.total_rank_calc = create_qline_edit("skills_total_rank_calc", self.container, enabled=False,
                                                  align=QtCore.Qt.AlignCenter, max_size=[30, None])
