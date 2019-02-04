@@ -43,7 +43,8 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
                       max_size: (list, tuple) = None,
                       align=None, indent: int = None, text: str = None, enabled: bool = True,
                       function_on_text_changed=None, args_on_text_changed=None, function_on_unfocused=None,
-                      args_on_unfocused=None, str_format="{}"):
+                      args_on_unfocused=None, str_format="{}", function_on_text_edited=None,
+                      args_on_text_edited=None):
     qline = MyQlineEdit(parent, function_on_unfocused=function_on_unfocused, args_on_unfocused=args_on_unfocused,
                         str_format=str_format)
     qline.setEnabled(enabled)
@@ -60,6 +61,12 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
             qline.textChanged.connect(function_on_text_changed)
         else:
             qline.textChanged.connect(partial(function_on_text_changed, *args_on_text_changed))
+    if function_on_text_edited:
+        if not args_on_text_edited:
+            qline.textEdited.connect(function_on_text_edited)
+        else:
+            qline.textEdited.connect(partial(function_on_text_edited, *args_on_text_edited))
+            
     qline.setObjectName(name)
 
     return qline
@@ -165,7 +172,8 @@ def set_text_of_children(root_object, to_set: dict):
 
 def collect_editable_data(elements_to_clean_up):
     tmp = {element for element in elements_to_clean_up if "label" not in element}
-    commons = ["root", "container", "layout", "translate_reference"]
+    commons = ["root", "container", "layout", "translate_reference", "melee_box", "ranged_box", "melee_container",
+               "ranged_container", "melee_layout", "ranged_layout",]
     for common in commons:
         try:
             tmp.remove(common)
