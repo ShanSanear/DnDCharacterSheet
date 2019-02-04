@@ -28,7 +28,8 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
         self.items_count_label = create_qlabel("items_count_label", **qlabel_dict)
         self.items_description_label = create_qlabel("items_description_label", **qlabel_dict)
-        self.total_weight = create_qline_edit("items_total_weight", self.container, max_size=[30, None], align=QtCore.Qt.AlignCenter)
+        self.total_weight = create_qline_edit("items_total_weight", self.container, max_size=[30, None],
+                                              align=QtCore.Qt.AlignCenter)
         self.total_weight_label = create_qlabel("items_total_weight_label", self.container,
                                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
         self.translate_reference = {"EN": {
@@ -41,7 +42,8 @@ class ItemsBox(DefaultBox, ResizeableBox):
         }}
         self.last_row = [self.add_new]
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
-        self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label, self.items_description_label]
+        self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label,
+                       self.items_description_label]
         self.add_to_layout()
         self.translate("EN")
         self.add_item = self.add_new_element

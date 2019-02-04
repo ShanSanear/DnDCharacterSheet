@@ -52,7 +52,7 @@ class MainWindowUi(QMainWindow):
         scroll.setWidgetResizable(True)
         self.setCentralWidget(scroll)
         self.add_base_elements()
-        self.tabs.setCurrentIndex(1)
+        self.tabs.setCurrentIndex(2)
 
     def create_tab_1(self):
         parent_for_boxes = self.tab1
