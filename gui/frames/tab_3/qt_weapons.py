@@ -178,6 +178,8 @@ class WeaponsBox(DefaultBox):
         self.current_ranged.type = create_qline_edit("ranged_weapon_type",
                                                      args_on_text_changed=["type"],
                                                      **ranged_weapon_qedit)
+
+        self.current_weapons = [self.current_melee, self.current_ranged]
         self.add_to_layout()
         self.translate("EN")
         self.change_melee_weapon()
@@ -262,10 +264,18 @@ class WeaponsBox(DefaultBox):
         setattr(chosen_weapon, attribute, new_val)
         if attribute == "name":
             self.melee_choice.setItemText(idx, chosen_weapon.name)
-        if attribute == "damage_roll":
+        elif attribute == "damage_roll":
             self.weapons_statistics_box.melee_damage.setText(new_val)
-        if attribute == "crit":
+        elif attribute == "crit":
             self.weapons_statistics_box.melee_crit.setText(new_val)
+        elif attribute == "attack_bonus":
+            try:
+                val = int(new_val)
+            except ValueError:
+                val = 0
+            self.weapons_statistics_box.bonus_from_melee = val
+            self.weapons_statistics_box.set_values_for_melee()
+
 
         print("Chosen weapon after: %s" % chosen_weapon)
 
@@ -279,15 +289,22 @@ class WeaponsBox(DefaultBox):
 
     def save_ranged_weapon(self, attribute):
         idx = self.ranged_choice.currentIndex()
-        chosen_weapon = self.melee_weapons[idx]
+        chosen_weapon = self.ranged_weapons[idx]
         print("Chosen weapon before: %s" % chosen_weapon)
         new_val = getattr(self.current_ranged, attribute).text()
         setattr(chosen_weapon, attribute, new_val)
         if attribute == "name":
             self.ranged_choice.setItemText(idx, chosen_weapon.name)
-        if attribute == "damage_roll":
+        elif attribute == "damage_roll":
             self.weapons_statistics_box.ranged_damage.setText(new_val)
-        if attribute == "crit":
+        elif attribute == "crit":
             self.weapons_statistics_box.ranged_crit.setText(new_val)
+        elif attribute == "attack_bonus":
+            try:
+                val = int(new_val)
+            except ValueError:
+                val = 0
+            self.weapons_statistics_box.bonus_from_ranged = val
+            self.weapons_statistics_box.set_values_for_ranged()
 
         print("Chosen weapon after: %s" % chosen_weapon)
