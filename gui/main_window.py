@@ -52,7 +52,7 @@ class MainWindowUi(QMainWindow):
         scroll.setWidgetResizable(True)
         self.setCentralWidget(scroll)
         self.add_base_elements()
-        self.tabs.setCurrentIndex(2)
+        self.tabs.setCurrentIndex(0)
 
     def create_tab_1(self):
         parent_for_boxes = self.tab1
@@ -66,7 +66,7 @@ class MainWindowUi(QMainWindow):
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150], char_core=self.char_core)
         self.feats_box = FeatsBox(parent_for_boxes, position=[540, 480], size=[340, 100])
 
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 140], size=[180, 110],
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 140], size=[220, 110],
                                                           char_core=self.char_core)
         self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 10], size=[340, 120], char_core=self.char_core)
 
@@ -74,7 +74,7 @@ class MainWindowUi(QMainWindow):
                                                  char_core=self.char_core)
         self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 480], size=[340, 100])
 
-        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1050, 140], size=[200, 80], char_core=self.char_core)
+        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1090, 140], size=[200, 80], char_core=self.char_core)
 
         return parent_for_boxes
 
