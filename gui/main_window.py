@@ -91,7 +91,8 @@ class MainWindowUi(QMainWindow):
         parent_for_boxes = self.tab3
         self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
         self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51])
-        self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450])
+        self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450],
+                                      weapons_statistics_box=self.weapons_statistics_box)
 
     def add_base_elements(self):
         pass

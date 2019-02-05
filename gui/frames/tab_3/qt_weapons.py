@@ -5,14 +5,18 @@ from PyQt5 import QtWidgets, QtCore
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
     add_multiple_elements_to_layout_by_row, set_text_of_children
+from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
 
 
 class WeaponsBox(DefaultBox):
     # TODO - more than 3 choices for weapons
-    def __init__(self, parent, position, size):
+    # TODO Generalize melee/ranged weapon as classes / general function
+    def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("WeaponsBox")
+        self.weapons_statistics_box = weapons_statistics_box
+
         self.melee_box = QtWidgets.QGroupBox(self.root)
         self.melee_box.setGeometry(QtCore.QRect(10, 60, 591, 161))
         self.melee_box.setMaximumSize(QtCore.QSize(591, 44444))
@@ -24,7 +28,8 @@ class WeaponsBox(DefaultBox):
         self.melee_layout.setContentsMargins(9, 9, 9, 9)
         self.melee_layout.setSpacing(6)
         self.melee_layout.setObjectName("MeleeWeapon")
-        melee_weapon_qedit = dict(parent=self.melee_container, function_on_text_edited=self.save_melee_weapon,
+        melee_weapon_qedit = dict(parent=self.melee_container,
+                                  function_on_text_changed=self.save_melee_weapon,
                                   min_size=(0, 23), max_size=(138, 20))
         melee_weapon_qlabel = dict(parent=self.melee_container, max_size=(138, 16))
         self.melee_weapons = []
@@ -76,15 +81,29 @@ class WeaponsBox(DefaultBox):
 
         self.current_melee = SimpleNamespace()
 
-        self.current_melee.name = create_qline_edit("melee_weapon_name",  **melee_weapon_qedit)
+        self.current_melee.name = create_qline_edit("melee_weapon_name", args_on_text_changed=["name"],
+                                                    **melee_weapon_qedit)
         self.current_melee.attack_bonus = create_qline_edit("melee_weapon_attack_bonus",
+                                                            args_on_text_changed=["attack_bonus"],
                                                             **melee_weapon_qedit)
-        self.current_melee.damage_roll = create_qline_edit("melee_weapon_damage_roll", **melee_weapon_qedit)
-        self.current_melee.crit = create_qline_edit("melee_weapon_crit", **melee_weapon_qedit)
-        self.current_melee.special = create_qline_edit("melee_weapon_special", **melee_weapon_qedit)
-        self.current_melee.weight = create_qline_edit("melee_weapon_weight", **melee_weapon_qedit)
-        self.current_melee.size = create_qline_edit("melee_weapon_size", **melee_weapon_qedit)
-        self.current_melee.type = create_qline_edit("melee_weapon_type", **melee_weapon_qedit)
+        self.current_melee.damage_roll = create_qline_edit("melee_weapon_damage_roll",
+                                                           args_on_text_changed=["damage_roll"],
+                                                           **melee_weapon_qedit)
+        self.current_melee.crit = create_qline_edit("melee_weapon_crit",
+                                                    args_on_text_changed=["crit"],
+                                                    **melee_weapon_qedit)
+        self.current_melee.special = create_qline_edit("melee_weapon_special",
+                                                       args_on_text_changed=["special"],
+                                                       **melee_weapon_qedit)
+        self.current_melee.weight = create_qline_edit("melee_weapon_weight",
+                                                      args_on_text_changed=["weight"],
+                                                      **melee_weapon_qedit)
+        self.current_melee.size = create_qline_edit("melee_weapon_size",
+                                                    args_on_text_changed=["size"],
+                                                    **melee_weapon_qedit)
+        self.current_melee.type = create_qline_edit("melee_weapon_type",
+                                                    args_on_text_changed=["type"],
+                                                    **melee_weapon_qedit)
 
         self.melee_choice = create_combo_box("weapons_melee_choice", self.root, 3, min_size=[171, 22],
                                              function_on_index_changed=self.change_melee_weapon)
@@ -115,7 +134,7 @@ class WeaponsBox(DefaultBox):
 
         ranged_weapon_qlabel = dict(parent=self.ranged_container)
         ranged_weapon_qedit = dict(parent=self.ranged_container, min_size=(0, 23),
-                                   function_on_text_edited=self.save_ranged_weapon)
+                                   function_on_text_changed=self.save_ranged_weapon)
 
         self.ranged_weapon_crit_label = create_qlabel("ranged_weapon_crit_label", **ranged_weapon_qlabel)
         self.ranged_weapon_damage_roll_label = create_qlabel("ranged_weapon_damage_roll_label", **ranged_weapon_qlabel)
@@ -130,16 +149,35 @@ class WeaponsBox(DefaultBox):
         self.ranged_weapon_type_label = create_qlabel("ranged_weapon_type_label", **ranged_weapon_qlabel)
 
         self.current_ranged = SimpleNamespace()
-        self.current_ranged.name = create_qline_edit("ranged_weapon_name", **ranged_weapon_qedit)
-        self.current_ranged.attack_bonus = create_qline_edit("ranged_weapon_attack_bonus", **ranged_weapon_qedit)
-        self.current_ranged.damage_roll = create_qline_edit("ranged_weapon_damage_roll", **ranged_weapon_qedit)
-        self.current_ranged.crit = create_qline_edit("ranged_weapon_crit", **ranged_weapon_qedit)
-        self.current_ranged.range = create_qline_edit("ranged_weapon_range", **ranged_weapon_qedit)
-        self.current_ranged.special = create_qline_edit("ranged_weapon_special", **ranged_weapon_qedit)
-        self.current_ranged.ammo = create_qline_edit("ranged_weapon_ammo", **ranged_weapon_qedit)
-        self.current_ranged.weight = create_qline_edit("ranged_weapon_weight", **ranged_weapon_qedit)
-        self.current_ranged.size = create_qline_edit("ranged_weapon_size", **ranged_weapon_qedit)
-        self.current_ranged.type = create_qline_edit("ranged_weapon_type", **ranged_weapon_qedit)
+        self.current_ranged.name = create_qline_edit("ranged_weapon_name", args_on_text_changed=["name"],
+                                                     **ranged_weapon_qedit)
+        self.current_ranged.attack_bonus = create_qline_edit("ranged_weapon_attack_bonus",
+                                                             args_on_text_changed=["attack_bonus"],
+                                                             **ranged_weapon_qedit)
+        self.current_ranged.damage_roll = create_qline_edit("ranged_weapon_damage_roll",
+                                                            args_on_text_changed=["damage_roll"],
+                                                            **ranged_weapon_qedit)
+        self.current_ranged.crit = create_qline_edit("ranged_weapon_crit",
+                                                     args_on_text_changed=["crit"],
+                                                     **ranged_weapon_qedit)
+        self.current_ranged.range = create_qline_edit("ranged_weapon_range",
+                                                      args_on_text_changed=["range"],
+                                                      **ranged_weapon_qedit)
+        self.current_ranged.special = create_qline_edit("ranged_weapon_special",
+                                                        args_on_text_changed=["special"],
+                                                        **ranged_weapon_qedit)
+        self.current_ranged.ammo = create_qline_edit("ranged_weapon_ammo",
+                                                     args_on_text_changed=["ammo"],
+                                                     **ranged_weapon_qedit)
+        self.current_ranged.weight = create_qline_edit("ranged_weapon_weight",
+                                                       args_on_text_changed=["weight"],
+                                                       **ranged_weapon_qedit)
+        self.current_ranged.size = create_qline_edit("ranged_weapon_size",
+                                                     args_on_text_changed=["size"],
+                                                     **ranged_weapon_qedit)
+        self.current_ranged.type = create_qline_edit("ranged_weapon_type",
+                                                     args_on_text_changed=["type"],
+                                                     **ranged_weapon_qedit)
         self.add_to_layout()
         self.translate("EN")
         self.change_melee_weapon()
@@ -216,14 +254,19 @@ class WeaponsBox(DefaultBox):
             obj_ref = getattr(self.current_melee, attribute)
             obj_ref.setText(value)
 
-    def save_melee_weapon(self):
+    def save_melee_weapon(self, attribute):
         idx = self.melee_choice.currentIndex()
         chosen_weapon = self.melee_weapons[idx]
         print("Chosen weapon before: %s" % chosen_weapon)
-        for attribute in chosen_weapon.__dict__:
-            new_val = getattr(self.current_melee, attribute).text()
-            setattr(chosen_weapon, attribute, new_val)
-        self.melee_choice.setItemText(idx, chosen_weapon.name)
+        new_val = getattr(self.current_melee, attribute).text()
+        setattr(chosen_weapon, attribute, new_val)
+        if attribute == "name":
+            self.melee_choice.setItemText(idx, chosen_weapon.name)
+        if attribute == "damage_roll":
+            self.weapons_statistics_box.melee_damage.setText(new_val)
+        if attribute == "crit":
+            self.weapons_statistics_box.melee_crit.setText(new_val)
+
         print("Chosen weapon after: %s" % chosen_weapon)
 
 
@@ -234,12 +277,17 @@ class WeaponsBox(DefaultBox):
             obj_ref = getattr(self.current_ranged, attribute)
             obj_ref.setText(value)
 
-    def save_ranged_weapon(self):
+    def save_ranged_weapon(self, attribute):
         idx = self.ranged_choice.currentIndex()
         chosen_weapon = self.melee_weapons[idx]
         print("Chosen weapon before: %s" % chosen_weapon)
-        for attribute in chosen_weapon.__dict__:
-            new_val = getattr(self.current_ranged, attribute).text()
-            setattr(chosen_weapon, attribute, new_val)
-        self.ranged_choice.setItemText(idx, chosen_weapon.name)
+        new_val = getattr(self.current_ranged, attribute).text()
+        setattr(chosen_weapon, attribute, new_val)
+        if attribute == "name":
+            self.ranged_choice.setItemText(idx, chosen_weapon.name)
+        if attribute == "damage_roll":
+            self.weapons_statistics_box.ranged_damage.setText(new_val)
+        if attribute == "crit":
+            self.weapons_statistics_box.ranged_crit.setText(new_val)
+
         print("Chosen weapon after: %s" % chosen_weapon)
