@@ -19,19 +19,21 @@ class WeaponStatisticsBox(DefaultBox):
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("WeaponStatisticsLayout")
         self.layout.setContentsMargins(8, 8, 8, 12)
-        self.layout.setSpacing(10)
+        #@self.layout.setSpacing(10)
+        self.melee_attr = "str"
+        self.ranged_attr = "dex"
+        self.bonus_from_melee = 0
+        self.bonus_from_ranged = 0
 
-        qline_dict = dict(parent=self.container, )  # min_size=(60, 23), max_size=(50, 20))
-        qlabel_dict = dict(parent=self.container, )  # max_size=(16777215, 20))
+        qline_dict = dict(parent=self.container, enabled=False)  # min_size=(60, 23), max_size=(50, 20))
+        qlabel_dict = dict(parent=self.container)  # max_size=(16777215, 20))
 
-        self.ranged_damage = create_qline_edit("weapon_statistics_ranged_damage", **qline_dict)
-        self.melee_damage = create_qline_edit("weapon_statistics_melee_damage", **qline_dict)
-        self.ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus", str_format="{:+d}",
-                                                     enabled=False, **qline_dict)
-        self.ranged_crit = create_qline_edit("weapon_statistics_ranged_crit", **qline_dict)
-        self.melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus", str_format="{:+d}",
-                                                    enabled=False, **qline_dict)
-        self.melee_crit = create_qline_edit("weapon_statistics_melee_crit", **qline_dict)
+        self.ranged_damage = create_qline_edit("weapon_statistics_ranged_damage",  **qline_dict)
+        self.melee_damage = create_qline_edit("weapon_statistics_melee_damage",  **qline_dict)
+        self.ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus", str_format="{:+d}", **qline_dict)
+        self.ranged_crit = create_qline_edit("weapon_statistics_ranged_crit",  **qline_dict)
+        self.melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus", str_format="{:+d}", **qline_dict)
+        self.melee_crit = create_qline_edit("weapon_statistics_melee_crit",  **qline_dict)
 
         self.attack_bonus_label = create_qlabel("weapon_statistics_attack_bonus_label", **qlabel_dict)
         self.damage_label = create_qlabel("weapon_statistics_damage_label", **qlabel_dict)
@@ -42,6 +44,7 @@ class WeaponStatisticsBox(DefaultBox):
         self.add_to_layout()
         self.translate()
         self.root.setLayout(self.layout)
+        self.set_values_from_attributes()
 
     def add_to_layout(self):
         self.layout.addWidget(self.ranged_damage, 2, 2, 1, 1)
@@ -56,17 +59,40 @@ class WeaponStatisticsBox(DefaultBox):
         self.layout.addWidget(self.melee_label, 1, 0, 1, 1)
         self.layout.addWidget(self.ranged_label, 2, 0, 1, 1)
 
+    def set_values_from_attributes(self):
+        self.set_values_for_melee()
+        self.set_values_for_ranged()
+
+    def set_values_for_melee(self):
+        attr_mod = getattr(self.char_core.attributes, self.melee_attr)['mod']
+        try:
+            total_val = int(attr_mod) + int(self.bonus_from_melee)
+        except ValueError:
+            total_val = 0
+        self.melee_attack_bonus.setText(str(total_val))
+
+    def set_values_for_ranged(self):
+        attr_mod = getattr(self.char_core.attributes, self.ranged_attr)['mod']
+        try:
+            total_val = int(attr_mod) + int(self.bonus_from_ranged)
+        except ValueError:
+            total_val = 0
+        self.ranged_attack_bonus.setText(str(total_val))
+
+
+
     def translate(self):
         _translate = QtCore.QCoreApplication.translate
         self.root.setTitle(_translate("MainWindow", "Current weapon statistics"))
         self.attack_bonus_label.setText(_translate("MainWindow", "Att. bonus"))
-        self.ranged_damage.setText(_translate("MainWindow", "10"))
-        self.ranged_attack_bonus.setText(_translate("MainWindow", "10"))
-        self.ranged_crit.setText(_translate("MainWindow", "10"))
-        self.melee_attack_bonus.setText(_translate("MainWindow", "10"))
-        self.melee_crit.setText(_translate("MainWindow", "10"))
         self.damage_label.setText(_translate("MainWindow", "Dmg"))
         self.crit_label.setText(_translate("MainWindow", "Crit"))
-        self.melee_damage.setText(_translate("MainWindow", "10"))
         self.melee_label.setText(_translate("MainWindow", "Melee"))
         self.ranged_label.setText(_translate("MainWindow", "Ranged"))
+
+        # self.ranged_damage.setText(_translate("MainWindow", "10"))
+        # self.ranged_attack_bonus.setText(_translate("MainWindow", "10"))
+        # self.ranged_crit.setText(_translate("MainWindow", "10"))
+        # self.melee_attack_bonus.setText(_translate("MainWindow", "10"))
+        # self.melee_crit.setText(_translate("MainWindow", "10"))
+        # self.melee_damage.setText(_translate("MainWindow", "10"))
