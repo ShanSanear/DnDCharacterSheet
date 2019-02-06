@@ -116,7 +116,6 @@ class MyApp(MainWindowUi):
         self.initiative_speed_box.set_values_from_attributes()
         self.hp_ac_box.set_values_from_attributes()
         self.skills_box.set_values_from_attributes()
-        self.weapons_statistics_box.set_values_from_attributes()
 
 
 def init_gui(char):
