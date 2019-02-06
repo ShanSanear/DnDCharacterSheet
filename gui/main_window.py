@@ -27,7 +27,7 @@ class MainWindowUi(QMainWindow):
 
     def setup_ui(self):
         self.setObjectName("MainWindow")
-        self.resize(1320, 830)
+        self.resize(1400, 830)
         self.tabs = QTabWidget(self)
         self.tabs.setMinimumSize(1300, 780)
         size_policy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
@@ -66,15 +66,15 @@ class MainWindowUi(QMainWindow):
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150], char_core=self.char_core)
         self.feats_box = FeatsBox(parent_for_boxes, position=[540, 480], size=[340, 100])
 
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 140], size=[220, 110],
-                                                          char_core=self.char_core)
-        self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 10], size=[340, 120], char_core=self.char_core)
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10],
+                                                          size=[420, 110], char_core=self.char_core)
+        self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 140], size=[340, 120], char_core=self.char_core)
 
         self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150],
                                                  char_core=self.char_core)
         self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 480], size=[340, 100])
 
-        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1090, 140], size=[200, 80], char_core=self.char_core)
+        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1200, 140], size=[200, 80], char_core=self.char_core)
 
         return parent_for_boxes
 
