@@ -59,7 +59,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
                                             max_size=[30, None], function_on_text_changed=self.calculate_weight)
 
         new_item.count = create_qline_edit("item_count", self.container, min_size=[None, 23],
-                                           max_size=[30, None])
+                                           max_size=[30, None], function_on_text_changed=self.calculate_weight)
         new_item.description = create_qline_edit("item_description", self.container, min_size=[None, 23])
         new_item.delete_item = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
                                                   function_on_clicked=self._remove_element, args_on_clicked=new_item)
@@ -88,7 +88,14 @@ class ItemsBox(DefaultBox, ResizeableBox):
         weight = 0
         for item in self.items:
             try:
-                weight += int(item.weight.text())
+                count = int(item.count.text())
+
+            except ValueError:
+                count = 1
+
+            try:
+                weight += float(item.weight.text().replace(',', '.')) * count
+
             except ValueError:
                 weight += 0
         self.total_weight.setText(str(weight))
