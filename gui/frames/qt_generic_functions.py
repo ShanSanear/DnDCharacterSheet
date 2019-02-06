@@ -253,3 +253,4 @@ class MyQlineEdit(QLineEdit):
         else:
             text = p_str
         super(MyQlineEdit, self).setText(text)
+        self.setCursorPosition(0)
