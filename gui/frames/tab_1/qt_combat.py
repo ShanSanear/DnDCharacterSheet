@@ -113,19 +113,12 @@ class CombatBox(DefaultBox):
         add_multiple_elements_to_layout_by_row(self.layout, second_row, row=2)
 
         third_row = [self.total_label_init, self.initiative_dex_bonus_label, self.initiative_misc_bonus_label,
-                     ]
-        add_element_to_layout(self.layout, self.speed_label, height=1, width=1, row=3, column=5)
-        # add_element_to_layout(self.layout, self.total_label, 0, 1, 1, 1)
-        # add_element_to_layout(self.layout, self.initiative_dex_bonus_label, 0, 2, 1, 1)
-        # add_element_to_layout(self.layout, self.initiative_misc_bonus_label, 0, 3, 1, 1)
-        #add_element_to_layout(self.layout, self.speed_label, 0, 4, 1, 1)
-        #add_element_to_layout(self.layout, self.speed_total, 1, 4, 1, 1)
+                     self.speed_label]
 
         add_multiple_elements_to_layout_by_row(self.layout, third_row, row=3, start_column=1)
         fourth_row = [self.initiative_label, self.initiative_total, self.initiative_dex_bonus,
-                      self.initiative_misc_bonus]
+                      self.initiative_misc_bonus, self.speed_total]
         add_multiple_elements_to_layout_by_row(self.layout, fourth_row, row=4)
-        add_element_to_layout(self.layout, self.speed_total, height=1, width=1, row=4, column=5)
 
     def translate(self, language_ref):
         set_text_of_children(self, self.translate_reference[language_ref])
