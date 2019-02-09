@@ -212,19 +212,25 @@ def get_general_dict_repr(root_object, to_get):
     return data
 
 
-def get_sum_of_elements(skill, to_get_from):
+def get_sum_of_elements(root_object, elements, with_decimal_point):
     tmp = 0
-    for element in to_get_from:
-        try:
-            tmp += int(getattr(skill, element).text())
-        except ValueError:
-            pass
+    for element in elements:
+        if not with_decimal_point:
+            try:
+                tmp += int(getattr(root_object, element).text())
+            except ValueError:
+                pass
+        else:
+            try:
+                tmp += float(getattr(root_object, element).text().replace(",", "."))
+            except ValueError:
+                pass
     return tmp
 
 
-def update_texts(root_object, to_set, to_get_from):
+def update_texts(root_object, to_set, to_get_from, with_decimal_point=False):
     obj_to_set = getattr(root_object, to_set)
-    obj_to_set.setText(str(get_sum_of_elements(root_object, to_get_from)))
+    obj_to_set.setText(str(get_sum_of_elements(root_object, to_get_from, with_decimal_point)))
 
 
 class MyQlineEdit(QLineEdit):
