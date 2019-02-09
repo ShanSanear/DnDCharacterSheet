@@ -90,7 +90,7 @@ class HpAcBox(DefaultBox):
         add_element_to_layout(self.layout, self.hp_label, 1, 0, 1, 1)
         add_element_to_layout(self.layout, self.hp_total, 1, 1, 1, 1)
         add_element_to_layout(self.layout, self.hp_contusion, 1, 4, 1, 2)
-        add_element_to_layout(self.layout, self.hp_dice, 1, 6, 1, 2)
+        add_element_to_layout(self.layout, self.hp_dice, 1, 6, 1, 1)
 
         third_row = [self.ac_label, self.ac_total, self.ac_base,
                      self.ac_armor_bonus, self.ac_dex_bonus, self.ac_size_bonus, self.ac_misc_bonus]
