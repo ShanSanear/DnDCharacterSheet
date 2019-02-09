@@ -44,9 +44,9 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
                       align=None, indent: int = None, text: str = None, enabled: bool = True,
                       function_on_text_changed=None, args_on_text_changed=None, function_on_unfocused=None,
                       args_on_unfocused=None, str_format="{}", function_on_text_edited=None,
-                      args_on_text_edited=None):
+                      args_on_text_edited=None, is_float=False):
     qline = MyQlineEdit(parent, function_on_unfocused=function_on_unfocused, args_on_unfocused=args_on_unfocused,
-                        str_format=str_format)
+                        str_format=str_format, is_float=is_float)
     qline.setEnabled(enabled)
 
     qline: QtWidgets.QLineEdit = resize_element(qline, min_size, max_size)
@@ -234,10 +234,11 @@ def update_texts(root_object, to_set, to_get_from, with_decimal_point=False):
 
 
 class MyQlineEdit(QLineEdit):
-    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}"):
+    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}", is_float=False):
         self.function_on_unfocused = function_on_unfocused
         self.args_on_unfocused = args_on_unfocused
         self.str_format = str_format
+        self.is_float = is_float
         super(MyQlineEdit, self).__init__(parent)
 
     def focusOutEvent(self, q_focus_event):
@@ -252,7 +253,11 @@ class MyQlineEdit(QLineEdit):
     def setText(self, p_str):
         if self.str_format != "{}":
             try:
-                text = self.str_format.format(int(p_str))
+                if not self.is_float:
+                    # Float in case of some kind of sum being with decimal point
+                    text = self.str_format.format(int(float(p_str)))
+                else:
+                    text = self.str_format.format(float(p_str))
             except ValueError:
                 text = p_str
                 print("Couldnt work with text:", p_str)
