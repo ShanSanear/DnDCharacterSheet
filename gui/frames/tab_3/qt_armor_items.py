@@ -9,6 +9,7 @@ from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, ad
 
 class ArmorItems(DefaultBox):
     def __init__(self, parent, position, size):
+        # TODO checkboxes for setting in the first tab
         self.increase_height = 140
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))

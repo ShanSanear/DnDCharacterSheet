@@ -1,3 +1,4 @@
+import logging
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
@@ -266,8 +267,8 @@ class WeaponsBox(DefaultBox):
 
     def change_melee_weapon(self):
         idx = self.melee_choice.currentIndex()
-        print(f"index of melee choice: {idx}")
-        print(f"Len of melee weapons {len(self.melee_weapons)}")
+        logging.debug("index of melee choice: %d", idx)
+        logging.debug("Len of melee weapons %s", len(self.melee_weapons))
         chosen_weapon = self.melee_weapons[idx]
         for attribute, value in chosen_weapon.__dict__.items():
             obj_ref = getattr(self.current_melee, attribute)
@@ -276,7 +277,7 @@ class WeaponsBox(DefaultBox):
     def save_melee_weapon(self, attribute):
         idx = self.melee_choice.currentIndex()
         chosen_weapon = self.melee_weapons[idx]
-        print("Chosen weapon before: %s" % chosen_weapon)
+        logging.debug("Chosen weapon before: %s", chosen_weapon)
         new_val = getattr(self.current_melee, attribute).text()
         setattr(chosen_weapon, attribute, new_val)
         if attribute == "name":
@@ -289,7 +290,7 @@ class WeaponsBox(DefaultBox):
         elif attribute == "attack_bonus":
             self.weapons_statistics_box.melee_attack_bonus.setText(new_val)
 
-        print("Chosen weapon after: %s" % chosen_weapon)
+        logging.debug("Chosen weapon after: %s", chosen_weapon)
 
     def _sort_melee_by_name(self):
         chosen_weapon = self.melee_weapons[self.melee_choice.currentIndex()]
@@ -319,7 +320,7 @@ class WeaponsBox(DefaultBox):
     def _remove_melee_weapon(self):
         idx = self.melee_choice.currentIndex()
         if idx == 0 and len(self.melee_weapons) == 1:
-            print("At least one weapon needs to be provided")
+            logging.warning("At least one weapon needs to be provided")
             return
         del self.melee_weapons[idx]
         self.melee_choice.removeItem(idx)
@@ -339,7 +340,7 @@ class WeaponsBox(DefaultBox):
     def _remove_ranged_weapon(self):
         idx = self.ranged_choice.currentIndex()
         if idx == 0 and len(self.ranged_weapons) == 1:
-            print("At least one weapon needs to be provided")
+            logging.warning("At least one weapon needs to be provided")
             return
         del self.ranged_weapons[idx]
         self.ranged_choice.removeItem(idx)
@@ -357,7 +358,7 @@ class WeaponsBox(DefaultBox):
     def save_ranged_weapon(self, attribute):
         idx = self.ranged_choice.currentIndex()
         chosen_weapon = self.ranged_weapons[idx]
-        print("Chosen weapon before: %s" % chosen_weapon)
+        logging.debug("Chosen weapon before: %s", chosen_weapon)
         new_val = getattr(self.current_ranged, attribute).text()
         setattr(chosen_weapon, attribute, new_val)
         if attribute == "name":
@@ -372,4 +373,4 @@ class WeaponsBox(DefaultBox):
         elif attribute == "range":
             self.weapons_statistics_box.ranged_range.setText(new_val)
 
-        print("Chosen weapon after: %s" % chosen_weapon)
+        logging.debug("Chosen weapon after: %s", chosen_weapon)

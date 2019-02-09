@@ -1,3 +1,4 @@
+import logging
 from abc import ABC, abstractmethod
 
 from PyQt5 import QtCore
@@ -45,8 +46,8 @@ class ResizeableBox(ABC):
         if hasattr(self, "parent"):
             vertical_position = self.root.pos().y()
             lower_border = vertical_position + new_root_height
-            print("Lower border: ", lower_border)
-            print("Item:", self)
+            logging.debug("Lower border: %s", lower_border)
+            logging.debug("Item: %s", self)
             if self.initial_tab_height < lower_border:
                 self.parent.tabs.setMinimumHeight(lower_border + self.increase_height * 2)
             else:
@@ -80,7 +81,7 @@ class ResizeableBox(ABC):
 
     def _remove_element(self, element):
         idx = self._get_element_index(element)
-        print(idx)
+        logging.debug("Index of element to remove: %d", idx)
         self._delete_from_layout(element)
         del self.elements_list[idx]
         self.update_layout()

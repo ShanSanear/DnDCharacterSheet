@@ -10,6 +10,7 @@ class InitiativeSpeedBox(DefaultBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
+        # TODO Merge with attacks, rename them after to "combat"
         self.root = QtWidgets.QGroupBox(parent)
         self.char_core = char_core
         self.root.setGeometry(QtCore.QRect(*position, *size))

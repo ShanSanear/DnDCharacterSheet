@@ -1,3 +1,4 @@
+import logging
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
@@ -132,7 +133,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
             if skill.cross_class_checkbox.isChecked():
                 rank_value *= 2
             total_ranks += rank_value
-        print(total_ranks)
+        logging.debug("Total ranks: %d", total_ranks)
         self.total_rank_calc.setText(str(total_ranks))
 
     def add_last_row(self):

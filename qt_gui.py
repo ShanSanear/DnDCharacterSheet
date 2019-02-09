@@ -1,4 +1,5 @@
 import json
+import logging
 import sys
 from functools import partial
 from pathlib import Path
@@ -61,21 +62,17 @@ class MyApp(MainWindowUi):
         }
         set_text_of_children(self.items_box, d)
 
-    def changed_text(self, arg):
-        print("Changed text")
-        print(arg)
-
     def open_file(self):
-        print("Opening file")
+        logging.info("Opening file")
         fname = QFileDialog.getOpenFileName(self.tabs, 'Open file', Path().cwd().as_posix(),
                                             "Character file (*.json)")[0]
         self.character_file = fname
-        print(fname)
+        logging.info("File opened: %s", fname)
         data_to_read = json.load(Path(fname).open())
         set_text_of_children(self, data_to_read)
 
     def save_file(self):
-        print("Saving file")
+        logging.info("Saving file")
         data_to_save = {"basic_info_box": self.basic_info_box.get_dict_repr(),
                         "feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr(),
                         "feats_box_2": self.feats_box_2.get_dict_repr(),
@@ -95,11 +92,11 @@ class MyApp(MainWindowUi):
         new_file = QFileDialog.getSaveFileName(self.tabs, "Save file", Path().cwd().as_posix(),
                                                "Character file (*.json)")[0]
         if new_file:
+            logging.info("File name: %s", new_file)
             json.dump(data_to_save, Path(new_file).open('w'), indent=4)
         else:
-            print("No file selected")
+            logging.info("No file selected")
         self.character_file = new_file
-        print(new_file)
 
     def connect_attrs(self):
         for attr in self.attributes_box.__dict__:

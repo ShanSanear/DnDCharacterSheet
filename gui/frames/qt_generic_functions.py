@@ -1,3 +1,4 @@
+import logging
 from functools import partial
 
 from PyQt5 import QtWidgets
@@ -185,12 +186,12 @@ def collect_editable_data(elements_to_clean_up):
 def get_general_dict_repr(root_object, to_get):
     data = {}
 
-    print(to_get)
+    logging.debug("To get: %s", to_get)
     for element in to_get:
         obj_ref = getattr(root_object, element)
         if isinstance(obj_ref, QLineEdit):
             if not obj_ref.isEnabled():
-                print(obj_ref, "is read only, skipping")
+                logging.debug("Object: %s is read only, skipping", obj_ref)
             else:
                 data[element] = obj_ref.text()
         elif isinstance(obj_ref, QPlainTextEdit):
@@ -207,7 +208,6 @@ def get_general_dict_repr(root_object, to_get):
                 getting = collect_editable_data(obj.__dict__.keys())
                 tmp.append(get_general_dict_repr(obj, getting))
             data[element] = list(tmp)
-            pass
 
     return data
 
@@ -260,7 +260,7 @@ class MyQlineEdit(QLineEdit):
                     text = self.str_format.format(float(p_str))
             except ValueError:
                 text = p_str
-                print("Couldnt work with text:", p_str)
+                logging.warning("Couldnt work with text: %s", p_str)
         else:
             text = p_str
         super(MyQlineEdit, self).setText(text)
