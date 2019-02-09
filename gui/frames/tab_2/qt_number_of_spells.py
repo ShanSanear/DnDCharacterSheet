@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children
 
 
 class NumberOfSpellsBox(DefaultBox):
@@ -18,6 +18,18 @@ class NumberOfSpellsBox(DefaultBox):
         self.layout.setContentsMargins(9, 9, 9, 9)
         self.layout.setSpacing(6)
         self.layout.setObjectName("NumberOfSpellsLayout")
+        self.translate_reference = {"EN": {"root": {"title": "Number of spells"},
+                                           "number_of_spells_0th_label": "0th lvl",
+                                           "number_of_spells_4th_label": "4th lvl",
+                                           "number_of_spells_2nd_label": "2nd lvl",
+                                           "number_of_spells_3rd_label": "3rd lvl",
+                                           "number_of_spells_1st_label": "1st lvl",
+                                           "number_of_spells_5th_label": "5th lvl",
+                                           "number_of_spells_6th_label": "6th lvl",
+                                           "number_of_spells_7th_label": "7th lvl",
+                                           "number_of_spells_8th_label": "8th lvl",
+                                           "number_of_spells_9th_label": "9th lvl",
+                                           "number_of_spells_known_number_of_spells_label": "Known number of spells (Warlock / Bard)"}}
 
         qline_dict = dict(parent=self.container, min_size=(0, 10))
         qline_dict_2 = dict(parent=self.container, align=QtCore.Qt.AlignCenter)
@@ -57,7 +69,7 @@ class NumberOfSpellsBox(DefaultBox):
         self.number_of_spells_9 = create_qline_edit("number_of_spells_9", **qline_dict)
 
         self.add_to_layout()
-        self.translate()
+        self.translate("EN")
         self.root.setLayout(self.layout)
 
     def add_to_layout(self):
@@ -83,28 +95,5 @@ class NumberOfSpellsBox(DefaultBox):
         self.layout.addWidget(self.number_of_spells_9, 2, 9, 1, 1)
         self.layout.addWidget(self.number_of_spells_known_number_of_spells_label, 0, 2, 1, 6)
 
-    def translate(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.root.setTitle(_translate("MainWindow", "Number of spells"))
-        self.number_of_spells_0th_label.setText(_translate("MainWindow", "0th lvl"))
-        self.number_of_spells_1.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_4th_label.setText(_translate("MainWindow", "4th lvl"))
-        self.number_of_spells_4.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_2nd_label.setText(_translate("MainWindow", "2nd lvl"))
-        self.number_of_spells_2.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_3rd_label.setText(_translate("MainWindow", "3rd lvl"))
-        self.number_of_spells_3.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_0.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_1st_label.setText(_translate("MainWindow", "1st lvl"))
-        self.number_of_spells_5th_label.setText(_translate("MainWindow", "5th lvl"))
-        self.number_of_spells_5.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_6.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_7.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_8.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_9.setText(_translate("MainWindow", "10"))
-        self.number_of_spells_6th_label.setText(_translate("MainWindow", "6th lvl"))
-        self.number_of_spells_7th_label.setText(_translate("MainWindow", "7th lvl"))
-        self.number_of_spells_8th_label.setText(_translate("MainWindow", "8th lvl"))
-        self.number_of_spells_9th_label.setText(_translate("MainWindow", "9th lvl"))
-        self.number_of_spells_known_number_of_spells_label.setText(
-            _translate("MainWindow", "Known number of spells (Warlock / Bard)"))
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
