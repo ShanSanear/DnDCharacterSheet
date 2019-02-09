@@ -16,7 +16,6 @@ class MyApp(MainWindowUi):
     def __init__(self, char: Character):
         self.char_core = char
         MainWindowUi.__init__(self, self.char_core)
-        self.setup_ui()
 
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character.triggered.connect(self.save_file)

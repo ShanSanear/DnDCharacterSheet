@@ -23,8 +23,6 @@ class MainWindowUi(QMainWindow):
     def __init__(self, char_core):
         super(MainWindowUi, self).__init__()
         self.char_core = char_core
-
-    def setup_ui(self):
         self.setObjectName("MainWindow")
         self.resize(1280, 830)
         self.tabs = QTabWidget(self)
