@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
-    add_multiple_elements_to_layout_by_row, set_text_of_children
+    add_multiple_elements_to_layout_by_row, set_text_of_children, create_push_button
 from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
 
 
@@ -35,10 +35,10 @@ class WeaponsBox(DefaultBox):
         self.melee_weapons = []
         self.ranged_weapons = []
 
-        for _ in range(3):
+        for _ in range(1):
             self.melee_weapons.append(self.create_melee_weapon())
 
-        for _ in range(3):
+        for _ in range(1):
             self.ranged_weapons.append(self.create_ranged_weapon())
 
         self.translate_reference = {
@@ -62,10 +62,10 @@ class WeaponsBox(DefaultBox):
                     "melee_weapon_size_label": "Size",
                     "melee_weapon_type_label": "Type",
                     "melee_choice": {
-                        "choices": ["Melee weapon 1", "Melee weapon 2", "Melee weapon 3"]
+                        "choices": ["Melee weapon 1"]
                     },
                     "ranged_choice": {
-                        "choices": ["Ranged weapon 1", "Ranged weapon 2", "Ranged weapon 3"]
+                        "choices": ["Ranged weapon 1"]
                     },
 
                     "ranged_weapon_crit_label": "Critical roll / multiplier",
@@ -82,6 +82,7 @@ class WeaponsBox(DefaultBox):
         self.current_melee = SimpleNamespace()
 
         self.current_melee.name = create_qline_edit("melee_weapon_name", args_on_text_changed=["name"],
+                                                    function_on_unfocused=self._sort_melee_by_name,
                                                     **melee_weapon_qedit)
         self.current_melee.attack_bonus = create_qline_edit("melee_weapon_attack_bonus",
                                                             args_on_text_changed=["attack_bonus"],
@@ -105,9 +106,15 @@ class WeaponsBox(DefaultBox):
                                                     args_on_text_changed=["type"],
                                                     **melee_weapon_qedit)
 
-        self.melee_choice = create_combo_box("weapons_melee_choice", self.root, 3, min_size=[171, 22],
+        self.melee_choice = create_combo_box("weapons_melee_choice", self.root, 1, min_size=[171, 22],
                                              function_on_index_changed=self.change_melee_weapon)
         self.melee_choice.move(20, 30)
+        self.melee_add = create_push_button("melee_add", parent=self.root, text="+", max_size=[24,24],
+                                            function_on_clicked=self._add_new_melee_weapon)
+        self.melee_add.move(200, 30)
+        self.melee_remove = create_push_button("melee_remove", parent=self.root, text="-", max_size=[24,24],
+                                            function_on_clicked=self._remove_melee_weapon)
+        self.melee_remove.move(230, 30)
         self.melee_weapon_name_label = create_qlabel("melee_weapon_name_label", **melee_weapon_qlabel)
         self.melee_weapon_attack_bonus_label = create_qlabel("melee_weapon_attack_bonus_label", **melee_weapon_qlabel)
         self.melee_weapon_damage_roll_label = create_qlabel("melee_weapon_damage_roll_label", **melee_weapon_qlabel)
@@ -117,10 +124,15 @@ class WeaponsBox(DefaultBox):
         self.melee_weapon_size_label = create_qlabel("melee_weapon_size_label", **melee_weapon_qlabel)
         self.melee_weapon_type_label = create_qlabel("melee_weapon_type_label", **melee_weapon_qlabel)
 
-        self.ranged_choice = create_combo_box("weapons_ranged_choice", self.root, 3, min_size=[171, 22],
+        self.ranged_choice = create_combo_box("weapons_ranged_choice", self.root, 1, min_size=[171, 22],
                                               function_on_index_changed=self.change_ranged_weapon)
         self.ranged_choice.move(20, 230)
-
+        self.ranged_add = create_push_button("ranged_add", parent=self.root, text="+", max_size=[24,24],
+                                            function_on_clicked=self._add_new_ranged_weapon)
+        self.ranged_add.move(200, 230)
+        self.melee_remove = create_push_button("ranged_remove", parent=self.root, text="-", max_size=[24, 24],
+                                               function_on_clicked=self._remove_ranged_weapon)
+        self.melee_remove.move(230, 230)
         self.ranged_box = QtWidgets.QGroupBox(self.root)
         self.ranged_box.setGeometry(QtCore.QRect(10, 260, 591, 151))
         self.ranged_box.setObjectName("CurrentRangedWeaponBox")
@@ -150,6 +162,7 @@ class WeaponsBox(DefaultBox):
 
         self.current_ranged = SimpleNamespace()
         self.current_ranged.name = create_qline_edit("ranged_weapon_name", args_on_text_changed=["name"],
+                                                     function_on_unfocused=self._sort_ranged_by_name,
                                                      **ranged_weapon_qedit)
         self.current_ranged.attack_bonus = create_qline_edit("ranged_weapon_attack_bonus",
                                                              args_on_text_changed=["attack_bonus"],
@@ -184,6 +197,8 @@ class WeaponsBox(DefaultBox):
         self.translate("EN")
         self.change_melee_weapon()
         self.change_ranged_weapon()
+        self._sort_melee_by_name()
+        self._sort_ranged_by_name()
         # self.root.setLayout(self.layout)
 
     def add_to_ranged_layout(self):
@@ -251,6 +266,8 @@ class WeaponsBox(DefaultBox):
 
     def change_melee_weapon(self):
         idx = self.melee_choice.currentIndex()
+        print(f"index of melee choice: {idx}")
+        print(f"Len of melee weapons {len(self.melee_weapons)}")
         chosen_weapon = self.melee_weapons[idx]
         for attribute, value in chosen_weapon.__dict__.items():
             obj_ref = getattr(self.current_melee, attribute)
@@ -263,8 +280,8 @@ class WeaponsBox(DefaultBox):
         new_val = getattr(self.current_melee, attribute).text()
         setattr(chosen_weapon, attribute, new_val)
         if attribute == "name":
-            self.melee_choice.setItemText(idx, chosen_weapon.name)
             self.weapons_statistics_box.melee_name.setText(new_val)
+            self.melee_choice.setItemText(idx, new_val)
         elif attribute == "damage_roll":
             self.weapons_statistics_box.melee_damage.setText(new_val)
         elif attribute == "crit":
@@ -272,8 +289,62 @@ class WeaponsBox(DefaultBox):
         elif attribute == "attack_bonus":
             self.weapons_statistics_box.melee_attack_bonus.setText(new_val)
 
-
         print("Chosen weapon after: %s" % chosen_weapon)
+
+    def _sort_melee_by_name(self):
+        chosen_weapon = self.melee_weapons[self.melee_choice.currentIndex()]
+        self.melee_weapons = sorted(self.melee_weapons, key=lambda x: x.name)
+        for idx, weapon in enumerate(self.melee_weapons):
+            self.melee_choice.setItemText(idx, weapon.name)
+            if chosen_weapon == weapon:
+                self.melee_choice.setCurrentIndex(idx)
+                
+    def _sort_ranged_by_name(self):
+        chosen_weapon = self.ranged_weapons[self.ranged_choice.currentIndex()]
+        self.ranged_weapons = sorted(self.ranged_weapons, key=lambda x: x.name)
+        for idx, weapon in enumerate(self.ranged_weapons):
+            self.ranged_choice.setItemText(idx, weapon.name)
+            if chosen_weapon == weapon:
+                self.ranged_choice.setCurrentIndex(idx)
+
+    def _add_new_melee_weapon(self):
+        new_weapon = self.create_melee_weapon()
+        new_name_count = sum(["New weapon" in weapon.name for weapon in self.melee_weapons])
+        new_name = f"New weapon {new_name_count}"
+        new_weapon.name = new_name
+        self.melee_weapons.append(new_weapon)
+        self.melee_choice.addItem(new_name)
+        self.melee_choice.setCurrentIndex(len(self.melee_weapons) - 1)
+
+    def _remove_melee_weapon(self):
+        idx = self.melee_choice.currentIndex()
+        if idx == 0 and len(self.melee_weapons) == 1:
+            print("At least one weapon needs to be provided")
+            return
+        del self.melee_weapons[idx]
+        self.melee_choice.removeItem(idx)
+        self.melee_choice.setCurrentIndex(0)
+        self._sort_melee_by_name()
+
+        
+    def _add_new_ranged_weapon(self):
+        new_weapon = self.create_ranged_weapon()
+        new_name_count = sum(["New weapon" in weapon.name for weapon in self.ranged_weapons])
+        new_name = f"New weapon {new_name_count}"
+        new_weapon.name = new_name
+        self.ranged_weapons.append(new_weapon)
+        self.ranged_choice.addItem(new_name)
+        self.ranged_choice.setCurrentIndex(len(self.ranged_weapons) - 1)
+        
+    def _remove_ranged_weapon(self):
+        idx = self.ranged_choice.currentIndex()
+        if idx == 0 and len(self.ranged_weapons) == 1:
+            print("At least one weapon needs to be provided")
+            return
+        del self.ranged_weapons[idx]
+        self.ranged_choice.removeItem(idx)
+        self.ranged_choice.setCurrentIndex(0)
+        self._sort_ranged_by_name()
 
 
     def change_ranged_weapon(self):
