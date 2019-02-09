@@ -34,14 +34,12 @@ class HpAcBox(DefaultBox):
                     "ac_total": "10",
                     "ac_base": "10",
                     "ac_armor_bonus": "10",
-                    "ac_shield_bonus": "10",
                     "ac_dex_bonus": "10",
                     "ac_size_bonus": "10",
                     "ac_misc_bonus": "10",
                     "ac_total_label": "Total",
                     "ac_base_bonus_label": "Base",
                     "ac_armor_bonus_label": "Armor",
-                    "ac_shield_bonus_label": "Shield",
                     "ac_dex_bonus_label": "Dex",
                     "ac_size_bonus_label": "Size",
                     "ac_misc_bonus_label": "Misc",
@@ -63,7 +61,6 @@ class HpAcBox(DefaultBox):
         self.ac_total = create_qline_edit("hp_ac_ac_total", self.container, enabled=False)
         self.ac_base = create_qline_edit("hp_ac_ac_base", **qline_editable)
         self.ac_armor_bonus = create_qline_edit("hp_ac_ac_armor_bonus", **qline_editable)
-        self.ac_shield_bonus = create_qline_edit("hp_ac_ac_shield_bonus", **qline_editable)
         self.ac_dex_bonus = create_qline_edit("hp_ac_ac_dex_bonus", self.container, enabled=False)
         self.ac_size_bonus = create_qline_edit("hp_ac_ac_size_bonus", **qline_editable)
         self.ac_misc_bonus = create_qline_edit("hp_ac_ac_misc_bonus", **qline_editable)
@@ -71,7 +68,6 @@ class HpAcBox(DefaultBox):
 
         self.ac_base_bonus_label = create_qlabel("hp_ac_ac_base_bonus_label", self.container)
         self.ac_armor_bonus_label = create_qlabel("hp_ac_ac_armor_bonus_label", self.container)
-        self.ac_shield_bonus_label = create_qlabel("hp_ac_ac_shield_bonus_label", self.container)
         self.ac_dex_bonus_label = create_qlabel("hp_ac_ac_dex_bonus_label", self.container)
         self.ac_size_bonus_label = create_qlabel("hp_ac_ac_size_bonus_label", self.container)
         self.ac_misc_bonus_label = create_qlabel("hp_ac_ac_misc_bonus_label", self.container)
@@ -97,12 +93,11 @@ class HpAcBox(DefaultBox):
         add_element_to_layout(self.layout, self.hp_dice, 1, 6, 1, 2)
 
         third_row = [self.ac_label, self.ac_total, self.ac_base,
-                     self.ac_armor_bonus, self.ac_shield_bonus,
-                     self.ac_dex_bonus, self.ac_size_bonus, self.ac_misc_bonus]
+                     self.ac_armor_bonus, self.ac_dex_bonus, self.ac_size_bonus, self.ac_misc_bonus]
         add_multiple_elements_to_layout_by_row(self.layout, third_row, row=2)
 
         fourth_row = [self.ac_total_label, self.ac_base_bonus_label, self.ac_armor_bonus_label,
-                      self.ac_shield_bonus_label, self.ac_dex_bonus_label, self.ac_size_bonus_label,
+                      self.ac_dex_bonus_label, self.ac_size_bonus_label,
                       self.ac_misc_bonus_label, ]
         add_multiple_elements_to_layout_by_row(self.layout, fourth_row, start_column=1, row=3)
 
@@ -123,4 +118,4 @@ class HpAcBox(DefaultBox):
 
     def _update_ac(self):
         update_texts(self, "ac_total",
-                     ["ac_base", "ac_armor_bonus", "ac_shield_bonus", "ac_size_bonus", "ac_misc_bonus", "ac_dex_bonus"])
+                     ["ac_base", "ac_armor_bonus", "ac_size_bonus", "ac_misc_bonus", "ac_dex_bonus"])
