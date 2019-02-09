@@ -1,12 +1,11 @@
 from PyQt5.QtWidgets import QTabWidget, QMainWindow, QScrollArea, QWidget, QSizePolicy
 
 from gui.frames.qt_menu_bar import MenuBar
-from gui.frames.tab_1.qt_attacks import AttacksBox
+from gui.frames.tab_1.qt_combat import CombatBox
 from gui.frames.tab_1.qt_attributes import AttributesBox
 from gui.frames.tab_1.qt_basic_info import BasicInfoBox
 from gui.frames.tab_1.qt_feats import FeatsBox
 from gui.frames.tab_1.qt_hp_ac import HpAcBox
-from gui.frames.tab_1.qt_initiative_speed import InitiativeSpeedBox
 from gui.frames.tab_1.qt_saving_throws import SavingThrowsBox
 from gui.frames.tab_1.qt_skills import SkillsBox
 from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
@@ -27,9 +26,9 @@ class MainWindowUi(QMainWindow):
 
     def setup_ui(self):
         self.setObjectName("MainWindow")
-        self.resize(1400, 830)
+        self.resize(1280, 830)
         self.tabs = QTabWidget(self)
-        self.tabs.setMinimumSize(1300, 780)
+        self.tabs.setMinimumSize(1260, 780)
         size_policy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         size_policy.setHeightForWidth(True)
         self.tabs.setSizePolicy(size_policy)
@@ -61,18 +60,18 @@ class MainWindowUi(QMainWindow):
 
         self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250],
                                             char_core=self.char_core)
-        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 290], size=[340, 150], char_core=self.char_core)
-        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 480], size=[340, 100])
+        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 340], size=[340, 150], char_core=self.char_core)
+        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 530], size=[340, 100])
 
         self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10],
                                                           size=[420, 110], char_core=self.char_core)
-        self.attacks_box = AttacksBox(parent_for_boxes, position=[840, 140], size=[340, 120], char_core=self.char_core)
+        self.attacks_box = CombatBox(parent_for_boxes, position=[840, 140], size=[340, 180], char_core=self.char_core)
 
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 290], size=[320, 150],
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 340], size=[320, 150],
                                                  char_core=self.char_core)
-        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 480], size=[340, 100])
+        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 530], size=[340, 100])
 
-        self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1200, 140], size=[200, 80], char_core=self.char_core)
+        #self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1200, 140], size=[200, 80], char_core=self.char_core)
 
         return parent_for_boxes
 
