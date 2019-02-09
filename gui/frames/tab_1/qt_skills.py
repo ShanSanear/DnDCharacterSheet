@@ -126,7 +126,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         total_ranks = 0
         for skill in self.skills:
             try:
-                rank_value = int(skill.rank.text())
+                rank_value = float(skill.rank.text().replace(',', '.'))
             except ValueError:
                 rank_value = 0
             if skill.cross_class_checkbox.isChecked():
@@ -152,5 +152,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self._update_skill(skill)
 
     def _update_skill(self, skill):
-        update_texts(skill, to_set="total", to_get_from=["attr_mod", "rank", "misc_mod"])
+        update_texts(skill, to_set="total", to_get_from=["attr_mod", "rank", "misc_mod"],
+                     with_decimal_point=True)
         self.calculate_ranks()
