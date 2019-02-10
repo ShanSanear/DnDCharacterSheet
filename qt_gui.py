@@ -109,9 +109,9 @@ class MyApp(MainWindowUi):
         attr_box_reference.mod.setText(str(attr_ref_core["mod"]))
         self.combat_box.set_values_from_attributes()
         self.saving_throws_box.set_values_from_attributes()
-        self.initiative_speed_box.set_values_from_attributes()
         self.hp_ac_box.set_values_from_attributes()
         self.skills_box.set_values_from_attributes()
+        self.items_box.set_values_from_attributes()
 
 
 def init_gui(char):
