@@ -83,7 +83,8 @@ class MainWindowUi(QMainWindow):
     def create_tab_3(self):
         parent_for_boxes = self.tab3
         self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
-        self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51], items_box=self.items_box)
+        self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51], items_box=self.items_box,
+                                          hp_ac_box=self.hp_ac_box)
         self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450],
                                       weapons_statistics_box=self.weapons_statistics_box, items_box=self.items_box)
 

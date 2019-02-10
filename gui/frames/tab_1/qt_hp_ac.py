@@ -60,7 +60,7 @@ class HpAcBox(DefaultBox):
         self.hp_dice = create_qline_edit("hp_ac_hp_dice", self.container)
         self.ac_total = create_qline_edit("hp_ac_ac_total", self.container, enabled=False)
         self.ac_base = create_qline_edit("hp_ac_ac_base", **qline_editable)
-        self.ac_armor_bonus = create_qline_edit("hp_ac_ac_armor_bonus", **qline_editable)
+        self.ac_armor_bonus = create_qline_edit("hp_ac_ac_armor_bonus", enabled=False, **qline_editable)
         self.ac_dex_bonus = create_qline_edit("hp_ac_ac_dex_bonus", self.container, enabled=False)
         self.ac_size_bonus = create_qline_edit("hp_ac_ac_size_bonus", **qline_editable)
         self.ac_misc_bonus = create_qline_edit("hp_ac_ac_misc_bonus", **qline_editable)

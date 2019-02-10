@@ -4,15 +4,17 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children, get_float_from_widget
+    set_text_of_children, get_float_from_widget, get_int_from_widget
+from gui.frames.tab_1.qt_hp_ac import HpAcBox
 from gui.frames.tab_2.qt_items import ItemsBox
 
 
 class ArmorItems(DefaultBox):
-    def __init__(self, parent, position, size, items_box: ItemsBox):
+    def __init__(self, parent, position, size, items_box: ItemsBox, hp_ac_box: HpAcBox):
         # TODO checkboxes for setting in the first tab
         self.increase_height = 140
         self.items_box = items_box
+        self.hp_ac_box = hp_ac_box
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("ArmorItems")
@@ -48,6 +50,7 @@ class ArmorItems(DefaultBox):
 
         self.translate()
         self._update_weight()
+        self._update_armor_ac()
 
     def create_armor(self):
         new_armor = SimpleNamespace()
@@ -68,7 +71,9 @@ class ArmorItems(DefaultBox):
         new_armor.type = create_qline_edit(f"armor_{self.item_count}_type", **qline_dict)
         new_armor.max_dex_bonus = create_qline_edit(f"armor_{self.item_count}_max_dex_bonus", **qline_dict)
         new_armor.name = create_qline_edit(f"armor_{self.item_count}_name", **qline_dict)
-        new_armor.ac_bonus = create_qline_edit(f"armor_{self.item_count}_ac_bonus", **qline_dict)
+        new_armor.ac_bonus = create_qline_edit(f"armor_{self.item_count}_ac_bonus",
+                                               function_on_text_changed=self._update_armor_ac,
+                                               **qline_dict)
         new_armor.weight = create_qline_edit(f"armor_{self.item_count}_weight",
                                              function_on_text_changed=self._update_weight, **qline_dict)
         new_armor.spell_fail = create_qline_edit(f"armor_{self.item_count}_spell_fail", **qline_dict)
@@ -127,3 +132,9 @@ class ArmorItems(DefaultBox):
 
     def _change_root_title(self, language):
         self.translate_reference_new_element[language]["root"]["title"] = f"Armor_{self.item_count}"
+
+    def _update_armor_ac(self):
+        total_ac = 0
+        for armor in self.armors:
+            total_ac += get_int_from_widget(armor.ac_bonus, 0)
+        self.hp_ac_box.ac_armor_bonus.setText(str(total_ac))
