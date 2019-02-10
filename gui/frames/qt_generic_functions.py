@@ -10,8 +10,6 @@ def try_to_get_float(string, fallback):
         val = float(string.replace(",", "."))
     except ValueError:
         val = fallback
-        logging.debug("Fallback while trying to get float value. Trying: %s, set: %s",
-                      string, fallback)
     return val
 
 
@@ -20,8 +18,6 @@ def get_int_from_widget(widget, fallback):
         val = int(widget.text())
     except ValueError:
         val = fallback
-        logging.debug("Fallback while trying to get int value for: %s. Trying: %s, set: %s",
-                      widget, widget.text(), fallback)
     return val
 
 
