@@ -5,12 +5,14 @@ from PyQt5 import QtWidgets, QtCore
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
+from gui.frames.tab_2.qt_items import ItemsBox
 
 
 class ArmorItems(DefaultBox):
-    def __init__(self, parent, position, size):
+    def __init__(self, parent, position, size, items_box: ItemsBox):
         # TODO checkboxes for setting in the first tab
         self.increase_height = 140
+        self.items_box = items_box
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("ArmorItems")

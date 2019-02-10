@@ -7,16 +7,18 @@ from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
     add_multiple_elements_to_layout_by_row, set_text_of_children, create_push_button
 from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
+from gui.frames.tab_2.qt_items import ItemsBox
 
 
 class WeaponsBox(DefaultBox):
     # TODO - more than 3 choices for weapons
     # TODO Generalize melee/ranged weapon as classes / general function
-    def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox):
+    def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox, items_box: ItemsBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("WeaponsBox")
         self.weapons_statistics_box = weapons_statistics_box
+        self.items_box = items_box
 
         self.melee_box = QtWidgets.QGroupBox(self.root)
         self.melee_box.setGeometry(QtCore.QRect(10, 60, 591, 161))
