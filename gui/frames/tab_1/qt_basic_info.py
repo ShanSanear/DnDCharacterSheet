@@ -16,6 +16,8 @@ class BasicInfoBox(DefaultBox):
 
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("BasicInfoLayout")
+        self.layout.setSpacing(10)
+        self.layout.setContentsMargins(20, 10, 10, 20)
         self.translate_reference = {
             "EN":
                 {
