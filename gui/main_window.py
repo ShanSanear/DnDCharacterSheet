@@ -73,7 +73,7 @@ class MainWindowUi(QMainWindow):
 
     def create_tab_2(self):
         parent_for_boxes = self.tab2
-        self.items_box = ItemsBox(parent_for_boxes, position=[10, 10], size=[500, 80])
+        self.items_box = ItemsBox(parent_for_boxes, position=[10, 10], size=[500, 80], char_core=self.char_core)
         self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
         self.spells_per_day_box = SpellsPerDayBox(parent_for_boxes, position=[1090, 10], size=[150, 350])
