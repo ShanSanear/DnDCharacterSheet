@@ -33,7 +33,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
             "EN":
                 {
                     "root": {
-                        "title": "Feats"
+                        "title": "Feats / Special abilities"
                     },
                     "description_label": "Desc",
                     "description_field_label": "Desc",
