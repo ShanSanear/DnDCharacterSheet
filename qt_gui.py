@@ -78,7 +78,7 @@ class MyApp(MainWindowUi):
                         "known_spells_box": self.known_spells_box.get_dict_repr(),
                         "languages_box": self.languages_box.get_dict_repr(),
                         "notes_box": self.notes_box.get_dict_repr(),
-                        "attacks_box": self.attacks_box.get_dict_repr(),
+                        "attacks_box": self.combat_box.get_dict_repr(),
                         "hp_ac_box": self.hp_ac_box.get_dict_repr(),
                         "saving_throws_box": self.saving_throws_box.get_dict_repr(),
                         "number_of_spells_box": self.number_of_spells_box.get_dict_repr(),
@@ -107,7 +107,7 @@ class MyApp(MainWindowUi):
         self.char_core.attributes.set_attribute(attr_name, attr_box_reference.val.text())
         attr_ref_core = getattr(self.char_core.attributes, attr_name)
         attr_box_reference.mod.setText(str(attr_ref_core["mod"]))
-        self.attacks_box.set_values_from_attributes()
+        self.combat_box.set_values_from_attributes()
         self.saving_throws_box.set_values_from_attributes()
         self.initiative_speed_box.set_values_from_attributes()
         self.hp_ac_box.set_values_from_attributes()
