@@ -136,7 +136,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def add_last_row(self):
         self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
         self.layout.addWidget(self.used_skill_points_label, len(self.elements_list) + 1, 1, 1, 3)
-        #.layout.addItem(self.used_skill_points_label, len(self.elements_list) + 1, 1, )
         self.layout.addWidget(self.total_rank_calc, len(self.elements_list) + 1, 4, 1, 1)
 
     def set_values_from_attributes(self):
