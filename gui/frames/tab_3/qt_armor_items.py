@@ -79,7 +79,8 @@ class ArmorItems(DefaultBox):
                                              function_on_text_changed=self._update_weight, **qline_dict)
         new_armor.spell_fail = create_qline_edit(f"armor_{self.item_count}_spell_fail", **qline_dict)
         new_armor.speed = create_qline_edit(f"armor_{self.item_count}_speed", **qline_dict)
-        new_armor.equipped = create_checkbox(f"armor_{self.item_count}_equipped", **qline_dict)
+        new_armor.equipped = create_checkbox(f"armor_{self.item_count}_equipped",
+                                             function_on_toggle=self._update_armor_ac, **qline_dict)
         new_armor.special = create_qline_edit(f"armor_{self.item_count}_special", **qline_dict)
 
         new_armor.max_dex_bonus_label = create_qlabel(f"armor_{self.item_count}_max_dex_bonus_label", **qline_dict)
@@ -142,5 +143,6 @@ class ArmorItems(DefaultBox):
     def _update_armor_ac(self):
         total_ac = 0
         for armor in self.armors:
-            total_ac += get_int_from_widget(armor.ac_bonus, 0)
+            if armor.equipped.isChecked():
+                total_ac += get_int_from_widget(armor.ac_bonus, 0)
         self.hp_ac_box.ac_armor_bonus.setText(str(total_ac))
