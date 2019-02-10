@@ -10,6 +10,7 @@ class CombatBox(DefaultBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
+        # TODO Column labels centered
         self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
@@ -75,8 +76,8 @@ class CombatBox(DefaultBox):
 
         self.initiative_misc_bonus_label = create_qlabel("initiative_misc_bonus_label", parent=self.container)
         self.initiative_dex_bonus_label = create_qlabel("initiative_dex_bonus_label", parent=self.container)
-        self.initiative_label = create_qlabel("initiative_label", parent=self.container)
-        self.speed_label = create_qlabel("speed_label", parent=self.container)
+        self.initiative_label = create_qlabel("initiative_label", align=QtCore.Qt.AlignRight, parent=self.container)
+        self.speed_label = create_qlabel("speed_label", align=QtCore.Qt.AlignRight, parent=self.container)
         self.speed_armor_type_label = create_qlabel("speed_armor_type_label", parent=self.container)
 
         self.initiative_total = create_qline_edit("initiative_total", parent=self.container, str_format="{:+d}",
@@ -92,7 +93,8 @@ class CombatBox(DefaultBox):
         self.set_values_from_attributes()
 
     def add_to_layout(self):
-        self.labels = [self.attacks_type_label, self.total_label, self.base_label, self.attr_mod_label, self.size_label, self.misc_label]
+        self.labels = [self.attacks_type_label, self.total_label, self.base_label, self.attr_mod_label,
+                       self.size_label, self.misc_label]
         add_multiple_elements_to_layout_by_row(self.layout, self.labels,)
 
         first_row = [self.melee_label,
@@ -112,13 +114,14 @@ class CombatBox(DefaultBox):
         add_multiple_elements_to_layout_by_row(self.layout, first_row, row=1)
         add_multiple_elements_to_layout_by_row(self.layout, second_row, row=2)
 
-        third_row = [self.total_label_init, self.initiative_dex_bonus_label, self.initiative_misc_bonus_label,
-                     self.speed_label]
+        third_row = [self.total_label_init, self.initiative_dex_bonus_label, self.initiative_misc_bonus_label]
 
         add_multiple_elements_to_layout_by_row(self.layout, third_row, row=3, start_column=1)
         fourth_row = [self.initiative_label, self.initiative_total, self.initiative_dex_bonus,
-                      self.initiative_misc_bonus, self.speed_total]
+                      self.initiative_misc_bonus]
         add_multiple_elements_to_layout_by_row(self.layout, fourth_row, row=4)
+        fith_row = [self.speed_label, self.speed_total]
+        add_multiple_elements_to_layout_by_row(self.layout, fith_row, row=5)
 
     def translate(self, language_ref):
         set_text_of_children(self, self.translate_reference[language_ref])
