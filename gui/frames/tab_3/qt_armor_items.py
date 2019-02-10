@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children, get_float_from_widget, get_int_from_widget
+    set_text_of_children, get_float_from_widget, get_int_from_widget, create_checkbox
 from gui.frames.tab_1.qt_hp_ac import HpAcBox
 from gui.frames.tab_2.qt_items import ItemsBox
 
@@ -12,7 +12,7 @@ from gui.frames.tab_2.qt_items import ItemsBox
 class ArmorItems(DefaultBox):
     def __init__(self, parent, position, size, items_box: ItemsBox, hp_ac_box: HpAcBox):
         # TODO checkboxes for setting in the first tab
-        self.increase_height = 140
+        self.increase_height = 170
         self.items_box = items_box
         self.hp_ac_box = hp_ac_box
         self.root = QtWidgets.QGroupBox(parent)
@@ -42,9 +42,10 @@ class ArmorItems(DefaultBox):
                 "spell_fail": "10",
                 "speed": "10",
                 "special": "Lorem ipsum",
-                "special_label": "Special"}
+                "special_label": "Special",
+                "equipped_label" : "Equipped"}
         }
-        for _ in range(5):
+        for _ in range(4):
             self.armors.append(self.create_armor())
             self.update_size()
 
@@ -57,15 +58,15 @@ class ArmorItems(DefaultBox):
         self.item_count = len(self.armors)
         new_armor.root = QtWidgets.QGroupBox(self.root)
         new_armor.root.setGeometry(QtCore.QRect(10, self.initial_armor_height_offset +
-                                                self.increase_height * self.item_count, 590, 130))
+                                                self.increase_height * self.item_count, 590, 160))
         new_armor.root.setObjectName(f"Armor_{self.item_count}_root")
 
         new_armor.container = QtWidgets.QWidget(new_armor.root)
-        new_armor.container.setGeometry(QtCore.QRect(10, 20, 570, 100))
+        new_armor.container.setGeometry(QtCore.QRect(10, 20, 570, 130))
         new_armor.container.setObjectName(f"Armor_{self.item_count}_container")
         new_armor.layout = QtWidgets.QGridLayout(new_armor.container)
         new_armor.layout.setObjectName(f"Armor_{self.item_count}_layout")
-        qline_dict = {"parent": new_armor.container}
+        qline_dict = dict(parent=new_armor.container)
 
         new_armor.test_penalty = create_qline_edit(f"armor_{self.item_count}_test_penalty", **qline_dict)
         new_armor.type = create_qline_edit(f"armor_{self.item_count}_type", **qline_dict)
@@ -78,6 +79,7 @@ class ArmorItems(DefaultBox):
                                              function_on_text_changed=self._update_weight, **qline_dict)
         new_armor.spell_fail = create_qline_edit(f"armor_{self.item_count}_spell_fail", **qline_dict)
         new_armor.speed = create_qline_edit(f"armor_{self.item_count}_speed", **qline_dict)
+        new_armor.equipped = create_checkbox(f"armor_{self.item_count}_equipped", **qline_dict)
         new_armor.special = create_qline_edit(f"armor_{self.item_count}_special", **qline_dict)
 
         new_armor.max_dex_bonus_label = create_qlabel(f"armor_{self.item_count}_max_dex_bonus_label", **qline_dict)
@@ -87,6 +89,7 @@ class ArmorItems(DefaultBox):
         new_armor.weight_label = create_qlabel(f"armor_{self.item_count}_weight_label", **qline_dict)
         new_armor.spell_fail_label = create_qlabel(f"armor_{self.item_count}_spell_fail_label", **qline_dict)
         new_armor.speed_label = create_qlabel(f"armor_{self.item_count}_speed_label", **qline_dict)
+        new_armor.equipped_label = create_qlabel(f"armor_{self.item_count}_equipped_label", **qline_dict)
         new_armor.name_label = create_qlabel(f"armor_{self.item_count}_name_label", **qline_dict)
         new_armor.special_label = create_qlabel(f"armor_{self.item_count}_special_label", **qline_dict)
 
@@ -115,20 +118,23 @@ class ArmorItems(DefaultBox):
         self.items_box.calculate_weight()
 
     def _add_new_element_to_layout(self, new_armor):
-        first_row_to_add = [new_armor.name_label, new_armor.type_label, new_armor.ac_bonus_label,
+        first_row = [new_armor.equipped_label, new_armor.equipped]
+
+        second_row = [new_armor.name_label, new_armor.type_label, new_armor.ac_bonus_label,
                             new_armor.test_penalty_label, new_armor.max_dex_bonus_label]
-        second_row = [new_armor.name, new_armor.type, new_armor.ac_bonus,
+        third_row = [new_armor.name, new_armor.type, new_armor.ac_bonus,
                       new_armor.test_penalty, new_armor.max_dex_bonus, ]
-        third_row = [new_armor.weight_label, new_armor.spell_fail_label, new_armor.speed_label, ]
+        fourth_row = [new_armor.weight_label, new_armor.spell_fail_label, new_armor.speed_label, ]
 
         # TODO - better handling of single elements with non-1 width
-        add_multiple_elements_to_layout_by_row(new_armor.layout, first_row_to_add)
+        add_multiple_elements_to_layout_by_row(new_armor.layout, first_row)
         add_multiple_elements_to_layout_by_row(new_armor.layout, second_row, row=1)
-        new_armor.layout.addWidget(new_armor.special_label, 2, 0, 1, 2)
-        add_multiple_elements_to_layout_by_row(new_armor.layout, third_row, row=2, start_column=2)
-        new_armor.layout.addWidget(new_armor.special, 3, 0, 1, 2)
-        fourth_row = [new_armor.weight, new_armor.spell_fail, new_armor.speed, ]
+        add_multiple_elements_to_layout_by_row(new_armor.layout, third_row, row=2)
+        new_armor.layout.addWidget(new_armor.special_label, 3, 0, 1, 2)
         add_multiple_elements_to_layout_by_row(new_armor.layout, fourth_row, row=3, start_column=2)
+        new_armor.layout.addWidget(new_armor.special, 4, 0, 1, 2)
+        fith_row = [new_armor.weight, new_armor.spell_fail, new_armor.speed]
+        add_multiple_elements_to_layout_by_row(new_armor.layout, fith_row, row=4, start_column=2)
 
     def _change_root_title(self, language):
         self.translate_reference_new_element[language]["root"]["title"] = f"Armor_{self.item_count}"
