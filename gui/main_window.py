@@ -69,8 +69,6 @@ class MainWindowUi(QMainWindow):
         self.feats_box = FeatsBox(parent_for_boxes, position=[540, 560], size=[340, 100])
         self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 560], size=[340, 100])
 
-        #self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1200, 140], size=[200, 80], char_core=self.char_core)
-
         return parent_for_boxes
 
     def create_tab_2(self):
@@ -85,9 +83,9 @@ class MainWindowUi(QMainWindow):
     def create_tab_3(self):
         parent_for_boxes = self.tab3
         self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
-        self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51], items_box=items_box)
+        self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51], items_box=self.items_box)
         self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450],
-                                      weapons_statistics_box=self.weapons_statistics_box, items_box=items_box)
+                                      weapons_statistics_box=self.weapons_statistics_box, items_box=self.items_box)
 
     def add_base_elements(self):
         pass
