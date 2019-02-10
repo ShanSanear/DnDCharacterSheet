@@ -6,7 +6,7 @@ from PyQt5 import QtWidgets, QtCore
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
-    add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox
+    add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
 
 
 class SkillsBox(DefaultBox, ResizeableBox):
@@ -126,10 +126,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def calculate_ranks(self):
         total_ranks = 0
         for skill in self.skills:
-            try:
-                rank_value = float(skill.rank.text().replace(',', '.'))
-            except ValueError:
-                rank_value = 0
+            rank_value = get_float_from_widget(skill.rank, 0)
             if skill.cross_class_checkbox.isChecked():
                 rank_value *= 2
             total_ranks += rank_value

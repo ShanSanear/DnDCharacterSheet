@@ -4,12 +4,14 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
-    add_multiple_elements_to_layout_by_row, create_push_button
+    add_multiple_elements_to_layout_by_row, create_push_button, get_int_from_widget, get_float_from_widget
 
 
 class ItemsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
+        # TODO - include weight of weapons / armor
+        # TODO - add max weight capacity
         self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
@@ -87,15 +89,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
     def calculate_weight(self):
         weight = 0
         for item in self.items:
-            try:
-                count = int(item.count.text())
-
-            except ValueError:
-                count = 1
-
-            try:
-                weight += float(item.weight.text().replace(',', '.')) * count
-
-            except ValueError:
-                weight += 0
+            count = get_int_from_widget(item.count, 1)
+            weight = get_float_from_widget(item.weight, 0) * count
         self.total_weight.setText(str(weight))

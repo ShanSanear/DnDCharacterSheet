@@ -230,16 +230,11 @@ def get_general_dict_repr(root_object, to_get):
 def get_sum_of_elements(root_object, elements, with_decimal_point):
     tmp = 0
     for element in elements:
+        root_element = getattr(root_object, element)
         if not with_decimal_point:
-            try:
-                tmp += int(getattr(root_object, element).text())
-            except ValueError:
-                pass
+            tmp += get_int_from_widget(root_element, 0)
         else:
-            try:
-                tmp += float(getattr(root_object, element).text().replace(",", "."))
-            except ValueError:
-                pass
+            tmp += get_float_from_widget(root_element, 0)
     return tmp
 
 

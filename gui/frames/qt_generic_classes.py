@@ -5,7 +5,7 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import QLineEdit
 
 from gui.frames.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
-    get_general_dict_repr
+    get_general_dict_repr, get_int_from_widget
 
 
 class DefaultBox(ABC):
@@ -130,10 +130,7 @@ class ResizeableBox(ABC):
 
     def _sort_element(self, element):
         if hasattr(element, 'lvl'):
-            try:
-                lvl = int(element.lvl.text())
-            except ValueError:
-                lvl = 0
+            lvl = get_int_from_widget(element.lvl, 0)
             return element.name.text() == "", lvl, element.name.text()
         else:
             return element.name.text() == "", element.name.text()
