@@ -78,7 +78,7 @@ class MyApp(MainWindowUi):
                         "known_spells_box": self.known_spells_box.get_dict_repr(),
                         "languages_box": self.languages_box.get_dict_repr(),
                         "notes_box": self.notes_box.get_dict_repr(),
-                        "attacks_box": self.combat_box.get_dict_repr(),
+                        "combat_box": self.combat_box.get_dict_repr(),
                         "hp_ac_box": self.hp_ac_box.get_dict_repr(),
                         "saving_throws_box": self.saving_throws_box.get_dict_repr(),
                         "number_of_spells_box": self.number_of_spells_box.get_dict_repr(),
