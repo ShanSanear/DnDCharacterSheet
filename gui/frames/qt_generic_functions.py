@@ -4,6 +4,21 @@ from functools import partial
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
 
+def get_int_from_widget(widget, fallback):
+    try:
+        val = int(widget.text())
+    except ValueError:
+        val = fallback
+    return val
+
+def get_float_from_widget(widget, fallback):
+    try:
+        val = float(widget.text().replace(",", "."))
+    except ValueError:
+        val = fallback
+    return val
+
+
 
 def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size: (list, tuple)):
     if min_size:
