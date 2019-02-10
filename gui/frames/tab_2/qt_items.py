@@ -10,8 +10,6 @@ from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children,
 class ItemsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
-        # TODO - include weight of weapons / armor
-        # TODO - add max weight capacity
         self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
@@ -98,10 +96,10 @@ class ItemsBox(DefaultBox, ResizeableBox):
         set_text_of_children(self, self.translate_reference[language])
 
     def calculate_weight(self):
-        weight = 0
+        total_weight = 0
         for item in self.items:
             count = get_int_from_widget(item.count, 1)
-            weight = get_float_from_widget(item.weight, 0) * count
-        weight += self.weapons_weight
-        weight += self.armor_weight
-        self.total_weight.setText(str(weight))
+            total_weight += get_float_from_widget(item.weight, 0) * count
+        total_weight += self.weapons_weight
+        total_weight += self.armor_weight
+        self.total_weight.setText(str(total_weight))

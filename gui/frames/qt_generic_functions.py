@@ -4,18 +4,29 @@ from functools import partial
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
 
+
+def try_to_get_float(string, fallback):
+    try:
+        val = float(string.replace(",", "."))
+    except ValueError:
+        val = fallback
+        logging.debug("Fallback while trying to get float value. Trying: %s, set: %s",
+                      string, fallback)
+    return val
+
+
 def get_int_from_widget(widget, fallback):
     try:
         val = int(widget.text())
     except ValueError:
         val = fallback
+        logging.debug("Fallback while trying to get int value for: %s. Trying: %s, set: %s",
+                      widget, widget.text(), fallback)
     return val
 
+
 def get_float_from_widget(widget, fallback):
-    try:
-        val = float(widget.text().replace(",", "."))
-    except ValueError:
-        val = fallback
+    val = try_to_get_float(widget.text(), fallback)
     return val
 
 

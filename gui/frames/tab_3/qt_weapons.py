@@ -5,7 +5,8 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
-    add_multiple_elements_to_layout_by_row, set_text_of_children, create_push_button
+    add_multiple_elements_to_layout_by_row, set_text_of_children, create_push_button, get_float_from_widget, \
+    try_to_get_float
 from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
 from gui.frames.tab_2.qt_items import ItemsBox
 
@@ -202,6 +203,7 @@ class WeaponsBox(DefaultBox):
         self.change_ranged_weapon()
         self._sort_melee_by_name()
         self._sort_ranged_by_name()
+        self._update_weight()
         # self.root.setLayout(self.layout)
 
     def add_to_ranged_layout(self):
@@ -291,6 +293,8 @@ class WeaponsBox(DefaultBox):
             self.weapons_statistics_box.melee_crit.setText(new_val)
         elif attribute == "attack_bonus":
             self.weapons_statistics_box.melee_attack_bonus.setText(new_val)
+        elif attribute == "weight":
+            self._update_weight()
 
         logging.debug("Chosen weapon after: %s", chosen_weapon)
 
@@ -374,5 +378,16 @@ class WeaponsBox(DefaultBox):
             self.weapons_statistics_box.ranged_attack_bonus.setText(new_val)
         elif attribute == "range":
             self.weapons_statistics_box.ranged_range.setText(new_val)
+        elif attribute == "weight":
+            self._update_weight()
 
         logging.debug("Chosen weapon after: %s", chosen_weapon)
+
+    def _update_weight(self):
+        total_weight = 0
+        for weapon in self.ranged_weapons:
+            total_weight += try_to_get_float(weapon.weight, 0)
+        for weapon in self.melee_weapons:
+            total_weight += try_to_get_float(weapon.weight, 0)
+        self.items_box.weapons_weight = total_weight
+        self.items_box.calculate_weight()

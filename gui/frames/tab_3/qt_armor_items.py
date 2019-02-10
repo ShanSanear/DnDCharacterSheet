@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children
+    set_text_of_children, get_float_from_widget
 from gui.frames.tab_2.qt_items import ItemsBox
 
 
@@ -47,6 +47,7 @@ class ArmorItems(DefaultBox):
             self.update_size()
 
         self.translate()
+        self._update_weight()
 
     def create_armor(self):
         new_armor = SimpleNamespace()
@@ -68,7 +69,8 @@ class ArmorItems(DefaultBox):
         new_armor.max_dex_bonus = create_qline_edit(f"armor_{self.item_count}_max_dex_bonus", **qline_dict)
         new_armor.name = create_qline_edit(f"armor_{self.item_count}_name", **qline_dict)
         new_armor.ac_bonus = create_qline_edit(f"armor_{self.item_count}_ac_bonus", **qline_dict)
-        new_armor.weight = create_qline_edit(f"armor_{self.item_count}_weight", **qline_dict)
+        new_armor.weight = create_qline_edit(f"armor_{self.item_count}_weight",
+                                             function_on_text_changed=self._update_weight, **qline_dict)
         new_armor.spell_fail = create_qline_edit(f"armor_{self.item_count}_spell_fail", **qline_dict)
         new_armor.speed = create_qline_edit(f"armor_{self.item_count}_speed", **qline_dict)
         new_armor.special = create_qline_edit(f"armor_{self.item_count}_special", **qline_dict)
@@ -99,6 +101,13 @@ class ArmorItems(DefaultBox):
 
     def add_to_layout(self, **kwargs):
         pass
+
+    def _update_weight(self):
+        total_weight = 0
+        for armor in self.armors:
+            total_weight += get_float_from_widget(armor.weight, 0)
+        self.items_box.armor_weight = total_weight
+        self.items_box.calculate_weight()
 
     def _add_new_element_to_layout(self, new_armor):
         first_row_to_add = [new_armor.name_label, new_armor.type_label, new_armor.ac_bonus_label,
