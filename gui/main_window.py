@@ -58,16 +58,16 @@ class MainWindowUi(QMainWindow):
 
         self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250],
                                             char_core=self.char_core)
-        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 340], size=[340, 150], char_core=self.char_core)
-        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 530], size=[340, 100])
 
         self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[840, 10],
                                                           size=[420, 110], char_core=self.char_core)
-        self.attacks_box = CombatBox(parent_for_boxes, position=[840, 140], size=[340, 180], char_core=self.char_core)
 
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 340], size=[320, 150],
+        self.combat_box = CombatBox(parent_for_boxes, position=[840, 140], size=[340, 200], char_core=self.char_core)
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 370], size=[320, 150],
                                                  char_core=self.char_core)
-        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 530], size=[340, 100])
+        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 370], size=[340, 150], char_core=self.char_core)
+        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 560], size=[340, 100])
+        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 560], size=[340, 100])
 
         #self.initiative_speed_box = InitiativeSpeedBox(parent_for_boxes, position=[1200, 140], size=[200, 80], char_core=self.char_core)
 
