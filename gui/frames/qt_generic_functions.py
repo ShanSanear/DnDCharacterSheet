@@ -41,7 +41,7 @@ def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size
     return element
 
 
-def create_checkbox(parent: QtWidgets.QWidget, name: str, function_on_toggle=None, args_on_toggle=None):
+def create_checkbox(name: str, parent: QtWidgets.QWidget, function_on_toggle=None, args_on_toggle=None):
     checkbox = QtWidgets.QCheckBox(parent)
     checkbox.setObjectName(name)
     if function_on_toggle:

@@ -106,7 +106,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                function_on_text_changed=self._update_skill,
                                                args_on_text_changed=[new_skill], **qdict)
 
-        new_skill.cross_class_checkbox = create_checkbox(self.container, f"skills{skill_idx}description_button",
+        new_skill.cross_class_checkbox = create_checkbox(f"skills{skill_idx}description_button", self.container,
                                                          function_on_toggle=self.calculate_ranks)
         new_skill.delete_skill = create_push_button("item_delete", self.container, min_size=[20, 20],
                                                     max_size=[20, 20], text="-",
