@@ -34,13 +34,18 @@ class ItemsBox(DefaultBox, ResizeableBox):
                                               align=QtCore.Qt.AlignCenter)
         self.total_weight_label = create_qlabel("items_total_weight_label", self.container,
                                                 align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        self.max_weight_label = create_qlabel("max_weight_label", self.container,
+                                              align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        self.max_weight = create_qline_edit("max_weight", self.container, max_size=[30, None],
+                                              align=QtCore.Qt.AlignCenter)
         self.translate_reference = {"EN": {
             "root": {"title": "Items"},
             "items_weight_label": "Weight",
             "items_name_label": "Item name",
             "items_count_label": "Count",
             "items_description_label": "Description",
-            "total_weight_label" : "Total weight:"
+            "total_weight_label" : "Total weight:",
+            "max_weight_label" : "Max:"
         }}
         self.last_row = [self.add_new]
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
@@ -51,6 +56,10 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.add_item = self.add_new_element
         self.add_new.clicked.connect(self.add_item)
         self.root.setLayout(self.layout)
+        self.weapons_weight = 0
+        self.armor_weight = 0
+        for _ in range(5):
+            self.add_item()
 
 
     def create_new_item(self):
@@ -70,9 +79,11 @@ class ItemsBox(DefaultBox, ResizeableBox):
 
     def add_last_row(self):
         last_row = len(self.items) + 1
-        self.layout.addWidget(self.add_new, last_row, 4, 1, 1)
         self.layout.addWidget(self.total_weight_label, last_row, 0, 1, 1)
         self.layout.addWidget(self.total_weight, last_row, 1, 1, 1)
+        self.layout.addWidget(self.max_weight, last_row, 3, 1, 1)
+        self.layout.addWidget(self.max_weight_label, last_row, 2, 1, 1)
+        self.layout.addWidget(self.add_new, last_row, 4, 1, 1)
 
 
     def create_new_element(self):
@@ -91,4 +102,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         for item in self.items:
             count = get_int_from_widget(item.count, 1)
             weight = get_float_from_widget(item.weight, 0) * count
+        weight += self.weapons_weight
+        weight += self.armor_weight
         self.total_weight.setText(str(weight))
