@@ -7,7 +7,7 @@ from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, cr
 
 class WeaponStatisticsBox(DefaultBox):
     char_core: Character
-
+    # TODO Column labels centered
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size, char_core):
@@ -35,7 +35,7 @@ class WeaponStatisticsBox(DefaultBox):
         self.range_label = create_qlabel("weapon_attribute_choice", **qlabel_dict)
 
 
-        self.melee_label = create_qlabel("weapon_statistics_melee_label", **qlabel_dict)
+        self.melee_label = create_qlabel("weapon_statistics_melee_label", align=QtCore.Qt.AlignRight, **qlabel_dict)
         self.melee_name = create_qline_edit("weapon_statistics_melee_damage", min_size=[90, None],
                                             parent=self.container, enabled=False)
         self.melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus", max_size=[50, None],
@@ -47,7 +47,7 @@ class WeaponStatisticsBox(DefaultBox):
                                               max_size=[50, None],
                                               enabled=False)
 
-        self.ranged_label = create_qlabel("weapon_statistics_ranged_label", **qlabel_dict)
+        self.ranged_label = create_qlabel("weapon_statistics_ranged_label", align=QtCore.Qt.AlignRight, **qlabel_dict)
         self.ranged_name = create_qline_edit("weapon_statistics_ranged_crit", min_size=[90, None],
                                              parent=self.container, enabled=False)
         self.ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus", max_size=[50, None],

@@ -8,6 +8,7 @@ from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, up
 class SavingThrowsBox(DefaultBox):
     char_core: Character
 
+    # TODO Column labels centered
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size, char_core):
@@ -21,7 +22,7 @@ class SavingThrowsBox(DefaultBox):
         self.layout.setObjectName("SavingThrowsLayout")
         self.layout.setContentsMargins(20, 10, 10, 20)
         self.layout.setSpacing(10)
-        qlabel_dict = dict(parent=self.container, min_size=(60, 18), max_size=(60, 23))
+        qlabel_dict = dict(parent=self.container,)
         qline_dict_disabled = dict(parent=self.container, min_size=(15, 23), enabled=False)
         qline_update_fortitude = dict(parent=self.container, min_size=(15, 23),
                                       function_on_text_changed=self._update_fortitude_text)
@@ -48,9 +49,9 @@ class SavingThrowsBox(DefaultBox):
         self.will_size_bonus = create_qline_edit("will_size_bonus", **qline_update_will)
         self.will_misc_bonus = create_qline_edit("will_misc_bonus", **qline_update_will)
 
-        self.reflex_label = create_qlabel("reflex_label", **qlabel_dict)
-        self.will_label = create_qlabel("will_label", **qlabel_dict)
-        self.total_label = create_qlabel("total_label", **qlabel_dict)
+        self.reflex_label = create_qlabel("reflex_label", align=QtCore.Qt.AlignRight, **qlabel_dict)
+        self.will_label = create_qlabel("will_label", align=QtCore.Qt.AlignRight,**qlabel_dict)
+        self.total_label = create_qlabel("total_label", align=QtCore.Qt.AlignRight,**qlabel_dict)
         self.class_base_label = create_qlabel("class_base_label", **qlabel_dict)
         self.attr_bonus_label = create_qlabel("attr_bonus_label", **qlabel_dict)
         self.size_bonus_label = create_qlabel("size_bonus_label", **qlabel_dict)
@@ -96,8 +97,8 @@ class SavingThrowsBox(DefaultBox):
         self.attr_bonus_label.setText(_translate("MainWindow", "Attr"))
         self.size_bonus_label.setText(_translate("MainWindow", "Size"))
         self.misc_bonus_label.setText(_translate("MainWindow", "Misc"))
-        self.fortitude_label.setText(_translate("MainWindow", "Fort."))
-        self.reflex_label.setText(_translate("MainWindow", "Rflx."))
+        self.fortitude_label.setText(_translate("MainWindow", "Fortitude"))
+        self.reflex_label.setText(_translate("MainWindow", "Reflex"))
         self.will_label.setText(_translate("MainWindow", "Will"))
 
     def set_default(self):
