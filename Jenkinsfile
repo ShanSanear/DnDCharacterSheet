@@ -30,6 +30,7 @@ pipeline {
                       pip install radon
                       pip install pytest
                       pip install behave
+                      pip install behave2cucumber
                    '''
             }
         }
@@ -46,19 +47,20 @@ pipeline {
             steps {
                 echo "Raw metrics"
                 sh  ''' source activate ${BUILD_TAG}
-                        radon raw --json irisvmpy/ > raw_report.json
-                        radon cc --json irisvmpy/ > cc_report.json
-                        radon mi --json irisvmpy/ > mi_report.json
-                        sloccount --duplicates --wide irisvmpy > sloccount.sc
+                        radon raw --json core/ > raw_report.json
+                        radon cc --json core/ > cc_report.json
+                        radon mi --json core/ > mi_report.json
+                        sloccount --duplicates --wide core > sloccount.sc
                     '''
                 echo "Code Coverage"
                 sh  ''' source activate ${BUILD_TAG}
-                        coverage run irisvmpy/iris.py 1 1 2 3
+                        coverage run core/character.py 1 1 2 3
                         python -m coverage xml -o ./reports/coverage.xml
                     '''
                 echo "PEP8 style check"
                 sh  ''' source activate ${BUILD_TAG}
-                        pylint --disable=C irisvmpy || true
+                        pylint --disable=C core || true
+                        pylint --disable=C gui || true
                     '''
             }
             post{
