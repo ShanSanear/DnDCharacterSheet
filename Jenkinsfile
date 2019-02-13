@@ -34,7 +34,7 @@ pipeline {
                       pip install coverage
                       pip install pytest-cov
                       pip install clock
-                      pip install sloccount
+                      pip install pygount
                    '''
             }
         }
@@ -54,7 +54,7 @@ pipeline {
                         radon raw --json core/ > raw_report.json
                         radon cc --json core/ > cc_report.json
                         radon mi --json core/ > mi_report.json
-                        sloccount --duplicates --wide core > sloccount.sc
+                        pygount --format=cloc-xml --out cloc.xml --suffix=py --verbose
                     '''
                 echo "Code Coverage"
                 sh  ''' source activate ${BUILD_TAG}
