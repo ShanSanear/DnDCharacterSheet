@@ -106,13 +106,13 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                sh 'conda remove --yes -n ${BUILD_TAG} --all'
-            }
-            filure {
-                echo "Send e-mail, when failed"
-            }
+    }
+    post {
+        always {
+            sh 'conda remove --yes -n ${BUILD_TAG} --all'
+        }
+        filure {
+            echo "Send e-mail, when failed"
         }
     }
 }
