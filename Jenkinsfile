@@ -31,7 +31,7 @@ pipeline {
                       pip install pytest
                       pip install behave
                       pip install behave2cucumber
-                      pip install coverate
+                      pip install coverage
                       pip install pytest-cov
                       pip install clock
                       pip install sloccount
