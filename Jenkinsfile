@@ -66,10 +66,7 @@ pipeline {
             }
             post{
                 always{
-                    step(recordIssues
-                    enabledForFailure: true,
-                    tool: pyLint(pattern: '*.log'),
-                    filters: [excludeCategory('WHITESPACE')])
+                    recordIssues enabledForFailure: true, tool: pyLint(pattern: '*.log')
                 }
             }
         }
