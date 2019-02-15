@@ -2,6 +2,7 @@ import logging
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QScrollArea, QSizePolicy, QVBoxLayout
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
@@ -14,10 +15,11 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def __init__(self, parent, position, size, char_core):
         # TODO - scrollbar after achieving certain height
+
         self.translate_reference = {
             "EN": {
                 "root": {
-                    "title": "Skills"
+                     "title": "Skills"
                 },
                 "cross_class_label": "CC",
                 "rank_label": "Rank",
@@ -37,14 +39,26 @@ class SkillsBox(DefaultBox, ResizeableBox):
             4: "wis",
             5: "cha",
         }
+
         self.char_core = char_core
         self.parent = parent
-        self.root = QtWidgets.QGroupBox(parent)
+        self.root = QtWidgets.QGroupBox(self.parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("SkillsBox")
-        self.container = QtWidgets.QWidget(self.root)
+        smaller_size = [size[0] * 0.95, size[1] * 0.95]
+        self.main_widget = QtWidgets.QWidget(self.parent)
+        self.scrollarea = QScrollArea(self.main_widget)
+        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
+        self.scrollarea.setFixedHeight(smaller_size[1])
+        self.scrollarea.setFixedWidth(smaller_size[0])
+        self.scrollarea.setWidgetResizable(True)
+        self.scrollarea.move(10, 10)
+        self.container = QtWidgets.QWidget(self.parent)
+        self.container.setGeometry(QtCore.QRect(*position, *smaller_size))
+        # self.scrollarea.setAutoFillBackground(False)
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
+        self.layout.setSpacing(10)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         self.layout.setObjectName("SkillsLayout")
         self.skills = []
@@ -74,13 +88,18 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
-        for _ in range(1):
+        for _ in range(15):
             self.add_skill()
 
         self.add_to_layout()
         self.translate("EN")
-        self.root.setLayout(self.layout)
         self.set_values_from_attributes()
+        self.scrollarea.setWidget(self.container)
+        self.layout_All = QVBoxLayout(self.main_widget)
+        self.layout_All.addWidget(self.scrollarea)
+
+    def update_size(self):
+        pass
 
     def create_new_skill(self):
         new_skill = SimpleNamespace()
@@ -116,6 +135,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def create_new_element(self):
         return self.create_new_skill()
+
 
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, self.labels)
