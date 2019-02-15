@@ -51,36 +51,25 @@ pipeline {
             steps {
                 echo "Raw metrics"
                 sh  ''' source activate ${BUILD_TAG}
-                        radon raw --json core/ > raw_report.json
-                        radon cc --json core/ > cc_report.json
-                        radon mi --json core/ > mi_report.json
-                        pygount --format=cloc-xml --out cloc.xml --suffix=py --verbose
+                        radon raw --json . > raw_report.json
+                        radon cc --json . > cc_report.json
+                        radon mi --json . > mi_report.json
+                        pygount --format=cloc-xml --suffix=py --verbose --out cloc.xml
                     '''
-                echo "Code Coverage"
-                // This below doesn't work too well with this modules structure, skipping it
-                //sh  ''' source activate ${BUILD_TAG}
-                //       coverage run core/character.py 1 1 2 3
-                //        python -m coverage xml -o ./reports/coverage.xml
-                //    '''
                 echo "PEP8 style check"
                 sh  ''' source activate ${BUILD_TAG}
-                        pylint --disable=C core || true
-                        pylint --disable=C gui || true
+                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero core > core.log
+                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero gui > gui.log
+                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero main.py > main.log
+                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero qt_gui.py > qt_gui.log
                     '''
             }
             post{
                 always{
-                    step([$class: 'CoberturaPublisher',
-                                   autoUpdateHealth: false,
-                                   autoUpdateStability: false,
-                                   coberturaReportFile: 'reports/coverage.xml',
-                                   failNoReports: false,
-                                   failUnhealthy: false,
-                                   failUnstable: false,
-                                   maxNumberOfBuilds: 10,
-                                   onlyStable: false,
-                                   sourceEncoding: 'ASCII',
-                                   zoomCoverageChart: false])
+                    step(recordIssues
+                    enabledForFailure: true,
+                    tool: pyLint(pattern: '*.log'),
+                    filters: [excludeCategory('WHITESPACE')])
                 }
             }
         }
