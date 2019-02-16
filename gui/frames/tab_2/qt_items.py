@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QScrollArea, QVBoxLayout
 
 from core.character import Character
 from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
@@ -17,7 +18,17 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.char_core = char_core
         self.root.setObjectName("ItemsBox")
-        self.container = QtWidgets.QWidget(self.root)
+        smaller_size = [size[0] * 0.96, size[1] * 0.94]
+        self.main_widget = QtWidgets.QWidget(self.parent)
+        self.scrollarea = QScrollArea(self.main_widget)
+        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
+        self.scrollarea.setFixedHeight(smaller_size[1])
+        self.scrollarea.setFixedWidth(smaller_size[0])
+        self.scrollarea.setWidgetResizable(True)
+        self.scrollarea.move(10, 10)
+
+        self.container = QtWidgets.QWidget(self.main_widget)
         self.container.setObjectName("gridLayoutWidget_8")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("ItemsLayout")
@@ -61,11 +72,14 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.translate("EN")
         self.add_item = self.add_new_element
         self.add_new.clicked.connect(self.add_item)
-        self.root.setLayout(self.layout)
+        #self.root.setLayout(self.layout)
         self.weapons_weight = 0
         self.armor_weight = 0
-        for _ in range(24):
+        for _ in range(22):
             self.add_item()
+        self.scrollarea.setWidget(self.container)
+        self.layout_All = QVBoxLayout(self.main_widget)
+        self.layout_All.addWidget(self.scrollarea)
 
 
     def create_new_item(self):
@@ -101,6 +115,9 @@ class ItemsBox(DefaultBox, ResizeableBox):
         add_element_to_layout(self.layout, item_name_label, row=0, column=0, height=1, width=5)
         add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5)
         self.add_last_row()
+
+    def update_size(self):
+        pass
 
 
     def translate(self, language):

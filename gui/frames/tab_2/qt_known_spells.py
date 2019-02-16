@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QScrollArea, QVBoxLayout
 
 from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
@@ -15,7 +16,17 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("KnownSpellsBox")
-        self.container = QtWidgets.QWidget(self.root)
+        smaller_size = [size[0] * 0.96, size[1] * 0.94]
+        self.main_widget = QtWidgets.QWidget(self.parent)
+        self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
+        self.scrollarea = QScrollArea(self.main_widget)
+        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
+        self.scrollarea.setFixedHeight(smaller_size[1])
+        self.scrollarea.setFixedWidth(smaller_size[0])
+        self.scrollarea.setWidgetResizable(True)
+        self.scrollarea.move(10, 10)
+        self.container = QtWidgets.QWidget(self.main_widget)
         self.container.setObjectName("KnownSpellsQwidget")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("KnownSpellsLayout")
@@ -62,13 +73,15 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
                                last_row_column=4)
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
-        for _ in range(21):
+        for _ in range(19):
             self.add_spell()
 
         self.add_to_layout()
         self.translate("EN")
 
-        self.root.setLayout(self.layout)
+        self.scrollarea.setWidget(self.container)
+        self.layout_All = QVBoxLayout(self.main_widget)
+        self.layout_All.addWidget(self.scrollarea)
 
     def create_spell(self):
         idx = len(self.spells)
@@ -93,6 +106,9 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
 
     def create_new_element(self):
         return self.create_spell()
+
+    def update_size(self):
+        pass
 
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=self.labels)
