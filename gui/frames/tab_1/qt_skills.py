@@ -45,9 +45,15 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(self.parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("SkillsBox")
-        smaller_size = [size[0] * 0.95, size[1] * 0.95]
+        smaller_size = [size[0] * 0.96, size[1] * 0.94]
         self.main_widget = QtWidgets.QWidget(self.parent)
+        self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
         self.scrollarea = QScrollArea(self.main_widget)
+        #self.scrollarea.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
+        #self.scrollarea.setStyleSheet("QScrollArea {background-color:white;}")
+        #self.main_widget.setStyleSheet("background-color:transparent;")
+
+        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.main_widget.setGeometry(QtCore.QRect(*position, *size))
         self.scrollarea.setFixedHeight(smaller_size[1])
         self.scrollarea.setFixedWidth(smaller_size[0])
@@ -55,7 +61,8 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.scrollarea.move(10, 10)
         self.container = QtWidgets.QWidget(self.parent)
         self.container.setGeometry(QtCore.QRect(*position, *smaller_size))
-        # self.scrollarea.setAutoFillBackground(False)
+        # self.container.setStyleSheet("background-color:white;")
+        self.scrollarea.setAutoFillBackground(False)
         self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setSpacing(10)
