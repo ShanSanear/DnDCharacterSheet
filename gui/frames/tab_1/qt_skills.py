@@ -47,7 +47,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.root.setObjectName("SkillsBox")
         smaller_size = [size[0] * 0.96, size[1] * 0.94]
         self.main_widget = QtWidgets.QWidget(self.parent)
-        self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
+        #self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
         self.scrollarea = QScrollArea(self.main_widget)
         #self.scrollarea.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
         #self.scrollarea.setStyleSheet("QScrollArea {background-color:white;}")
