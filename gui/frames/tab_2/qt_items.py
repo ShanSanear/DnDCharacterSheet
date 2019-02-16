@@ -64,7 +64,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.root.setLayout(self.layout)
         self.weapons_weight = 0
         self.armor_weight = 0
-        for _ in range(5):
+        for _ in range(24):
             self.add_item()
 
 

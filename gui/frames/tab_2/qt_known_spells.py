@@ -62,7 +62,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
                                last_row_column=4)
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
-        for _ in range(15):
+        for _ in range(21):
             self.add_spell()
 
         self.add_to_layout()
