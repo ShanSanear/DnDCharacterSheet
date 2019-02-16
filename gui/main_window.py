@@ -24,9 +24,9 @@ class MainWindowUi(QMainWindow):
         super(MainWindowUi, self).__init__()
         self.char_core = char_core
         self.setObjectName("MainWindow")
-        self.resize(1280, 830)
+        self.resize(1280, 860)
         self.tabs = QTabWidget(self)
-        self.tabs.setMinimumSize(1260, 780)
+        self.tabs.setMinimumSize(1260, 800)
         size_policy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         size_policy.setHeightForWidth(True)
         self.tabs.setSizePolicy(size_policy)
@@ -66,8 +66,8 @@ class MainWindowUi(QMainWindow):
         self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 400], size=[320, 150],
                                                  char_core=self.char_core)
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 400], size=[340, 150], char_core=self.char_core)
-        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 560], size=[340, 100])
-        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 560], size=[340, 100])
+        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 560], size=[340, 235])
+        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 560], size=[340, 235])
 
         return parent_for_boxes
 

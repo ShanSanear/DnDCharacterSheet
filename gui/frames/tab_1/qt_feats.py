@@ -2,6 +2,7 @@ from functools import partial
 from types import SimpleNamespace
 
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QScrollArea, QVBoxLayout
 
 from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
@@ -17,7 +18,20 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("FeatsBox")
-        self.container = QtWidgets.QWidget(self.root)
+        smaller_size = [size[0] * 0.94, size[1] * 0.85]
+        self.main_widget = QtWidgets.QWidget(self.parent)
+        self.scrollarea = QScrollArea(self.main_widget)
+        # self.scrollarea.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
+        # self.scrollarea.setStyleSheet("QScrollArea {background-color:white;}")
+        # self.main_widget.setStyleSheet("background-color:transparent;")
+
+        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
+        self.scrollarea.setFixedHeight(smaller_size[1])
+        self.scrollarea.setFixedWidth(smaller_size[0])
+        self.scrollarea.setWidgetResizable(True)
+        self.scrollarea.move(10, 10)
+        self.container = QtWidgets.QWidget(self.main_widget)
         self.container.setObjectName("FeatsQwidget")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setObjectName("FeatsLayout")
@@ -52,14 +66,19 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)
 
-        for _ in range(1):
+        for _ in range(5):
             self.add_feat()
 
         self.translate("EN")
-        self.root.setLayout(self.layout)
+        self.scrollarea.setWidget(self.container)
+        self.layout_All = QVBoxLayout(self.main_widget)
+        self.layout_All.addWidget(self.scrollarea)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
+
+    def update_size(self):
+        pass
 
     def create_new_element(self):
         return self.create_feat()
