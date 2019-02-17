@@ -18,7 +18,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("FeatsBox")
-        smaller_size = [size[0] * 0.94, size[1] * 0.85]
+        smaller_size = [size[0] * 0.90, size[1] * 0.90]
         self.main_widget = QtWidgets.QWidget(self.parent)
         self.scrollarea = QScrollArea(self.main_widget)
         # self.scrollarea.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
@@ -50,7 +50,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
                         "title": "Feats / Special abilities"
                     },
                     "description_label": "Desc",
-                    "description_field_label": "Desc",
                     "name_label": "Feat name",
                 }
         }
@@ -61,12 +60,12 @@ class FeatsBox(DefaultBox, ResizeableBox):
         }
 
         ResizeableBox.__init__(self, elements_list=self.feats, row_offset=1, increase_width=0, increase_height=28,
-                               last_row_column=3)
+                               last_row_column=2)
         self.add_to_layout()
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)
 
-        for _ in range(5):
+        for _ in range(25):
             self.add_feat()
 
         self.translate("EN")
@@ -84,8 +83,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         return self.create_feat()
 
     def add_to_layout(self):
-        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label,
-                                                             self.description_field_label])
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label])
         self.add_last_row()
 
     def show_description(self, feat):
@@ -98,7 +96,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         new_feat.name = create_qline_edit(f"feat{idx}_name", self.container, max_size=(150, None),
                                           function_on_unfocused=self.sort_elements)
 
-        new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
+        #new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
                                                          self.container, min_size=[20, 20], max_size=[20, 20], )
         new_feat.description_button.clicked.connect(partial(self.show_description, new_feat))

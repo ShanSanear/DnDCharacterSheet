@@ -53,21 +53,21 @@ class MainWindowUi(QMainWindow):
 
     def create_tab_1(self):
         parent_for_boxes = self.tab1
-        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
-        self.skills_box = SkillsBox(parent_for_boxes, position=[10, 245], size=[500, 550], char_core=self.char_core)
+        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[530, 220])
+        self.skills_box = SkillsBox(parent_for_boxes, position=[870, 10], size=[500, 550], char_core=self.char_core)
 
-        self.attributes_box = AttributesBox(parent_for_boxes, position=[540, 10], size=[270, 250],
+        self.attributes_box = AttributesBox(parent_for_boxes, position=[10, 240], size=[270, 270],
                                             char_core=self.char_core)
 
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[540, 270],
-                                                          size=[420, 110], char_core=self.char_core)
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[10, 580],
+                                                          size=[530, 120], char_core=self.char_core)
 
-        self.combat_box = CombatBox(parent_for_boxes, position=[840, 10], size=[340, 220], char_core=self.char_core)
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[910, 400], size=[320, 150],
+        self.combat_box = CombatBox(parent_for_boxes, position=[550, 10], size=[300, 220], char_core=self.char_core)
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[290, 380], size=[250, 150],
                                                  char_core=self.char_core)
-        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[540, 400], size=[340, 150], char_core=self.char_core)
-        self.feats_box = FeatsBox(parent_for_boxes, position=[540, 560], size=[340, 235])
-        self.feats_box_2 = FeatsBox(parent_for_boxes, position=[910, 560], size=[340, 235])
+        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[290, 240], size=[250, 130], char_core=self.char_core)
+        self.feats_box = FeatsBox(parent_for_boxes, position=[550, 400], size=[300, 300])
+       # self.feats_box_2 = FeatsBox(parent_for_boxes, position=[470, 560], size=[340, 235])
 
         return parent_for_boxes
 
