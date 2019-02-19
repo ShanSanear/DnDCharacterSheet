@@ -24,9 +24,9 @@ class MainWindowUi(QMainWindow):
         super(MainWindowUi, self).__init__()
         self.char_core = char_core
         self.setObjectName("MainWindow")
-        self.resize(1280, 860)
+        self.resize(1360, 860)
         self.tabs = QTabWidget(self)
-        self.tabs.setMinimumSize(1260, 800)
+        self.tabs.setMinimumSize(1340, 800)
         size_policy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         size_policy.setHeightForWidth(True)
         self.tabs.setSizePolicy(size_policy)
@@ -35,7 +35,7 @@ class MainWindowUi(QMainWindow):
         self.tab2 = QWidget(self.tabs)
         self.tab2.tabs = self.tabs
         self.tab3 = QWidget(self.tabs)
-        self.tabs.addTab(self.tab1, "Basic information")
+        self.tabs.addTab(self.tab1, "Basic information / Combat / Skills / Feats")
         self.tabs.addTab(self.tab2, "Items / Spells / Languages")
         self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
         self.create_tab_1()
@@ -53,20 +53,20 @@ class MainWindowUi(QMainWindow):
 
     def create_tab_1(self):
         parent_for_boxes = self.tab1
-        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[530, 220])
-        self.skills_box = SkillsBox(parent_for_boxes, position=[870, 10], size=[500, 550], char_core=self.char_core)
+        self.basic_info_box = BasicInfoBox(parent_for_boxes, position=[10, 10], size=[500, 220])
+        self.skills_box = SkillsBox(parent_for_boxes, position=[830, 10], size=[500, 780], char_core=self.char_core)
 
-        self.attributes_box = AttributesBox(parent_for_boxes, position=[10, 240], size=[270, 270],
+        self.attributes_box = AttributesBox(parent_for_boxes, position=[10, 240], size=[240, 250],
                                             char_core=self.char_core)
 
-        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[10, 580],
-                                                          size=[530, 120], char_core=self.char_core)
+        self.weapons_statistics_box = WeaponStatisticsBox(parent_for_boxes, position=[10, 530],
+                                                          size=[500, 120], char_core=self.char_core)
 
-        self.combat_box = CombatBox(parent_for_boxes, position=[550, 10], size=[300, 220], char_core=self.char_core)
-        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[290, 380], size=[250, 150],
+        self.combat_box = CombatBox(parent_for_boxes, position=[520, 10], size=[300, 220], char_core=self.char_core)
+        self.saving_throws_box = SavingThrowsBox(parent_for_boxes, position=[260, 380], size=[250, 150],
                                                  char_core=self.char_core)
-        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[290, 240], size=[250, 130], char_core=self.char_core)
-        self.feats_box = FeatsBox(parent_for_boxes, position=[550, 400], size=[300, 300])
+        self.hp_ac_box = HpAcBox(parent_for_boxes, position=[260, 240], size=[250, 130], char_core=self.char_core)
+        self.feats_box = FeatsBox(parent_for_boxes, position=[520, 240], size=[300, 550])
        # self.feats_box_2 = FeatsBox(parent_for_boxes, position=[470, 560], size=[340, 235])
 
         return parent_for_boxes
