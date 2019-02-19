@@ -27,7 +27,7 @@ class HpAcBox(DefaultBox):
                         "title": "HP / AC"
                     },
                     "hp_total_label": "Total",
-                    "hp_hp_wounds_current_hp_label": "Wounds / Current HP",
+                    "hp_hp_wounds_current_hp_label": "Wounds",
                     "hp_label": "HP",
                     "hp_total": "10",
                     "ac_label": "AC",
@@ -44,7 +44,7 @@ class HpAcBox(DefaultBox):
                     "ac_size_bonus_label": "Size",
                     "ac_misc_bonus_label": "Misc",
                     "hp_hp_wounds_current_hp": "10/10",
-                    "hp_dice_label": "HP Dice",
+                    "hp_dice_label": "Dice",
                     "hp_dice": "d10",
                     "hp_contusion": "10",
                     "contusion_label": "Contusion",

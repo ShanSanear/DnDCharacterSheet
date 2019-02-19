@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtWidgets import QSizePolicy, QLayout
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox
@@ -38,8 +39,8 @@ class AttributesBox(DefaultBox):
                         "label": "Attr",
                         "val": "Val",
                         "mod": "Mod",
-                        "temp_val": "Tmp val",
-                        "temp_mod": "Tmp mod",
+                        "temp_val": "T. Val",
+                        "temp_mod": "T. Mod",
                     },
                     "str": {
                         "label": "STR"
