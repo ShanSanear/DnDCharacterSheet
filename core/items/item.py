@@ -1,4 +1,4 @@
-from possible_exceptions import IncorrectCategory, NegativeCost, NegativeWeight
+from core.exceptions import IncorrectCategory, NegativeCost, NegativeWeight
 
 possible_categories = ("weapon", "food", "other", "armor", "jewelry")
 

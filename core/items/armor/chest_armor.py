@@ -1,5 +1,5 @@
 from core.items.armor import Armor
-from possible_exceptions import IncorrectArmorType
+from core.exceptions import IncorrectArmorType
 
 possible_armor_types = ('light', 'medium', 'heavy')
 

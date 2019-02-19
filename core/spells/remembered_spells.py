@@ -1,4 +1,4 @@
-from possible_exceptions import SpellNotInSpellBook, SpellNotRemembered
+from core.exceptions import SpellNotInSpellBook, SpellNotRemembered
 
 
 class RememberedSpells:

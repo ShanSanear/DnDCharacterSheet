@@ -2,7 +2,7 @@ import pytest
 
 from core.items.weapons.weapons import *
 
-from possible_exceptions import *
+from core.exceptions import *
 
 
 class TestWeapons:

@@ -1,7 +1,7 @@
 from core.items.weapons.weapons import Weapon
-from possible_exceptions import LightWeaponCheck, HandlingError
+from core.exceptions import LightWeaponCheck, HandlingError
 import re
-from patterns import HANDLING_RE
+from core.patterns import HANDLING_RE
 
 
 class MeleeWeapon(Weapon):

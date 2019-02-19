@@ -1,4 +1,4 @@
-from possible_exceptions import NoSpellException, IncorrectSpellSchool
+from core.exceptions import NoSpellException, IncorrectSpellSchool
 
 spell_schools = (
     "Abjuration", "Conjuration", "Divination", "Enchantment", "Evocation", "Illusion", "Necromancy", "Transmutation",

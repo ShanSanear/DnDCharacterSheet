@@ -1,6 +1,6 @@
 import pytest
 
-from possible_exceptions import *
+from core.exceptions import *
 from .. import Item
 
 class TestItem:

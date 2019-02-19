@@ -1,6 +1,6 @@
 import pytest
 
-from possible_exceptions import *
+from core.exceptions import *
 from ..melee_weapon import *
 
 class TestMeleeWeapon:

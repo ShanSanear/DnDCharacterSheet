@@ -1,4 +1,4 @@
-from possible_exceptions import IncorrectAlignementError
+from core.exceptions import IncorrectAlignementError
 
 
 class Alignement:

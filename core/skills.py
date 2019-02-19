@@ -1,4 +1,4 @@
-from possible_exceptions import NoAttributesInstance
+from core.exceptions import NoAttributesInstance
 
 
 class Skill:

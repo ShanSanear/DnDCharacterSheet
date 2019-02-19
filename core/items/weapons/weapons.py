@@ -1,6 +1,6 @@
 from core.items import Item
-from possible_exceptions import IncorrectDamage, IncorrectCritical
-from patterns import CRITICAL_RE, DICE_RE
+from core.exceptions import IncorrectDamage, IncorrectCritical
+from core.patterns import CRITICAL_RE, DICE_RE
 
 import re
 
