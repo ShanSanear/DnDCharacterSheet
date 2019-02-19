@@ -1,4 +1,3 @@
-from core.tests import test_attributes
 from . import alignment
 from . import attributes
 from . import character
