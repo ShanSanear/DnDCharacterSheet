@@ -23,44 +23,6 @@ class MyApp(MainWindowUi):
         self.character_file = ""
         self.connect_attrs()
 
-    def do_stuff(self):
-        d = {
-            "items": [
-                {
-                    "name": "Item 1 name",
-                    "weight": "19",
-                    "count": "3",
-                    "description": "onomatopeja",
-                },
-                {
-                    "name": "Item 2 name",
-                    "weight": "222",
-                    "count": "2",
-                    "description": "onomatopeja 2",
-                },
-                {
-                    "name": "Item 3 name",
-                    "weight": "222",
-                    "count": "2",
-                    "description": "onomatopeja 3",
-                },
-                {
-                    "name": "Item 4 name",
-                    "weight": "444",
-                    "count": "4",
-                    "description": "onomatopeja 4",
-                },
-                {
-                    "name": "Item 5 name",
-                    "weight": "555",
-                    "count": "5",
-                    "description": "onomatopeja 5",
-                },
-
-            ]
-        }
-        set_text_of_children(self.items_box, d)
-
     def open_file(self):
         logging.info("Opening file")
         fname = QFileDialog.getOpenFileName(self.tabs, 'Open file', Path().cwd().as_posix(),
