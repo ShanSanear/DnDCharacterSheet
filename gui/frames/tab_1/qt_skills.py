@@ -45,7 +45,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(self.parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("SkillsBox")
-        smaller_size = [size[0] * 0.96, size[1] * 0.94]
+        smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         #self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
         self.scrollarea = QScrollArea(self.main_widget)
@@ -94,7 +94,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
-        for _ in range(15):
+        for _ in range(22):
             self.add_skill()
 
         self.add_to_layout()

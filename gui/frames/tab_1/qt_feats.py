@@ -18,7 +18,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("FeatsBox")
-        smaller_size = [size[0] * 0.90, size[1] * 0.90]
+        smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         self.scrollarea = QScrollArea(self.main_widget)
         # self.scrollarea.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
@@ -65,7 +65,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)
 
-        for _ in range(25):
+        for _ in range(17):
             self.add_feat()
 
         self.translate("EN")
