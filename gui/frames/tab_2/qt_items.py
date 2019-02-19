@@ -18,7 +18,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.char_core = char_core
         self.root.setObjectName("ItemsBox")
-        smaller_size = [size[0] * 0.96, size[1] * 0.94]
+        smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         self.scrollarea = QScrollArea(self.main_widget)
         self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)

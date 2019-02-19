@@ -16,7 +16,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.root.setObjectName("KnownSpellsBox")
-        smaller_size = [size[0] * 0.96, size[1] * 0.94]
+        smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
         self.scrollarea = QScrollArea(self.main_widget)
