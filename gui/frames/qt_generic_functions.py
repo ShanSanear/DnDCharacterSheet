@@ -106,7 +106,7 @@ def create_push_button(name: str, parent: QtWidgets.QWidget, min_size: (list, tu
     return button
 
 
-def create_combo_box(name: str, parent: QtWidgets.QWidget, number_of_choices: int = 1,
+def create_combo_box(parent: QtWidgets.QWidget, number_of_choices: int = 1,
                      choices_text: (list, tuple) = None,
                      min_size: (list, tuple) = None, max_size: (list, tuple) = None, function_on_index_changed=None,
                      args_on_index_changed=None):

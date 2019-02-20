@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox, ResizeType
+from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
     add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
 
@@ -15,6 +15,10 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size, char_core):
         # TODO - scrollbar after achieving certain height
 
+        self.skills = []
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size,
+                               elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
+                               last_row_column=7)
         self.translate_reference = {
             "EN": {
                 "root": {
@@ -33,12 +37,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self._map_choice_to_attr = {0: "str", 1: "dex", 2: "con", 3: "int", 4: "wis", 5: "cha"}
 
         self.char_core = char_core
-        ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
-        self.skills = []
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size,
-                               elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
-                               last_row_column=7)
         self.skill_name_label = create_qlabel(self.container, max_size=(69, 20))
         self.attr_choice_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                                max_size=(69, 20))
@@ -74,18 +73,18 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def create_new_skill(self):
         new_skill = SimpleNamespace()
         skill_idx = len(self.skills)
-        new_skill.name = create_qline_edit(self.container,
-                                                 min_size=(150, None), function_on_unfocused=self.sort_elements)
+        new_skill.name = create_qline_edit(self.container, min_size=(150, None),
+                                           function_on_unfocused=self.sort_elements)
         new_skill.name.setText(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
             "Praesent sapien urna, egestas eu tempor at, pretium nec orci.")
-        new_skill.attr_choice = create_combo_box(name=f"skills{skill_idx}attr_choice", parent=self.container,
+        new_skill.attr_choice = create_combo_box(parent=self.container,
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
                                                  function_on_index_changed=self._set_attr_val_for_skill,
                                                  args_on_index_changed=[new_skill], max_size=(69, 20), )
 
-        qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None], )
+        qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None])
         new_skill.total = create_qline_edit(enabled=False, str_format="{:+d}", **qdict)
         new_skill.attr_mod = create_qline_edit(**qdict, enabled=False)
         new_skill.rank = create_qline_edit(function_on_text_changed=self._update_skill,

@@ -5,8 +5,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
-    add_multiple_elements_to_layout_by_row, set_text_of_children, create_push_button, get_float_from_widget, \
-    try_to_get_float
+    add_multiple_elements_to_layout_by_row, set_text_of_children, create_push_button, try_to_get_float
 from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
 from gui.frames.tab_2.qt_items import ItemsBox
 
@@ -106,7 +105,7 @@ class WeaponsBox(DefaultBox):
                                                     args_on_text_changed=["type"],
                                                     **melee_weapon_qedit)
 
-        self.melee_choice = create_combo_box("weapons_melee_choice", self.root, 1, min_size=[171, 22],
+        self.melee_choice = create_combo_box(parent=self.root, number_of_choices=1, min_size=[171, 22],
                                              function_on_index_changed=self.change_melee_weapon)
         self.melee_choice.move(20, 30)
         self.melee_add = create_push_button("melee_add", parent=self.root, text="+", max_size=[24,24],
@@ -124,7 +123,7 @@ class WeaponsBox(DefaultBox):
         self.melee_weapon_size_label = create_qlabel(**melee_weapon_qlabel)
         self.melee_weapon_type_label = create_qlabel(**melee_weapon_qlabel)
 
-        self.ranged_choice = create_combo_box("weapons_ranged_choice", self.root, 1, min_size=[171, 22],
+        self.ranged_choice = create_combo_box(parent=self.root, number_of_choices=1, min_size=[171, 22],
                                               function_on_index_changed=self.change_ranged_weapon)
         self.ranged_choice.move(20, 230)
         self.ranged_add = create_push_button("ranged_add", parent=self.root, text="+", max_size=[24,24],
