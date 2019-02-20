@@ -1,22 +1,15 @@
-from PyQt5 import QtWidgets, QtCore
-
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_element_to_layout, \
     add_multiple_elements_to_layout_by_row, set_text_of_children, update_texts
 
 
-class HpAcBox(DefaultBox):
+class HpAcBox(BoxType, DefaultBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(20, 10, 10, 20)
-        self.layout.setSpacing(8)
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         self.translate_reference = {
             "EN":
                 {
@@ -74,7 +67,6 @@ class HpAcBox(DefaultBox):
 
         self.add_to_layout()
         self.translate("EN")
-        self.root.setLayout(self.layout)
         self.set_values_from_attributes()
 
     def add_to_layout(self):

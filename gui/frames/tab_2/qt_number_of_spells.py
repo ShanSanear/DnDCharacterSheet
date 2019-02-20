@@ -1,20 +1,14 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtCore
 
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children
 
 
-class NumberOfSpellsBox(DefaultBox):
+class NumberOfSpellsBox(BoxType, DefaultBox):
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 561, 91))
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(6)
+        BoxType.__init__(self, parent=parent, position=position, size=size, defaults=True)
         self.translate_reference = {"EN": {"root": {"title": "Number of spells"},
                                            "number_of_spells_0th_label": "0th lvl",
                                            "number_of_spells_4th_label": "4th lvl",

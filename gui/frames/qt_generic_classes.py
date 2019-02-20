@@ -2,10 +2,23 @@ import logging
 from abc import ABC, abstractmethod
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout
 
 from gui.frames.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
     get_general_dict_repr, get_int_from_widget
+
+
+class BoxType:
+    def __init__(self, parent, position, size, spacing=10, margins=(20, 10, 10, 20), defaults=False):
+        self.parent = parent
+        self.root = QGroupBox(parent)
+        self.root.setGeometry(QtCore.QRect(*position, *size))
+        self.container = QWidget(self.root)
+        self.layout = QGridLayout(self.container)
+        if not defaults:
+            self.layout.setSpacing(spacing)
+            self.layout.setContentsMargins(*margins)
+        self.root.setLayout(self.layout)
 
 
 class DefaultBox(ABC):
@@ -152,8 +165,6 @@ class ResizeableBox(ABC):
         else:
             self.end_scroll = False
         logging.debug("Is at the end scroll: %s", self.end_scroll)
-
-
 
     @abstractmethod
     def create_new_element(self):

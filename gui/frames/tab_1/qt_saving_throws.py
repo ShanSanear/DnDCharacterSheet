@@ -1,11 +1,11 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, update_texts
 
 
-class SavingThrowsBox(DefaultBox):
+class SavingThrowsBox(BoxType, DefaultBox):
     char_core: Character
 
     # TODO Column labels centered
@@ -13,12 +13,7 @@ class SavingThrowsBox(DefaultBox):
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(20, 10, 10, 20)
-        self.layout.setSpacing(10)
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         qlabel_dict = dict(parent=self.container,)
         qline_dict_disabled = dict(parent=self.container, min_size=(15, 23), enabled=False)
         qline_update_fortitude = dict(parent=self.container, min_size=(15, 23),
@@ -58,7 +53,6 @@ class SavingThrowsBox(DefaultBox):
         self.add_to_layout()
         self.translate()
         self.set_default()
-        self.root.setLayout(self.layout)
         self.set_values_from_attributes()
 
     def add_to_layout(self):

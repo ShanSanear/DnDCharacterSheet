@@ -1,20 +1,11 @@
-from PyQt5 import QtWidgets, QtCore
-
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
 
 
-class BasicInfoBox(DefaultBox):
+class BasicInfoBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size):
-        self.root = QtWidgets.QGroupBox(parent)
-
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setSpacing(10)
-        self.layout.setContentsMargins(20, 10, 10, 20)
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         self.translate_reference = {
             "EN":
                 {
@@ -79,8 +70,7 @@ class BasicInfoBox(DefaultBox):
         self.add_to_layout()
         self.translate("EN")
         self.set_default()
-        self.root.setTitle("Basic Info")
-        self.root.setLayout(self.layout)
+
 
     def add_to_layout(self):
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
@@ -109,6 +99,9 @@ class BasicInfoBox(DefaultBox):
 
     def set_default(self):
         default_values = {
+            "root": {
+                "title": "Basic Info"
+            },
             "race": "Lorem ipsum",
             "alignement": "Lorem ipsum",
             "char_class": "Lorem ipsum",

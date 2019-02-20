@@ -1,19 +1,15 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtCore
 
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, numeric_label
 
 
-class SpellsPerDayBox(DefaultBox):
+class SpellsPerDayBox(BoxType, DefaultBox):
     # TODO - function based widgets and labels
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-        self.container.setGeometry(QtCore.QRect(10, 20, 251, 321))
-        self.layout = QtWidgets.QGridLayout(self.container)
+        BoxType.__init__(self, parent=parent, position=position, size=size, defaults=True)
 
         qline_dict = dict(parent=self.container, min_size=(0, 23), align=QtCore.Qt.AlignCenter)
         qlabel_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter)
@@ -23,81 +19,61 @@ class SpellsPerDayBox(DefaultBox):
         self.spells_per_day_extra_spells = create_qlabel(**qlabel_dict)
         self.spells_per_day_base_spell_dc = create_qlabel(**qlabel_dict)
 
-        self.spells_per_day_dc_lvl_0 = create_qline_edit( **qline_dict)
-        self.spells_per_day_spells_per_day_lvl_0 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_dc_lvl_0 = create_qline_edit(**qline_dict)
+        self.spells_per_day_spells_per_day_lvl_0 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_1 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_1 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_0 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_0 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_1 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_1 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_2 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_2 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_2 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_2 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_1 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_1 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_5 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_5 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_2 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_2 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_3 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_3 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_4 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_4 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_3 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_3 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_6 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_6 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_4 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_4 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_5 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_5 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_3 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_3 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_4 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_4 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_8 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_8 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_5 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_5 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_8 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_8 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_dc_lvl_7 = create_qline_edit( **qline_dict)
+        self.spells_per_day_dc_lvl_7 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_7 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_7 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_extra_spells_lvl_6 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_extra_spells_lvl_6 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_7 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_7 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_6 = create_qline_edit(
-                                                                     **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_6 = create_qline_edit(**qline_dict)
 
-        self.spells_per_day_spells_per_day_lvl_8 = create_qline_edit(
-                                                                     **qline_dict)
-        self.spells_per_day_dc_lvl_9 = create_qline_edit( **qline_dict)
-        self.spells_per_day_spells_per_day_lvl_9 = create_qline_edit(
-                                                                     **qline_dict)
-        self.spells_per_day_extra_spells_lvl_9 = create_qline_edit(
-                                                                   **qline_dict)
+        self.spells_per_day_spells_per_day_lvl_8 = create_qline_edit(**qline_dict)
+        self.spells_per_day_dc_lvl_9 = create_qline_edit(**qline_dict)
+        self.spells_per_day_spells_per_day_lvl_9 = create_qline_edit(**qline_dict)
+        self.spells_per_day_extra_spells_lvl_9 = create_qline_edit(**qline_dict)
 
         self._num_0 = numeric_label("_num_0", **qlabel_dict)
         self._num_1 = numeric_label("_num_1", **qlabel_dict)
@@ -112,7 +88,6 @@ class SpellsPerDayBox(DefaultBox):
 
         self.add_to_layout()
         self.translate()
-        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self._num_0, 1, 1, 1, 1)

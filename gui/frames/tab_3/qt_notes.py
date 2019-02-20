@@ -1,17 +1,14 @@
 from PyQt5 import QtWidgets, QtCore
 
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 
 
-class NotesBox(DefaultBox):
+class NotesBox(BoxType, DefaultBox):
     # TODO - function based widgets and labels
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-        self.layout = QtWidgets.QVBoxLayout(self.container)
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         self.notes_label = QtWidgets.QLabel(self.container)
         self.notes_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.notes_label)

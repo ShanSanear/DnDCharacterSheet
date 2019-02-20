@@ -1,22 +1,17 @@
 from PyQt5 import QtWidgets, QtCore
 
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 
 
-class LanguagesBox(DefaultBox):
+class LanguagesBox(BoxType, DefaultBox):
     # TODO - function based widgets and labels
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns (if its even worth here)
     # TODO - change PlainTextEdit to something else?
 
     def __init__(self, parent, position, size):
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         self.root.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        self.container = QtWidgets.QWidget(self.root)
-        self.layout = QtWidgets.QVBoxLayout(self.container)
-        self.layout.setContentsMargins(9, 9, 9, 9)
-        self.layout.setSpacing(0)
         self.known_languages_label = QtWidgets.QLabel(self.container)
         self.known_languages_label.setAlignment(QtCore.Qt.AlignCenter)
         self.layout.addWidget(self.known_languages_label)
@@ -24,7 +19,6 @@ class LanguagesBox(DefaultBox):
         self.add_to_layout()
         self.translate()
         self.set_default()
-        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.known_languages)

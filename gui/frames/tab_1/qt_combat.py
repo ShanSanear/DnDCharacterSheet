@@ -1,23 +1,24 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children, update_texts, add_element_to_layout
+    set_text_of_children, update_texts
 
 
-class CombatBox(DefaultBox):
+class CombatBox(BoxType, DefaultBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
         # TODO Column labels centered
         self.char_core = char_core
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setSpacing(10)
-        self.layout.setContentsMargins(20, 10, 10, 20)
+        # self.root = QtWidgets.QGroupBox(parent)
+        # self.root.setGeometry(QtCore.QRect(*position, *size))
+        # self.container = QtWidgets.QWidget(self.root)
+        # self.layout = QtWidgets.QGridLayout(self.container)
+        # self.layout.setSpacing(10)
+        # self.layout.setContentsMargins(20, 10, 10, 20)
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         self.translate_reference = {
             "EN":
                 {
@@ -86,7 +87,6 @@ class CombatBox(DefaultBox):
         self.add_to_layout()
         self.translate("EN")
         self.set_default_values()
-        self.root.setLayout(self.layout)
         self.set_values_from_attributes()
 
     def add_to_layout(self):

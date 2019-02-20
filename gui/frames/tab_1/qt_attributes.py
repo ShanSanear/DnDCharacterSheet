@@ -1,30 +1,20 @@
 from types import SimpleNamespace
 
-from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QSizePolicy, QLayout
+from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
 
 
-class AttributesBox(DefaultBox):
+class AttributesBox(BoxType, DefaultBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
 
         self.char_core = char_core
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-
-        self.container = QtWidgets.QWidget(self.root)
-
-        self.layout = QtWidgets.QGridLayout(self.container)
-        # self.layout.setContentsMargins(8,8,8,8)
-        self.layout.setSpacing(10)
-        self.layout.setContentsMargins(20, 10, 10, 20)
-
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         self.attrs_names = ('str', 'dex', 'con', 'int', 'wis', 'cha')
         self.attrs_references = []
         self.head = SimpleNamespace()
@@ -32,6 +22,9 @@ class AttributesBox(DefaultBox):
         self.translate_reference = {
             "EN":
                 {
+                    "root": {
+                        "title": "Attributes"
+                    },
                     "head": {
                         "label": "Attr",
                         "val": "Val",
@@ -75,8 +68,6 @@ class AttributesBox(DefaultBox):
         self.add_to_layout()
         self.translate("EN")
         self.set_default_values()
-        self.root.setTitle("Attributes")
-        self.root.setLayout(self.layout)
         self.set_values_from_attributes()
 
     def generate_head_labels(self):

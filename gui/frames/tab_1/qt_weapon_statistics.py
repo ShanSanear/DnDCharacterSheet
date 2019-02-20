@@ -1,25 +1,18 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox
-from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box
+from gui.frames.qt_generic_classes import DefaultBox, BoxType
+from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel
 
 
-class WeaponStatisticsBox(DefaultBox):
+class WeaponStatisticsBox(BoxType, DefaultBox):
     char_core: Character
     # TODO Column labels centered
     # TODO - generalized translation
     # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QtWidgets.QWidget(self.root)
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setContentsMargins(8, 8, 8, 12)
-        # @self.layout.setSpacing(10)
-        self.melee_attr = "str"
-        self.ranged_attr = "dex"
+        BoxType.__init__(self, parent=parent, position=position, size=size)
         self.bonus_from_melee = 0
         self.bonus_from_ranged = 0
 
@@ -58,7 +51,6 @@ class WeaponStatisticsBox(DefaultBox):
 
         self.add_to_layout()
         self.translate()
-        self.root.setLayout(self.layout)
 
     def add_to_layout(self):
         self.layout.addWidget(self.weapon_name_label, 0, 1, 1, 1)
