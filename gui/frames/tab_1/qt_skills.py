@@ -9,7 +9,7 @@ from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit,
     add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
 
 
-class SkillsBox(ResizeType, DefaultBox, ResizeableBox):
+class SkillsBox(DefaultBox, ResizeableBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
@@ -36,7 +36,8 @@ class SkillsBox(ResizeType, DefaultBox, ResizeableBox):
         ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         self.skills = []
-        ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size,
+                               elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
                                last_row_column=7)
         self.skill_name_label = create_qlabel(self.container, max_size=(69, 20))
         self.attr_choice_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,

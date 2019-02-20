@@ -9,7 +9,7 @@ from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children,
     add_element_to_layout
 
 
-class ItemsBox(ResizeType, DefaultBox, ResizeableBox):
+class ItemsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size, char_core: Character):
         # TODO - scrollbar after achieving certain height
         ResizeType.__init__(self, parent=parent, position=position, size=size)
@@ -17,7 +17,8 @@ class ItemsBox(ResizeType, DefaultBox, ResizeableBox):
         self.items = []
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")
-        ResizeableBox.__init__(self, elements_list=self.items, row_offset=1, increase_width=0, increase_height=28,
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size,
+                               elements_list=self.items, row_offset=1, increase_width=0, increase_height=28,
                                last_row_column=4)
 
         self.max_encumbrance_map = {1: 1.5, 2: 3, 3: 5, 4: 6.5, 5: 8, 6: 10, 7: 11.5, 8: 13, 9: 15, 10: 16.5, 11: 19,

@@ -1,20 +1,21 @@
 from types import SimpleNamespace
 
-from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox, ResizeType
+from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
     set_text_of_children, add_multiple_elements_to_layout_by_row
 from gui.popups.qt_full_description import DescriptionDialog
 
 
-class KnownSpellsBox(ResizeType, DefaultBox, ResizeableBox):
+class KnownSpellsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
-        ResizeType.__init__(self, parent=parent, position=position, size=size)
+
+        self.spells = []
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size, elements_list=self.spells,
+                               row_offset=1, increase_width=0, increase_height=28, last_row_column=4)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
         self.last_row = [self.add_new]
-
-        self.spells = []
         qlabel_dict = dict(parent=self.container, max_size=(20, None))
         qlabel_dict_2 = dict(parent=self.container)
 
@@ -47,8 +48,6 @@ class KnownSpellsBox(ResizeType, DefaultBox, ResizeableBox):
             }
         }
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
-        ResizeableBox.__init__(self, elements_list=self.spells, row_offset=1, increase_width=0, increase_height=28,
-                               last_row_column=4)
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
         for _ in range(19):
@@ -72,7 +71,8 @@ class KnownSpellsBox(ResizeType, DefaultBox, ResizeableBox):
                                                           function_on_clicked=self.show_description,
                                                           args_on_clicked=new_spell, text="...")
         new_spell._full_description = ""
-        new_spell.delete_spell = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
+        new_spell.delete_spell = create_push_button("item_delete", self.container, min_size=[20, 20],
+                                                    max_size=[20, 20], text="-",
                                                     function_on_clicked=self._remove_element, args_on_clicked=new_spell)
 
         set_text_of_children(new_spell, self.translate_reference_new_element["EN"])

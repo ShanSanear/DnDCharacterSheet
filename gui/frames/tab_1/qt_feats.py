@@ -1,16 +1,19 @@
 from functools import partial
 from types import SimpleNamespace
 
-from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox, ResizeType
+from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
     add_multiple_elements_to_layout_by_row, set_text_of_children
 from gui.popups.qt_full_description import DescriptionDialog
 
 
-class FeatsBox(ResizeType, DefaultBox, ResizeableBox):
+class FeatsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
-        ResizeType.__init__(self, parent=parent, position=position, size=size)
+        self.feats = []
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size,
+                               elements_list=self.feats, row_offset=1, increase_width=0, increase_height=28,
+                               last_row_column=2)
         self.name_label = create_qlabel(self.container)
         self.description_field_label = create_qlabel(self.container)
         self.description_label = create_qlabel(self.container)
@@ -18,7 +21,6 @@ class FeatsBox(ResizeType, DefaultBox, ResizeableBox):
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")
         self.last_row = [self.add_new]
-        self.feats = []
         self.translate_reference = {"EN":
             {"root":
                 {
@@ -34,8 +36,6 @@ class FeatsBox(ResizeType, DefaultBox, ResizeableBox):
             }
         }
 
-        ResizeableBox.__init__(self, elements_list=self.feats, row_offset=1, increase_width=0, increase_height=28,
-                               last_row_column=2)
         self.add_to_layout()
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)

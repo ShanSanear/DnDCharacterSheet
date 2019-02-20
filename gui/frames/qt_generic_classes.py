@@ -58,9 +58,11 @@ class DefaultBox(ABC):
         return get_general_dict_repr(self, elements)
 
 
-class ResizeableBox(ABC):
+class ResizeableBox(ABC, ResizeType):
 
-    def __init__(self, elements_list, row_offset, increase_width, increase_height, last_row_column=4):
+    def __init__(self, parent, position, size, elements_list, row_offset, increase_width, increase_height,
+                 last_row_column=4):
+        ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.elements_list = elements_list
         self.row_offset = row_offset
         self.increase_width = increase_width
@@ -122,12 +124,6 @@ class ResizeableBox(ABC):
         logging.debug("Index of element to remove: %d", idx)
         self._delete_from_layout(element)
         del self.elements_list[idx]
-        self.update_layout()
-        self.update_size()
-
-    def update_layout(self):
-        self.remove_widgets_from_layout()
-        self.add_widgets_again()
 
     def _get_element_index(self, element):
         for idx, searched_for in enumerate(self.elements_list):
@@ -159,12 +155,9 @@ class ResizeableBox(ABC):
 
     def add_last_row(self):
         self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
-        # add_multiple_elements_to_layout_by_row(self.layout, self.last_row, row=len(self.elements_list) + 1,
-        #                                        start_column=self.add_new_column)
 
     def sort_elements(self):
         self.elements_list = sorted(self.elements_list, key=self._sort_element)
-        self.update_layout()
 
     def _sort_element(self, element):
         if hasattr(element, 'lvl'):
