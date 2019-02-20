@@ -41,9 +41,8 @@ def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size
     return element
 
 
-def create_checkbox(name: str, parent: QtWidgets.QWidget, function_on_toggle=None, args_on_toggle=None):
+def create_checkbox(parent: QtWidgets.QWidget, function_on_toggle=None, args_on_toggle=None):
     checkbox = QtWidgets.QCheckBox(parent)
-    checkbox.setObjectName(name)
     if function_on_toggle:
         if not args_on_toggle:
             checkbox.toggled.connect(function_on_toggle)
@@ -52,13 +51,12 @@ def create_checkbox(name: str, parent: QtWidgets.QWidget, function_on_toggle=Non
     return checkbox
 
 
-def create_qlabel(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None, max_size: (list, tuple) = None,
+def create_qlabel(parent: QtWidgets.QWidget, min_size: (list, tuple) = None, max_size: (list, tuple) = None,
                   align=None):
     label = QtWidgets.QLabel(parent)
     label: QtWidgets.QLabel = resize_element(label, min_size, max_size)
     if align:
         label.setAlignment(align)
-    label.setObjectName(name)
     return label
 
 
@@ -131,7 +129,7 @@ def create_combo_box(name: str, parent: QtWidgets.QWidget, number_of_choices: in
 
 
 def numeric_label(name, parent, align):
-    return create_qlabel(name, parent, align=align)
+    return create_qlabel(parent, align=align)
 
 
 def add_multiple_elements_to_layout_by_row(layout: QtWidgets.QLayout, elements_to_add: (list, tuple), row: int = 0,

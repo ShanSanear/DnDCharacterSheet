@@ -31,28 +31,17 @@ class NumberOfSpellsBox(DefaultBox):
         qline_dict = dict(parent=self.container, min_size=(0, 10))
         qline_dict_2 = dict(parent=self.container, align=QtCore.Qt.AlignCenter)
 
-        self.number_of_spells_0th_label = create_qlabel("number_of_spells_0th_label",
-                                                        parent=self.container)
-        self.number_of_spells_1st_label = create_qlabel("number_of_spells_1st_label",
-                                                        parent=self.container)
-        self.number_of_spells_2nd_label = create_qlabel("number_of_spells_2nd_label",
-                                                        parent=self.container)
-        self.number_of_spells_3rd_label = create_qlabel("number_of_spells_3rd_label",
-                                                        parent=self.container)
-        self.number_of_spells_4th_label = create_qlabel("number_of_spells_4th_label",
-                                                        parent=self.container)
-        self.number_of_spells_5th_label = create_qlabel("number_of_spells_5th_label",
-                                                        parent=self.container)
-        self.number_of_spells_6th_label = create_qlabel("number_of_spells_6th_label",
-                                                        parent=self.container)
-        self.number_of_spells_7th_label = create_qlabel("number_of_spells_7th_label",
-                                                        parent=self.container)
-        self.number_of_spells_8th_label = create_qlabel("number_of_spells_8th_label",
-                                                        parent=self.container)
-        self.number_of_spells_9th_label = create_qlabel("number_of_spells_9th_label",
-                                                        parent=self.container)
-        self.number_of_spells_known_number_of_spells_label = create_qlabel(
-            "number_of_spells_known_number_of_spells_label", **qline_dict_2)
+        self.number_of_spells_0th_label = create_qlabel(parent=self.container)
+        self.number_of_spells_1st_label = create_qlabel(parent=self.container)
+        self.number_of_spells_2nd_label = create_qlabel(parent=self.container)
+        self.number_of_spells_3rd_label = create_qlabel(parent=self.container)
+        self.number_of_spells_4th_label = create_qlabel(parent=self.container)
+        self.number_of_spells_5th_label = create_qlabel(parent=self.container)
+        self.number_of_spells_6th_label = create_qlabel(parent=self.container)
+        self.number_of_spells_7th_label = create_qlabel(parent=self.container)
+        self.number_of_spells_8th_label = create_qlabel(parent=self.container)
+        self.number_of_spells_9th_label = create_qlabel(parent=self.container)
+        self.number_of_spells_known_number_of_spells_label = create_qlabel(**qline_dict_2)
 
         self.number_of_spells_0 = create_qline_edit("number_of_spells_0", **qline_dict)
         self.number_of_spells_1 = create_qline_edit("number_of_spells_1", **qline_dict)

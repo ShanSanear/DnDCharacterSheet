@@ -67,20 +67,20 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.skills = []
         ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
                                last_row_column=7)
-        self.skill_name_label = create_qlabel("skills_skill_name_label", self.container, max_size=(69, 20))
-        self.attr_choice_label = create_qlabel("skills_attr_choice_label", self.container, align=QtCore.Qt.AlignCenter,
+        self.skill_name_label = create_qlabel(self.container, max_size=(69, 20))
+        self.attr_choice_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                                max_size=(69, 20))
-        self.total_label = create_qlabel("skills_total_label", self.container, align=QtCore.Qt.AlignCenter,
+        self.total_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                          max_size=(69, 20))
-        self.attr_mod_label = create_qlabel("skills_attr_mod_label", self.container, align=QtCore.Qt.AlignCenter,
+        self.attr_mod_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                             max_size=(69, 20))
-        self.rank_label = create_qlabel("skills_rank_label", self.container, align=QtCore.Qt.AlignCenter,
+        self.rank_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                         max_size=(69, 20))
-        self.misc_label = create_qlabel("skills_misc_label", self.container, align=QtCore.Qt.AlignCenter,
+        self.misc_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                         max_size=(69, 20))
-        self.cross_class_label = create_qlabel("skills_description_label", self.container, align=QtCore.Qt.AlignCenter,
+        self.cross_class_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                                max_size=(69, 20))
-        self.used_skill_points_label = create_qlabel("skills_total_rank_label", self.container,
+        self.used_skill_points_label = create_qlabel(self.container,
                                                      align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter,
                                                      max_size=(None, 20))
         self.total_rank_calc = create_qline_edit("skills_total_rank_calc", self.container, enabled=False,
@@ -128,8 +128,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                function_on_text_changed=self._update_skill,
                                                args_on_text_changed=[new_skill], **qdict)
 
-        new_skill.cross_class_checkbox = create_checkbox(f"skills{skill_idx}description_button", self.container,
-                                                         function_on_toggle=self.calculate_ranks)
+        new_skill.cross_class_checkbox = create_checkbox(self.container, function_on_toggle=self.calculate_ranks)
         new_skill.delete_skill = create_push_button("item_delete", self.container, min_size=[20, 20],
                                                     max_size=[20, 20], text="-",
                                                     function_on_clicked=self._remove_element, args_on_clicked=new_skill)

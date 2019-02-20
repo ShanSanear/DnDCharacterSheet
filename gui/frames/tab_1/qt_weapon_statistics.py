@@ -26,14 +26,14 @@ class WeaponStatisticsBox(DefaultBox):
         qline_dict = dict(parent=self.container, enabled=False)
         qlabel_dict = dict(parent=self.container)
 
-        self.weapon_name_label = create_qlabel("weapon_name_label", **qlabel_dict)
-        self.attack_bonus_label = create_qlabel("weapon_statistics_attack_bonus_label", **qlabel_dict)
-        self.damage_label = create_qlabel("weapon_statistics_damage_label", **qlabel_dict)
-        self.crit_label = create_qlabel("weapon_statistics_crit_label", **qlabel_dict)
-        self.range_label = create_qlabel("weapon_attribute_choice", **qlabel_dict)
+        self.weapon_name_label = create_qlabel(**qlabel_dict)
+        self.attack_bonus_label = create_qlabel(**qlabel_dict)
+        self.damage_label = create_qlabel(**qlabel_dict)
+        self.crit_label = create_qlabel(**qlabel_dict)
+        self.range_label = create_qlabel(**qlabel_dict)
 
 
-        self.melee_label = create_qlabel("weapon_statistics_melee_label", align=QtCore.Qt.AlignRight, **qlabel_dict)
+        self.melee_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
         self.melee_name = create_qline_edit("weapon_statistics_melee_damage", min_size=[90, None],
                                             parent=self.container, enabled=False)
         self.melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus", max_size=[50, None],
@@ -45,7 +45,7 @@ class WeaponStatisticsBox(DefaultBox):
                                               max_size=[50, None],
                                               enabled=False)
 
-        self.ranged_label = create_qlabel("weapon_statistics_ranged_label", align=QtCore.Qt.AlignRight, **qlabel_dict)
+        self.ranged_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
         self.ranged_name = create_qline_edit("weapon_statistics_ranged_crit", min_size=[90, None],
                                              parent=self.container, enabled=False)
         self.ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus", max_size=[50, None],

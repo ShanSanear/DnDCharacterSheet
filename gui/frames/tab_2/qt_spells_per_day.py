@@ -18,11 +18,10 @@ class SpellsPerDayBox(DefaultBox):
         qline_dict = dict(parent=self.container, min_size=(0, 23), align=QtCore.Qt.AlignCenter)
         qlabel_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter)
 
-        self.spells_per_day_level_label = create_qlabel("spells_per_day_level_label", **qlabel_dict)
-        self.spells_per_day_spells_per_day_label = create_qlabel("spells_per_day_spells_per_day_label",
-                                                                 **qlabel_dict)
-        self.spells_per_day_extra_spells = create_qlabel("spells_per_day_extra_spells", **qlabel_dict)
-        self.spells_per_day_base_spell_dc = create_qlabel("spells_per_day_base_spell_dc", **qlabel_dict)
+        self.spells_per_day_level_label = create_qlabel(**qlabel_dict)
+        self.spells_per_day_spells_per_day_label = create_qlabel(**qlabel_dict)
+        self.spells_per_day_extra_spells = create_qlabel(**qlabel_dict)
+        self.spells_per_day_base_spell_dc = create_qlabel(**qlabel_dict)
 
         self.spells_per_day_dc_lvl_0 = create_qline_edit("spells_per_day_dc_lvl_0", **qline_dict)
         self.spells_per_day_spells_per_day_lvl_0 = create_qline_edit("spells_per_day_spells_per_day_lvl_0",

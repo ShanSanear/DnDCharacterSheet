@@ -40,15 +40,15 @@ class ItemsBox(DefaultBox, ResizeableBox):
                                     29: 233.3, }
 
         qlabel_dict = dict(parent=self.container)
-        self.items_name_label = create_qlabel("items_name_label", **qlabel_dict)
-        self.items_weight_label = create_qlabel("items_weight_label", **qlabel_dict)
-        self.items_count_label = create_qlabel("items_count_label", **qlabel_dict)
-        self.items_description_label = create_qlabel("items_description_label", **qlabel_dict)
+        self.items_name_label = create_qlabel(**qlabel_dict)
+        self.items_weight_label = create_qlabel(**qlabel_dict)
+        self.items_count_label = create_qlabel(**qlabel_dict)
+        self.items_description_label = create_qlabel(**qlabel_dict)
         self.total_encumbrance = create_qline_edit("items_total_weight", self.container, max_size=[30, None], enabled=False,
                                                    align=QtCore.Qt.AlignCenter)
-        self.total_encumbrance_label = create_qlabel("items_total_weight_label", self.container,
+        self.total_encumbrance_label = create_qlabel(self.container,
                                                      align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
-        self.weight_separator_label = create_qlabel("max_weight_label", self.container,
+        self.weight_separator_label = create_qlabel(self.container,
                                                     align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
         self.max_encumbrance = create_qline_edit("max_weight", self.container, max_size=[30, None], enabled=False,
                                                  align=QtCore.Qt.AlignCenter)

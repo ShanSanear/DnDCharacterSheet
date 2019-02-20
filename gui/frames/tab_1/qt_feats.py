@@ -32,9 +32,9 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.scrollarea.move(10, 10)
         self.container = QtWidgets.QWidget(self.main_widget)
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.name_label = create_qlabel("feat_name_label", self.container)
-        self.description_field_label = create_qlabel("feat_name_label", self.container)
-        self.description_label = create_qlabel("feat_description_label", self.container)
+        self.name_label = create_qlabel(self.container)
+        self.description_field_label = create_qlabel(self.container)
+        self.description_label = create_qlabel(self.container)
         self.labels = [self.name_label, self.description_field_label, self.description_label]
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")

@@ -115,14 +115,14 @@ class WeaponsBox(DefaultBox):
         self.melee_remove = create_push_button("melee_remove", parent=self.root, text="-", max_size=[24,24],
                                             function_on_clicked=self._remove_melee_weapon)
         self.melee_remove.move(230, 30)
-        self.melee_weapon_name_label = create_qlabel("melee_weapon_name_label", **melee_weapon_qlabel)
-        self.melee_weapon_attack_bonus_label = create_qlabel("melee_weapon_attack_bonus_label", **melee_weapon_qlabel)
-        self.melee_weapon_damage_roll_label = create_qlabel("melee_weapon_damage_roll_label", **melee_weapon_qlabel)
-        self.melee_weapon_crit_label = create_qlabel("melee_weapon_crit_label", **melee_weapon_qlabel)
-        self.melee_weapon_special_label = create_qlabel("melee_weapon_special_label", **melee_weapon_qlabel)
-        self.melee_weapon_weight_label = create_qlabel("melee_weapon_weight_label", **melee_weapon_qlabel)
-        self.melee_weapon_size_label = create_qlabel("melee_weapon_size_label", **melee_weapon_qlabel)
-        self.melee_weapon_type_label = create_qlabel("melee_weapon_type_label", **melee_weapon_qlabel)
+        self.melee_weapon_name_label = create_qlabel(**melee_weapon_qlabel)
+        self.melee_weapon_attack_bonus_label = create_qlabel(**melee_weapon_qlabel)
+        self.melee_weapon_damage_roll_label = create_qlabel(**melee_weapon_qlabel)
+        self.melee_weapon_crit_label = create_qlabel(**melee_weapon_qlabel)
+        self.melee_weapon_special_label = create_qlabel(**melee_weapon_qlabel)
+        self.melee_weapon_weight_label = create_qlabel(**melee_weapon_qlabel)
+        self.melee_weapon_size_label = create_qlabel(**melee_weapon_qlabel)
+        self.melee_weapon_type_label = create_qlabel(**melee_weapon_qlabel)
 
         self.ranged_choice = create_combo_box("weapons_ranged_choice", self.root, 1, min_size=[171, 22],
                                               function_on_index_changed=self.change_ranged_weapon)
@@ -145,17 +145,16 @@ class WeaponsBox(DefaultBox):
         ranged_weapon_qedit = dict(parent=self.ranged_container, min_size=(0, 23),
                                    function_on_text_changed=self.save_ranged_weapon)
 
-        self.ranged_weapon_crit_label = create_qlabel("ranged_weapon_crit_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_damage_roll_label = create_qlabel("ranged_weapon_damage_roll_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_range_label = create_qlabel("ranged_weapon_range_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_name_label = create_qlabel("ranged_weapon_name_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_attack_bonus_label = create_qlabel("ranged_weapon_attack_bonus_label",
-                                                              **ranged_weapon_qlabel)
-        self.ranged_weapon_special_label = create_qlabel("ranged_weapon_special_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_ammo_label = create_qlabel("ranged_weapon_ammo_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_weight_label = create_qlabel("ranged_weapon_weight_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_size_label = create_qlabel("ranged_weapon_size_label", **ranged_weapon_qlabel)
-        self.ranged_weapon_type_label = create_qlabel("ranged_weapon_type_label", **ranged_weapon_qlabel)
+        self.ranged_weapon_crit_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_damage_roll_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_range_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_name_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_attack_bonus_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_special_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_ammo_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_weight_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_size_label = create_qlabel(**ranged_weapon_qlabel)
+        self.ranged_weapon_type_label = create_qlabel(**ranged_weapon_qlabel)
 
         self.current_ranged = SimpleNamespace()
         self.current_ranged.name = create_qline_edit("ranged_weapon_name", args_on_text_changed=["name"],

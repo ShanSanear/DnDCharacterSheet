@@ -82,7 +82,7 @@ class AttributesBox(DefaultBox):
     def generate_head_labels(self):
         elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
         for element in elements:
-            setattr(self.head, element, create_qlabel(f"attr_head_{element}", **self.qlabel_header_dict))
+            setattr(self.head, element, create_qlabel(**self.qlabel_header_dict))
 
     def generate_attributes_elements(self):
         for attr_reference, attr_name in zip(self.attrs_references, self.attrs_names):
@@ -96,7 +96,7 @@ class AttributesBox(DefaultBox):
                         create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict_mod))
             else:
                 setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict))
-        setattr(attr_reference, 'label', create_qlabel(f"attr_{attr_name}_label", **self.qlabel_dict))
+        setattr(attr_reference, 'label', create_qlabel(**self.qlabel_dict))
 
     def add_to_layout(self):
         elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']

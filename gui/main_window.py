@@ -66,7 +66,6 @@ class MainWindowUi(QMainWindow):
                                                  char_core=self.char_core)
         self.hp_ac_box = HpAcBox(parent_for_boxes, position=[260, 240], size=[250, 130], char_core=self.char_core)
         self.feats_box = FeatsBox(parent_for_boxes, position=[520, 240], size=[300, 550])
-       # self.feats_box_2 = FeatsBox(parent_for_boxes, position=[470, 560], size=[340, 235])
 
         return parent_for_boxes
 

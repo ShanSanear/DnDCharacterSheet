@@ -36,14 +36,12 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         qlabel_dict = dict(parent=self.container, max_size=(20, None))
         qlabel_dict_2 = dict(parent=self.container)
 
-        self.lvl_label = create_qlabel("known_spells_lvl_label", **qlabel_dict)
+        self.lvl_label = create_qlabel(**qlabel_dict)
 
-        self.name_label = create_qlabel("known_spells_name_label", **qlabel_dict_2)
+        self.name_label = create_qlabel(**qlabel_dict_2)
 
-        self.description_button_label = create_qlabel("known_spells_description_label",
-                                                      **qlabel_dict_2)
-        self.short_description_label = create_qlabel("known_spells_short_description_label",
-                                                     **qlabel_dict_2)
+        self.description_button_label = create_qlabel(**qlabel_dict_2)
+        self.short_description_label = create_qlabel(**qlabel_dict_2)
 
         self.translate_reference = {
             "EN": {

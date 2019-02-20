@@ -64,31 +64,28 @@ class ArmorItems(DefaultBox):
         new_armor.layout = QtWidgets.QGridLayout(new_armor.container)
         qline_dict = dict(parent=new_armor.container)
 
-        new_armor.test_penalty = create_qline_edit(f"armor_{self.item_count}_test_penalty", **qline_dict)
-        new_armor.type = create_qline_edit(f"armor_{self.item_count}_type", **qline_dict)
-        new_armor.max_dex_bonus = create_qline_edit(f"armor_{self.item_count}_max_dex_bonus", **qline_dict)
-        new_armor.name = create_qline_edit(f"armor_{self.item_count}_name", **qline_dict)
-        new_armor.ac_bonus = create_qline_edit(f"armor_{self.item_count}_ac_bonus",
-                                               function_on_text_changed=self._update_armor_ac,
+        new_armor.test_penalty = create_qline_edit(" ",**qline_dict)
+        new_armor.type = create_qline_edit(" ",**qline_dict)
+        new_armor.max_dex_bonus = create_qline_edit(" ",**qline_dict)
+        new_armor.name = create_qline_edit(" ",**qline_dict)
+        new_armor.ac_bonus = create_qline_edit(" ",function_on_text_changed=self._update_armor_ac,
                                                **qline_dict)
-        new_armor.weight = create_qline_edit(f"armor_{self.item_count}_weight",
-                                             function_on_text_changed=self._update_weight, **qline_dict)
-        new_armor.spell_fail = create_qline_edit(f"armor_{self.item_count}_spell_fail", **qline_dict)
-        new_armor.speed = create_qline_edit(f"armor_{self.item_count}_speed", **qline_dict)
-        new_armor.equipped = create_checkbox(f"armor_{self.item_count}_equipped",
-                                             function_on_toggle=self._update_armor_ac, **qline_dict)
-        new_armor.special = create_qline_edit(f"armor_{self.item_count}_special", **qline_dict)
+        new_armor.weight = create_qline_edit(" ",function_on_text_changed=self._update_weight, **qline_dict)
+        new_armor.spell_fail = create_qline_edit(" ",**qline_dict)
+        new_armor.speed = create_qline_edit(" ",**qline_dict)
+        new_armor.equipped = create_checkbox(function_on_toggle=self._update_armor_ac, **qline_dict)
+        new_armor.special = create_qline_edit(" ",**qline_dict)
 
-        new_armor.max_dex_bonus_label = create_qlabel(f"armor_{self.item_count}_max_dex_bonus_label", **qline_dict)
-        new_armor.test_penalty_label = create_qlabel(f"armor_{self.item_count}_test_penalty_label", **qline_dict)
-        new_armor.type_label = create_qlabel(f"armor_{self.item_count}_type_label", **qline_dict)
-        new_armor.ac_bonus_label = create_qlabel(f"armor_{self.item_count}_ac_bonus_label", **qline_dict)
-        new_armor.weight_label = create_qlabel(f"armor_{self.item_count}_weight_label", **qline_dict)
-        new_armor.spell_fail_label = create_qlabel(f"armor_{self.item_count}_spell_fail_label", **qline_dict)
-        new_armor.speed_label = create_qlabel(f"armor_{self.item_count}_speed_label", **qline_dict)
-        new_armor.equipped_label = create_qlabel(f"armor_{self.item_count}_equipped_label", **qline_dict)
-        new_armor.name_label = create_qlabel(f"armor_{self.item_count}_name_label", **qline_dict)
-        new_armor.special_label = create_qlabel(f"armor_{self.item_count}_special_label", **qline_dict)
+        new_armor.max_dex_bonus_label = create_qlabel(**qline_dict)
+        new_armor.test_penalty_label = create_qlabel(**qline_dict)
+        new_armor.type_label = create_qlabel(**qline_dict)
+        new_armor.ac_bonus_label = create_qlabel(**qline_dict)
+        new_armor.weight_label = create_qlabel(**qline_dict)
+        new_armor.spell_fail_label = create_qlabel(**qline_dict)
+        new_armor.speed_label = create_qlabel(**qline_dict)
+        new_armor.equipped_label = create_qlabel(**qline_dict)
+        new_armor.name_label = create_qlabel(**qline_dict)
+        new_armor.special_label = create_qlabel(**qline_dict)
 
         self._add_new_element_to_layout(new_armor)
 
