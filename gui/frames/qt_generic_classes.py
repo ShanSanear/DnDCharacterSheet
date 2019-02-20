@@ -35,6 +35,9 @@ class ResizeableBox(ABC):
         if hasattr(self, "parent"):
             self.initial_tab_height = self.parent.tabs.height()
         self.last_row_column = last_row_column
+        self.end_scroll = False
+        self.scrollarea.verticalScrollBar().rangeChanged.connect(self._max_scroll)
+        self.scrollarea.verticalScrollBar().valueChanged.connect(lambda value: self.scrolled(value))
 
     def update_size(self):
         new_root_height = self.root_initial_height + self.increase_height * len(self.elements_list)
@@ -135,6 +138,20 @@ class ResizeableBox(ABC):
         else:
             return element.name.text() == "", element.name.text()
 
+    def _max_scroll(self, min_scroll, max_scroll):
+        logging.debug("Max scroll in _max_scroll: %s", max_scroll)
+        logging.debug("Min scroll in _max_scroll: %s", min_scroll)
+        if self.end_scroll:
+            self.scrollarea.verticalScrollBar().setSliderPosition(max_scroll)
+
+    def scrolled(self, value):
+        logging.debug("Scrolled to: %s", value)
+        maximum_scroll = self.scrollarea.verticalScrollBar().maximum()
+        if value == maximum_scroll:
+            self.end_scroll = True
+        else:
+            self.end_scroll = False
+        logging.debug("Is at the end scroll: %s", self.end_scroll)
 
 
 

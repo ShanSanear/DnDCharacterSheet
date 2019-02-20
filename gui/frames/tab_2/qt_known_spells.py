@@ -83,18 +83,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.scrollarea.setWidget(self.container)
         self.layout_All = QVBoxLayout(self.main_widget)
         self.layout_All.addWidget(self.scrollarea)
-        self.end_scroll = False
-        self.scrollarea.verticalScrollBar().rangeChanged.connect(self._max_scroll)
-        self.scrollarea.verticalScrollBar().valueChanged.connect(lambda value: self.scrolled(value))
 
-    def scrolled(self, value):
-        logging.debug("Scrolled to: %s", value)
-        maximum_scroll = self.scrollarea.verticalScrollBar().maximum()
-        if value == maximum_scroll:
-            self.end_scroll = True
-        else:
-            self.end_scroll = False
-        logging.debug("Is at the end scroll: %s", self.end_scroll)
 
     def create_spell(self):
         idx = len(self.spells)
@@ -132,10 +121,3 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
-
-    def _max_scroll(self, min_scroll, max_scroll):
-        logging.debug("Max scroll in _max_scroll: %s", max_scroll)
-        logging.debug("Min scroll in _max_scroll: %s", min_scroll)
-        if self.end_scroll:
-            self.scrollarea.verticalScrollBar().setSliderPosition(max_scroll)
