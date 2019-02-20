@@ -16,7 +16,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.parent = parent
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("KnownSpellsBox")
         smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
@@ -28,9 +27,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
         self.scrollarea.setWidgetResizable(True)
         self.scrollarea.move(10, 10)
         self.container = QtWidgets.QWidget(self.main_widget)
-        self.container.setObjectName("KnownSpellsQwidget")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("KnownSpellsLayout")
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
         self.last_row = [self.add_new]

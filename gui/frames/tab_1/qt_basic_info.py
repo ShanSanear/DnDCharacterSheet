@@ -10,12 +10,9 @@ class BasicInfoBox(DefaultBox):
         self.root = QtWidgets.QGroupBox(parent)
 
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("BasicInfoBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setObjectName("gridLayoutWidget_2")
 
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("BasicInfoLayout")
         self.layout.setSpacing(10)
         self.layout.setContentsMargins(20, 10, 10, 20)
         self.translate_reference = {

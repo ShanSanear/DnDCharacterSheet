@@ -17,7 +17,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
         self.char_core = char_core
-        self.root.setObjectName("ItemsBox")
         smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         self.scrollarea = QScrollArea(self.main_widget)
@@ -29,9 +28,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.scrollarea.move(10, 10)
 
         self.container = QtWidgets.QWidget(self.main_widget)
-        self.container.setObjectName("gridLayoutWidget_8")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("ItemsLayout")
         self.items = []
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         ResizeableBox.__init__(self, elements_list=self.items, row_offset=1, increase_width=0, increase_height=28,

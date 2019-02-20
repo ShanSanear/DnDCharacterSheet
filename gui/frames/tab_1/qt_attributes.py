@@ -17,13 +17,10 @@ class AttributesBox(DefaultBox):
         self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("AttributesBox")
 
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setObjectName("gridLayoutWidget")
 
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("AttributesLayout")
         # self.layout.setContentsMargins(8,8,8,8)
         self.layout.setSpacing(10)
         self.layout.setContentsMargins(20, 10, 10, 20)

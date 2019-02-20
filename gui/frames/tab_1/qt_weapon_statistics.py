@@ -14,10 +14,8 @@ class WeaponStatisticsBox(DefaultBox):
         self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("WeaponStatisticsBox")
         self.container = QtWidgets.QWidget(self.root)
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("WeaponStatisticsLayout")
         self.layout.setContentsMargins(8, 8, 8, 12)
         # @self.layout.setSpacing(10)
         self.melee_attr = "str"

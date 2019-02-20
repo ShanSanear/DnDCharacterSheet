@@ -115,7 +115,6 @@ def create_combo_box(name: str, parent: QtWidgets.QWidget, number_of_choices: in
                      min_size: (list, tuple) = None, max_size: (list, tuple) = None, function_on_index_changed=None,
                      args_on_index_changed=None):
     combo_box: QComboBox = QtWidgets.QComboBox(parent)
-    combo_box.setObjectName(name)
     for _ in range(number_of_choices):
         combo_box.addItem("")
     if choices_text:

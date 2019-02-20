@@ -13,11 +13,8 @@ class HpAcBox(DefaultBox):
         self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("HpAcBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setObjectName("layoutWidget")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("HpAcLayout")
         self.layout.setContentsMargins(20, 10, 10, 20)
         self.layout.setSpacing(8)
         self.translate_reference = {

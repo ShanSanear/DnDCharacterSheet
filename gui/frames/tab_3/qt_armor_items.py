@@ -17,7 +17,6 @@ class ArmorItems(DefaultBox):
         self.hp_ac_box = hp_ac_box
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("ArmorItems")
         self.initial_armor_height_offset = 20
         self.armors = []
         self.item_count = len(self.armors)
@@ -59,13 +58,10 @@ class ArmorItems(DefaultBox):
         new_armor.root = QtWidgets.QGroupBox(self.root)
         new_armor.root.setGeometry(QtCore.QRect(10, self.initial_armor_height_offset +
                                                 self.increase_height * self.item_count, 590, 160))
-        new_armor.root.setObjectName(f"Armor_{self.item_count}_root")
 
         new_armor.container = QtWidgets.QWidget(new_armor.root)
         new_armor.container.setGeometry(QtCore.QRect(10, 20, 570, 130))
-        new_armor.container.setObjectName(f"Armor_{self.item_count}_container")
         new_armor.layout = QtWidgets.QGridLayout(new_armor.container)
-        new_armor.layout.setObjectName(f"Armor_{self.item_count}_layout")
         qline_dict = dict(parent=new_armor.container)
 
         new_armor.test_penalty = create_qline_edit(f"armor_{self.item_count}_test_penalty", **qline_dict)

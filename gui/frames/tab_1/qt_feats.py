@@ -17,7 +17,6 @@ class FeatsBox(DefaultBox, ResizeableBox):
 
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("FeatsBox")
         smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         self.scrollarea = QScrollArea(self.main_widget)
@@ -32,9 +31,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         self.scrollarea.setWidgetResizable(True)
         self.scrollarea.move(10, 10)
         self.container = QtWidgets.QWidget(self.main_widget)
-        self.container.setObjectName("FeatsQwidget")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("FeatsLayout")
         self.name_label = create_qlabel("feat_name_label", self.container)
         self.description_field_label = create_qlabel("feat_name_label", self.container)
         self.description_label = create_qlabel("feat_description_label", self.container)

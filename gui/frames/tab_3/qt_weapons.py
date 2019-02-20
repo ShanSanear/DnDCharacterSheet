@@ -17,21 +17,17 @@ class WeaponsBox(DefaultBox):
     def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox, items_box: ItemsBox):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("WeaponsBox")
         self.weapons_statistics_box = weapons_statistics_box
         self.items_box = items_box
 
         self.melee_box = QtWidgets.QGroupBox(self.root)
         self.melee_box.setGeometry(QtCore.QRect(10, 60, 591, 161))
         self.melee_box.setMaximumSize(QtCore.QSize(591, 44444))
-        self.melee_box.setObjectName("CurrentMeleeWeaponBox")
         self.melee_container = QtWidgets.QWidget(self.melee_box)
         self.melee_container.setGeometry(QtCore.QRect(11, 21, 571, 121))
-        self.melee_container.setObjectName("layoutWidget3")
         self.melee_layout = QtWidgets.QGridLayout(self.melee_container)
         self.melee_layout.setContentsMargins(9, 9, 9, 9)
         self.melee_layout.setSpacing(6)
-        self.melee_layout.setObjectName("MeleeWeapon")
         melee_weapon_qedit = dict(parent=self.melee_container,
                                   function_on_text_changed=self.save_melee_weapon,
                                   min_size=(0, 23), max_size=(138, 20))
@@ -139,14 +135,11 @@ class WeaponsBox(DefaultBox):
         self.melee_remove.move(230, 230)
         self.ranged_box = QtWidgets.QGroupBox(self.root)
         self.ranged_box.setGeometry(QtCore.QRect(10, 260, 591, 151))
-        self.ranged_box.setObjectName("CurrentRangedWeaponBox")
         self.ranged_container = QtWidgets.QWidget(self.ranged_box)
         self.ranged_container.setGeometry(QtCore.QRect(10, 20, 571, 111))
-        self.ranged_container.setObjectName("gridLayoutWidget_17")
         self.ranged_layout = QtWidgets.QGridLayout(self.ranged_container)
         self.ranged_layout.setContentsMargins(9, 9, 9, 9)
         self.ranged_layout.setSpacing(6)
-        self.ranged_layout.setObjectName("RangedWeapon")
 
         ranged_weapon_qlabel = dict(parent=self.ranged_container)
         ranged_weapon_qedit = dict(parent=self.ranged_container, min_size=(0, 23),

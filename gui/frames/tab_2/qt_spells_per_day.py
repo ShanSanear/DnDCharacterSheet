@@ -11,12 +11,9 @@ class SpellsPerDayBox(DefaultBox):
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("SpellsPerDayBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setGeometry(QtCore.QRect(10, 20, 251, 321))
-        self.container.setObjectName("gridLayoutWidget_9")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("SpellsPerDayLayout")
 
         qline_dict = dict(parent=self.container, min_size=(0, 23), align=QtCore.Qt.AlignCenter)
         qlabel_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter)

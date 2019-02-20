@@ -44,7 +44,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.parent = parent
         self.root = QtWidgets.QGroupBox(self.parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("SkillsBox")
         smaller_size = [size[0] - 20, size[1] - 40]
         self.main_widget = QtWidgets.QWidget(self.parent)
         #self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
@@ -62,11 +61,9 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.container = QtWidgets.QWidget(self.main_widget)
         # self.container.setStyleSheet("background-color:white;")
         # self.scrollarea.setAutoFillBackground(False)
-        self.container.setObjectName("gridLayoutWidget_5")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setSpacing(10)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
-        self.layout.setObjectName("SkillsLayout")
         self.skills = []
         ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
                                last_row_column=7)

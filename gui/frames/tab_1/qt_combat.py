@@ -14,11 +14,8 @@ class CombatBox(DefaultBox):
         self.char_core = char_core
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("AttacksBox")
         self.container = QtWidgets.QWidget(self.root)
-        self.container.setObjectName("layoutWidget1")
         self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setObjectName("AttacksLayout")
         self.layout.setSpacing(10)
         self.layout.setContentsMargins(20, 10, 10, 20)
         self.translate_reference = {

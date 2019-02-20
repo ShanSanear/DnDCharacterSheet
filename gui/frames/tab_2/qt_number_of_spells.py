@@ -10,14 +10,11 @@ class NumberOfSpellsBox(DefaultBox):
     def __init__(self, parent, position, size):
         self.root = QtWidgets.QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.root.setObjectName("NumberOfSpellsBox")
         self.container = QtWidgets.QWidget(self.root)
         self.container.setGeometry(QtCore.QRect(10, 20, 561, 91))
-        self.container.setObjectName("gridLayoutWidget_10")
         self.layout = QtWidgets.QGridLayout(self.container)
         self.layout.setContentsMargins(9, 9, 9, 9)
         self.layout.setSpacing(6)
-        self.layout.setObjectName("NumberOfSpellsLayout")
         self.translate_reference = {"EN": {"root": {"title": "Number of spells"},
                                            "number_of_spells_0th_label": "0th lvl",
                                            "number_of_spells_4th_label": "4th lvl",
