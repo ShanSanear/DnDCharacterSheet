@@ -83,7 +83,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.used_skill_points_label = create_qlabel(self.container,
                                                      align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter,
                                                      max_size=(None, 20))
-        self.total_rank_calc = create_qline_edit("skills_total_rank_calc", self.container, enabled=False,
+        self.total_rank_calc = create_qline_edit(self.container, enabled=False,
                                                  align=QtCore.Qt.AlignCenter, max_size=[30, None], is_float=True)
         self.labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
                        self.rank_label, self.misc_label, self.cross_class_label, ]
@@ -107,7 +107,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def create_new_skill(self):
         new_skill = SimpleNamespace()
         skill_idx = len(self.skills)
-        new_skill.name = create_qline_edit(f"skills{skill_idx}skill_name", self.container,
+        new_skill.name = create_qline_edit(self.container,
                                                  min_size=(150, None), function_on_unfocused=self.sort_elements)
         new_skill.name.setText(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
@@ -119,13 +119,12 @@ class SkillsBox(DefaultBox, ResizeableBox):
                                                  args_on_index_changed=[new_skill], max_size=(69, 20), )
 
         qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None], )
-        new_skill.total = create_qline_edit(f"skills{skill_idx}total", enabled=False, str_format="{:+d}", **qdict)
-        new_skill.attr_mod = create_qline_edit(f"skills{skill_idx}attr_mod", **qdict, enabled=False)
-        new_skill.rank = create_qline_edit(f"skills{skill_idx}rank", function_on_text_changed=self._update_skill,
+        new_skill.total = create_qline_edit(enabled=False, str_format="{:+d}", **qdict)
+        new_skill.attr_mod = create_qline_edit(**qdict, enabled=False)
+        new_skill.rank = create_qline_edit(function_on_text_changed=self._update_skill,
                                            args_on_text_changed=[new_skill], **qdict)
 
-        new_skill.misc_mod = create_qline_edit(f"skills_{skill_idx}_misc_mod",
-                                               function_on_text_changed=self._update_skill,
+        new_skill.misc_mod = create_qline_edit(function_on_text_changed=self._update_skill,
                                                args_on_text_changed=[new_skill], **qdict)
 
         new_skill.cross_class_checkbox = create_checkbox(self.container, function_on_toggle=self.calculate_ranks)

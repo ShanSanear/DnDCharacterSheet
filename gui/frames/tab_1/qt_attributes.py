@@ -93,9 +93,9 @@ class AttributesBox(DefaultBox):
         for element in elements[1:]:
             if "mod" in element:
                 setattr(attr_reference, element,
-                        create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict_mod))
+                        create_qline_edit(**self.qline_dict_mod))
             else:
-                setattr(attr_reference, element, create_qline_edit(f"attr_{attr_name}_{element}", **self.qline_dict))
+                setattr(attr_reference, element, create_qline_edit(**self.qline_dict))
         setattr(attr_reference, 'label', create_qlabel(**self.qlabel_dict))
 
     def add_to_layout(self):

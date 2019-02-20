@@ -34,26 +34,26 @@ class WeaponStatisticsBox(DefaultBox):
 
 
         self.melee_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
-        self.melee_name = create_qline_edit("weapon_statistics_melee_damage", min_size=[90, None],
+        self.melee_name = create_qline_edit(min_size=[90, None],
                                             parent=self.container, enabled=False)
-        self.melee_attack_bonus = create_qline_edit("weapon_statistics_melee_attack_bonus", max_size=[50, None],
+        self.melee_attack_bonus = create_qline_edit(max_size=[50, None],
                                                     str_format="{:+d}", **qline_dict)
-        self.melee_damage = create_qline_edit("weapon_statistics_melee_damage", max_size=[60, None], **qline_dict)
-        self.melee_crit = create_qline_edit("weapon_statistics_melee_crit",  parent=self.container, max_size=[60, None],
+        self.melee_damage = create_qline_edit(max_size=[60, None], **qline_dict)
+        self.melee_crit = create_qline_edit( parent=self.container, max_size=[60, None],
                                             min_size=[50, None], enabled=False)
-        self.melee_range = create_qline_edit("melee_range", parent=self.container,
+        self.melee_range = create_qline_edit(parent=self.container,
                                               max_size=[50, None],
                                               enabled=False)
 
         self.ranged_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
-        self.ranged_name = create_qline_edit("weapon_statistics_ranged_crit", min_size=[90, None],
+        self.ranged_name = create_qline_edit(min_size=[90, None],
                                              parent=self.container, enabled=False)
-        self.ranged_attack_bonus = create_qline_edit("weapon_statistics_ranged_attack_bonus", max_size=[50, None],
+        self.ranged_attack_bonus = create_qline_edit(max_size=[50, None],
                                                      str_format="{:+d}", **qline_dict)
-        self.ranged_damage = create_qline_edit("weapon_statistics_ranged_damage", max_size=[60, None], **qline_dict)
-        self.ranged_crit = create_qline_edit("weapon_statistics_ranged_crit", parent=self.container, max_size=[60, None],
+        self.ranged_damage = create_qline_edit(max_size=[60, None], **qline_dict)
+        self.ranged_crit = create_qline_edit(parent=self.container, max_size=[60, None],
                                              min_size=[50, None], enabled=False)
-        self.ranged_range = create_qline_edit("ranged_range", parent=self.container, max_size=[50, None],
+        self.ranged_range = create_qline_edit(parent=self.container, max_size=[50, None],
                                              enabled=False)
 
         self.add_to_layout()

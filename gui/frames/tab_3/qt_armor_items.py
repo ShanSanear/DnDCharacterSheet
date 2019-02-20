@@ -64,17 +64,17 @@ class ArmorItems(DefaultBox):
         new_armor.layout = QtWidgets.QGridLayout(new_armor.container)
         qline_dict = dict(parent=new_armor.container)
 
-        new_armor.test_penalty = create_qline_edit(" ",**qline_dict)
-        new_armor.type = create_qline_edit(" ",**qline_dict)
-        new_armor.max_dex_bonus = create_qline_edit(" ",**qline_dict)
-        new_armor.name = create_qline_edit(" ",**qline_dict)
-        new_armor.ac_bonus = create_qline_edit(" ",function_on_text_changed=self._update_armor_ac,
+        new_armor.test_penalty = create_qline_edit(**qline_dict)
+        new_armor.type = create_qline_edit(**qline_dict)
+        new_armor.max_dex_bonus = create_qline_edit(**qline_dict)
+        new_armor.name = create_qline_edit(**qline_dict)
+        new_armor.ac_bonus = create_qline_edit(function_on_text_changed=self._update_armor_ac,
                                                **qline_dict)
-        new_armor.weight = create_qline_edit(" ",function_on_text_changed=self._update_weight, **qline_dict)
-        new_armor.spell_fail = create_qline_edit(" ",**qline_dict)
-        new_armor.speed = create_qline_edit(" ",**qline_dict)
+        new_armor.weight = create_qline_edit(function_on_text_changed=self._update_weight, **qline_dict)
+        new_armor.spell_fail = create_qline_edit(**qline_dict)
+        new_armor.speed = create_qline_edit(**qline_dict)
         new_armor.equipped = create_checkbox(function_on_toggle=self._update_armor_ac, **qline_dict)
-        new_armor.special = create_qline_edit(" ",**qline_dict)
+        new_armor.special = create_qline_edit(**qline_dict)
 
         new_armor.max_dex_bonus_label = create_qlabel(**qline_dict)
         new_armor.test_penalty_label = create_qlabel(**qline_dict)

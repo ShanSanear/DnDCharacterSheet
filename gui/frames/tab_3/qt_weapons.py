@@ -81,28 +81,28 @@ class WeaponsBox(DefaultBox):
 
         self.current_melee = SimpleNamespace()
 
-        self.current_melee.name = create_qline_edit("melee_weapon_name", args_on_text_changed=["name"],
+        self.current_melee.name = create_qline_edit( args_on_text_changed=["name"],
                                                     function_on_unfocused=self._sort_melee_by_name,
                                                     **melee_weapon_qedit)
-        self.current_melee.attack_bonus = create_qline_edit("melee_weapon_attack_bonus",
+        self.current_melee.attack_bonus = create_qline_edit(
                                                             args_on_text_changed=["attack_bonus"],
                                                             **melee_weapon_qedit)
-        self.current_melee.damage_roll = create_qline_edit("melee_weapon_damage_roll",
+        self.current_melee.damage_roll = create_qline_edit(
                                                            args_on_text_changed=["damage_roll"],
                                                            **melee_weapon_qedit)
-        self.current_melee.crit = create_qline_edit("melee_weapon_crit",
+        self.current_melee.crit = create_qline_edit(
                                                     args_on_text_changed=["crit"],
                                                     **melee_weapon_qedit)
-        self.current_melee.special = create_qline_edit("melee_weapon_special",
+        self.current_melee.special = create_qline_edit(
                                                        args_on_text_changed=["special"],
                                                        **melee_weapon_qedit)
-        self.current_melee.weight = create_qline_edit("melee_weapon_weight",
+        self.current_melee.weight = create_qline_edit(
                                                       args_on_text_changed=["weight"],
                                                       **melee_weapon_qedit)
-        self.current_melee.size = create_qline_edit("melee_weapon_size",
+        self.current_melee.size = create_qline_edit(
                                                     args_on_text_changed=["size"],
                                                     **melee_weapon_qedit)
-        self.current_melee.type = create_qline_edit("melee_weapon_type",
+        self.current_melee.type = create_qline_edit(
                                                     args_on_text_changed=["type"],
                                                     **melee_weapon_qedit)
 
@@ -157,34 +157,34 @@ class WeaponsBox(DefaultBox):
         self.ranged_weapon_type_label = create_qlabel(**ranged_weapon_qlabel)
 
         self.current_ranged = SimpleNamespace()
-        self.current_ranged.name = create_qline_edit("ranged_weapon_name", args_on_text_changed=["name"],
+        self.current_ranged.name = create_qline_edit( args_on_text_changed=["name"],
                                                      function_on_unfocused=self._sort_ranged_by_name,
                                                      **ranged_weapon_qedit)
-        self.current_ranged.attack_bonus = create_qline_edit("ranged_weapon_attack_bonus",
+        self.current_ranged.attack_bonus = create_qline_edit(
                                                              args_on_text_changed=["attack_bonus"],
                                                              **ranged_weapon_qedit)
-        self.current_ranged.damage_roll = create_qline_edit("ranged_weapon_damage_roll",
+        self.current_ranged.damage_roll = create_qline_edit(
                                                             args_on_text_changed=["damage_roll"],
                                                             **ranged_weapon_qedit)
-        self.current_ranged.crit = create_qline_edit("ranged_weapon_crit",
+        self.current_ranged.crit = create_qline_edit(
                                                      args_on_text_changed=["crit"],
                                                      **ranged_weapon_qedit)
-        self.current_ranged.range = create_qline_edit("ranged_weapon_range",
+        self.current_ranged.range = create_qline_edit(
                                                       args_on_text_changed=["range"],
                                                       **ranged_weapon_qedit)
-        self.current_ranged.special = create_qline_edit("ranged_weapon_special",
+        self.current_ranged.special = create_qline_edit(
                                                         args_on_text_changed=["special"],
                                                         **ranged_weapon_qedit)
-        self.current_ranged.ammo = create_qline_edit("ranged_weapon_ammo",
+        self.current_ranged.ammo = create_qline_edit(
                                                      args_on_text_changed=["ammo"],
                                                      **ranged_weapon_qedit)
-        self.current_ranged.weight = create_qline_edit("ranged_weapon_weight",
+        self.current_ranged.weight = create_qline_edit(
                                                        args_on_text_changed=["weight"],
                                                        **ranged_weapon_qedit)
-        self.current_ranged.size = create_qline_edit("ranged_weapon_size",
+        self.current_ranged.size = create_qline_edit(
                                                      args_on_text_changed=["size"],
                                                      **ranged_weapon_qedit)
-        self.current_ranged.type = create_qline_edit("ranged_weapon_type",
+        self.current_ranged.type = create_qline_edit(
                                                      args_on_text_changed=["type"],
                                                      **ranged_weapon_qedit)
 

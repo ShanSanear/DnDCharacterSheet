@@ -44,13 +44,13 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.items_weight_label = create_qlabel(**qlabel_dict)
         self.items_count_label = create_qlabel(**qlabel_dict)
         self.items_description_label = create_qlabel(**qlabel_dict)
-        self.total_encumbrance = create_qline_edit("items_total_weight", self.container, max_size=[30, None], enabled=False,
+        self.total_encumbrance = create_qline_edit(self.container, max_size=[30, None], enabled=False,
                                                    align=QtCore.Qt.AlignCenter)
         self.total_encumbrance_label = create_qlabel(self.container,
                                                      align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
         self.weight_separator_label = create_qlabel(self.container,
                                                     align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
-        self.max_encumbrance = create_qline_edit("max_weight", self.container, max_size=[30, None], enabled=False,
+        self.max_encumbrance = create_qline_edit(self.container, max_size=[30, None], enabled=False,
                                                  align=QtCore.Qt.AlignCenter)
         self.translate_reference = {"EN": {
             "root": {"title": "Items"},
@@ -81,14 +81,14 @@ class ItemsBox(DefaultBox, ResizeableBox):
 
     def create_new_item(self):
         new_item = SimpleNamespace()
-        new_item.name = create_qline_edit("item_name", self.container, min_size=[200, 23],
+        new_item.name = create_qline_edit(self.container, min_size=[200, 23],
                                           function_on_unfocused=self.sort_elements)
-        new_item.weight = create_qline_edit("item_weight", self.container, min_size=[None, 23],
+        new_item.weight = create_qline_edit(self.container, min_size=[None, 23],
                                             max_size=[30, None], function_on_text_changed=self.calculate_weight)
 
-        new_item.count = create_qline_edit("item_count", self.container, min_size=[None, 23],
+        new_item.count = create_qline_edit(self.container, min_size=[None, 23],
                                            max_size=[30, None], function_on_text_changed=self.calculate_weight)
-        new_item.description = create_qline_edit("item_description", self.container, min_size=[None, 23])
+        new_item.description = create_qline_edit(self.container, min_size=[None, 23])
         new_item.delete_item = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
                                                   function_on_clicked=self._remove_element, args_on_clicked=new_item)
 

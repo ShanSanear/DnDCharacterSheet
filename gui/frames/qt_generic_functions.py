@@ -60,7 +60,7 @@ def create_qlabel(parent: QtWidgets.QWidget, min_size: (list, tuple) = None, max
     return label
 
 
-def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
+def create_qline_edit(parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
                       max_size: (list, tuple) = None,
                       align=None, indent: int = None, text: str = None, enabled: bool = True,
                       function_on_text_changed=None, args_on_text_changed=None, function_on_unfocused=None,
@@ -88,8 +88,6 @@ def create_qline_edit(name: str, parent: QtWidgets.QWidget, min_size: (list, tup
         else:
             qline.textEdited.connect(partial(function_on_text_edited, *args_on_text_edited))
             
-    qline.setObjectName(name)
-
     return qline
 
 

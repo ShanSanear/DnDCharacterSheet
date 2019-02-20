@@ -90,10 +90,10 @@ class FeatsBox(DefaultBox, ResizeableBox):
     def create_feat(self):
         new_feat = SimpleNamespace()
         idx = len(self.feats)
-        new_feat.name = create_qline_edit(f"feat{idx}_name", self.container, max_size=(150, None),
+        new_feat.name = create_qline_edit(self.container, max_size=(150, None),
                                           function_on_unfocused=self.sort_elements)
 
-        #new_feat.description_edit = create_qline_edit(f"feat_{idx}_description_edit", self.container)
+        #new_feat.description_edit = create_qline_edit(self.container)
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
                                                          self.container, min_size=[20, 20], max_size=[20, 20], )
         new_feat.description_button.clicked.connect(partial(self.show_description, new_feat))

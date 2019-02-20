@@ -59,17 +59,17 @@ class CombatBox(DefaultBox):
         self.ranged_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
         self.total_label_init = create_qlabel(**qlabel_dict)
 
-        self.melee_total = create_qline_edit("attacks_melee_total", str_format="{:+d}", **qline_dict_disabled)
-        self.melee_base = create_qline_edit("attacks_melee_base", **qline_dict_melee)
-        self.melee_attr_mod = create_qline_edit("attacks_melee_attr_mod",  **qline_dict_disabled)
-        self.melee_size = create_qline_edit("attacks_melee_size", **qline_dict_melee)
-        self.melee_misc = create_qline_edit("attacks_melee_misc", **qline_dict_melee)
+        self.melee_total = create_qline_edit(str_format="{:+d}", **qline_dict_disabled)
+        self.melee_base = create_qline_edit(**qline_dict_melee)
+        self.melee_attr_mod = create_qline_edit( **qline_dict_disabled)
+        self.melee_size = create_qline_edit(**qline_dict_melee)
+        self.melee_misc = create_qline_edit(**qline_dict_melee)
 
-        self.ranged_total = create_qline_edit("attacks_ranged_total", str_format="{:+d}", **qline_dict_disabled)
-        self.ranged_base = create_qline_edit("attacks_ranged_base", **qline_dict_ranged)
-        self.ranged_attr_mod = create_qline_edit("attacks_ranged_attr_mod", **qline_dict_disabled)
-        self.ranged_size = create_qline_edit("attacks_ranged_size", **qline_dict_ranged)
-        self.ranged_misc = create_qline_edit("attacks_ranged_misc", **qline_dict_ranged)
+        self.ranged_total = create_qline_edit(str_format="{:+d}", **qline_dict_disabled)
+        self.ranged_base = create_qline_edit(**qline_dict_ranged)
+        self.ranged_attr_mod = create_qline_edit(**qline_dict_disabled)
+        self.ranged_size = create_qline_edit(**qline_dict_ranged)
+        self.ranged_misc = create_qline_edit(**qline_dict_ranged)
 
         self.initiative_misc_bonus_label = create_qlabel(parent=self.container)
         self.initiative_dex_bonus_label = create_qlabel(parent=self.container)
@@ -77,11 +77,11 @@ class CombatBox(DefaultBox):
         self.speed_label = create_qlabel(align=QtCore.Qt.AlignRight, parent=self.container)
         self.speed_armor_type_label = create_qlabel(parent=self.container)
 
-        self.initiative_total = create_qline_edit("initiative_total", parent=self.container, str_format="{:+d}",
+        self.initiative_total = create_qline_edit(parent=self.container, str_format="{:+d}",
                                                   enabled=False)
-        self.initiative_misc_bonus = create_qline_edit("initiative_misc_bonus", **qline_update)
-        self.initiative_dex_bonus = create_qline_edit("initiative_dex_bonus", parent=self.container, enabled=False)
-        self.speed_total = create_qline_edit("speed_total", parent=self.container)
+        self.initiative_misc_bonus = create_qline_edit(**qline_update)
+        self.initiative_dex_bonus = create_qline_edit(parent=self.container, enabled=False)
+        self.speed_total = create_qline_edit(parent=self.container)
 
         self.add_to_layout()
         self.translate("EN")
