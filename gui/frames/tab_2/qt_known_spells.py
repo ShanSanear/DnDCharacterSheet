@@ -1,33 +1,15 @@
-import logging
 from types import SimpleNamespace
 
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QScrollArea, QVBoxLayout
-
-from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
+from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox, ResizeType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
     set_text_of_children, add_multiple_elements_to_layout_by_row
 from gui.popups.qt_full_description import DescriptionDialog
 
 
-class KnownSpellsBox(DefaultBox, ResizeableBox):
+class KnownSpellsBox(ResizeType, DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
-        self.parent = parent
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        smaller_size = [size[0] - 20, size[1] - 40]
-        self.main_widget = QtWidgets.QWidget(self.parent)
-        self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
-        self.scrollarea = QScrollArea(self.main_widget)
-        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
-        self.scrollarea.setFixedHeight(smaller_size[1])
-        self.scrollarea.setFixedWidth(smaller_size[0])
-        self.scrollarea.setWidgetResizable(True)
-        self.scrollarea.move(10, 10)
-        self.container = QtWidgets.QWidget(self.main_widget)
-        self.layout = QtWidgets.QGridLayout(self.container)
+        ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
         self.last_row = [self.add_new]
@@ -74,10 +56,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
 
         self.add_to_layout()
         self.translate("EN")
-
-        self.scrollarea.setWidget(self.container)
-        self.layout_All = QVBoxLayout(self.main_widget)
-        self.layout_All.addWidget(self.scrollarea)
 
 
     def create_spell(self):

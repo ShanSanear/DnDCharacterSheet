@@ -1,16 +1,15 @@
 import logging
 from types import SimpleNamespace
 
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QScrollArea, QSizePolicy, QVBoxLayout
+from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
+from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox, ResizeType
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
     add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
 
 
-class SkillsBox(DefaultBox, ResizeableBox):
+class SkillsBox(ResizeType, DefaultBox, ResizeableBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
@@ -31,38 +30,10 @@ class SkillsBox(DefaultBox, ResizeableBox):
                 "used_skill_points_label": "Used skill points:"
             }
         }
-        self._map_choice_to_attr = {
-            0: "str",
-            1: "dex",
-            2: "con",
-            3: "int",
-            4: "wis",
-            5: "cha",
-        }
+        self._map_choice_to_attr = {0: "str", 1: "dex", 2: "con", 3: "int", 4: "wis", 5: "cha"}
 
         self.char_core = char_core
-        self.parent = parent
-        self.root = QtWidgets.QGroupBox(self.parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        smaller_size = [size[0] - 20, size[1] - 40]
-        self.main_widget = QtWidgets.QWidget(self.parent)
-        #self.main_widget.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
-        self.scrollarea = QScrollArea(self.main_widget)
-        #self.scrollarea.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
-        #self.scrollarea.setStyleSheet("QScrollArea {background-color:white;}")
-        #self.main_widget.setStyleSheet("background-color:transparent;")
-
-        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
-        self.scrollarea.setFixedHeight(smaller_size[1])
-        self.scrollarea.setFixedWidth(smaller_size[0])
-        self.scrollarea.setWidgetResizable(True)
-        self.scrollarea.move(10, 10)
-        self.container = QtWidgets.QWidget(self.main_widget)
-        # self.container.setStyleSheet("background-color:white;")
-        # self.scrollarea.setAutoFillBackground(False)
-        self.layout = QtWidgets.QGridLayout(self.container)
-        self.layout.setSpacing(10)
+        ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         self.skills = []
         ResizeableBox.__init__(self, elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
@@ -97,9 +68,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.add_to_layout()
         self.translate("EN")
         self.set_values_from_attributes()
-        self.scrollarea.setWidget(self.container)
-        self.layout_All = QVBoxLayout(self.main_widget)
-        self.layout_All.addWidget(self.scrollarea)
 
     def update_size(self):
         pass

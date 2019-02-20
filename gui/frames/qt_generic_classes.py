@@ -2,7 +2,7 @@ import logging
 from abc import ABC, abstractmethod
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout
+from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout, QScrollArea, QVBoxLayout
 
 from gui.frames.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
     get_general_dict_repr, get_int_from_widget
@@ -19,6 +19,28 @@ class BoxType:
             self.layout.setSpacing(spacing)
             self.layout.setContentsMargins(*margins)
         self.root.setLayout(self.layout)
+
+
+class ResizeType:
+    def __init__(self, parent, position, size):
+        self.parent = parent
+        self.root = QGroupBox(parent)
+        self.root.setGeometry(QtCore.QRect(*position, *size))
+        smaller_size = [size[0] - 20, size[1] - 40]
+        self.main_widget = QWidget(self.parent)
+        self.scrollarea = QScrollArea(self.main_widget)
+        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
+        self.scrollarea.setFixedHeight(smaller_size[1])
+        self.scrollarea.setFixedWidth(smaller_size[0])
+        self.scrollarea.setWidgetResizable(True)
+        self.scrollarea.move(10, 10)
+
+        self.container = QWidget(self.main_widget)
+        self.layout = QGridLayout(self.container)
+        self.scrollarea.setWidget(self.container)
+        self.layout_All = QVBoxLayout(self.main_widget)
+        self.layout_All.addWidget(self.scrollarea)
 
 
 class DefaultBox(ABC):

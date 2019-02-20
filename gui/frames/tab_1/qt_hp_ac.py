@@ -9,7 +9,7 @@ class HpAcBox(BoxType, DefaultBox):
 
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
-        BoxType.__init__(self, parent=parent, position=position, size=size)
+        BoxType.__init__(self, parent=parent, position=position, size=size, defaults=True)
         self.translate_reference = {
             "EN":
                 {

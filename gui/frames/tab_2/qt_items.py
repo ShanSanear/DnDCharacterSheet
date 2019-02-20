@@ -1,36 +1,22 @@
 from types import SimpleNamespace
 
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QScrollArea, QVBoxLayout
+from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
+from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox, ResizeType
 from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
     add_multiple_elements_to_layout_by_row, create_push_button, get_int_from_widget, get_float_from_widget, \
     add_element_to_layout
 
 
-class ItemsBox(DefaultBox, ResizeableBox):
+class ItemsBox(ResizeType, DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size, char_core: Character):
         # TODO - scrollbar after achieving certain height
-        self.parent = parent
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
+        ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.char_core = char_core
-        smaller_size = [size[0] - 20, size[1] - 40]
-        self.main_widget = QtWidgets.QWidget(self.parent)
-        self.scrollarea = QScrollArea(self.main_widget)
-        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
-        self.scrollarea.setFixedHeight(smaller_size[1])
-        self.scrollarea.setFixedWidth(smaller_size[0])
-        self.scrollarea.setWidgetResizable(True)
-        self.scrollarea.move(10, 10)
-
-        self.container = QtWidgets.QWidget(self.main_widget)
-        self.layout = QtWidgets.QGridLayout(self.container)
         self.items = []
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
+                                          text="+")
         ResizeableBox.__init__(self, elements_list=self.items, row_offset=1, increase_width=0, increase_height=28,
                                last_row_column=4)
 
@@ -58,26 +44,20 @@ class ItemsBox(DefaultBox, ResizeableBox):
             "items_name_label": "Item name",
             "items_count_label": "Count",
             "items_description_label": "Description",
-            "total_encumbrance_label" : "Total encumbrance:",
-            "weight_separator_label" : "/"
+            "total_encumbrance_label": "Total encumbrance:",
+            "weight_separator_label": "/"
         }}
         self.last_row = [self.add_new]
-        self.container.setGeometry(QtCore.QRect(10, 20, 561, 80))
         self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label,
                        self.items_description_label]
         self.add_to_layout()
         self.translate("EN")
         self.add_item = self.add_new_element
         self.add_new.clicked.connect(self.add_item)
-        #self.root.setLayout(self.layout)
         self.weapons_weight = 0
         self.armor_weight = 0
         for _ in range(22):
             self.add_item()
-        self.scrollarea.setWidget(self.container)
-        self.layout_All = QVBoxLayout(self.main_widget)
-        self.layout_All.addWidget(self.scrollarea)
-
 
     def create_new_item(self):
         new_item = SimpleNamespace()
@@ -89,7 +69,8 @@ class ItemsBox(DefaultBox, ResizeableBox):
         new_item.count = create_qline_edit(self.container, min_size=[None, 23],
                                            max_size=[30, None], function_on_text_changed=self.calculate_weight)
         new_item.description = create_qline_edit(self.container, min_size=[None, 23])
-        new_item.delete_item = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20], text="-",
+        new_item.delete_item = create_push_button("item_delete", self.container, min_size=[20, 20], max_size=[20, 20],
+                                                  text="-",
                                                   function_on_clicked=self._remove_element, args_on_clicked=new_item)
 
         return new_item
@@ -101,7 +82,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         self.layout.addWidget(self.weight_separator_label, last_row, 2, 1, 1)
         self.layout.addWidget(self.max_encumbrance, last_row, 3, 1, 1)
         self.layout.addWidget(self.add_new, last_row, 8, 1, 1)
-
 
     def create_new_element(self):
         return self.create_new_item()
@@ -115,7 +95,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
 
     def update_size(self):
         pass
-
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
@@ -137,7 +116,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         total_weight += self.weapons_weight
         total_weight += self.armor_weight
         self.total_encumbrance.setText(str(total_weight))
-
 
     def adding_new_element_to_layout(self, element_idx, values):
         if hasattr(self, "add_new"):

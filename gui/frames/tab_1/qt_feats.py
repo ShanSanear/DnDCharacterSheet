@@ -1,37 +1,16 @@
 from functools import partial
 from types import SimpleNamespace
 
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QScrollArea, QVBoxLayout
-
-from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
+from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox, ResizeType
 from gui.frames.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
     add_multiple_elements_to_layout_by_row, set_text_of_children
 from gui.popups.qt_full_description import DescriptionDialog
 
 
-class FeatsBox(DefaultBox, ResizeableBox):
+class FeatsBox(ResizeType, DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
-        self.parent = parent
-
-        self.root = QtWidgets.QGroupBox(parent)
-        self.root.setGeometry(QtCore.QRect(*position, *size))
-        smaller_size = [size[0] - 20, size[1] - 40]
-        self.main_widget = QtWidgets.QWidget(self.parent)
-        self.scrollarea = QScrollArea(self.main_widget)
-        # self.scrollarea.setStyleSheet("QScrollArea {background-color: #D8D8D8}")
-        # self.scrollarea.setStyleSheet("QScrollArea {background-color:white;}")
-        # self.main_widget.setStyleSheet("background-color:transparent;")
-
-        self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.main_widget.setGeometry(QtCore.QRect(*position, *size))
-        self.scrollarea.setFixedHeight(smaller_size[1])
-        self.scrollarea.setFixedWidth(smaller_size[0])
-        self.scrollarea.setWidgetResizable(True)
-        self.scrollarea.move(10, 10)
-        self.container = QtWidgets.QWidget(self.main_widget)
-        self.layout = QtWidgets.QGridLayout(self.container)
+        ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.name_label = create_qlabel(self.container)
         self.description_field_label = create_qlabel(self.container)
         self.description_label = create_qlabel(self.container)
@@ -40,15 +19,14 @@ class FeatsBox(DefaultBox, ResizeableBox):
                                           text="+")
         self.last_row = [self.add_new]
         self.feats = []
-        self.translate_reference = {
-            "EN":
+        self.translate_reference = {"EN":
+            {"root":
                 {
-                    "root": {
-                        "title": "Feats / Special abilities"
-                    },
-                    "description_label": "Desc",
-                    "name_label": "Feat name",
-                }
+                    "title": "Feats / Special abilities"
+                },
+                "description_label": "Desc",
+                "name_label": "Feat name",
+            }
         }
         self.translate_reference_new_element = {
             "EN": {
@@ -64,11 +42,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
 
         for _ in range(17):
             self.add_feat()
-
         self.translate("EN")
-        self.scrollarea.setWidget(self.container)
-        self.layout_All = QVBoxLayout(self.main_widget)
-        self.layout_All.addWidget(self.scrollarea)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
@@ -93,7 +67,7 @@ class FeatsBox(DefaultBox, ResizeableBox):
         new_feat.name = create_qline_edit(self.container, max_size=(150, None),
                                           function_on_unfocused=self.sort_elements)
 
-        #new_feat.description_edit = create_qline_edit(self.container)
+        # new_feat.description_edit = create_qline_edit(self.container)
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
                                                          self.container, min_size=[20, 20], max_size=[20, 20], )
         new_feat.description_button.clicked.connect(partial(self.show_description, new_feat))
