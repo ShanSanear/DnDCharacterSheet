@@ -81,9 +81,6 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
     def create_new_element(self):
         return self.create_spell()
 
-    def update_size(self):
-        pass
-
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=self.labels)
 

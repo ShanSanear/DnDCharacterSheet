@@ -70,8 +70,6 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.translate("EN")
         self.set_values_from_attributes()
 
-    def update_size(self):
-        pass
 
     def create_new_skill(self):
         new_skill = SimpleNamespace()

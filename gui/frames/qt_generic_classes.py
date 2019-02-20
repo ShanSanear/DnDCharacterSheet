@@ -76,25 +76,7 @@ class ResizeableBox(ABC, ResizeType):
         self.scrollarea.verticalScrollBar().rangeChanged.connect(self._max_scroll)
         self.scrollarea.verticalScrollBar().valueChanged.connect(lambda value: self.scrolled(value))
 
-    def update_size(self):
-        new_root_height = self.root_initial_height + self.increase_height * len(self.elements_list)
-        new_container_height = self.container_initial_height + self.increase_height * len(self.elements_list)
-        self.root.setMinimumHeight(new_root_height)
-        self.container.setMinimumHeight(new_container_height)
-        self.root.setMaximumHeight(new_root_height)
-        self.container.setMaximumHeight(new_container_height)
-        if hasattr(self, "parent"):
-            vertical_position = self.root.pos().y()
-            lower_border = vertical_position + new_root_height
-            logging.debug("Lower border: %s", lower_border)
-            logging.debug("Item: %s", self)
-            if self.initial_tab_height < lower_border:
-                self.parent.tabs.setMinimumHeight(lower_border + self.increase_height * 2)
-            else:
-                self.parent.tabs.setMinimumHeight(self.initial_tab_height)
 
-            # self.parent.setMinimumHeight(parent_height)
-            # self.parent.tabs.setMinimumHeight(self.parent.tabs.height() + self.increase_height/2)
 
     def add_new_element(self):
         element_idx = len(self.elements_list)
@@ -105,7 +87,6 @@ class ResizeableBox(ABC, ResizeType):
         self.adding_new_element_to_layout(element_idx, values)
         if hasattr(self, "set_values_from_attributes"):
             self.set_values_from_attributes()
-        self.update_size()
 
     def adding_new_element_to_layout(self, element_idx, values):
         if hasattr(self, "add_new"):
