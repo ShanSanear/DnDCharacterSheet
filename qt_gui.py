@@ -7,15 +7,13 @@ from pathlib import Path
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QFileDialog
 
-from core.character import Character
 from gui.frames.qt_generic_functions import set_text_of_children
 from gui.main_window import MainWindowUi
 
 
 class MyApp(MainWindowUi):
-    def __init__(self, char: Character):
-        self.char_core = char
-        MainWindowUi.__init__(self, self.char_core)
+    def __init__(self):
+        MainWindowUi.__init__(self)
 
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character.triggered.connect(self.save_file)
@@ -36,7 +34,6 @@ class MyApp(MainWindowUi):
         logging.info("Saving file")
         data_to_save = {"basic_info_box": self.basic_info_box.get_dict_repr(),
                         "feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr(),
-                        "feats_box_2": self.feats_box_2.get_dict_repr(),
                         "known_spells_box": self.known_spells_box.get_dict_repr(),
                         "languages_box": self.languages_box.get_dict_repr(),
                         "notes_box": self.notes_box.get_dict_repr(),
@@ -76,10 +73,10 @@ class MyApp(MainWindowUi):
         self.items_box.set_values_from_attributes()
 
 
-def init_gui(char):
+def init_gui():
     app = QApplication(sys.argv)
     app.setAttribute(Qt.AA_EnableHighDpiScaling)
-    form = MyApp(char)
+    form = MyApp()
     form.show()
     app.exec_()
 
