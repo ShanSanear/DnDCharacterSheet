@@ -105,6 +105,7 @@ class ResizeableBox(ABC, ResizeType):
         logging.debug("Index of element to remove: %d", idx)
         self._delete_from_layout(element)
         del self.elements_list[idx]
+        self.update_layout()
 
     def _get_element_index(self, element):
         for idx, searched_for in enumerate(self.elements_list):
@@ -125,6 +126,10 @@ class ResizeableBox(ABC, ResizeType):
             for widget in subwidgets:
                 self.layout.removeWidget(widget)
 
+    def update_layout(self):
+        self.remove_widgets_from_layout()
+        self.add_widgets_again()
+
     def add_widgets_again(self):
         self.add_to_layout()
         self._add_all_elements_to_layout()
@@ -139,6 +144,7 @@ class ResizeableBox(ABC, ResizeType):
 
     def sort_elements(self):
         self.elements_list = sorted(self.elements_list, key=self._sort_element)
+        self.update_layout()
 
     def _sort_element(self, element):
         if hasattr(element, 'lvl'):
