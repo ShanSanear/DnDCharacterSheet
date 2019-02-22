@@ -14,11 +14,10 @@ class ItemsBox(DefaultBox, ResizeableBox):
         # TODO - scrollbar after achieving certain height
         ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.char_core = char_core
-        self.items = []
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")
         ResizeableBox.__init__(self, parent=parent, position=position, size=size,
-                               elements_list=self.items, row_offset=1, increase_width=0, increase_height=28,
+                               row_offset=1, increase_width=0, increase_height=28,
                                last_row_column=4)
 
         self.max_encumbrance_map = {1: 1.5, 2: 3, 3: 5, 4: 6.5, 5: 8, 6: 10, 7: 11.5, 8: 13, 9: 15, 10: 16.5, 11: 19,
@@ -77,7 +76,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         return new_item
 
     def add_last_row(self):
-        last_row = len(self.items) + 1
+        last_row = len(self.elements_list) + 1
         self.layout.addWidget(self.total_encumbrance_label, last_row, 0, 1, 1)
         self.layout.addWidget(self.total_encumbrance, last_row, 1, 1, 1)
         self.layout.addWidget(self.weight_separator_label, last_row, 2, 1, 1)
@@ -111,7 +110,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
 
     def calculate_weight(self):
         total_weight = 0
-        for item in self.items:
+        for item in self.elements_list:
             count = get_int_from_widget(item.count, 1)
             total_weight += get_float_from_widget(item.weight, 0) * count
         total_weight += self.weapons_weight

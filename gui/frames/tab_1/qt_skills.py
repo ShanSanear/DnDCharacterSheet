@@ -15,10 +15,8 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size, char_core):
         # TODO - scrollbar after achieving certain height
 
-        self.skills = []
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size,
-                               elements_list=self.skills, row_offset=1, increase_width=0, increase_height=28,
-                               last_row_column=7)
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, increase_width=0,
+                               increase_height=28, last_row_column=7)
         self.translate_reference = {
             "EN": {
                 "root": {
@@ -72,7 +70,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def create_new_skill(self):
         new_skill = SimpleNamespace()
-        skill_idx = len(self.skills)
+        skill_idx = len(self.elements_list)
         new_skill.name = create_qline_edit(self.container, min_size=(150, None),
                                            function_on_unfocused=self.sort_elements)
         new_skill.name.setText(
@@ -112,7 +110,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
 
     def calculate_ranks(self):
         total_ranks = 0
-        for skill in self.skills:
+        for skill in self.elements_list:
             rank_value = get_float_from_widget(skill.rank, 0)
             if skill.cross_class_checkbox.isChecked():
                 rank_value *= 2
@@ -126,7 +124,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
         self.layout.addWidget(self.total_rank_calc, len(self.elements_list) + 1, 4, 1, 1)
 
     def set_values_from_attributes(self):
-        for skill in self.skills:
+        for skill in self.elements_list:
             self._set_attr_val_for_skill(skill)
 
     def _set_attr_val_for_skill(self, skill):

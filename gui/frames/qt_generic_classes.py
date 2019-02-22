@@ -60,10 +60,10 @@ class DefaultBox(ABC):
 
 class ResizeableBox(ABC, ResizeType):
 
-    def __init__(self, parent, position, size, elements_list, row_offset, increase_width, increase_height,
+    def __init__(self, parent, position, size, row_offset, increase_width, increase_height,
                  last_row_column=4):
         ResizeType.__init__(self, parent=parent, position=position, size=size)
-        self.elements_list = elements_list
+        self.elements_list = []
         self.row_offset = row_offset
         self.increase_width = increase_width
         self.increase_height = increase_height

@@ -10,9 +10,9 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
 
-        self.spells = []
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size, elements_list=self.spells,
-                               row_offset=1, increase_width=0, increase_height=28, last_row_column=4)
+        # self.spells = []
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, increase_width=0,
+                               increase_height=28, last_row_column=4)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
         self.last_row = [self.add_new]
@@ -58,7 +58,7 @@ class KnownSpellsBox(DefaultBox, ResizeableBox):
 
 
     def create_spell(self):
-        idx = len(self.spells)
+        idx = len(self.elements_list)
         new_spell = SimpleNamespace()
         new_spell.lvl = create_qline_edit(parent=self.container, max_size=[20, None],
                                           min_size=[None, 23], function_on_unfocused=self.sort_elements)
