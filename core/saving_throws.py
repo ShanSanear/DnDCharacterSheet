@@ -1,7 +1,7 @@
 from core.throws.basic_saving_throw import BasicSavingThrow
 from core.throws.magic_saving_throw import MagicSavingThrow
-from core.throws.temp_saving_throw import TempSavingThrow
 from core.throws.misc_saving_throw import MiscSavingThrow
+from core.throws.temp_saving_throw import TempSavingThrow
 
 THROWS_KEYS = ('fortitude', 'reflex', 'will')
 THROW_ATTRIBUTE = {"fortitude": 'con', "reflex": "dex", "will": "wis"}

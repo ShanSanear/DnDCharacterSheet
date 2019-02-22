@@ -1,9 +1,10 @@
-from core.saving_throws import *
 from core.attributes import Attributes
+from core.saving_throws import *
+from core.throws.basic_saving_throw import BasicSavingThrow
 from core.throws.magic_saving_throw import MagicSavingThrow
 from core.throws.misc_saving_throw import MiscSavingThrow
 from core.throws.temp_saving_throw import TempSavingThrow
-from core.throws.basic_saving_throw import BasicSavingThrow
+
 
 class TestSavingThrows:
     def test_fortitude_from_attribute(self):
