@@ -2,19 +2,18 @@ from PyQt5 import QtCore
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, update_texts
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, update_texts, \
+    add_multiple_elements_to_layout_by_row
 
 
 class SavingThrowsBox(BoxType, DefaultBox):
     char_core: Character
-
-    # TODO Column labels centered
     # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
         BoxType.__init__(self, parent=parent, position=position, size=size)
         qlabel_dict = dict(parent=self.container,)
+        qlabel_dict_centered = dict(parent=self.container, align=QtCore.Qt.AlignVCenter | QtCore.Qt.AlignCenter)
         qline_dict_disabled = dict(parent=self.container, min_size=(15, 23), enabled=False)
         qline_update_fortitude = dict(parent=self.container, min_size=(15, 23),
                                       function_on_text_changed=self._update_fortitude_text)
@@ -44,11 +43,11 @@ class SavingThrowsBox(BoxType, DefaultBox):
         self.reflex_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
         self.will_label = create_qlabel(align=QtCore.Qt.AlignRight,**qlabel_dict)
         self.total_label = create_qlabel(align=QtCore.Qt.AlignRight,**qlabel_dict)
-        self.class_base_label = create_qlabel(**qlabel_dict)
-        self.attr_bonus_label = create_qlabel(**qlabel_dict)
-        self.size_bonus_label = create_qlabel(**qlabel_dict)
-        self.misc_bonus_label = create_qlabel(**qlabel_dict)
-        self.fortitude_label = create_qlabel(**qlabel_dict)
+        self.class_base_label = create_qlabel(**qlabel_dict_centered)
+        self.attr_bonus_label = create_qlabel(**qlabel_dict_centered)
+        self.size_bonus_label = create_qlabel(**qlabel_dict_centered)
+        self.misc_bonus_label = create_qlabel(**qlabel_dict_centered)
+        self.fortitude_label = create_qlabel(**qlabel_dict_centered)
 
         self.add_to_layout()
         self.translate()
@@ -56,29 +55,22 @@ class SavingThrowsBox(BoxType, DefaultBox):
         self.set_values_from_attributes()
 
     def add_to_layout(self):
-        self.layout.addWidget(self.will_misc_bonus, 3, 9, 1, 1)
-        self.layout.addWidget(self.total_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.class_base_label, 0, 3, 1, 1)
-        self.layout.addWidget(self.attr_bonus_label, 0, 5, 1, 1)
-        self.layout.addWidget(self.size_bonus_label, 0, 7, 1, 1)
-        self.layout.addWidget(self.misc_bonus_label, 0, 9, 1, 1)
-        self.layout.addWidget(self.fortitude_label, 1, 0, 1, 1)
-        self.layout.addWidget(self.fortitude_total, 1, 1, 1, 1)
-        self.layout.addWidget(self.fortitude_class_bonus, 1, 3, 1, 1)
-        self.layout.addWidget(self.fortitude_attr_bonus, 1, 5, 1, 1)
-        self.layout.addWidget(self.fortitude_size_bonus, 1, 7, 1, 1)
-        self.layout.addWidget(self.fortitude_misc_bonus, 1, 9, 1, 1)
-        self.layout.addWidget(self.reflex_label, 2, 0, 1, 1)
-        self.layout.addWidget(self.reflex_total, 2, 1, 1, 1)
-        self.layout.addWidget(self.reflex_class_bonus, 2, 3, 1, 1)
-        self.layout.addWidget(self.reflex_attr_bonus, 2, 5, 1, 1)
-        self.layout.addWidget(self.reflex_size_bonus, 2, 7, 1, 1)
-        self.layout.addWidget(self.reflex_misc_bonus, 2, 9, 1, 1)
-        self.layout.addWidget(self.will_label, 3, 0, 1, 1)
-        self.layout.addWidget(self.will_total, 3, 1, 1, 1)
-        self.layout.addWidget(self.will_class_bonus, 3, 3, 1, 1)
-        self.layout.addWidget(self.will_attr_bonus, 3, 5, 1, 1)
-        self.layout.addWidget(self.will_size_bonus, 3, 7, 1, 1)
+        first_row = [self.total_label, self.class_base_label, self.attr_bonus_label, self.size_bonus_label,
+                     self.misc_bonus_label]
+        add_multiple_elements_to_layout_by_row(self.layout, first_row, start_column=1)
+
+        second_row = [self.fortitude_label, self.fortitude_total, self.fortitude_class_bonus, self.fortitude_attr_bonus,
+                      self.fortitude_size_bonus, self.fortitude_misc_bonus]
+        add_multiple_elements_to_layout_by_row(self.layout, second_row, row=1)
+
+        third_row = [self.reflex_label, self.reflex_total, self.reflex_class_bonus, self.reflex_attr_bonus,
+                     self.reflex_size_bonus, self.reflex_misc_bonus]
+        add_multiple_elements_to_layout_by_row(self.layout, third_row, row=2)
+
+        fourth_row = [self.will_label, self.will_total, self.will_class_bonus, self.will_attr_bonus,
+                      self.will_size_bonus, self.will_misc_bonus]
+        add_multiple_elements_to_layout_by_row(self.layout, fourth_row, row=3)
+
 
     def translate(self):
         _translate = QtCore.QCoreApplication.translate
