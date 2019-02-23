@@ -48,17 +48,17 @@ class CombatBox(BoxType, DefaultBox):
         qline_dict_ranged = dict(parent=self.container, function_on_text_changed=self._update_ranged_attack)
         qline_dict_melee = dict(parent=self.container, function_on_text_changed=self._update_melee_attack)
         qlabel_dict = dict(parent=self.container, )
+        qlabel_dict_centered = dict(parent=self.container, align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
         qline_update = dict(parent=self.container, function_on_text_changed=self._update_initiative)
 
-        self.attacks_type_label = create_qlabel(**qlabel_dict)
-        self.total_label = create_qlabel(**qlabel_dict)
-        self.base_label = create_qlabel(**qlabel_dict)
-        self.attr_mod_label = create_qlabel(**qlabel_dict)
-        self.size_label = create_qlabel(**qlabel_dict)
-        self.misc_label = create_qlabel(**qlabel_dict)
+        self.attacks_type_label = create_qlabel(**qlabel_dict_centered)
+        self.total_label = create_qlabel(**qlabel_dict_centered)
+        self.base_label = create_qlabel(**qlabel_dict_centered)
+        self.attr_mod_label = create_qlabel(**qlabel_dict_centered)
+        self.size_label = create_qlabel(**qlabel_dict_centered)
+        self.misc_label = create_qlabel(**qlabel_dict_centered)
         self.melee_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
         self.ranged_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
-        self.total_label_init = create_qlabel(**qlabel_dict)
 
         self.melee_total = create_qline_edit(str_format="{:+d}", **qline_dict_disabled)
         self.melee_base = create_qline_edit(**qline_dict_melee)
@@ -72,11 +72,11 @@ class CombatBox(BoxType, DefaultBox):
         self.ranged_size = create_qline_edit(**qline_dict_ranged)
         self.ranged_misc = create_qline_edit(**qline_dict_ranged)
 
-        self.initiative_misc_bonus_label = create_qlabel(parent=self.container)
-        self.initiative_dex_bonus_label = create_qlabel(parent=self.container)
+        self.total_label_init = create_qlabel(**qlabel_dict_centered)
+        self.initiative_misc_bonus_label = create_qlabel(**qlabel_dict_centered)
+        self.initiative_dex_bonus_label = create_qlabel(**qlabel_dict_centered)
         self.initiative_label = create_qlabel(align=QtCore.Qt.AlignRight, parent=self.container)
         self.speed_label = create_qlabel(align=QtCore.Qt.AlignRight, parent=self.container)
-        self.speed_armor_type_label = create_qlabel(parent=self.container)
 
         self.initiative_total = create_qline_edit(parent=self.container, str_format="{:+d}",
                                                   enabled=False)
@@ -84,39 +84,32 @@ class CombatBox(BoxType, DefaultBox):
         self.initiative_dex_bonus = create_qline_edit(parent=self.container, enabled=False)
         self.speed_total = create_qline_edit(parent=self.container)
 
+        self.labels = [self.attacks_type_label, self.total_label, self.base_label, self.attr_mod_label,
+                       self.size_label, self.misc_label]
+
         self.add_to_layout()
         self.translate("EN")
         self.set_default_values()
         self.set_values_from_attributes()
 
     def add_to_layout(self):
-        self.labels = [self.attacks_type_label, self.total_label, self.base_label, self.attr_mod_label,
-                       self.size_label, self.misc_label]
-        add_multiple_elements_to_layout_by_row(self.layout, self.labels,)
+        add_multiple_elements_to_layout_by_row(self.layout, self.labels)
 
-        first_row = [self.melee_label,
-                     self.melee_total,
-                     self.melee_base,
-                     self.melee_attr_mod,
-                     self.melee_size,
+        first_row = [self.melee_label, self.melee_total, self.melee_base, self.melee_attr_mod, self.melee_size,
                      self.melee_misc, ]
-
-        second_row = [self.ranged_label,
-                      self.ranged_total,
-                      self.ranged_base,
-                      self.ranged_attr_mod,
-                      self.ranged_size,
-                      self.ranged_misc, ]
-
         add_multiple_elements_to_layout_by_row(self.layout, first_row, row=1)
+
+        second_row = [self.ranged_label, self.ranged_total, self.ranged_base, self.ranged_attr_mod, self.ranged_size,
+                      self.ranged_misc, ]
         add_multiple_elements_to_layout_by_row(self.layout, second_row, row=2)
 
         third_row = [self.total_label_init, self.initiative_dex_bonus_label, self.initiative_misc_bonus_label]
-
         add_multiple_elements_to_layout_by_row(self.layout, third_row, row=3, start_column=1)
+
         fourth_row = [self.initiative_label, self.initiative_total, self.initiative_dex_bonus,
                       self.initiative_misc_bonus]
         add_multiple_elements_to_layout_by_row(self.layout, fourth_row, row=4)
+
         fith_row = [self.speed_label, self.speed_total]
         add_multiple_elements_to_layout_by_row(self.layout, fith_row, row=5)
 
@@ -146,11 +139,14 @@ class CombatBox(BoxType, DefaultBox):
         self._update_initiative()
     
     def _update_ranged_attack(self):
-        update_texts(self, "ranged_total", ["ranged_base", "ranged_attr_mod", "ranged_size", "ranged_misc"])
+        update_texts(root_object=self, to_set="ranged_total",
+                     to_get_from=["ranged_base", "ranged_attr_mod", "ranged_size", "ranged_misc"])
     
     def _update_melee_attack(self):
-        update_texts(self, "melee_total", ["melee_base", "melee_attr_mod", "melee_size", "melee_misc"])
+        update_texts(root_object=self, to_set="melee_total",
+                     to_get_from=["melee_base", "melee_attr_mod", "melee_size", "melee_misc"])
 
 
     def _update_initiative(self):
-        update_texts(self, "initiative_total", ["initiative_misc_bonus", "initiative_dex_bonus"])
+        update_texts(root_object=self, to_set="initiative_total",
+                     to_get_from=["initiative_misc_bonus", "initiative_dex_bonus"])
