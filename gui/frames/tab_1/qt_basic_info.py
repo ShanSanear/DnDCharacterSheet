@@ -33,7 +33,6 @@ class BasicInfoBox(BoxType, DefaultBox):
         qline_dict_1 = dict(parent=self.container, )  # min_size=(100, 23))
         qline_dict_2 = dict(parent=self.container, max_size=(40, None))  # min_size=(50, 23))
 
-        # TODO - in a long shot - generalize it
         self.class_label = create_qlabel(**qlabel_dict_1)
         self.faith_label = create_qlabel(**qlabel_dict_1)
         self.race_label = create_qlabel(**qlabel_dict_1)
@@ -50,7 +49,6 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.gender_label = create_qlabel(**qlabel_dict_2)
         self.level_label = create_qlabel(**qlabel_dict_2)
 
-        # TODO - in a long shot - generalize it
         self.race = create_qline_edit(**qline_dict_1)
         self.alignement = create_qline_edit(**qline_dict_1)
         self.char_class = create_qline_edit(**qline_dict_1)
