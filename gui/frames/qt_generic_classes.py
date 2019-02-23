@@ -58,7 +58,7 @@ class DefaultBox(ABC):
         return get_general_dict_repr(self, elements)
 
 
-class ResizeableBox(ABC, ResizeType):
+class ResizeableBox(DefaultBox, ResizeType):
 
     def __init__(self, parent, position, size, row_offset, last_row_column=4):
         ResizeType.__init__(self, parent=parent, position=position, size=size)
@@ -159,9 +159,9 @@ class ResizeableBox(ABC, ResizeType):
             self.end_scroll = False
         logging.debug("Is at the end scroll: %s", self.end_scroll)
 
-    @abstractmethod
-    def add_to_layout(self):
-        pass
+    # @abstractmethod
+    # def add_to_layout(self):
+    #     pass
 
     @abstractmethod
     def create_new_element(self):

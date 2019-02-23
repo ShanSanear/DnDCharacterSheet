@@ -3,13 +3,13 @@ from types import SimpleNamespace
 from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
+from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
     add_multiple_elements_to_layout_by_row, create_push_button, get_int_from_widget, get_float_from_widget, \
     add_element_to_layout
 
 
-class ItemsBox(DefaultBox, ResizeableBox):
+class ItemsBox(ResizeableBox):
     def __init__(self, parent, position, size, char_core: Character):
         # TODO - scrollbar after achieving certain height
         self.char_core = char_core

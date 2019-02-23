@@ -4,12 +4,12 @@ from types import SimpleNamespace
 from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import DefaultBox, ResizeableBox
+from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
     add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
 
 
-class SkillsBox(DefaultBox, ResizeableBox):
+class SkillsBox(ResizeableBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):

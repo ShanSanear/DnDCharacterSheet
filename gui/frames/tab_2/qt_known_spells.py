@@ -1,12 +1,12 @@
 from types import SimpleNamespace
 
-from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
+from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
     set_text_of_children, add_multiple_elements_to_layout_by_row
 from gui.popups.qt_full_description import DescriptionDialog
 
 
-class KnownSpellsBox(DefaultBox, ResizeableBox):
+class KnownSpellsBox(ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
         ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, last_row_column=4)
