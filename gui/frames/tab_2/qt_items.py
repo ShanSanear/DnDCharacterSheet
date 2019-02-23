@@ -3,7 +3,7 @@ from types import SimpleNamespace
 from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox, ResizeType
+from gui.frames.qt_generic_classes import ResizeableBox, DefaultBox
 from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
     add_multiple_elements_to_layout_by_row, create_push_button, get_int_from_widget, get_float_from_widget, \
     add_element_to_layout
@@ -12,13 +12,12 @@ from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children,
 class ItemsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size, char_core: Character):
         # TODO - scrollbar after achieving certain height
-        ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.char_core = char_core
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
-                                          text="+")
         ResizeableBox.__init__(self, parent=parent, position=position, size=size,
                                row_offset=1, increase_width=0, increase_height=28,
                                last_row_column=4)
+        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
+                                          text="+")
 
         self.max_encumbrance_map = {1: 1.5, 2: 3, 3: 5, 4: 6.5, 5: 8, 6: 10, 7: 11.5, 8: 13, 9: 15, 10: 16.5, 11: 19,
                                     12: 21.5, 13: 25, 14: 29, 15: 33, 16: 38, 17: 43, 18: 50, 19: 58, 20: 66.5,
@@ -92,9 +91,6 @@ class ItemsBox(DefaultBox, ResizeableBox):
         add_element_to_layout(self.layout, item_name_label, row=0, column=0, height=1, width=5)
         add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5)
         self.add_last_row()
-
-    def update_size(self):
-        pass
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
