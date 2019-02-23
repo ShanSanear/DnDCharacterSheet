@@ -8,6 +8,7 @@ from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, up
 
 class SavingThrowsBox(BoxType, DefaultBox):
     char_core: Character
+
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
         BoxType.__init__(self, parent=parent, position=position, size=size)

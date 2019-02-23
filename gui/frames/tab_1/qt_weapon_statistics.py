@@ -2,14 +2,13 @@ from PyQt5 import QtCore
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel
+from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row
 
 
 class WeaponStatisticsBox(BoxType, DefaultBox):
     char_core: Character
-    # TODO Column labels centered
     # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
+
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
         BoxType.__init__(self, parent=parent, position=position, size=size)
@@ -18,12 +17,13 @@ class WeaponStatisticsBox(BoxType, DefaultBox):
 
         qline_dict = dict(parent=self.container, enabled=False)
         qlabel_dict = dict(parent=self.container)
+        qlabel_dict_centered = dict(parent=self.container, align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
 
         self.weapon_name_label = create_qlabel(**qlabel_dict)
-        self.attack_bonus_label = create_qlabel(**qlabel_dict)
-        self.damage_label = create_qlabel(**qlabel_dict)
-        self.crit_label = create_qlabel(**qlabel_dict)
-        self.range_label = create_qlabel(**qlabel_dict)
+        self.attack_bonus_label = create_qlabel(**qlabel_dict_centered)
+        self.damage_label = create_qlabel(**qlabel_dict_centered)
+        self.crit_label = create_qlabel(**qlabel_dict_centered)
+        self.range_label = create_qlabel(**qlabel_dict_centered)
 
 
         self.melee_label = create_qlabel(align=QtCore.Qt.AlignRight, **qlabel_dict)
@@ -53,25 +53,18 @@ class WeaponStatisticsBox(BoxType, DefaultBox):
         self.translate()
 
     def add_to_layout(self):
-        self.layout.addWidget(self.weapon_name_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.attack_bonus_label, 0, 2, 1, 1)
-        self.layout.addWidget(self.damage_label, 0, 3, 1, 1)
-        self.layout.addWidget(self.crit_label, 0, 4, 1, 1)
-        self.layout.addWidget(self.range_label, 0, 5, 1, 1)
+        first_row = [self.weapon_name_label, self.attack_bonus_label, self.damage_label, self.crit_label,
+                     self.range_label]
+        add_multiple_elements_to_layout_by_row(layout=self.layout, elements_to_add=first_row, start_column=1)
 
-        self.layout.addWidget(self.melee_label, 1, 0, 1, 1)
-        self.layout.addWidget(self.melee_name, 1, 1, 1, 1)
-        self.layout.addWidget(self.melee_attack_bonus, 1, 2, 1, 1)
-        self.layout.addWidget(self.melee_damage, 1, 3, 1, 1)
-        self.layout.addWidget(self.melee_crit, 1, 4, 1, 1)
-        self.layout.addWidget(self.melee_range,1,5,1,1)
+        second_row = [self.melee_label, self.melee_name, self.melee_attack_bonus, self.melee_damage, self.melee_crit,
+                      self.melee_range]
+        add_multiple_elements_to_layout_by_row(layout=self.layout, elements_to_add=second_row, row=1)
 
-        self.layout.addWidget(self.ranged_label, 2, 0, 1, 1)
-        self.layout.addWidget(self.ranged_name, 2, 1, 1, 1)
-        self.layout.addWidget(self.ranged_attack_bonus, 2, 2, 1, 1)
-        self.layout.addWidget(self.ranged_damage, 2, 3, 1, 1)
-        self.layout.addWidget(self.ranged_crit, 2, 4, 1, 1)
-        self.layout.addWidget(self.ranged_range, 2,5,1,1)
+        third_row = [self.ranged_label, self.ranged_name, self.ranged_attack_bonus, self.ranged_damage,
+                     self.ranged_crit,
+                     self.ranged_range]
+        add_multiple_elements_to_layout_by_row(layout=self.layout, elements_to_add=third_row, row=2)
 
     def translate(self):
         _translate = QtCore.QCoreApplication.translate
@@ -84,10 +77,3 @@ class WeaponStatisticsBox(BoxType, DefaultBox):
         self.weapon_name_label.setText("Weapon name")
         self.range_label.setText("Range")
         self.melee_range.setText("1 m")
-
-        # self.ranged_damage.setText(_translate("MainWindow", "10"))
-        # self.ranged_attack_bonus.setText(_translate("MainWindow", "10"))
-        # self.ranged_crit.setText(_translate("MainWindow", "10"))
-        # self.melee_attack_bonus.setText(_translate("MainWindow", "10"))
-        # self.melee_crit.setText(_translate("MainWindow", "10"))
-        # self.melee_damage.setText(_translate("MainWindow", "10"))
