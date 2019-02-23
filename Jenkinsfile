@@ -6,8 +6,8 @@ pipeline {
     }
     options {
         skipDefaultCheckout(true)
-        // Keep the 10 most recent builds
-        buildDiscarder(logRotator(numToKeepStr: '10'))
+        // Keep the 40 most recent builds
+        buildDiscarder(logRotator(numToKeepStr: '40'))
         timestamps()
     }
     environment {
