@@ -1,12 +1,10 @@
 from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import set_text_of_children
+from gui.frames.qt_generic_functions import set_text_of_children, create_qlabel
 
 
 class NotesBox(BoxType, DefaultBox):
-    # TODO - function based widgets and labels
-    # TODO - generalized translation
     def __init__(self, parent, position, size):
         BoxType.__init__(self, parent=parent, position=position, size=size)
         self.translate_reference = {
@@ -33,10 +31,9 @@ class NotesBox(BoxType, DefaultBox):
                              "pulvinar, nec feugiat metus egestas. "
                 }
         }
-        self.notes_label = QtWidgets.QLabel(self.container)
-        self.notes_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.layout.addWidget(self.notes_label)
+        self.notes_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter)
         self.notes = QtWidgets.QPlainTextEdit(self.container)
+        self.layout.addWidget(self.notes_label)
         self.translate("EN")
         self.add_to_layout()
         self.root.setLayout(self.layout)
