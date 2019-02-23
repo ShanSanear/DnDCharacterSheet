@@ -41,13 +41,20 @@ class ArmorItems(DefaultBox):
                 "speed": "10",
                 "special": "Lorem ipsum",
                 "special_label": "Special",
-                "equipped_label" : "Equipped"}
+                "equipped_label": "Equipped"}
         }
         for _ in range(4):
             self.armors.append(self.create_armor())
             self.update_size()
 
-        self.translate()
+        self.translate_reference = {
+            "EN":
+                {"root":
+                     {"title": "Armor items"}
+                 }
+
+        }
+        self.translate("EN")
         self._update_weight()
         self._update_armor_ac()
 
@@ -90,7 +97,7 @@ class ArmorItems(DefaultBox):
 
         self._add_new_element_to_layout(new_armor)
 
-        set_text_of_children(new_armor, self.translate_reference_new_element["EN"])
+        self._translate_armor(new_armor, "EN")
         return new_armor
 
     def update_size(self):
@@ -98,8 +105,15 @@ class ArmorItems(DefaultBox):
         root_height = self.root.height()
         self.root.setMinimumSize(QtCore.QSize(root_width, root_height + self.increase_height))
 
-    def translate(self):
-        self.root.setTitle("Armor items")
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
+
+    def translate_all_armor(self):
+        for armor in self.armors:
+            self._translate_armor(armor, "EN")
+
+    def _translate_armor(self, armor, language):
+        set_text_of_children(armor, self.translate_reference_new_element[language])
 
     def add_to_layout(self, **kwargs):
         pass
@@ -133,7 +147,6 @@ class ArmorItems(DefaultBox):
         fith_row = [new_armor.weight, new_armor.spell_fail, new_armor.speed]
         add_element_to_layout(new_armor.layout, new_armor.special, 4, 0, 1, 4)
         add_multiple_elements_to_layout_by_row(new_armor.layout, fith_row, row=4, start_column=4)
-
 
     def _update_armor_ac(self):
         total_ac = 0
