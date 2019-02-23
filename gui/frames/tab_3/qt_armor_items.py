@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets, QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children, get_float_from_widget, get_int_from_widget, create_checkbox
+    set_text_of_children, get_float_from_widget, get_int_from_widget, create_checkbox, add_element_to_layout
 from gui.frames.tab_1.qt_hp_ac import HpAcBox
 from gui.frames.tab_2.qt_items import ItemsBox
 
@@ -67,7 +67,7 @@ class ArmorItems(DefaultBox):
         new_armor.test_penalty = create_qline_edit(**qline_dict)
         new_armor.type = create_qline_edit(**qline_dict)
         new_armor.max_dex_bonus = create_qline_edit(**qline_dict)
-        new_armor.name = create_qline_edit(**qline_dict)
+        new_armor.name = create_qline_edit(**qline_dict, min_size=[150, None])
         new_armor.ac_bonus = create_qline_edit(function_on_text_changed=self._update_armor_ac,
                                                **qline_dict)
         new_armor.weight = create_qline_edit(function_on_text_changed=self._update_weight, **qline_dict)
@@ -112,23 +112,29 @@ class ArmorItems(DefaultBox):
         self.items_box.calculate_weight()
 
     def _add_new_element_to_layout(self, new_armor):
-        first_row = [new_armor.equipped_label, new_armor.equipped]
 
-        second_row = [new_armor.name_label, new_armor.type_label, new_armor.ac_bonus_label,
-                            new_armor.test_penalty_label, new_armor.max_dex_bonus_label]
-        third_row = [new_armor.name, new_armor.type, new_armor.ac_bonus,
-                      new_armor.test_penalty, new_armor.max_dex_bonus, ]
-        fourth_row = [new_armor.weight_label, new_armor.spell_fail_label, new_armor.speed_label, ]
 
         # TODO - better handling of single elements with non-1 width
+        first_row = [new_armor.equipped_label, new_armor.equipped]
         add_multiple_elements_to_layout_by_row(new_armor.layout, first_row)
-        add_multiple_elements_to_layout_by_row(new_armor.layout, second_row, row=1)
-        add_multiple_elements_to_layout_by_row(new_armor.layout, third_row, row=2)
-        new_armor.layout.addWidget(new_armor.special_label, 3, 0, 1, 2)
-        add_multiple_elements_to_layout_by_row(new_armor.layout, fourth_row, row=3, start_column=2)
-        new_armor.layout.addWidget(new_armor.special, 4, 0, 1, 2)
+
+        second_row = [new_armor.name_label, new_armor.type_label, new_armor.ac_bonus_label,
+                      new_armor.test_penalty_label, new_armor.max_dex_bonus_label]
+        add_element_to_layout(new_armor.layout, second_row[0], row=1, column=0, height=1, width=3)
+        add_multiple_elements_to_layout_by_row(new_armor.layout, second_row[1:], row=1, start_column=3)
+
+        third_row = [new_armor.name, new_armor.type, new_armor.ac_bonus,
+                     new_armor.test_penalty, new_armor.max_dex_bonus, ]
+        add_element_to_layout(new_armor.layout, third_row[0], row=2, column=0, height=1, width=3)
+        add_multiple_elements_to_layout_by_row(new_armor.layout, third_row[1:], row=2, start_column=3)
+
+        fourth_row = [new_armor.weight_label, new_armor.spell_fail_label, new_armor.speed_label, ]
+        new_armor.layout.addWidget(new_armor.special_label, 3, 0, 1, 4)
+        add_multiple_elements_to_layout_by_row(new_armor.layout, fourth_row, row=3, start_column=4)
+
         fith_row = [new_armor.weight, new_armor.spell_fail, new_armor.speed]
-        add_multiple_elements_to_layout_by_row(new_armor.layout, fith_row, row=4, start_column=2)
+        new_armor.layout.addWidget(new_armor.special, 4, 0, 1, 4)
+        add_multiple_elements_to_layout_by_row(new_armor.layout, fith_row, row=4, start_column=4)
 
     def _change_root_title(self, language):
         self.translate_reference_new_element[language]["root"]["title"] = f"Armor_{self.item_count}"
