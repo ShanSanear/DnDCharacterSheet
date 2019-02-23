@@ -50,7 +50,6 @@ class Tab1(CoreWindow):
     def __init__(self):
         super(Tab1, self).__init__()
         self.tab1 = QWidget(self.tabs)
-        self.tab1.tabs = self.tabs
         self.basic_info_box = BasicInfoBox(self.tab1, position=[10, 10], size=[500, 220])
         self.skills_box = SkillsBox(self.tab1, position=[830, 10], size=[500, 780], char_core=self.char_core)
 
@@ -73,13 +72,11 @@ class Tab2(Tab1):
     def __init__(self):
         super(Tab2, self).__init__()
         self.tab2 = QWidget(self.tabs)
-        self.tab2.tabs = self.tabs
-        parent_for_boxes = self.tab2
-        self.items_box = ItemsBox(parent_for_boxes, position=[10, 10], size=[500, 760], char_core=self.char_core)
-        self.number_of_spells_box = NumberOfSpellsBox(parent_for_boxes, position=[520, 10], size=[450, 100])
-        self.languages_box = LanguagesBox(parent_for_boxes, position=[1090, 380], size=[150, 250])
-        self.spells_per_day_box = SpellsPerDayBox(parent_for_boxes, position=[1090, 10], size=[150, 350])
-        self.known_spells_box = KnownSpellsBox(parent_for_boxes, position=[520, 120], size=[550, 650])
+        self.items_box = ItemsBox(self.tab2, position=[10, 10], size=[500, 760], char_core=self.char_core)
+        self.number_of_spells_box = NumberOfSpellsBox(self.tab2, position=[520, 10], size=[450, 100])
+        self.languages_box = LanguagesBox(self.tab2, position=[1090, 380], size=[150, 250])
+        self.spells_per_day_box = SpellsPerDayBox(self.tab2, position=[1090, 10], size=[150, 350])
+        self.known_spells_box = KnownSpellsBox(self.tab2, position=[520, 120], size=[550, 650])
         self.tabs.addTab(self.tab2, "Items / Spells / Languages")
 
 
@@ -88,12 +85,10 @@ class Tab3(Tab2):
     def __init__(self):
         super(Tab3, self).__init__()
         self.tab3 = QWidget(self.tabs)
-        self.tab3.tabs = self.tabs
-        parent_for_boxes = self.tab3
-        self.notes_box = NotesBox(parent_for_boxes, position=[650, 470], size=[620, 290])
-        self.armor_items_box = ArmorItems(parent_for_boxes, position=[10, 10], size=[620, 51], items_box=self.items_box,
+        self.notes_box = NotesBox(self.tab3, position=[650, 470], size=[620, 290])
+        self.armor_items_box = ArmorItems(self.tab3, position=[10, 10], size=[620, 51], items_box=self.items_box,
                                           hp_ac_box=self.hp_ac_box)
-        self.weapons_box = WeaponsBox(parent_for_boxes, position=[650, 10], size=[620, 450],
+        self.weapons_box = WeaponsBox(self.tab3, position=[650, 10], size=[620, 450],
                                       weapons_statistics_box=self.weapons_statistics_box, items_box=self.items_box)
         self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
 
@@ -102,3 +97,4 @@ class MainWindowUi(Tab3):
 
     def __init__(self):
         super(MainWindowUi, self).__init__()
+        self.tabs.setCurrentIndex(1)

@@ -69,8 +69,6 @@ class ResizeableBox(ABC, ResizeType):
         self.increase_height = increase_height
         self.root_initial_height = self.root.height()
         self.container_initial_height = self.container.height()
-        if hasattr(self, "parent"):
-            self.initial_tab_height = self.parent.tabs.height()
         self.last_row_column = last_row_column
         self.end_scroll = False
         self.scrollarea.verticalScrollBar().rangeChanged.connect(self._max_scroll)
