@@ -120,8 +120,8 @@ class CombatBox(BoxType, DefaultBox):
         fith_row = [self.speed_label, self.speed_total]
         add_multiple_elements_to_layout_by_row(self.layout, fith_row, row=5)
 
-    def translate(self, language_ref):
-        set_text_of_children(self, self.translate_reference[language_ref])
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
 
     def set_default_values(self):
         defaults = {"melee_total": "10",

@@ -97,8 +97,8 @@ class AttributesBox(BoxType, DefaultBox):
         for idx, attribute_row in enumerate(attributes_elements):
             add_multiple_elements_to_layout_by_row(self.layout, attribute_row, row=idx + 1)
 
-    def translate(self, language_ref):
-        set_text_of_children(self, self.translate_reference[language_ref])
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
 
     def set_default_values(self):
         attr_default = {"val": "10",

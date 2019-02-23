@@ -94,8 +94,8 @@ class BasicInfoBox(BoxType, DefaultBox):
         add_multiple_elements_to_layout_by_row(self.layout, third_row_input_part_1, row=5)
         add_multiple_elements_to_layout_by_row(self.layout, third_row_input_part_2, row=5, start_column=4)
 
-    def translate(self, language_ref):
-        set_text_of_children(self, self.translate_reference[language_ref])
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
 
     def set_default(self):
         default_values = {
