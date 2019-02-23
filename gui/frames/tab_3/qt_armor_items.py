@@ -67,7 +67,9 @@ class ArmorItems(DefaultBox):
         new_armor.test_penalty = create_qline_edit(**qline_dict)
         new_armor.type = create_qline_edit(**qline_dict)
         new_armor.max_dex_bonus = create_qline_edit(**qline_dict)
-        new_armor.name = create_qline_edit(**qline_dict, min_size=[150, None])
+        new_armor.name = create_qline_edit(**qline_dict, min_size=[150, None],
+                                           function_on_text_changed=self._update_root_text,
+                                           args_on_text_changed=[new_armor])
         new_armor.ac_bonus = create_qline_edit(function_on_text_changed=self._update_armor_ac,
                                                **qline_dict)
         new_armor.weight = create_qline_edit(function_on_text_changed=self._update_weight, **qline_dict)
@@ -89,7 +91,7 @@ class ArmorItems(DefaultBox):
 
         self._add_new_element_to_layout(new_armor)
 
-        self._change_root_title("EN")
+        # self._change_root_title("EN")
         set_text_of_children(new_armor, self.translate_reference_new_element["EN"])
         return new_armor
 
@@ -136,8 +138,8 @@ class ArmorItems(DefaultBox):
         new_armor.layout.addWidget(new_armor.special, 4, 0, 1, 4)
         add_multiple_elements_to_layout_by_row(new_armor.layout, fith_row, row=4, start_column=4)
 
-    def _change_root_title(self, language):
-        self.translate_reference_new_element[language]["root"]["title"] = f"Armor_{self.item_count}"
+    # def _change_root_title(self, language):
+    #     self.translate_reference_new_element[language]["root"]["title"] = f"Armor_{self.item_count}"
 
     def _update_armor_ac(self):
         total_ac = 0
@@ -145,3 +147,7 @@ class ArmorItems(DefaultBox):
             if armor.equipped.isChecked():
                 total_ac += get_int_from_widget(armor.ac_bonus, 0)
         self.hp_ac_box.ac_armor_bonus.setText(str(total_ac))
+
+    def _update_root_text(self, new_armor):
+        name = new_armor.name.text()
+        new_armor.root.setTitle(name)
