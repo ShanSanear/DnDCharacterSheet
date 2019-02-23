@@ -127,11 +127,11 @@ class ArmorItems(DefaultBox):
         add_multiple_elements_to_layout_by_row(new_armor.layout, third_row[1:], row=2, start_column=3)
 
         fourth_row = [new_armor.weight_label, new_armor.spell_fail_label, new_armor.speed_label, ]
-        new_armor.layout.addWidget(new_armor.special_label, 3, 0, 1, 4)
+        add_element_to_layout(new_armor.layout, new_armor.special_label, 3, 0, 1, 4)
         add_multiple_elements_to_layout_by_row(new_armor.layout, fourth_row, row=3, start_column=4)
 
         fith_row = [new_armor.weight, new_armor.spell_fail, new_armor.speed]
-        new_armor.layout.addWidget(new_armor.special, 4, 0, 1, 4)
+        add_element_to_layout(new_armor.layout, new_armor.special, 4, 0, 1, 4)
         add_multiple_elements_to_layout_by_row(new_armor.layout, fith_row, row=4, start_column=4)
 
 
