@@ -11,7 +11,6 @@ from gui.frames.tab_2.qt_items import ItemsBox
 
 
 class WeaponsBox(DefaultBox):
-    # TODO - more than 3 choices for weapons
     # TODO Generalize melee/ranged weapon as classes / general function
     def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox, items_box: ItemsBox):
         self.root = QtWidgets.QGroupBox(parent)
