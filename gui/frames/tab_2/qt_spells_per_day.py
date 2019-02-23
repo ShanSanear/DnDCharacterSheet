@@ -6,9 +6,6 @@ from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, se
 
 
 class SpellsPerDayBox(BoxType, DefaultBox):
-    # TODO - function based widgets and labels
-    # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
     def __init__(self, parent, position, size):
         BoxType.__init__(self, parent=parent, position=position, size=size, defaults=True)
         self.translation_reference = {"EN": {
