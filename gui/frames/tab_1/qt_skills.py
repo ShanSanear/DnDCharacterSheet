@@ -15,8 +15,7 @@ class SkillsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size, char_core):
         # TODO - scrollbar after achieving certain height
 
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, increase_width=0,
-                               increase_height=28, last_row_column=7)
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, last_row_column=7)
         self.translate_reference = {
             "EN": {
                 "root": {

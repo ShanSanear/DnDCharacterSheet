@@ -60,21 +60,14 @@ class DefaultBox(ABC):
 
 class ResizeableBox(ABC, ResizeType):
 
-    def __init__(self, parent, position, size, row_offset, increase_width, increase_height,
-                 last_row_column=4):
+    def __init__(self, parent, position, size, row_offset, last_row_column=4):
         ResizeType.__init__(self, parent=parent, position=position, size=size)
         self.elements_list = []
         self.row_offset = row_offset
-        self.increase_width = increase_width
-        self.increase_height = increase_height
-        self.root_initial_height = self.root.height()
-        self.container_initial_height = self.container.height()
         self.last_row_column = last_row_column
         self.end_scroll = False
         self.scrollarea.verticalScrollBar().rangeChanged.connect(self._max_scroll)
         self.scrollarea.verticalScrollBar().valueChanged.connect(lambda value: self.scrolled(value))
-
-
 
     def add_new_element(self):
         element_idx = len(self.elements_list)
@@ -165,6 +158,10 @@ class ResizeableBox(ABC, ResizeType):
         else:
             self.end_scroll = False
         logging.debug("Is at the end scroll: %s", self.end_scroll)
+
+    @abstractmethod
+    def add_to_layout(self):
+        pass
 
     @abstractmethod
     def create_new_element(self):

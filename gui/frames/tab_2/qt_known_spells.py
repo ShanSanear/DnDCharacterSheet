@@ -9,10 +9,7 @@ from gui.popups.qt_full_description import DescriptionDialog
 class KnownSpellsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
-
-        # self.spells = []
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, increase_width=0,
-                               increase_height=28, last_row_column=4)
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, last_row_column=4)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
         self.last_row = [self.add_new]

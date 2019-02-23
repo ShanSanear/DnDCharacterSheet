@@ -14,8 +14,7 @@ class ItemsBox(DefaultBox, ResizeableBox):
         # TODO - scrollbar after achieving certain height
         self.char_core = char_core
         ResizeableBox.__init__(self, parent=parent, position=position, size=size,
-                               row_offset=1, increase_width=0, increase_height=28,
-                               last_row_column=4)
+                               row_offset=1, last_row_column=4)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")
 

@@ -10,9 +10,7 @@ from gui.popups.qt_full_description import DescriptionDialog
 class FeatsBox(DefaultBox, ResizeableBox):
     def __init__(self, parent, position, size):
         # TODO - scrollbar after achieving certain height
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, increase_width=0,
-                               increase_height=28,
-                               last_row_column=2)
+        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, last_row_column=2)
         self.name_label = create_qlabel(self.container)
         self.description_field_label = create_qlabel(self.container)
         self.description_label = create_qlabel(self.container)
