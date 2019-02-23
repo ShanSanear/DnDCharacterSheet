@@ -165,7 +165,7 @@ def set_text_of_children(root_object, to_set: dict):
             set_text_of_children(obj_ref, data_to_set)
         elif isinstance(data_to_set, list):
             for idx, element_data in enumerate(data_to_set):
-                # obj_ref in such case is self.items, self.spells etc.
+                # obj_ref in such case is self.elements_list
                 try:
                     set_text_of_children(obj_ref[idx], element_data)
                 except IndexError:
