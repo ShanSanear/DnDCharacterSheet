@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, numeric_label
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit
 
 
 class SpellsPerDayBox(BoxType, DefaultBox):
@@ -75,16 +75,16 @@ class SpellsPerDayBox(BoxType, DefaultBox):
         self.spells_per_day_spells_per_day_lvl_9 = create_qline_edit(**qline_dict)
         self.spells_per_day_extra_spells_lvl_9 = create_qline_edit(**qline_dict)
 
-        self._num_0 = numeric_label("_num_0", **qlabel_dict)
-        self._num_1 = numeric_label("_num_1", **qlabel_dict)
-        self._num_2 = numeric_label("_num_2", **qlabel_dict)
-        self._num_3 = numeric_label("_num_3", **qlabel_dict)
-        self._num_4 = numeric_label("_num_4", **qlabel_dict)
-        self._num_5 = numeric_label("_num_5", **qlabel_dict)
-        self._num_6 = numeric_label("_num_6", **qlabel_dict)
-        self._num_7 = numeric_label("_num_7", **qlabel_dict)
-        self._num_8 = numeric_label("_num_8", **qlabel_dict)
-        self._num_9 = numeric_label("_num_9", **qlabel_dict)
+        self._num_0 = create_qlabel(**qlabel_dict)
+        self._num_1 = create_qlabel(**qlabel_dict)
+        self._num_2 = create_qlabel(**qlabel_dict)
+        self._num_3 = create_qlabel(**qlabel_dict)
+        self._num_4 = create_qlabel(**qlabel_dict)
+        self._num_5 = create_qlabel(**qlabel_dict)
+        self._num_6 = create_qlabel(**qlabel_dict)
+        self._num_7 = create_qlabel(**qlabel_dict)
+        self._num_8 = create_qlabel(**qlabel_dict)
+        self._num_9 = create_qlabel(**qlabel_dict)
 
         self.add_to_layout()
         self.translate()

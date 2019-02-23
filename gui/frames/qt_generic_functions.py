@@ -126,10 +126,6 @@ def create_combo_box(parent: QtWidgets.QWidget, number_of_choices: int = 1,
     return combo_box
 
 
-def numeric_label(name, parent, align):
-    return create_qlabel(parent, align=align)
-
-
 def add_multiple_elements_to_layout_by_row(layout: QtWidgets.QLayout, elements_to_add: (list, tuple), row: int = 0,
                                            start_column: int = 0, height: int = 1, width: int = 1):
     for column, element in enumerate(elements_to_add):
