@@ -1,7 +1,8 @@
 from PyQt5 import QtCore
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children, \
+    add_multiple_elements_to_layout_by_column
 
 
 class SpellsPerDayBox(BoxType, DefaultBox):
@@ -95,50 +96,25 @@ class SpellsPerDayBox(BoxType, DefaultBox):
         self.translate("EN")
 
     def add_to_layout(self):
-        self.layout.addWidget(self._num_0, 1, 1, 1, 1)
-        self.layout.addWidget(self._num_1, 2, 1, 1, 1)
-        self.layout.addWidget(self._num_2, 3, 1, 1, 1)
-        self.layout.addWidget(self._num_3, 4, 1, 1, 1)
-        self.layout.addWidget(self._num_4, 5, 1, 1, 1)
-        self.layout.addWidget(self._num_5, 6, 1, 1, 1)
-        self.layout.addWidget(self._num_6, 7, 1, 1, 1)
-        self.layout.addWidget(self._num_7, 8, 1, 1, 1)
-        self.layout.addWidget(self._num_8, 9, 1, 1, 1)
-        self.layout.addWidget(self._num_9, 10, 1, 1, 1)
-        self.layout.addWidget(self.dc_lvl_0, 1, 0, 1, 1)
-        self.layout.addWidget(self.level_label, 0, 1, 1, 1)
-        self.layout.addWidget(self.per_day_label, 0, 2, 1, 1)
-        self.layout.addWidget(self.extra_spells_label, 0, 3, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_0, 1, 2, 1, 1)
-        self.layout.addWidget(self.dc_lvl_1, 2, 0, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_0, 1, 3, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_1, 2, 3, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_2, 3, 2, 1, 1)
-        self.layout.addWidget(self.dc_lvl_2, 3, 0, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_1, 2, 2, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_5, 6, 2, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_2, 3, 3, 1, 1)
-        self.layout.addWidget(self.dc_lvl_3, 4, 0, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_4, 5, 2, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_3, 4, 3, 1, 1)
-        self.layout.addWidget(self.dc_lvl_6, 7, 0, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_4, 5, 3, 1, 1)
-        self.layout.addWidget(self.dc_lvl_5, 6, 0, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_3, 4, 2, 1, 1)
-        self.layout.addWidget(self.dc_lvl_4, 5, 0, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_8, 9, 3, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_5, 6, 3, 1, 1)
-        self.layout.addWidget(self.dc_lvl_8, 9, 0, 1, 1)
-        self.layout.addWidget(self.dc_lvl_7, 8, 0, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_7, 8, 3, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_6, 7, 3, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_7, 8, 2, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_6, 7, 2, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_8, 9, 2, 1, 1)
-        self.layout.addWidget(self.base_spell_dc_label, 0, 0, 1, 1)
-        self.layout.addWidget(self.spells_per_day_lvl_9, 10, 2, 1, 1)
-        self.layout.addWidget(self.dc_lvl_9, 10, 0, 1, 1)
-        self.layout.addWidget(self.extra_spells_lvl_9, 10, 3, 1, 1)
+        first_column = [self.base_spell_dc_label, self.dc_lvl_0, self.dc_lvl_1, self.dc_lvl_2, self.dc_lvl_3,
+                        self.dc_lvl_4, self.dc_lvl_5, self.dc_lvl_6, self.dc_lvl_7, self.dc_lvl_8, self.dc_lvl_9]
+        add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=first_column, column=0)
+
+        second_column = [self.level_label, self._num_0, self._num_1, self._num_2, self._num_3, self._num_4, self._num_5,
+                         self._num_6, self._num_7, self._num_8, self._num_9, ]
+        add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=second_column, column=1)
+
+        third_column = [self.per_day_label, self.spells_per_day_lvl_0, self.spells_per_day_lvl_1,
+                        self.spells_per_day_lvl_2, self.spells_per_day_lvl_3, self.spells_per_day_lvl_4,
+                        self.spells_per_day_lvl_5, self.spells_per_day_lvl_6, self.spells_per_day_lvl_7,
+                        self.spells_per_day_lvl_8, self.spells_per_day_lvl_9]
+        add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=third_column, column=2)
+
+        fourth_column = [self.extra_spells_label, self.extra_spells_lvl_0, self.extra_spells_lvl_1,
+                         self.extra_spells_lvl_2, self.extra_spells_lvl_3, self.extra_spells_lvl_4,
+                         self.extra_spells_lvl_5, self.extra_spells_lvl_6, self.extra_spells_lvl_7,
+                         self.extra_spells_lvl_8, self.extra_spells_lvl_9]
+        add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=fourth_column, column=3)
 
     def translate(self, language):
         set_text_of_children(self, self.translation_reference[language])
