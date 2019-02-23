@@ -11,7 +11,6 @@ from gui.frames.tab_2.qt_items import ItemsBox
 
 class ArmorItems(DefaultBox):
     def __init__(self, parent, position, size, items_box: ItemsBox, hp_ac_box: HpAcBox):
-        # TODO checkboxes for setting in the first tab
         self.increase_height = 170
         self.items_box = items_box
         self.hp_ac_box = hp_ac_box
@@ -91,7 +90,6 @@ class ArmorItems(DefaultBox):
 
         self._add_new_element_to_layout(new_armor)
 
-        # self._change_root_title("EN")
         set_text_of_children(new_armor, self.translate_reference_new_element["EN"])
         return new_armor
 
@@ -114,8 +112,6 @@ class ArmorItems(DefaultBox):
         self.items_box.calculate_weight()
 
     def _add_new_element_to_layout(self, new_armor):
-
-
         # TODO - better handling of single elements with non-1 width
         first_row = [new_armor.equipped_label, new_armor.equipped]
         add_multiple_elements_to_layout_by_row(new_armor.layout, first_row)
@@ -138,8 +134,6 @@ class ArmorItems(DefaultBox):
         new_armor.layout.addWidget(new_armor.special, 4, 0, 1, 4)
         add_multiple_elements_to_layout_by_row(new_armor.layout, fith_row, row=4, start_column=4)
 
-    # def _change_root_title(self, language):
-    #     self.translate_reference_new_element[language]["root"]["title"] = f"Armor_{self.item_count}"
 
     def _update_armor_ac(self):
         total_ac = 0
