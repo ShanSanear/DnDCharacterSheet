@@ -10,14 +10,7 @@ class CombatBox(BoxType, DefaultBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
-        # TODO Column labels centered
         self.char_core = char_core
-        # self.root = QtWidgets.QGroupBox(parent)
-        # self.root.setGeometry(QtCore.QRect(*position, *size))
-        # self.container = QtWidgets.QWidget(self.root)
-        # self.layout = QtWidgets.QGridLayout(self.container)
-        # self.layout.setSpacing(10)
-        # self.layout.setContentsMargins(20, 10, 10, 20)
         BoxType.__init__(self, parent=parent, position=position, size=size)
         self.translate_reference = {
             "EN":
