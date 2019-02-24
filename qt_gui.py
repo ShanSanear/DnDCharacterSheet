@@ -59,13 +59,32 @@ class MyApp(MainWindowUi):
     def connect_attrs(self):
         for attr in self.attributes_box.__dict__:
             if attr in ['str', 'dex', 'con', 'int', 'wis', 'cha']:
-                attr_box_reference = getattr(self.attributes_box, attr)
-                attr_box_reference.val.textChanged.connect(partial(self.changed_attributes, attr_box_reference, attr))
+                attr_from_qt_attrs = getattr(self.attributes_box, attr)
+                attr_from_qt_attrs.val.textChanged.connect(partial(self.changed_attributes, attr_from_qt_attrs, attr))
+                attr_from_qt_attrs.temp_val.textChanged.connect(
+                    partial(self.changed_temp_attributes, attr_from_qt_attrs, attr))
 
-    def changed_attributes(self, attr_box_reference, attr_name):
-        self.char_core.attributes.set_attribute(attr_name, attr_box_reference.val.text())
+    def changed_attributes(self, attr_from_qt_attrs, attr_name):
+        self.char_core.attributes.set_attribute(attr_name, attr_from_qt_attrs.val.text())
         attr_ref_core = getattr(self.char_core.attributes, attr_name)
-        attr_box_reference.mod.setText(str(attr_ref_core["mod"]))
+        temp_attr_ref = getattr(self.char_core.attributes, "temp")
+        attr_ref_temp_core = getattr(temp_attr_ref, attr_name)
+        if not attr_ref_temp_core:
+            attr_from_qt_attrs.mod.setText(str(attr_ref_core["mod"]))
+        self._setting_values_from_attributes()
+
+    def changed_temp_attributes(self, attr_from_qt_attrs, attr_name):
+        value = attr_from_qt_attrs.temp_val.text()
+        self.char_core.attributes.set_temp_attribute(attr_name, value)
+        attr_ref_core = getattr(self.char_core.attributes, attr_name)
+        if value:
+            attr_from_qt_attrs.temp_mod.setText(str(attr_ref_core["mod"]))
+        else:
+            attr_from_qt_attrs.temp_mod.setText("")
+            self.changed_attributes(attr_from_qt_attrs, attr_name)
+        self._setting_values_from_attributes()
+
+    def _setting_values_from_attributes(self):
         self.combat_box.set_values_from_attributes()
         self.saving_throws_box.set_values_from_attributes()
         self.hp_ac_box.set_values_from_attributes()

@@ -110,14 +110,16 @@ class Attributes:
 
     def set_temp_attributes(self, temp_attributes):
         for key, val in temp_attributes.items():
-            try:
-                setattr(self.temp, key, int(val))
-            except ValueError:
-                logging.debug("Empty or incorrect value passed as value to temp attribute")
-                setattr(self.temp, key, 0)
+            self.set_temp_attribute(self, attribute=key, value=val)
+            # try:
+            #     setattr(self.temp, key, int(val))
+            # except ValueError:
+            #     logging.debug("Empty or incorrect value passed as value to temp attribute")
+            #     setattr(self.temp, key, 0)
 
     def set_temp_attribute(self, attribute, value):
         try:
             setattr(self.temp, attribute, int(value))
         except ValueError:
             logging.debug("Empty or incorrect value passed as value to temp attribute")
+            setattr(self.temp, attribute, 0)

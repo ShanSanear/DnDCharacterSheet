@@ -102,10 +102,7 @@ class AttributesBox(BoxType, DefaultBox):
         set_text_of_children(self, self.translate_reference[language])
 
     def set_default_values(self):
-        attr_default = {"val": "10",
-                        "mod": "0",
-                        "temp_val": "10",
-                        "temp_mod": "0", }
+        attr_default = {"val": "10", "mod": "0"}
 
         default_attribute_values = dict(str=dict(attr_default), dex=dict(attr_default), con=dict(attr_default),
                                         int=dict(attr_default), wis=dict(attr_default), cha=dict(attr_default), )
