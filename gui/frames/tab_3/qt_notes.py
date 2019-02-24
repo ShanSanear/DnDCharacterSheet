@@ -33,12 +33,12 @@ class NotesBox(BoxType, DefaultBox):
         }
         self.notes_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter)
         self.notes = QtWidgets.QPlainTextEdit(self.container)
-        self.layout.addWidget(self.notes_label)
         self.translate("EN")
         self.add_to_layout()
         self.root.setLayout(self.layout)
 
     def add_to_layout(self):
+        self.layout.addWidget(self.notes_label)
         self.layout.addWidget(self.notes)
 
     def translate(self, language):
