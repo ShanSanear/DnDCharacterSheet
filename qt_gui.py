@@ -65,19 +65,16 @@ class MyApp(MainWindowUi):
                     partial(self.changed_temp_attributes, attr_from_qt_attrs, attr))
 
     def changed_attributes(self, attr_from_qt_attrs, attr_name):
-        self.char_core.attributes.set_attribute(attr_name, attr_from_qt_attrs.val.text())
-        attr_ref_core = getattr(self.char_core.attributes, attr_name)
-        temp_attr_ref = getattr(self.char_core.attributes, "temp")
-        attr_ref_temp_core = getattr(temp_attr_ref, attr_name)
-        if not attr_ref_temp_core:
-            attr_from_qt_attrs.mod.setText(str(attr_ref_core["mod"]))
+        self.char_core.attributes.set_attribute(f"base_{attr_name}", attr_from_qt_attrs.val.text())
+        base_attr_ref = getattr(self.char_core.attributes, f"base_{attr_name}")
+        attr_from_qt_attrs.mod.setText(str(base_attr_ref["mod"]))
         self._setting_values_from_attributes()
 
     def changed_temp_attributes(self, attr_from_qt_attrs, attr_name):
         value = attr_from_qt_attrs.temp_val.text()
         self.char_core.attributes.set_temp_attribute(attr_name, value)
         attr_ref_core = getattr(self.char_core.attributes, attr_name)
-        if value:
+        if value and not value.strip() == '0':
             attr_from_qt_attrs.temp_mod.setText(str(attr_ref_core["mod"]))
         else:
             attr_from_qt_attrs.temp_mod.setText("")
