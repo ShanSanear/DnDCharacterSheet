@@ -1,11 +1,9 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
+
+from gui.frames.qt_generic_functions import set_text_of_children
 
 
 class MenuBar:
-    # TODO - function based widgets and labels
-    # TODO - generalized translation
-    # TODO - adding widgets by rows/columns
-    # TODO - some basic tests of saving / loading files (probably in main file)
     def __init__(self, main_window):
         self.root = QtWidgets.QMenuBar(main_window)
         self.file_menu = QtWidgets.QMenu(self.root)
@@ -21,13 +19,17 @@ class MenuBar:
         self.file_menu.addAction(self.exit)
         self.root.addAction(self.file_menu.menuAction())
         self.root.addAction(self.about_menu.menuAction())
-        self.translate_menu_bar()
+        self.translate_reference = {
+            "EN": {
+                "file_menu": {"title": "File"},
+                "about_menu": {"title": "About"},
+                "new_character": "New character...",
+                "open_character": "Open",
+                "save_character": "Save",
+                "exit": "Exit",
+            }
+        }
+        self.translate("EN")
 
-    def translate_menu_bar(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.file_menu.setTitle(_translate("MainWindow", "File"))
-        self.about_menu.setTitle(_translate("MainWindow", "About"))
-        self.new_character.setText(_translate("MainWindow", "New character..."))
-        self.open_character.setText(_translate("MainWindow", "Open"))
-        self.save_character.setText(_translate("MainWindow", "Save"))
-        self.exit.setText(_translate("MainWindow", "Exit"))
+    def translate(self, language):
+        set_text_of_children(self, self.translate_reference[language])
