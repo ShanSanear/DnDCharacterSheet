@@ -1,11 +1,18 @@
+import logging
+from types import SimpleNamespace
+
+
 class InvalidAttribute(Exception):
     pass
 
 
 class Attributes:
-    def __init__(self, attributes=None):
+    def __init__(self, attributes=None, temp_attributes=None):
+        # TODO Temporary attributes mods
         if not attributes:
             attributes = {}
+        if not temp_attributes:
+            temp_attributes = {}
 
         self._str = 10
         self._dex = 10
@@ -13,9 +20,17 @@ class Attributes:
         self._wis = 10
         self._int = 10
         self._cha = 10
+        self.temp = SimpleNamespace()
+        self.temp.str = 0
+        self.temp.dex = 0
+        self.temp.con = 0
+        self.temp.wis = 0
+        self.temp.int = 0
+        self.temp.cha = 0
 
         self.decreases = {}
         self.set_attributes(attributes)
+        self.set_temp_attributes(temp_attributes)
 
 
     def temp_decrease(self, attr, decrease_value):
@@ -26,21 +41,33 @@ class Attributes:
         setattr(self, attr, current_value - decrease_value)
 
     def _get_str(self):
+        if self.temp.str:
+            return {"value": self.temp.str, "mod": (self.temp.str - 10) // 2}
         return {"value": self._str, "mod": (self._str - 10) // 2}
 
     def _get_dex(self):
+        if self.temp.dex:
+            return {"value": self.temp.dex, "mod": (self.temp.dex - 10) // 2}
         return {"value": self._dex, "mod": (self._dex - 10) // 2}
 
     def _get_con(self):
+        if self.temp.con:
+            return {"value": self.temp.con, "mod": (self.temp.con - 10) // 2}
         return {"value": self._con, "mod": (self._con - 10) // 2}
 
     def _get_wis(self):
+        if self.temp.wis:
+            return {"value": self.temp.wis, "mod": (self.temp.wis - 10) // 2}
         return {"value": self._wis, "mod": (self._wis - 10) // 2}
 
     def _get_int(self):
+        if self.temp.int:
+            return {"value": self.temp.int, "mod": (self.temp.int - 10) // 2}
         return {"value": self._int, "mod": (self._int - 10) // 2}
 
     def _get_cha(self):
+        if self.temp.cha:
+            return {"value": self.temp.cha, "mod": (self.temp.cha - 10) // 2}
         return {"value": self._cha, "mod": (self._cha - 10) // 2}
 
     def _set_str(self, val):
@@ -78,4 +105,19 @@ class Attributes:
         try:
             setattr(self, attribute, int(value))
         except ValueError:
-            print("Empty or incorrect value passed as value to attribute")
+            logging.debug("Empty or incorrect value passed as value to attribute, setting to 0")
+            setattr(self, attribute, 0)
+
+    def set_temp_attributes(self, temp_attributes):
+        for key, val in temp_attributes.items():
+            try:
+                setattr(self.temp, key, int(val))
+            except ValueError:
+                logging.debug("Empty or incorrect value passed as value to temp attribute")
+                setattr(self.temp, key, 0)
+
+    def set_temp_attribute(self, attribute, value):
+        try:
+            setattr(self.temp, attribute, int(value))
+        except ValueError:
+            logging.debug("Empty or incorrect value passed as value to temp attribute")
