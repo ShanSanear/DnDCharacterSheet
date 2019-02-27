@@ -1,3 +1,5 @@
+from PyQt5.QtCore import Qt
+
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
     set_text_of_children
@@ -24,6 +26,7 @@ class BasicInfoBox(BoxType, DefaultBox):
                     "age_label": "Age",
                     "gender_label": "Gender",
                     "level_label": "Level",
+                    "experience_divide_label": "/",
                 }
         }
         qlabel_dict_1 = dict(parent=self.container,
@@ -39,7 +42,8 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.alignement_label = create_qlabel(**qlabel_dict_1)
         self.player_name_label = create_qlabel(**qlabel_dict_1)
         self.name_label = create_qlabel(**qlabel_dict_1)
-        self.experience_label = create_qlabel(**qlabel_dict_1)
+        self.experience_label = create_qlabel(**qlabel_dict_1, align=Qt.AlignVCenter | Qt.AlignCenter)
+        self.experience_divide_label = create_qlabel(**qlabel_dict_1)
         self.height_label = create_qlabel(**qlabel_dict_2)
         self.weight_label = create_qlabel(**qlabel_dict_2)
         self.eyes_label = create_qlabel(**qlabel_dict_2)
@@ -54,7 +58,8 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.char_class = create_qline_edit(**qline_dict_1)
         self.faith = create_qline_edit(**qline_dict_1)
         self.name = create_qline_edit(**qline_dict_1)
-        self.experience = create_qline_edit(**qline_dict_1)
+        self.current_experience = create_qline_edit(**qline_dict_1)
+        self.next_experience = create_qline_edit(**qline_dict_1)
         self.height = create_qline_edit(**qline_dict_2)
         self.weight = create_qline_edit(**qline_dict_2)
         self.hair = create_qline_edit(**qline_dict_1)
@@ -81,16 +86,24 @@ class BasicInfoBox(BoxType, DefaultBox):
 
         elements = [[second_row_labels, 2], [second_row_input, 2]]
         add_multiple_elements_to_layout_by_row(self.layout, [self.name_label], width=4)
-        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name_label, self.experience_label], start_column=4, width=2)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name_label], start_column=4, width=2)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.experience_label], start_column=6, width=3)
         add_multiple_elements_to_layout_by_row(self.layout, [self.name], row=1, width=4)
-        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name, self.experience], row=1, start_column=4, width=2)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.player_name], row=1, start_column=4, width=2)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.current_experience, self.experience_divide_label,
+                                                             self.next_experience], row=1, start_column=6)
         for row_idx, [row_elements, width] in enumerate(elements):
             add_multiple_elements_to_layout_by_row(self.layout, row_elements, row=row_idx + 2, width=width)
+        add_multiple_elements_to_layout_by_row(self.layout, [self.faith], start_column=6, row=3, width=3)
 
         add_multiple_elements_to_layout_by_row(self.layout, third_row_labels_part_1, row=4)
-        add_multiple_elements_to_layout_by_row(self.layout, third_row_labels_part_2, row=4, start_column=4)
+        add_multiple_elements_to_layout_by_row(self.layout, third_row_labels_part_2[:-1], row=4, start_column=4)
+        add_multiple_elements_to_layout_by_row(self.layout, [third_row_labels_part_2[-1]], row=4, start_column=7,
+                                               width=2)
         add_multiple_elements_to_layout_by_row(self.layout, third_row_input_part_1, row=5)
-        add_multiple_elements_to_layout_by_row(self.layout, third_row_input_part_2, row=5, start_column=4)
+        add_multiple_elements_to_layout_by_row(self.layout, third_row_input_part_2[:-1], row=5, start_column=4)
+        add_multiple_elements_to_layout_by_row(self.layout, [third_row_input_part_2[-1]], row=5, start_column=7,
+                                               width=2)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
@@ -114,6 +127,7 @@ class BasicInfoBox(BoxType, DefaultBox):
             "age": "10",
             "size": "Lorem ipsum",
             "level": "10",
-            "experience": "0/1000",
+            "current_experience": "0",
+            "next_experience": "1000",
         }
         set_text_of_children(self, default_values)
