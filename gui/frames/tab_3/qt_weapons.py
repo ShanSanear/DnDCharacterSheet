@@ -173,6 +173,11 @@ class WeaponsBox(DefaultBox):
         self._update_weight()
         # self.root.setLayout(self.layout)
 
+    def add_new_element(self):
+        self._add_new_ranged_weapon()
+        self._add_new_melee_weapon()
+
+
     def add_to_ranged_layout(self):
         first_row = [self.ranged_weapon_name_label, self.ranged_weapon_attack_bonus_label,
                      self.ranged_weapon_damage_roll_label, self.ranged_weapon_crit_label,
