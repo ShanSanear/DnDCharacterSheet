@@ -36,12 +36,9 @@ class KnownSpellsBox(ResizeableBox):
         }
         self.translate_reference_new_element = {
             "EN": {
-                "lvl": "10",
-                "name": "Lorem ipsum",
-                "short_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                                     "Praesent sapien urna, egestas eu tempor at, pretium nec orci. "
-                                     "In nec pharetra tellus. In malesuada erat tellus, "
-                                     "eget efficitur elit convallis eu."
+                "lvl": "",
+                "name": "",
+                "short_description": ""
             }
         }
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
