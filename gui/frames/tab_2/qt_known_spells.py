@@ -12,6 +12,7 @@ class KnownSpellsBox(ScrollableBox):
         height_increment = 29
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
+                               original_size=size,
                                height_increment=height_increment, row_offset=1, last_row_column=4)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
@@ -40,7 +41,7 @@ class KnownSpellsBox(ScrollableBox):
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
-        for _ in range(8):
+        for _ in range(25):
             self.add_spell()
 
         self.add_to_layout()

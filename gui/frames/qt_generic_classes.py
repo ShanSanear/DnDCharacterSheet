@@ -182,7 +182,8 @@ class ResizeableBox(DefaultBox, ResizeType):
 
 
 class ScrollableBox(ResizeableBox):
-    def __init__(self, parent, position, base_size, max_height, height_increment, row_offset, last_row_column):
+    def __init__(self, parent, position, base_size, original_size, max_height, height_increment, row_offset,
+                 last_row_column):
         ResizeableBox.__init__(self, parent=parent, position=position, size=base_size, row_offset=row_offset,
                                last_row_column=last_row_column)
 
@@ -190,6 +191,8 @@ class ScrollableBox(ResizeableBox):
         self.height_increment = height_increment
         self.height_increments = 0
         self.exceed_height = False
+        self.original_size = original_size
+        self.original_smaller_size = [original_size[0] - 20, original_size[1] - 40]
 
     def increase_height(self):
         self.height_increments += 1
@@ -218,6 +221,13 @@ class ScrollableBox(ResizeableBox):
             self.main_widget.setGeometry(QtCore.QRect(*self.position, self.size[0],
                                                       self.size[1] + (self.height_increments * self.height_increment)))
             self.scrollarea.setFixedHeight(self.smaller_size[1] + (self.height_increments * self.height_increment))
+            self.scrollarea.move(10, 10)
+        else:
+            self.root.setGeometry(QtCore.QRect(*self.position, *self.original_size))
+
+            self.main_widget.setGeometry(QtCore.QRect(*self.position, *self.original_size))
+            self.scrollarea.setFixedWidth(self.original_smaller_size[0])
+            self.scrollarea.setFixedHeight(self.original_smaller_size[1])
             self.scrollarea.move(10, 10)
 
     def _remove_element(self, element):

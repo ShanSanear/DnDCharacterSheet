@@ -63,7 +63,7 @@ class Tab1(CoreWindow):
         self.saving_throws_box = SavingThrowsBox(self.tab1, position=[260, 360], size=[250, 150],
                                                  char_core=self.char_core)
         self.hp_ac_box = HpAcBox(self.tab1, position=[260, 220], size=[250, 130], char_core=self.char_core)
-        self.feats_box = FeatsBox(self.tab1, position=[520, 220], size=[300, 550])
+        self.feats_box = FeatsBox(self.tab1, position=[520, 220], size=[300, 570])
         self.tabs.addTab(self.tab1, "Basic information / Combat / Skills / Feats")
 
 
@@ -72,11 +72,11 @@ class Tab2(Tab1):
     def __init__(self):
         super(Tab2, self).__init__()
         self.tab2 = QWidget(self.tabs)
-        self.items_box = ItemsBox(self.tab2, position=[10, 10], size=[500, 760], char_core=self.char_core)
+        self.items_box = ItemsBox(self.tab2, position=[10, 10], size=[500, 780], char_core=self.char_core)
         self.number_of_spells_box = NumberOfSpellsBox(self.tab2, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(self.tab2, position=[1090, 380], size=[150, 250])
         self.spells_per_day_box = SpellsPerDayBox(self.tab2, position=[1090, 10], size=[150, 350])
-        self.known_spells_box = KnownSpellsBox(self.tab2, position=[520, 120], size=[550, 660])
+        self.known_spells_box = KnownSpellsBox(self.tab2, position=[520, 120], size=[550, 670])
         self.tabs.addTab(self.tab2, "Items / Spells / Languages")
 
 

@@ -13,6 +13,7 @@ class FeatsBox(ScrollableBox):
         height_increment = 26
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
+                               original_size=size,
                                height_increment=height_increment, row_offset=1, last_row_column=2)
         self.name_label = create_qlabel(self.container)
         self.description_field_label = create_qlabel(self.container)
@@ -40,7 +41,7 @@ class FeatsBox(ScrollableBox):
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)
 
-        for _ in range(2):
+        for _ in range(25):
             self.add_feat()
         self.translate("EN")
 

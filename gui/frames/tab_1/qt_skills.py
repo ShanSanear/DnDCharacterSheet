@@ -17,6 +17,7 @@ class SkillsBox(ScrollableBox):
         height_increment = 29
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
+                               original_size=size,
                                height_increment=height_increment, row_offset=1, last_row_column=7)
         self.translate_reference = {
             "EN": {
@@ -60,7 +61,7 @@ class SkillsBox(ScrollableBox):
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
-        for _ in range(1):
+        for _ in range(25):
             self.add_skill()
 
         self.add_to_layout()
