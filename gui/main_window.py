@@ -50,20 +50,20 @@ class Tab1(CoreWindow):
     def __init__(self):
         super(Tab1, self).__init__()
         self.tab1 = QWidget(self.tabs)
-        self.basic_info_box = BasicInfoBox(self.tab1, position=[10, 10], size=[500, 220])
+        self.basic_info_box = BasicInfoBox(self.tab1, position=[10, 10], size=[500, 200])
         self.skills_box = SkillsBox(self.tab1, position=[830, 10], size=[500, 780], char_core=self.char_core)
 
-        self.attributes_box = AttributesBox(self.tab1, position=[10, 240], size=[240, 250],
+        self.attributes_box = AttributesBox(self.tab1, position=[10, 220], size=[240, 240],
                                             char_core=self.char_core)
 
-        self.weapons_statistics_box = WeaponStatisticsBox(self.tab1, position=[10, 530],
+        self.weapons_statistics_box = WeaponStatisticsBox(self.tab1, position=[10, 520],
                                                           size=[500, 120], char_core=self.char_core)
 
-        self.combat_box = CombatBox(self.tab1, position=[520, 10], size=[300, 220], char_core=self.char_core)
-        self.saving_throws_box = SavingThrowsBox(self.tab1, position=[260, 380], size=[250, 150],
+        self.combat_box = CombatBox(self.tab1, position=[520, 10], size=[300, 200], char_core=self.char_core)
+        self.saving_throws_box = SavingThrowsBox(self.tab1, position=[260, 360], size=[250, 150],
                                                  char_core=self.char_core)
-        self.hp_ac_box = HpAcBox(self.tab1, position=[260, 240], size=[250, 130], char_core=self.char_core)
-        self.feats_box = FeatsBox(self.tab1, position=[520, 240], size=[300, 550])
+        self.hp_ac_box = HpAcBox(self.tab1, position=[260, 220], size=[250, 130], char_core=self.char_core)
+        self.feats_box = FeatsBox(self.tab1, position=[520, 220], size=[300, 550])
         self.tabs.addTab(self.tab1, "Basic information / Combat / Skills / Feats")
 
 
@@ -76,7 +76,7 @@ class Tab2(Tab1):
         self.number_of_spells_box = NumberOfSpellsBox(self.tab2, position=[520, 10], size=[450, 100])
         self.languages_box = LanguagesBox(self.tab2, position=[1090, 380], size=[150, 250])
         self.spells_per_day_box = SpellsPerDayBox(self.tab2, position=[1090, 10], size=[150, 350])
-        self.known_spells_box = KnownSpellsBox(self.tab2, position=[520, 120], size=[550, 650])
+        self.known_spells_box = KnownSpellsBox(self.tab2, position=[520, 120], size=[550, 660])
         self.tabs.addTab(self.tab2, "Items / Spells / Languages")
 
 
