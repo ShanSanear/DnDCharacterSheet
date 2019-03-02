@@ -14,14 +14,16 @@ class SavingThrowsBox(BoxType, DefaultBox):
         BoxType.__init__(self, parent=parent, position=position, size=size)
         self.translate_reference = {
             "EN":
-                {"total_label": "Total",
-                 "class_base_label": "Base",
-                 "attr_bonus_label": "Attr",
-                 "size_bonus_label": "Size",
-                 "misc_bonus_label": "Misc",
-                 "fortitude_label": "Fortitude",
-                 "reflex_label": "Reflex",
-                 "will_label": "Will"}}
+                {
+                    "root": {"title": "Saving throws"},
+                    "total_label": "Total",
+                    "class_base_label": "Base",
+                    "attr_bonus_label": "Attr",
+                    "size_bonus_label": "Size",
+                    "misc_bonus_label": "Misc",
+                    "fortitude_label": "Fortitude",
+                    "reflex_label": "Reflex",
+                    "will_label": "Will"}}
         qlabel_dict = dict(parent=self.container)
         qlabel_dict_centered = dict(parent=self.container, align=QtCore.Qt.AlignVCenter | QtCore.Qt.AlignCenter)
         qline_dict_disabled = dict(parent=self.container, min_size=(15, 23), enabled=False)
