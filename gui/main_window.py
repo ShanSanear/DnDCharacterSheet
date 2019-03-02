@@ -97,4 +97,4 @@ class MainWindowUi(Tab3):
 
     def __init__(self):
         super(MainWindowUi, self).__init__()
-        self.tabs.setCurrentIndex(1)
+        self.tabs.setCurrentIndex(0)

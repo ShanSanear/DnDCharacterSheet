@@ -4,18 +4,20 @@ from types import SimpleNamespace
 from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import ResizeableBox
+from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
     add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
 
 
-class SkillsBox(ResizeableBox):
+class SkillsBox(ScrollableBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
-        # TODO - scrollbar after achieving certain height
-
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, last_row_column=7)
+        base_size = [size[0], 110]
+        height_increment = 29
+        max_height = size[1]
+        ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
+                               height_increment=height_increment, row_offset=1, last_row_column=7)
         self.translate_reference = {
             "EN": {
                 "root": {
@@ -35,22 +37,21 @@ class SkillsBox(ResizeableBox):
 
         self.char_core = char_core
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
-        self.skill_name_label = create_qlabel(self.container, max_size=(69, 20))
+        self.skill_name_label = create_qlabel(self.container, max_size=(69, None))
         self.attr_choice_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
-                                               max_size=(69, 20))
+                                               max_size=(69, None))
         self.total_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
-                                         max_size=(69, 20))
+                                         max_size=(69, None))
         self.attr_mod_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
-                                            max_size=(69, 20))
+                                            max_size=(69, None))
         self.rank_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
-                                        max_size=(69, 20))
+                                        max_size=(69, None))
         self.misc_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
-                                        max_size=(69, 20))
+                                        max_size=(69, None))
         self.cross_class_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
-                                               max_size=(69, 20))
+                                               max_size=(69, None))
         self.used_skill_points_label = create_qlabel(self.container,
-                                                     align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter,
-                                                     max_size=(None, 20))
+                                                     align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter, )
         self.total_rank_calc = create_qline_edit(self.container, enabled=False,
                                                  align=QtCore.Qt.AlignCenter, max_size=[30, None], is_float=True)
         self.labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
@@ -59,7 +60,7 @@ class SkillsBox(ResizeableBox):
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
-        for _ in range(22):
+        for _ in range(1):
             self.add_skill()
 
         self.add_to_layout()
@@ -79,9 +80,9 @@ class SkillsBox(ResizeableBox):
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
                                                  function_on_index_changed=self._set_attr_val_for_skill,
-                                                 args_on_index_changed=[new_skill], max_size=(69, 20), )
+                                                 args_on_index_changed=[new_skill], max_size=(69, None), )
 
-        qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None])
+        qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None], min_size=[None, 23])
         new_skill.total = create_qline_edit(enabled=False, str_format="{:+d}", **qdict)
         new_skill.attr_mod = create_qline_edit(**qdict, enabled=False)
         new_skill.rank = create_qline_edit(function_on_text_changed=self._update_skill,
@@ -98,6 +99,7 @@ class SkillsBox(ResizeableBox):
         return new_skill
 
     def create_new_element(self):
+        self.increase_height()
         return self.create_new_skill()
 
 
