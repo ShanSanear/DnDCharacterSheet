@@ -9,7 +9,6 @@ from gui.popups.qt_full_description import DescriptionDialog
 
 class FeatsBox(ScrollableBox):
     def __init__(self, parent, position, size):
-        # TODO - scrollbar after achieving certain height
         base_size = [size[0], 100]
         height_increment = 26
         max_height = size[1]
