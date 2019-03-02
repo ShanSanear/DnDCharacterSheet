@@ -1,15 +1,18 @@
 from types import SimpleNamespace
 
-from gui.frames.qt_generic_classes import ResizeableBox
+from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
     set_text_of_children, add_multiple_elements_to_layout_by_row
 from gui.popups.qt_full_description import DescriptionDialog
 
 
-class KnownSpellsBox(ResizeableBox):
+class KnownSpellsBox(ScrollableBox):
     def __init__(self, parent, position, size):
-        # TODO - scrollbar after achieving certain height
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size, row_offset=1, last_row_column=4)
+        base_size = [size[0], 100]
+        height_increment = 29
+        max_height = size[1]
+        ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
+                               height_increment=height_increment, row_offset=1, last_row_column=4)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20],
                                           max_size=[20, 20], text="+")
         self.last_row = [self.add_new]
@@ -34,17 +37,10 @@ class KnownSpellsBox(ResizeableBox):
                 "short_description_label": "DESC",
             }
         }
-        self.translate_reference_new_element = {
-            "EN": {
-                "lvl": "",
-                "name": "",
-                "short_description": ""
-            }
-        }
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
-        for _ in range(19):
+        for _ in range(8):
             self.add_spell()
 
         self.add_to_layout()
@@ -69,10 +65,10 @@ class KnownSpellsBox(ResizeableBox):
                                                     max_size=[20, 20], text="-",
                                                     function_on_clicked=self._remove_element, args_on_clicked=new_spell)
 
-        set_text_of_children(new_spell, self.translate_reference_new_element["EN"])
         return new_spell
 
     def create_new_element(self):
+        self.increase_height()
         return self.create_spell()
 
     def add_to_layout(self):
