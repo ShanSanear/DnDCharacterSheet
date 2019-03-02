@@ -3,18 +3,22 @@ from types import SimpleNamespace
 from PyQt5 import QtCore
 
 from core.character import Character
-from gui.frames.qt_generic_classes import ResizeableBox
+from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
     add_multiple_elements_to_layout_by_row, create_push_button, get_int_from_widget, get_float_from_widget, \
     add_element_to_layout
 
 
-class ItemsBox(ResizeableBox):
+class ItemsBox(ScrollableBox):
     def __init__(self, parent, position, size, char_core: Character):
-        # TODO - scrollbar after achieving certain height
         self.char_core = char_core
-        ResizeableBox.__init__(self, parent=parent, position=position, size=size,
-                               row_offset=1, last_row_column=4)
+        base_size = [size[0], 100]
+        height_increment = 29
+        max_height = size[1]
+        ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
+                               height_increment=height_increment, row_offset=1, last_row_column=4)
+        # ResizeableBox.__init__(self, parent=parent, position=position, size=size,
+        #                        row_offset=1, last_row_column=4)
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")
 
@@ -54,7 +58,7 @@ class ItemsBox(ResizeableBox):
         self.add_new.clicked.connect(self.add_item)
         self.weapons_weight = 0
         self.armor_weight = 0
-        for _ in range(22):
+        for _ in range(10):
             self.add_item()
 
     def create_new_item(self):
@@ -82,6 +86,7 @@ class ItemsBox(ResizeableBox):
         self.layout.addWidget(self.add_new, last_row, 8, 1, 1)
 
     def create_new_element(self):
+        self.increase_height()
         return self.create_new_item()
 
     def add_to_layout(self):
