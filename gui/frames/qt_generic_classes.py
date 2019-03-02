@@ -22,17 +22,23 @@ class BoxType:
 
 
 class ResizeType:
+    parent: QWidget
+
     def __init__(self, parent, position, size):
+        self.size = size
+        self.position = position
+        self.smaller_size = [size[0] - 20, size[1] - 40]
         self.parent = parent
         self.root = QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        smaller_size = [size[0] - 20, size[1] - 40]
+        self.root.setBaseSize(*size)
+
         self.main_widget = QWidget(self.parent)
         self.scrollarea = QScrollArea(self.main_widget)
         self.scrollarea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.main_widget.setGeometry(QtCore.QRect(*position, *size))
-        self.scrollarea.setFixedHeight(smaller_size[1])
-        self.scrollarea.setFixedWidth(smaller_size[0])
+        self.scrollarea.setFixedHeight(self.smaller_size[1])
+        self.scrollarea.setFixedWidth(self.smaller_size[0])
         self.scrollarea.setWidgetResizable(True)
         self.scrollarea.move(10, 10)
 
@@ -159,10 +165,61 @@ class ResizeableBox(DefaultBox, ResizeType):
             self.end_scroll = False
         logging.debug("Is at the end scroll: %s", self.end_scroll)
 
-    # @abstractmethod
-    # def add_to_layout(self):
-    #     pass
+    def log_height(self):
+        logging.debug("Getting heights for %s", self)
+        current_root_height = self.root.height()
+        logging.debug("Current root height: %s", current_root_height)
+        current_scrollarea_height = self.scrollarea.height()
+        logging.debug("Current scrollarea height: %s", current_scrollarea_height)
+        current_container_height = self.container.height()
+        logging.debug("Current container height: %s", current_container_height)
+        current_main_widget_height = self.main_widget.height()
+        logging.debug("Current main_widget height: %s", current_main_widget_height)
 
     @abstractmethod
     def create_new_element(self):
         pass
+
+
+class ScrollableBox(ResizeableBox):
+    def __init__(self, parent, position, base_size, max_height, height_increment, row_offset, last_row_column):
+        ResizeableBox.__init__(self, parent=parent, position=position, size=base_size, row_offset=row_offset,
+                               last_row_column=last_row_column)
+
+        self.max_height = max_height
+        self.height_increment = height_increment
+        self.height_increments = 0
+        self.exceed_height = False
+
+    def increase_height(self):
+        self.height_increments += 1
+        base_root_height = self.size[1] + self.height_increment * self.height_increments
+        if base_root_height > self.max_height:
+            self.exceed_height = True
+        else:
+            self.exceed_height = False
+        self._change_size_of_widgets()
+
+    def decrease_height(self):
+        self.height_increments -= 1
+        base_root_height = self.size[1] + self.height_increment * self.height_increments
+        if base_root_height > self.max_height:
+            self.exceed_height = True
+        else:
+            self.exceed_height = False
+        self._change_size_of_widgets()
+
+    def _change_size_of_widgets(self):
+        self.log_height()
+        if not self.exceed_height:
+            self.root.setGeometry(QtCore.QRect(*self.position, self.size[0],
+                                               self.size[1] + (self.height_increments * self.height_increment)))
+
+            self.main_widget.setGeometry(QtCore.QRect(*self.position, self.size[0],
+                                                      self.size[1] + (self.height_increments * self.height_increment)))
+            self.scrollarea.setFixedHeight(self.smaller_size[1] + (self.height_increments * self.height_increment))
+            self.scrollarea.move(10, 10)
+
+    def _remove_element(self, element):
+        super(ScrollableBox, self)._remove_element(element)
+        self.decrease_height()
