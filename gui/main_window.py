@@ -16,6 +16,7 @@ from gui.frames.tab_2.qt_languages import LanguagesBox
 from gui.frames.tab_2.qt_number_of_spells import NumberOfSpellsBox
 from gui.frames.tab_2.qt_spells_per_day import SpellsPerDayBox
 from gui.frames.tab_3.qt_armor_items import ArmorItems
+from gui.frames.tab_3.qt_cheatsheet import CheatSheet
 from gui.frames.tab_3.qt_notes import NotesBox
 from gui.frames.tab_3.qt_weapons import WeaponsBox
 
@@ -85,8 +86,9 @@ class Tab3(Tab2):
     def __init__(self):
         super(Tab3, self).__init__()
         self.tab3 = QWidget(self.tabs)
-        self.notes_box = NotesBox(self.tab3, position=[650, 470], size=[620, 290])
-        self.armor_items_box = ArmorItems(self.tab3, position=[10, 10], size=[620, 51], items_box=self.items_box,
+        self.notes_box = NotesBox(self.tab3, position=[650, 470], size=[440, 290])
+        self.cheathseet_box = CheatSheet(self.tab3, position=[1100, 470], size=[170, 290])
+        self.armor_items_box = ArmorItems(self.tab3, position=[10, 10], size=[620, 70], items_box=self.items_box,
                                           hp_ac_box=self.hp_ac_box)
         self.weapons_box = WeaponsBox(self.tab3, position=[650, 10], size=[620, 450],
                                       weapons_statistics_box=self.weapons_statistics_box, items_box=self.items_box)
