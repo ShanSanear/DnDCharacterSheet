@@ -53,7 +53,7 @@ class CheatSheet(DefaultBox):
         add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=self.labels[:10],
                                                   column=0, start_row=1)
         add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=self.exps[:10],
-                                                  olumn=1, start_row=1)
+                                                  column=1, start_row=1)
         add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=self.labels[10:],
                                                   column=2, start_row=1)
         add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=self.exps[10:],
