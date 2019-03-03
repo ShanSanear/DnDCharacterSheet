@@ -52,11 +52,13 @@ def create_checkbox(parent: QtWidgets.QWidget, function_on_toggle=None, args_on_
 
 
 def create_qlabel(parent: QtWidgets.QWidget, min_size: (list, tuple) = None, max_size: (list, tuple) = None,
-                  align=None):
+                  align=None, text=None):
     label = QtWidgets.QLabel(parent)
     label: QtWidgets.QLabel = resize_element(label, min_size, max_size)
     if align:
         label.setAlignment(align)
+    if text:
+        label.setText(text)
     return label
 
 
