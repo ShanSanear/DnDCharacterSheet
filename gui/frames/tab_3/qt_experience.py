@@ -11,7 +11,7 @@ from gui.frames.qt_generic_functions import set_text_of_children, create_qlabel,
     add_multiple_elements_to_layout_by_column, add_multiple_elements_to_layout_by_row
 
 
-class CheatSheet(DefaultBox):
+class ExpirienceSheet(DefaultBox):
     def __init__(self, parent, position, size):
         self.parent = parent
         self.root = QGroupBox(parent)
