@@ -12,8 +12,6 @@ class AttributesBox(BoxType, DefaultBox):
     char_core: Character
 
     def __init__(self, parent, position, size, char_core):
-        # TODO Temporary attributes mods
-
         self.char_core = char_core
         BoxType.__init__(self, parent=parent, position=position, size=size)
         self.attrs_names = ('str', 'dex', 'con', 'int', 'wis', 'cha')
