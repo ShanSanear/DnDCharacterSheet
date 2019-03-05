@@ -4,25 +4,25 @@ from pathlib import Path
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QGroupBox, QStackedWidget, QGridLayout
+from PyQt5.QtWidgets import QGroupBox, QGridLayout, QWidget
 
 from gui.frames.qt_generic_classes import DefaultBox
 from gui.frames.qt_generic_functions import set_text_of_children, create_qlabel, \
     add_multiple_elements_to_layout_by_column, add_multiple_elements_to_layout_by_row
 
 
-class ExpirienceSheet(DefaultBox):
+class ExperienceSheet(DefaultBox):
     def __init__(self, parent, position, size):
         self.parent = parent
         self.root = QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.container = QStackedWidget(self.root)
+        self.container = QWidget(self.root)
         self.layout = QGridLayout(self.container)
         self.root.setLayout(self.layout)
 
         self.translate_reference = {
             "EN": {
-                "root": {"title": "Cheatsheet"}
+                "root": {"title": "Experience"}
             }
 
         }
