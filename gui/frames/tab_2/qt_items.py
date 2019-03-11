@@ -57,7 +57,8 @@ class ItemsBox(ScrollableBox):
         self.translate("EN")
         self.add_item = self.add_new_element
         self.add_new.clicked.connect(self.add_item)
-        self.weapons_weight = 0
+        self.melee_weapons_weight = 0
+        self.ranged_weapons_weight = 0
         self.armor_weight = 0
         for _ in range(30):
             self.add_item()
@@ -114,7 +115,8 @@ class ItemsBox(ScrollableBox):
         for item in self.elements_list:
             count = get_int_from_widget(item.count, 1)
             total_weight += get_float_from_widget(item.weight, 0) * count
-        total_weight += self.weapons_weight
+        total_weight += self.melee_weapons_weight
+        total_weight += self.ranged_weapons_weight
         total_weight += self.armor_weight
         self.total_encumbrance.setText(str(total_weight))
 
