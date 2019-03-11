@@ -26,8 +26,6 @@ class CoreWindow(QMainWindow):
     def __init__(self):
         super(CoreWindow, self).__init__()
         self.char_core = core.character.Character("Shan")
-        attrs = dict(str=12, dex=12, con=12, int=12, wis=12, cha=16)
-        self.char_core.attributes.set_attributes(attrs)
 
         self.tabs = QTabWidget(self)
         self.tabs.setMinimumSize(1340, 800)
@@ -89,7 +87,7 @@ class Tab3(Tab2):
         self.cheathseet_box = ExperienceSheet(self.tab3, position=[1100, 470], size=[170, 290])
         self.armor_items_box = ArmorItems(self.tab3, position=[10, 10], size=[620, 70], items_box=self.items_box,
                                           hp_ac_box=self.hp_ac_box)
-        self.weapons_box = WeaponsBox(self.tab3, position=[650, 10], size=[620, 450],
+        self.weapons_box = WeaponsBox(self.tab3, position=[650, 10], size=[620, 440],
                                       weapons_statistics_box=self.weapons_statistics_box, items_box=self.items_box)
         self.tabs.addTab(self.tab3, "Weapons / Armor / Notes")
 
