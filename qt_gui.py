@@ -16,8 +16,8 @@ class MyApp(MainWindowUi):
         MainWindowUi.__init__(self)
 
         self.menu_bar.open_character.triggered.connect(self.open_file)
-        self.menu_bar.save_character.triggered.connect(self.save_file)
-        self.menu_bar.new_character.triggered.connect(self.save_file)
+        self.menu_bar.save_character.triggered.connect(self.save_file_as)
+        self.menu_bar.new_character.triggered.connect(self.new_character)
         self.character_file = ""
         self.connect_attrs()
 
@@ -26,11 +26,20 @@ class MyApp(MainWindowUi):
         fname = QFileDialog.getOpenFileName(self.tabs, 'Open file', Path().cwd().as_posix(),
                                             "Character file (*.json)")[0]
         self.character_file = fname
+        if not fname:
+            logging.debug("No file opened.")
+            return
+
         logging.info("File opened: %s", fname)
         data_to_read = json.load(Path(fname).open())
         set_text_of_children(self, data_to_read)
 
-    def save_file(self):
+    def new_character(self):
+        # TODO Logic and data for this
+        logging.debug("Cleaning character sheet")
+
+    def save_file_as(self):
+        # TODO Crashes when clicked Cancel
         logging.info("Saving file")
         data_to_save = {"basic_info_box": self.basic_info_box.get_dict_repr(),
                         "feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr(),
@@ -45,15 +54,15 @@ class MyApp(MainWindowUi):
                         "skills_box": self.skills_box.get_dict_repr(),
                         "attributes_box": self.attributes_box.get_dict_repr(),
                         "armor_items_box": self.armor_items_box.get_dict_repr(),
-                        "weapons_box": self.weapons_box.get_dict_repr(),
+                        # "weapons_box": self.weapons_box.get_dict_repr(),
                         }
         new_file = QFileDialog.getSaveFileName(self.tabs, "Save file", Path().cwd().as_posix(),
                                                "Character file (*.json)")[0]
-        if new_file:
-            logging.info("File name: %s", new_file)
-            json.dump(data_to_save, Path(new_file).open('w'), indent=4)
-        else:
+        if not new_file:
             logging.info("No file selected")
+            return
+        logging.info("File name: %s", new_file)
+        json.dump(data_to_save, Path(new_file).open('w'), indent=4)
         self.character_file = new_file
 
     def connect_attrs(self):
