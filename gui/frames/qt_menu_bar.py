@@ -9,6 +9,8 @@ class MenuBar:
         self.file_menu = QtWidgets.QMenu(self.root)
         self.about_menu = QtWidgets.QMenu(self.root)
         main_window.setMenuBar(self.root)
+        # TODO NEW CHARACTER - 10S ATTRIBUTES
+
         self.new_character = QtWidgets.QAction(main_window)
         self.open_character = QtWidgets.QAction(main_window)
         self.save_character = QtWidgets.QAction(main_window)
