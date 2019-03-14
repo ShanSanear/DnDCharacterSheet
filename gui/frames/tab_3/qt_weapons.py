@@ -2,7 +2,7 @@ import logging
 from types import SimpleNamespace
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout, QComboBox
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
@@ -12,6 +12,8 @@ from gui.frames.tab_2.qt_items import ItemsBox
 
 
 class WeaponBox(BoxType, DefaultBox):
+    choice: QComboBox
+
     def __init__(self, parent, position, size, translation, weapons_statistics_box, label_dict, weapon_attributes, ):
         self.main_widget = QWidget(parent)
         self.main_widget.setGeometry(QtCore.QRect(*position, *size))
@@ -79,22 +81,11 @@ class WeaponBox(BoxType, DefaultBox):
         self.current_weapon.type = create_qline_edit(args_on_text_changed=["type"], **self.qedit_dict)
 
     def save_weapon(self, attribute):
-        idx = self.choice.currentIndex()
-        chosen_weapon = self.weapons[idx]
-        logging.debug("Chosen weapon before: %s", chosen_weapon)
-        new_val = getattr(self.current_weapon, attribute).text()
-        setattr(chosen_weapon, attribute, new_val)
-        if attribute == "name":
-            self.weapons_statistics_box.melee_name.setText(new_val)
-            self.choice.setItemText(idx, new_val)
-        elif attribute == "damage_roll":
-            self.weapons_statistics_box.melee_damage.setText(new_val)
-        elif attribute == "crit":
-            self.weapons_statistics_box.melee_crit.setText(new_val)
-        elif attribute == "attack_bonus":
-            self.weapons_statistics_box.melee_attack_bonus.setText(new_val)
-        elif attribute == "weight":
-            self.update_total_weight()
+        pass
+
+    def update_choice_text(self):
+        for idx, weapon in enumerate(self.weapons):
+            self.choice.setItemText(idx, weapon.name)
 
     def create_weapon(self):
         weapon = SimpleNamespace()
@@ -136,7 +127,7 @@ class WeaponBox(BoxType, DefaultBox):
         chosen_weapon = self.weapons[self.choice.currentIndex()]
         self.weapons = sorted(self.weapons, key=lambda x: x.name)
         for idx, weapon in enumerate(self.weapons):
-            self.choice.setItemText(idx, weapon.name)
+            # self.choice.setItemText(idx, weapon.name)
             if chosen_weapon == weapon:
                 self.choice.setCurrentIndex(idx)
 
@@ -152,6 +143,7 @@ class WeaponBox(BoxType, DefaultBox):
 
     def update_total_weight(self):
         pass
+
 
 
 class MeleeWeapon(WeaponBox):
@@ -196,6 +188,25 @@ class MeleeWeapon(WeaponBox):
             total_weight += try_to_get_float(weapon.weight, 0)
         self.items_box.melee_weapons_weight = total_weight
         self.items_box.calculate_weight()
+
+    def save_weapon(self, attribute):
+        idx = self.choice.currentIndex()
+        chosen_weapon = self.weapons[idx]
+        logging.debug("Chosen weapon before: %s", chosen_weapon)
+        new_val = getattr(self.current_weapon, attribute).text()
+        setattr(chosen_weapon, attribute, new_val)
+        if attribute == "name":
+            self.weapons_statistics_box.melee_name.setText(new_val)
+            self.choice.setItemText(idx, new_val)
+        elif attribute == "damage_roll":
+            self.weapons_statistics_box.melee_damage.setText(new_val)
+        elif attribute == "crit":
+            self.weapons_statistics_box.melee_crit.setText(new_val)
+        elif attribute == "attack_bonus":
+            self.weapons_statistics_box.melee_attack_bonus.setText(new_val)
+        elif attribute == "weight":
+            self.update_total_weight()
+        self.update_choice_text()
 
 
 class RangedWeapon(WeaponBox):
@@ -256,6 +267,27 @@ class RangedWeapon(WeaponBox):
             total_weight += try_to_get_float(weapon.weight, 0)
         self.items_box.ranged_weapons_weight = total_weight
         self.items_box.calculate_weight()
+
+    def save_weapon(self, attribute):
+        idx = self.choice.currentIndex()
+        chosen_weapon = self.weapons[idx]
+        logging.debug("Chosen weapon before: %s", chosen_weapon)
+        new_val = getattr(self.current_weapon, attribute).text()
+        setattr(chosen_weapon, attribute, new_val)
+        if attribute == "name":
+            self.weapons_statistics_box.ranged_name.setText(new_val)
+            # self.choice.setItemText(idx, new_val)
+        elif attribute == "damage_roll":
+            self.weapons_statistics_box.ranged_damage.setText(new_val)
+        elif attribute == "crit":
+            self.weapons_statistics_box.ranged_crit.setText(new_val)
+        elif attribute == "attack_bonus":
+            self.weapons_statistics_box.ranged_attack_bonus.setText(new_val)
+        elif attribute == "range":
+            self.weapons_statistics_box.ranged_range.setText(new_val)
+        elif attribute == "weight":
+            self.update_total_weight()
+        self.update_choice_text()
 
 
 class WeaponsBox:

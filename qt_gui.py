@@ -33,6 +33,8 @@ class MyApp(MainWindowUi):
         logging.info("File opened: %s", fname)
         data_to_read = json.load(Path(fname).open())
         set_text_of_children(self, data_to_read)
+        self.weapons_box.melee_weapons_box.update_choice_text()
+        self.weapons_box.ranged_weapons_box.update_choice_text()
 
     def new_character(self):
         # TODO Logic and data for this
