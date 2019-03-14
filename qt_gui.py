@@ -16,7 +16,8 @@ class MyApp(MainWindowUi):
         MainWindowUi.__init__(self)
 
         self.menu_bar.open_character.triggered.connect(self.open_file)
-        self.menu_bar.save_character.triggered.connect(self.save_file_as)
+        self.menu_bar.save_character_as.triggered.connect(self.save_file_as)
+        self.menu_bar.save_character.triggered.connect(self.save_file)
         self.menu_bar.new_character.triggered.connect(self.new_character)
         self.character_file = ""
         self.connect_attrs()
@@ -25,14 +26,15 @@ class MyApp(MainWindowUi):
         logging.info("Opening file")
         fname = QFileDialog.getOpenFileName(self.tabs, 'Open file', Path().cwd().as_posix(),
                                             "Character file (*.json)")[0]
-        self.character_file = fname
         if not fname:
             logging.debug("No file opened.")
             return
 
-        logging.info("File opened: %s", fname)
+        self.character_file = fname
+
         data_to_read = json.load(Path(fname).open())
         set_text_of_children(self, data_to_read)
+        logging.info("File opened: %s", fname)
         self.weapons_box.melee_weapons_box.update_choice_text()
         self.weapons_box.ranged_weapons_box.update_choice_text()
 
@@ -40,8 +42,27 @@ class MyApp(MainWindowUi):
         # TODO Logic and data for this
         logging.debug("Cleaning character sheet")
 
+    def save_file(self):
+        if not self.character_file:
+            self.save_file_as()
+        else:
+            self._save_file()
+
     def save_file_as(self):
-        # TODO Crashes when clicked Cancel
+        default_path = Path().cwd()
+        if self.character_file:
+            default_path = default_path / self.character_file
+        default_path = default_path.as_posix()
+        new_file = QFileDialog.getSaveFileName(self.tabs, "Save file", default_path,
+                                               "Character file (*.json)")[0]
+        if not new_file:
+            logging.info("No file selected")
+            return
+        logging.info("File name: %s", new_file)
+        self.character_file = new_file
+        self._save_file()
+
+    def _save_file(self):
         logging.info("Saving file")
         data_to_save = {"basic_info_box": self.basic_info_box.get_dict_repr(),
                         "feats_box": self.feats_box.get_dict_repr(), "items_box": self.items_box.get_dict_repr(),
@@ -58,14 +79,9 @@ class MyApp(MainWindowUi):
                         "armor_items_box": self.armor_items_box.get_dict_repr(),
                         "weapons_box": self.weapons_box.get_dict_repr(),
                         }
-        new_file = QFileDialog.getSaveFileName(self.tabs, "Save file", Path().cwd().as_posix(),
-                                               "Character file (*.json)")[0]
-        if not new_file:
-            logging.info("No file selected")
-            return
-        logging.info("File name: %s", new_file)
-        json.dump(data_to_save, Path(new_file).open('w'), indent=4)
-        self.character_file = new_file
+        json.dump(data_to_save, Path(self.character_file).open('w'), indent=4)
+        logging.debug("Saved character to file: %s", self.character_file)
+
 
     def connect_attrs(self):
         for attr in self.attributes_box.__dict__:

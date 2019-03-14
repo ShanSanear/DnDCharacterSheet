@@ -14,10 +14,12 @@ class MenuBar:
         self.new_character = QtWidgets.QAction(main_window)
         self.open_character = QtWidgets.QAction(main_window)
         self.save_character = QtWidgets.QAction(main_window)
+        self.save_character_as = QtWidgets.QAction(main_window)
         self.exit = QtWidgets.QAction(main_window)
         self.file_menu.addAction(self.new_character)
         self.file_menu.addAction(self.open_character)
         self.file_menu.addAction(self.save_character)
+        self.file_menu.addAction(self.save_character_as)
         self.file_menu.addAction(self.exit)
         self.root.addAction(self.file_menu.menuAction())
         self.root.addAction(self.about_menu.menuAction())
@@ -28,6 +30,7 @@ class MenuBar:
                 "new_character": "New character...",
                 "open_character": "Open",
                 "save_character": "Save",
+                "save_character_as": "Save as...",
                 "exit": "Exit",
             }
         }
