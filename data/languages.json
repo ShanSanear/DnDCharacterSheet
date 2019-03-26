@@ -386,7 +386,7 @@
         },
         "number_of_spells_box": {
             "root": {
-                "title": "Number of spells"
+                "title": "Ilość znanych zaklęć"
             },
             "number_of_spells_0th_label": "0wy poz.",
             "number_of_spells_4th_label": "4ty poz.",
@@ -398,7 +398,7 @@
             "number_of_spells_7th_label": "7my poz.",
             "number_of_spells_8th_label": "8my poz.",
             "number_of_spells_9th_label": "9ty poz.",
-            "known_spells_title": "Ilośc znanych zaklęć (Czarnoksiężnik, Bard)"
+            "known_spells_title": "Ilość znanych zaklęć (Czarnoksiężnik, Bard)"
         },
         "languages_box": {
             "root": {
