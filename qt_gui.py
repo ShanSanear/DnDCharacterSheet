@@ -14,13 +14,7 @@ from gui.main_window import MainWindowUi
 class MyApp(MainWindowUi):
     def __init__(self):
         MainWindowUi.__init__(self)
-
-        self.menu_bar.open_character.triggered.connect(self.open_file)
-        self.menu_bar.save_character_as.triggered.connect(self.save_file_as)
-        self.menu_bar.save_character.triggered.connect(self.save_file)
-        self.menu_bar.new_character.triggered.connect(self.new_character)
         self.character_file = ""
-        self.connect_attrs()
 
     def open_file(self):
         logging.info("Opening file")
@@ -38,7 +32,7 @@ class MyApp(MainWindowUi):
         self.weapons_box.melee_weapons_box.update_choice_text()
         self.weapons_box.ranged_weapons_box.update_choice_text()
 
-    def new_character(self):
+    def create_new_character(self):
         # TODO Logic and data for this
         logging.debug("Cleaning character sheet")
 
@@ -50,6 +44,7 @@ class MyApp(MainWindowUi):
             self._save_file()
 
     def save_file_as(self):
+        logging.debug("Saving file as...")
         default_path = Path().cwd()
         if self.character_file:
             default_path = default_path / self.character_file
@@ -123,8 +118,7 @@ class SingleCharApp(MyApp):
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character_as.triggered.connect(self.save_file_as)
         self.menu_bar.save_character.triggered.connect(self.save_file)
-        self.menu_bar.new_character.triggered.connect(self.new_character)
-        self.character_file = ""
+        self.menu_bar.new_character.triggered.connect(self.create_new_character)
         self.connect_attrs()
 
 
