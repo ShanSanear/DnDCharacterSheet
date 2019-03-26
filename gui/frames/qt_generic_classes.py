@@ -228,7 +228,7 @@ class ScrollableBox(ResizeableBox):
             self.main_widget.setGeometry(QtCore.QRect(*self.position, *self.original_size))
             self.scrollarea.setFixedWidth(self.original_smaller_size[0])
             self.scrollarea.setFixedHeight(self.original_smaller_size[1])
-            self.scrollarea.move(10, 10)
+            self.scrollarea.move(10, 20)
 
     def _remove_element(self, element):
         super(ScrollableBox, self)._remove_element(element)
