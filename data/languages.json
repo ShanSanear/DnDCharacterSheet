@@ -1,5 +1,38 @@
 {
     "EN": {
+        "weapons_box": {
+            "root": {
+                "title": "Weapons"
+            },
+            "ranged_weapons_box": {
+                "name_label": "Name",
+                "attack_bonus_label": "Attack bonus",
+                "damage_roll_label": "Damage roll",
+                "crit_label": "Critical roll / multiplier",
+                "special_label": "Special",
+                "weight_label": "Weight",
+                "size_label": "Size",
+                "type_label": "Type",
+                "root": {
+                    "title": "Currently chosen ranged weapon"
+                },
+                "ammo_label": "Ammo",
+                "range_label": "Range"
+            },
+            "melee_weapons_box": {
+                "name_label": "Name",
+                "attack_bonus_label": "Attack bonus",
+                "damage_roll_label": "Damage roll",
+                "crit_label": "Critical roll / multiplier",
+                "special_label": "Special",
+                "weight_label": "Weight",
+                "size_label": "Size",
+                "type_label": "Type",
+                "root": {
+                    "title": "Currently chosen melee weapon"
+                }
+            }
+        },
         "menu_bar": {
             "file_menu": {
                 "title": "File"
@@ -217,12 +250,76 @@
         "armor_items_box": {
             "root": {
                 "title": "Armor items"
-            }
+            },
+            "armors": [
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                },
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                },
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                },
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                }
+            ]
         },
-        "weapons_box": {
+        "spells_per_day_box": {
             "root": {
-                "title": "Weapons"
-            }
+                "title": "Spells per day / Spells DC"
+            },
+            "level_label": "Lvl",
+            "per_day_label": "/Day",
+            "extra_spells_label": "Extra",
+            "base_spell_dc_label": "DC",
+            "_num_0": "0",
+            "_num_1": "1",
+            "_num_2": "2",
+            "_num_3": "3",
+            "_num_4": "4",
+            "_num_5": "5",
+            "_num_6": "6",
+            "_num_7": "7",
+            "_num_8": "8",
+            "_num_9": "9"
         }
     },
     "PL": {
@@ -386,7 +483,7 @@
         },
         "number_of_spells_box": {
             "root": {
-                "title": "Number of spells"
+                "title": "Ilość znanych zaklęć"
             },
             "number_of_spells_0th_label": "0wy poz.",
             "number_of_spells_4th_label": "4ty poz.",
@@ -398,7 +495,7 @@
             "number_of_spells_7th_label": "7my poz.",
             "number_of_spells_8th_label": "8my poz.",
             "number_of_spells_9th_label": "9ty poz.",
-            "known_spells_title": "Ilośc znanych zaklęć (Czarnoksiężnik, Bard)"
+            "known_spells_title": "Ilość znanych zaklęć (Czarnoksiężnik, Bard)"
         },
         "languages_box": {
             "root": {
@@ -429,12 +526,109 @@
         "armor_items_box": {
             "root": {
                 "title": "Przedmioty pancerza"
-            }
+            },
+            "armors": [
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                },
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                },
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                },
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                }
+            ]
         },
         "weapons_box": {
             "root": {
                 "title": "Bronie"
+            },
+            "ranged_weapons_box": {
+                "name_label": "Nazwa",
+                "attack_bonus_label": "Bonus do ataku",
+                "damage_roll_label": "Rzut na obrażenia",
+                "crit_label": "Zasięg krytyka / mnożnik",
+                "special_label": "Specjalne",
+                "weight_label": "Waga",
+                "size_label": "Rozmiar",
+                "type_label": "Typ",
+                "root": {
+                    "title": "Aktualnie wybrana broń zasięgowa"
+                },
+                "ammo_label": "Amunicja",
+                "range_label": "Zasięg"
+            },
+            "melee_weapons_box": {
+                "name_label": "Nazwa",
+                "attack_bonus_label": "Bonus do ataku",
+                "damage_roll_label": "Rzut na obrażenia",
+                "crit_label": "Zasięg krytyka / mnożnik",
+                "special_label": "Specjalne",
+                "weight_label": "Waga",
+                "size_label": "Rozmiar",
+                "type_label": "Typ",
+                "root": {
+                    "title": "Aktualnie wybrana broń w zwarciu"
+                }
             }
+        },
+        "spells_per_day_box": {
+            "root": {
+                "title": "Czary na dzień / ST czarów"
+            },
+            "level_label": "Poz.",
+            "per_day_label": "/Dzień",
+            "extra_spells_label": "Ekstra",
+            "base_spell_dc_label": "ST",
+            "_num_0": "0",
+            "_num_1": "1",
+            "_num_2": "2",
+            "_num_3": "3",
+            "_num_4": "4",
+            "_num_5": "5",
+            "_num_6": "6",
+            "_num_7": "7",
+            "_num_8": "8",
+            "_num_9": "9"
         }
     }
 }
