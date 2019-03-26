@@ -111,6 +111,15 @@ class MyApp(MainWindowUi):
         self.skills_box.set_values_from_attributes()
         self.items_box.set_values_from_attributes()
 
+    def change_language(self):
+        logging.debug("Changing language")
+        language_data = json.load(Path("data/languages.json").open(encoding='utf-8'))
+        if self.menu_bar.change_language_en.isChecked():
+            set_text_of_children(self, language_data["EN"])
+        else:
+            set_text_of_children(self, language_data["PL"])
+
+
 
 class SingleCharApp(MyApp):
     def __init__(self):
@@ -119,6 +128,7 @@ class SingleCharApp(MyApp):
         self.menu_bar.save_character_as.triggered.connect(self.save_file_as)
         self.menu_bar.save_character.triggered.connect(self.save_file)
         self.menu_bar.new_character.triggered.connect(self.create_new_character)
+        self.menu_bar.language_menu.triggered.connect(self.change_language)
         self.connect_attrs()
 
 
