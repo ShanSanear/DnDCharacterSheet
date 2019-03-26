@@ -250,7 +250,57 @@
         "armor_items_box": {
             "root": {
                 "title": "Armor items"
-            }
+            },
+            "armors": [
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                },
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                },
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                },
+                {
+                    "max_dex_bonus_label": "Max dex. bonus",
+                    "test_penalty_label": "Test penalty",
+                    "type_label": "Type",
+                    "ac_bonus_label": "AC bonus",
+                    "weight_label": "Weight",
+                    "spell_fail_label": "Spell fail",
+                    "speed_label": "Speed",
+                    "name_label": "Name",
+                    "special_label": "Special",
+                    "equipped_label": "Equipped"
+                }
+            ]
         },
         "spells_per_day_box": {
             "root": {
@@ -476,7 +526,57 @@
         "armor_items_box": {
             "root": {
                 "title": "Przedmioty pancerza"
-            }
+            },
+            "armors": [
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                },
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                },
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                },
+                {
+                    "max_dex_bonus_label": "Max bonus ze ZRC",
+                    "test_penalty_label": "Kara do testów",
+                    "type_label": "Typ",
+                    "ac_bonus_label": "Bonus KP",
+                    "weight_label": "Waga",
+                    "spell_fail_label": "Niepowodzenie czaru",
+                    "speed_label": "Prędkość",
+                    "name_label": "Nazwa",
+                    "special_label": "Specjalne",
+                    "equipped_label": "Założony"
+                }
+            ]
         },
         "weapons_box": {
             "root": {

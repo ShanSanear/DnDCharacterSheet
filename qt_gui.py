@@ -114,7 +114,6 @@ class MyApp(MainWindowUi):
     def change_language(self):
         logging.debug("Changing language")
         language_data = json.load(Path("data/languages.json").open(encoding='utf-8'))
-        # TODO FULL armors translation
         if self.menu_bar.change_language_en.isChecked():
             set_text_of_children(self, language_data["EN"])
         else:
@@ -131,19 +130,6 @@ class SingleCharApp(MyApp):
         self.menu_bar.new_character.triggered.connect(self.create_new_character)
         self.menu_bar.language_menu.triggered.connect(self.change_language)
         self.connect_attrs()
-        self.dump_weapons_box_json()
-
-    def dump_weapons_box_json(self):
-        d = {
-            "weapons_box": {
-                "ranged_weapons_box": self.weapons_box.ranged_weapons_box.translate_reference["EN"],
-                "melee_weapons_box": self.weapons_box.melee_weapons_box.translate_reference["EN"]
-            }
-
-        }
-        json.dump(d, Path("test.json").open('w', encoding='utf-8', newline='\n'), indent=4)
-
-
 
 
 def init_gui():
