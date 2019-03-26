@@ -41,8 +41,7 @@ class KnownSpellsBox(ScrollableBox):
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
-        for _ in range(25):
-            self.add_spell()
+        self.add_spell()
 
         self.add_to_layout()
         self.translate("EN")

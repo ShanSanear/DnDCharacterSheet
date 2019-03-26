@@ -60,8 +60,7 @@ class ItemsBox(ScrollableBox):
         self.melee_weapons_weight = 0
         self.ranged_weapons_weight = 0
         self.armor_weight = 0
-        for _ in range(30):
-            self.add_item()
+        self.add_item()
 
     def create_new_item(self):
         new_item = SimpleNamespace()

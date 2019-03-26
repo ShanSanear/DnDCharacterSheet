@@ -61,8 +61,7 @@ class SkillsBox(ScrollableBox):
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
-        for _ in range(25):
-            self.add_skill()
+        self.add_skill()
 
         self.add_to_layout()
         self.translate("EN")
@@ -71,12 +70,8 @@ class SkillsBox(ScrollableBox):
 
     def create_new_skill(self):
         new_skill = SimpleNamespace()
-        skill_idx = len(self.elements_list)
         new_skill.name = create_qline_edit(self.container, min_size=(150, None),
                                            function_on_unfocused=self.sort_elements)
-        new_skill.name.setText(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-            "Praesent sapien urna, egestas eu tempor at, pretium nec orci.")
         new_skill.attr_choice = create_combo_box(parent=self.container,
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
