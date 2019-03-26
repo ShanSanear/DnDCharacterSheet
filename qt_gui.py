@@ -114,6 +114,10 @@ class MyApp(MainWindowUi):
     def change_language(self):
         logging.debug("Changing language")
         language_data = json.load(Path("data/languages.json").open(encoding='utf-8'))
+        # TODO Number of spells translation
+        # TODO Spells per day translation
+        # TODO FULL armors translation
+        # TODO FULL weapons translation
         if self.menu_bar.change_language_en.isChecked():
             set_text_of_children(self, language_data["EN"])
         else:
