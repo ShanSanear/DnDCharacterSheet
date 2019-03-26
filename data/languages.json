@@ -1,5 +1,38 @@
 {
     "EN": {
+        "weapons_box": {
+            "root": {
+                "title": "Weapons"
+            },
+            "ranged_weapons_box": {
+                "name_label": "Name",
+                "attack_bonus_label": "Attack bonus",
+                "damage_roll_label": "Damage roll",
+                "crit_label": "Critical roll / multiplier",
+                "special_label": "Special",
+                "weight_label": "Weight",
+                "size_label": "Size",
+                "type_label": "Type",
+                "root": {
+                    "title": "Currently chosen ranged weapon"
+                },
+                "ammo_label": "Ammo",
+                "range_label": "Range"
+            },
+            "melee_weapons_box": {
+                "name_label": "Name",
+                "attack_bonus_label": "Attack bonus",
+                "damage_roll_label": "Damage roll",
+                "crit_label": "Critical roll / multiplier",
+                "special_label": "Special",
+                "weight_label": "Weight",
+                "size_label": "Size",
+                "type_label": "Type",
+                "root": {
+                    "title": "Currently chosen melee weapon"
+                }
+            }
+        },
         "menu_bar": {
             "file_menu": {
                 "title": "File"
@@ -217,11 +250,6 @@
         "armor_items_box": {
             "root": {
                 "title": "Armor items"
-            }
-        },
-        "weapons_box": {
-            "root": {
-                "title": "Weapons"
             }
         },
         "spells_per_day_box": {
@@ -453,6 +481,34 @@
         "weapons_box": {
             "root": {
                 "title": "Bronie"
+            },
+            "ranged_weapons_box": {
+                "name_label": "Nazwa",
+                "attack_bonus_label": "Bonus do ataku",
+                "damage_roll_label": "Rzut na obrażenia",
+                "crit_label": "Zasięg krytyka / mnożnik",
+                "special_label": "Specjalne",
+                "weight_label": "Waga",
+                "size_label": "Rozmiar",
+                "type_label": "Typ",
+                "root": {
+                    "title": "Aktualnie wybrana broń zasięgowa"
+                },
+                "ammo_label": "Amunicja",
+                "range_label": "Zasięg"
+            },
+            "melee_weapons_box": {
+                "name_label": "Nazwa",
+                "attack_bonus_label": "Bonus do ataku",
+                "damage_roll_label": "Rzut na obrażenia",
+                "crit_label": "Zasięg krytyka / mnożnik",
+                "special_label": "Specjalne",
+                "weight_label": "Waga",
+                "size_label": "Rozmiar",
+                "type_label": "Typ",
+                "root": {
+                    "title": "Aktualnie wybrana broń w zwarciu"
+                }
             }
         },
         "spells_per_day_box": {
