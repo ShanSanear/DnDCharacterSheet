@@ -42,6 +42,7 @@ class MyApp(MainWindowUi):
         # TODO Logic and data for this
         logging.debug("Cleaning character sheet")
 
+
     def save_file(self):
         if not self.character_file:
             self.save_file_as()
@@ -116,10 +117,21 @@ class MyApp(MainWindowUi):
         self.items_box.set_values_from_attributes()
 
 
+class SingleCharApp(MyApp):
+    def __init__(self):
+        super(SingleCharApp, self).__init__()
+        self.menu_bar.open_character.triggered.connect(self.open_file)
+        self.menu_bar.save_character_as.triggered.connect(self.save_file_as)
+        self.menu_bar.save_character.triggered.connect(self.save_file)
+        self.menu_bar.new_character.triggered.connect(self.new_character)
+        self.character_file = ""
+        self.connect_attrs()
+
+
 def init_gui():
     app = QApplication(sys.argv)
     app.setAttribute(Qt.AA_EnableHighDpiScaling)
-    form = MyApp()
+    form = SingleCharApp()
     form.show()
     app.exec_()
 
