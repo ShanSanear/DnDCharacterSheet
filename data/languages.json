@@ -223,6 +223,25 @@
             "root": {
                 "title": "Weapons"
             }
+        },
+        "spells_per_day_box": {
+            "root": {
+                "title": "Spells per day / Spells DC"
+            },
+            "level_label": "Lvl",
+            "per_day_label": "/Day",
+            "extra_spells_label": "Extra",
+            "base_spell_dc_label": "DC",
+            "_num_0": "0",
+            "_num_1": "1",
+            "_num_2": "2",
+            "_num_3": "3",
+            "_num_4": "4",
+            "_num_5": "5",
+            "_num_6": "6",
+            "_num_7": "7",
+            "_num_8": "8",
+            "_num_9": "9"
         }
     },
     "PL": {
@@ -435,6 +454,25 @@
             "root": {
                 "title": "Bronie"
             }
+        },
+        "spells_per_day_box": {
+            "root": {
+                "title": "Czary na dzień / ST czarów"
+            },
+            "level_label": "Poz.",
+            "per_day_label": "/Dzień",
+            "extra_spells_label": "Ekstra",
+            "base_spell_dc_label": "ST",
+            "_num_0": "0",
+            "_num_1": "1",
+            "_num_2": "2",
+            "_num_3": "3",
+            "_num_4": "4",
+            "_num_5": "5",
+            "_num_6": "6",
+            "_num_7": "7",
+            "_num_8": "8",
+            "_num_9": "9"
         }
     }
 }
