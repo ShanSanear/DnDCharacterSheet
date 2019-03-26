@@ -38,8 +38,7 @@ class FeatsBox(ScrollableBox):
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)
 
-        for _ in range(25):
-            self.add_feat()
+        self.add_feat()
         self.translate("EN")
 
     def translate(self, language):

@@ -11,7 +11,7 @@ def config_logger(logging_level):
 
 def main():
     config_logger(logging.DEBUG)
-
+    # qt_gui.init_multi_gui()
     qt_gui.init_gui()
 
 
