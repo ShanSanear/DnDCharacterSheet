@@ -1,0 +1,228 @@
+{
+    "EN": {
+        "menu_bar": {
+            "file_menu": {
+                "title": "File"
+            },
+            "about_menu": {
+                "title": "About"
+            },
+            "language_menu": {
+                "title": "Language"
+            },
+            "new_character": "New character...",
+            "open_character": "Open",
+            "save_character": "Save",
+            "save_character_as": "Save as...",
+            "change_language_en": "English",
+            "change_language_pl": "polski",
+            "exit": "Exit"
+        },
+        "basic_info_box": {
+            "class_label": "Class",
+            "faith_label": "Faith",
+            "race_label": "Race",
+            "alignement_label": "Alignement",
+            "player_name_label": "Player",
+            "name_label": "Name",
+            "height_label": "Height",
+            "weight_label": "Weight",
+            "experience_label": "Experience",
+            "eyes_label": "Eyes",
+            "hair_label": "Hair",
+            "size_label": "Size",
+            "age_label": "Age",
+            "gender_label": "Gender",
+            "level_label": "Level",
+            "experience_divide_label": "/"
+        },
+        "skills_box": {
+            "root": {
+                "title": "Skills"
+            },
+            "cross_class_label": "CC",
+            "rank_label": "Rank",
+            "attr_mod_label": "Mod",
+            "misc_label": "Misc",
+            "skill_name_label": "Skill name",
+            "attr_choice_label": "Attr",
+            "total_label": "Total",
+            "used_skill_points_label": "Used skill points:"
+        },
+        "attributes_box": {
+            "root": {
+                "title": "Attributes"
+            },
+            "head": {
+                "label": "Attr",
+                "val": "Val",
+                "mod": "Mod",
+                "temp_val": "T. Val",
+                "temp_mod": "T. Mod"
+            },
+            "str": {
+                "label": "STR"
+            },
+            "dex": {
+                "label": "DEX"
+            },
+            "con": {
+                "label": "CON"
+            },
+            "int": {
+                "label": "INT"
+            },
+            "wis": {
+                "label": "WIS"
+            },
+            "cha": {
+                "label": "CHA"
+            }
+        },
+        "weapons_statistics_box": {
+            "root": {
+                "title": "Current weapon statistics"
+            },
+            "attack_bonus_label": "Att. bonus",
+            "damage_label": "Dmg",
+            "range_label": "Range",
+            "melee_range": "1 m",
+            "crit_label": "Crit",
+            "melee_label": "Melee",
+            "ranged_label": "Ranged",
+            "weapon_name_label": "Weapon name"
+        },
+        "combat_box": {
+            "root": {
+                "title": "Combat"
+            },
+            "total_label": "Total",
+            "base_label": "Base",
+            "attr_mod_label": "Attr mod",
+            "size_label": "Size",
+            "misc_label": "Misc",
+            "melee_label": "Melee",
+            "ranged_label": "Ranged",
+            "initiative_total": "10",
+            "initiative_misc_bonus": "10",
+            "initiative_dex_bonus": "10",
+            "initiative_misc_bonus_label": "Misc",
+            "initiative_dex_bonus_label": "Dex",
+            "initiative_label": "Initiative",
+            "speed_label": "Speed",
+            "speed_total": "10",
+            "total_label_init": "Total",
+            "attacks_type_label": "Type"
+        },
+        "saving_throws_box": {
+            "root": {
+                "title": "Saving throws"
+            },
+            "total_label": "Total",
+            "class_base_label": "Base",
+            "attr_bonus_label": "Attr",
+            "size_bonus_label": "Size",
+            "misc_bonus_label": "Misc",
+            "fortitude_label": "Fortitude",
+            "reflex_label": "Reflex",
+            "will_label": "Will"
+        },
+        "hp_ac_box": {
+            "root": {
+                "title": "HP / AC"
+            },
+            "hp_total_label": "Total",
+            "hp_hp_wounds_current_hp_label": "Wounds",
+            "hp_label": "HP",
+            "hp_total": "10",
+            "ac_label": "AC",
+            "ac_total": "10",
+            "ac_base": "10",
+            "ac_armor_bonus": "10",
+            "ac_dex_bonus": "10",
+            "ac_size_bonus": "10",
+            "ac_misc_bonus": "10",
+            "ac_total_label": "Total",
+            "ac_base_bonus_label": "Base",
+            "ac_armor_bonus_label": "Armor",
+            "ac_dex_bonus_label": "Dex",
+            "ac_size_bonus_label": "Size",
+            "ac_misc_bonus_label": "Misc",
+            "hp_hp_wounds_current_hp": "10/10",
+            "hp_dice_label": "Dice",
+            "hp_dice": "d10",
+            "hp_contusion": "10",
+            "contusion_label": "Contusion"
+        },
+        "feats_box": {
+            "root": {
+                "title": "Feats / Special abilities"
+            },
+            "description_label": "Desc",
+            "name_label": "Feat name"
+        },
+        "items_box": {
+            "root": {
+                "title": "Items"
+            },
+            "items_weight_label": "Weight",
+            "items_name_label": "Item name",
+            "items_count_label": "Count",
+            "items_description_label": "Description",
+            "total_encumbrance_label": "Total encumbrance:",
+            "weight_separator_label": "/"
+        },
+        "number_of_spells_box": {
+            "root": {
+                "title": "Number of spells"
+            },
+            "number_of_spells_0th_label": "0th lvl",
+            "number_of_spells_4th_label": "4th lvl",
+            "number_of_spells_2nd_label": "2nd lvl",
+            "number_of_spells_3rd_label": "3rd lvl",
+            "number_of_spells_1st_label": "1st lvl",
+            "number_of_spells_5th_label": "5th lvl",
+            "number_of_spells_6th_label": "6th lvl",
+            "number_of_spells_7th_label": "7th lvl",
+            "number_of_spells_8th_label": "8th lvl",
+            "number_of_spells_9th_label": "9th lvl",
+            "known_spells_title": "Known number of spells (Warlock / Bard)"
+        },
+        "languages_box": {
+            "root": {
+                "title": "Languages"
+            },
+            "known_languages_label": "Known Languages"
+        },
+        "known_spells_box": {
+            "root": {
+                "title": "Known spells"
+            },
+            "lvl_label": "LVL",
+            "name_label": "Spell name",
+            "description_button_label": "Desc",
+            "short_description_label": "DESC"
+        },
+        "notes_box": {
+            "root": {
+                "title": "Notes"
+            },
+            "notes_label": "Notes"
+        },
+        "cheathseet_box": {
+            "root": {
+                "title": "Experience"
+            }
+        },
+        "armor_items_box": {
+            "root": {
+                "title": "Armor items"
+            }
+        },
+        "weapons_box": {
+            "root": {
+                "title": "Weapons"
+            }
+        }
+    }
+}
