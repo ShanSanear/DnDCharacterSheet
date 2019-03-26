@@ -224,5 +224,217 @@
                 "title": "Weapons"
             }
         }
+    },
+    "PL": {
+        "menu_bar": {
+            "file_menu": {
+                "title": "Plik"
+            },
+            "about_menu": {
+                "title": "O programie"
+            },
+            "language_menu": {
+                "title": "Język"
+            },
+            "new_character": "Nowa postać...",
+            "open_character": "Otwórz",
+            "save_character": "Zapisz",
+            "save_character_as": "Zapisz jako...",
+            "change_language_en": "English",
+            "change_language_pl": "polski",
+            "exit": "Wyjście"
+        },
+        "basic_info_box": {
+            "class_label": "Klasa",
+            "faith_label": "Wiara",
+            "race_label": "Rasa",
+            "alignement_label": "Charakter",
+            "player_name_label": "Gracz",
+            "name_label": "Imię",
+            "height_label": "Wzrost",
+            "weight_label": "Waga",
+            "experience_label": "Doświadczenie",
+            "eyes_label": "Oczy",
+            "hair_label": "Włosy",
+            "size_label": "Rozm.",
+            "age_label": "Wiek",
+            "gender_label": "Płeć",
+            "level_label": "Poziom",
+            "experience_divide_label": "/"
+        },
+        "skills_box": {
+            "root": {
+                "title": "Umiejętności"
+            },
+            "cross_class_label": "MK",
+            "rank_label": "Ranga",
+            "attr_mod_label": "Mod",
+            "misc_label": "Różne",
+            "skill_name_label": "Nazwa umj.",
+            "attr_choice_label": "Atrybut",
+            "total_label": "Całość",
+            "used_skill_points_label": "Użyte punkty umiejętności:"
+        },
+        "attributes_box": {
+            "root": {
+                "title": "Atrybuty"
+            },
+            "head": {
+                "label": "Atr.",
+                "val": "Wart.",
+                "mod": "Mod.",
+                "temp_val": "T. Wart.",
+                "temp_mod": "T. Mod."
+            },
+            "str": {
+                "label": "SIŁ"
+            },
+            "dex": {
+                "label": "ZRC"
+            },
+            "con": {
+                "label": "KON"
+            },
+            "int": {
+                "label": "INT"
+            },
+            "wis": {
+                "label": "RZT"
+            },
+            "cha": {
+                "label": "CHA"
+            }
+        },
+        "weapons_statistics_box": {
+            "root": {
+                "title": "Statystyki wybranych broni"
+            },
+            "attack_bonus_label": "Bonus at.",
+            "damage_label": "Obr.",
+            "range_label": "Zasięg",
+            "melee_range": "1 m",
+            "crit_label": "Kryt",
+            "melee_label": "Wręcz",
+            "ranged_label": "Zasięgowa",
+            "weapon_name_label": "Nazwa broni"
+        },
+        "combat_box": {
+            "root": {
+                "title": "Walka"
+            },
+            "total_label": "Całość",
+            "base_label": "Baz.",
+            "attr_mod_label": "Atrybut",
+            "size_label": "Rozm.",
+            "misc_label": "Różne",
+            "melee_label": "Wręcz",
+            "ranged_label": "Zasięg",
+            "initiative_misc_bonus_label": "Różne",
+            "initiative_dex_bonus_label": "Zrc",
+            "initiative_label": "Inic.",
+            "speed_label": "Pręd.",
+            "total_label_init": "Całość",
+            "attacks_type_label": "Typ"
+        },
+        "saving_throws_box": {
+            "root": {
+                "title": "Rzuty obronne"
+            },
+            "total_label": "Suma",
+            "class_base_label": "Baza",
+            "attr_bonus_label": "Attr.",
+            "size_bonus_label": "Rozm.",
+            "misc_bonus_label": "Róż.",
+            "fortitude_label": "Wytrw.",
+            "reflex_label": "Refl.",
+            "will_label": "Wola"
+        },
+        "hp_ac_box": {
+            "root": {
+                "title": "PW / KP"
+            },
+            "hp_total_label": "Suma",
+            "hp_hp_wounds_current_hp_label": "Rany",
+            "hp_label": "PW",
+            "ac_label": "AC",
+            "ac_total_label": "Suma",
+            "ac_base_bonus_label": "Baz.",
+            "ac_armor_bonus_label": "Pancerz",
+            "ac_dex_bonus_label": "Zrc",
+            "ac_size_bonus_label": "Rozm.",
+            "ac_misc_bonus_label": "Różne",
+            "hp_dice_label": "KW",
+            "contusion_label": "Stłuczenia"
+        },
+        "feats_box": {
+            "root": {
+                "title": "Atuty / Umiejętności specjalne"
+            },
+            "description_label": "Opis",
+            "name_label": "Nazwa atutu"
+        },
+        "items_box": {
+            "root": {
+                "title": "Przedmioty"
+            },
+            "items_weight_label": "Waga",
+            "items_name_label": "Nazwa przedmiotu",
+            "items_count_label": "Ilość",
+            "items_description_label": "Opis",
+            "total_encumbrance_label": "Całkowite obciążenie",
+            "weight_separator_label": "/"
+        },
+        "number_of_spells_box": {
+            "root": {
+                "title": "Number of spells"
+            },
+            "number_of_spells_0th_label": "0wy poz.",
+            "number_of_spells_4th_label": "4ty poz.",
+            "number_of_spells_2nd_label": "2gi poz.",
+            "number_of_spells_3rd_label": "3ci poz.",
+            "number_of_spells_1st_label": "1wszy poz.",
+            "number_of_spells_5th_label": "5ty poz.",
+            "number_of_spells_6th_label": "6ty poz.",
+            "number_of_spells_7th_label": "7my poz.",
+            "number_of_spells_8th_label": "8my poz.",
+            "number_of_spells_9th_label": "9ty poz.",
+            "known_spells_title": "Ilośc znanych zaklęć (Czarnoksiężnik, Bard)"
+        },
+        "languages_box": {
+            "root": {
+                "title": "Języki"
+            },
+            "known_languages_label": "Znane Języki"
+        },
+        "known_spells_box": {
+            "root": {
+                "title": "Znane zaklęcia"
+            },
+            "lvl_label": "Poz.",
+            "name_label": "Nazwa zaklęcia",
+            "description_button_label": "Opis",
+            "short_description_label": "Opis"
+        },
+        "notes_box": {
+            "root": {
+                "title": "Notatki"
+            },
+            "notes_label": "Notatki"
+        },
+        "cheathseet_box": {
+            "root": {
+                "title": "Doświadczenie"
+            }
+        },
+        "armor_items_box": {
+            "root": {
+                "title": "Przedmioty pancerza"
+            }
+        },
+        "weapons_box": {
+            "root": {
+                "title": "Bronie"
+            }
+        }
     }
 }
