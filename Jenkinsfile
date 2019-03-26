@@ -54,7 +54,7 @@ pipeline {
                         radon raw --json . > raw_report.json
                         radon cc --json . > cc_report.json
                         radon mi --json . > mi_report.json
-                        pygount --format=cloc-xml --suffix=py --verbose --out cloc.xml
+                        pygount --format=cloc-xml --suffix=py,json --verbose --out cloc.xml
                     '''
                 echo "PEP8 style check"
                 sh  ''' source activate ${BUILD_TAG}
