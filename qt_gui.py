@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QApplication, QFileDialog
 
 from gui.frames.qt_generic_functions import set_text_of_children
 from gui.main_window import MainWindowUi
+from gui.popups.qt_about_popup import AboutDialog
 
 
 class MyApp(MainWindowUi):
@@ -124,11 +125,13 @@ class MyApp(MainWindowUi):
 class SingleCharApp(MyApp):
     def __init__(self):
         super(SingleCharApp, self).__init__()
+        self.about_popup = AboutDialog("About", self)
         self.menu_bar.open_character.triggered.connect(self.open_file)
         self.menu_bar.save_character_as.triggered.connect(self.save_file_as)
         self.menu_bar.save_character.triggered.connect(self.save_file)
         self.menu_bar.new_character.triggered.connect(self.create_new_character)
         self.menu_bar.language_menu.triggered.connect(self.change_language)
+        self.menu_bar.about.triggered.connect(self.about_popup.show)
         self.connect_attrs()
 
 
