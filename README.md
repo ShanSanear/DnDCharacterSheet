@@ -5,6 +5,6 @@ It's based on PCProfiler which can be found here - http://tuskmountain.wikidot.c
 
 ## License
 
-This project is licensed under the GIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the GNU Public License - see the [LICENSE.md](LICENSE.md) file for details.
 
 The SRD content is licensed under Open Game License - see the [OPEN-GAME-LICENSE.md](OPEN-GAME-LICENSE.md) file for details.
