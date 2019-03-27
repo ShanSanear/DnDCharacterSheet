@@ -8,7 +8,7 @@ class MenuBar:
     def __init__(self, main_window):
         self.root = QtWidgets.QMenuBar(main_window)
         self.file_menu = QtWidgets.QMenu(self.root)
-        self.about_menu = QtWidgets.QMenu(self.root)
+        self.help_menu = QtWidgets.QMenu(self.root)
         self.language_menu = QtWidgets.QMenu(self.root)
         main_window.setMenuBar(self.root)
         # TODO NEW CHARACTER - 10S ATTRIBUTES
@@ -37,11 +37,11 @@ class MenuBar:
         self.language_menu.addAction(self.change_language_pl)
         self.root.addAction(self.file_menu.menuAction())
         self.root.addAction(self.language_menu.menuAction())
-        self.root.addAction(self.about_menu.menuAction())
+        self.root.addAction(self.help_menu.menuAction())
         self.translate_reference = {
             "EN": {
                 "file_menu": {"title": "File"},
-                "about_menu": {"title": "About"},
+                "help_menu": {"title": "About"},
                 "language_menu": {"title": "Language"},
                 "new_character": "New character...",
                 "open_character": "Open",

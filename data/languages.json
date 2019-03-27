@@ -37,8 +37,8 @@
             "file_menu": {
                 "title": "File"
             },
-            "about_menu": {
-                "title": "About"
+            "help_menu": {
+                "title": "Help"
             },
             "language_menu": {
                 "title": "Language"
@@ -327,8 +327,8 @@
             "file_menu": {
                 "title": "Plik"
             },
-            "about_menu": {
-                "title": "O programie"
+            "help_menu": {
+                "title": "Pomoc"
             },
             "language_menu": {
                 "title": "Język"
