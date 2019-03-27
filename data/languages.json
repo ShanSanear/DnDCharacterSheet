@@ -49,6 +49,7 @@
             "save_character_as": "Save as...",
             "change_language_en": "English",
             "change_language_pl": "polski",
+            "about": "About",
             "exit": "Exit"
         },
         "basic_info_box": {
@@ -339,7 +340,8 @@
             "save_character_as": "Zapisz jako...",
             "change_language_en": "English",
             "change_language_pl": "polski",
-            "exit": "Wyjście"
+            "exit": "Wyjście",
+            "about": "O programie"
         },
         "basic_info_box": {
             "class_label": "Klasa",

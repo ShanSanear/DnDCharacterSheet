@@ -24,6 +24,8 @@ class MenuBar:
         self.language_action_group = QActionGroup(main_window, exclusive=True)
         self.change_language_en = QtWidgets.QAction(main_window, checkable=True)
         self.change_language_pl = QtWidgets.QAction(main_window, checkable=True)
+        self.about = QtWidgets.QAction(main_window)
+        self.help_menu.addAction(self.about)
         self.language_action_group.addAction(self.change_language_en)
         self.language_action_group.addAction(self.change_language_pl)
         self.change_language_en.setChecked(True)
@@ -41,7 +43,7 @@ class MenuBar:
         self.translate_reference = {
             "EN": {
                 "file_menu": {"title": "File"},
-                "help_menu": {"title": "About"},
+                "help_menu": {"title": "Help"},
                 "language_menu": {"title": "Language"},
                 "new_character": "New character...",
                 "open_character": "Open",
@@ -49,6 +51,7 @@ class MenuBar:
                 "save_character_as": "Save as...",
                 "change_language_en": "English",
                 "change_language_pl": "polski",
+                "about": "About",
                 "exit": "Exit",
             }
         }
