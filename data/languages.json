@@ -33,25 +33,6 @@
                 }
             }
         },
-        "menu_bar": {
-            "file_menu": {
-                "title": "File"
-            },
-            "help_menu": {
-                "title": "Help"
-            },
-            "language_menu": {
-                "title": "Language"
-            },
-            "new_character": "New character...",
-            "open_character": "Open",
-            "save_character": "Save",
-            "save_character_as": "Save as...",
-            "change_language_en": "English",
-            "change_language_pl": "polski",
-            "about": "About",
-            "exit": "Exit"
-        },
         "basic_info_box": {
             "class_label": "Class",
             "faith_label": "Faith",
@@ -324,25 +305,6 @@
         }
     },
     "PL": {
-        "menu_bar": {
-            "file_menu": {
-                "title": "Plik"
-            },
-            "help_menu": {
-                "title": "Pomoc"
-            },
-            "language_menu": {
-                "title": "Język"
-            },
-            "new_character": "Nowa postać...",
-            "open_character": "Otwórz",
-            "save_character": "Zapisz",
-            "save_character_as": "Zapisz jako...",
-            "change_language_en": "English",
-            "change_language_pl": "polski",
-            "exit": "Wyjście",
-            "about": "O programie"
-        },
         "basic_info_box": {
             "class_label": "Klasa",
             "faith_label": "Wiara",
@@ -631,6 +593,50 @@
             "_num_7": "7",
             "_num_8": "8",
             "_num_9": "9"
+        }
+    },
+    "menu_bar": {
+        "PL": {
+            "menu_bar": {
+                "file_menu": {
+                    "title": "Plik"
+                },
+                "help_menu": {
+                    "title": "Pomoc"
+                },
+                "language_menu": {
+                    "title": "Język"
+                },
+                "new_character": "Nowa postać...",
+                "open_character": "Otwórz",
+                "save_character": "Zapisz",
+                "save_character_as": "Zapisz jako...",
+                "change_language_en": "English",
+                "change_language_pl": "polski",
+                "exit": "Wyjście",
+                "about": "O programie"
+            }
+        },
+        "EN": {
+            "menu_bar": {
+                "file_menu": {
+                    "title": "File"
+                },
+                "help_menu": {
+                    "title": "Help"
+                },
+                "language_menu": {
+                    "title": "Language"
+                },
+                "new_character": "New character...",
+                "open_character": "Open",
+                "save_character": "Save",
+                "save_character_as": "Save as...",
+                "change_language_en": "English",
+                "change_language_pl": "polski",
+                "about": "About",
+                "exit": "Exit"
+            }
         }
     }
 }

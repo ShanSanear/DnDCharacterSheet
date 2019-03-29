@@ -1,16 +1,12 @@
 import json
 import logging
-import sys
 from functools import partial
 from pathlib import Path
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QFileDialog
+from PyQt5.QtWidgets import QFileDialog
 
 from gui.frames.qt_generic_functions import set_text_of_children
-from gui.frames.qt_menu_bar import MenuBar
 from gui.main_window import MainWindowUi
-from gui.popups.qt_about_popup import AboutDialog
 
 
 class MyApp(MainWindowUi):
@@ -19,6 +15,7 @@ class MyApp(MainWindowUi):
         MainWindowUi.__init__(self)
         self.character_file = ""
         self.tab_name = "New char"
+        self.connect_attrs()
 
     def open_file(self):
         logging.info("Opening file")
@@ -119,38 +116,8 @@ class MyApp(MainWindowUi):
         self.skills_box.set_values_from_attributes()
         self.items_box.set_values_from_attributes()
 
-    def change_language(self):
-        logging.debug("Changing language")
-        language_data = json.load(Path("data/languages.json").open(encoding='utf-8'))
-        if self.menu_bar.change_language_en.isChecked():
-            set_text_of_children(self, language_data["EN"])
-        else:
-            set_text_of_children(self, language_data["PL"])
 
-
-
-class SingleCharApp(MyApp):
-    def __init__(self):
-        super(SingleCharApp, self).__init__()
-        self.about_popup = AboutDialog("About", self)
-        self.menu_bar = MenuBar(self)
-        self.menu_bar.open_character.triggered.connect(self.open_file)
-        self.menu_bar.save_character_as.triggered.connect(self.save_file_as)
-        self.menu_bar.save_character.triggered.connect(self.save_file)
-        self.menu_bar.new_character.triggered.connect(self.create_new_character)
-        self.menu_bar.language_menu.triggered.connect(self.change_language)
-        self.menu_bar.about.triggered.connect(self.about_popup.show)
-        self.connect_attrs()
-
-
-def init_gui():
-    app = QApplication(sys.argv)
-    app.setAttribute(Qt.AA_EnableHighDpiScaling)
-    form = SingleCharApp()
-    form.show()
-    app.exec_()
-
-
-if __name__ == '__main__':
-    init_gui()
-    # main1()
+def config_logger(logging_level):
+    logging.basicConfig(level=logging_level, style="%",
+                        format="%(asctime)s %(levelname)s %(module)s %(funcName)s: %(lineno)d %(message)s",
+                        datefmt="%H:%M:%S")
