@@ -14,9 +14,11 @@ from gui.popups.qt_about_popup import AboutDialog
 
 
 class MyApp(MainWindowUi):
+
     def __init__(self):
         MainWindowUi.__init__(self)
         self.character_file = ""
+        self.tab_name = "New char"
 
     def open_file(self):
         logging.info("Opening file")
@@ -29,7 +31,11 @@ class MyApp(MainWindowUi):
         self.character_file = fname
 
         data_to_read = json.load(Path(fname).open())
-        set_text_of_children(self, data_to_read)
+        try:
+            set_text_of_children(self, data_to_read)
+        except (AttributeError, TypeError, IndexError) as e:
+            logging.error("Couldnt load file: %s. Error: %s", self.character_file, e)
+            return
         logging.info("File opened: %s", fname)
         self.weapons_box.melee_weapons_box.update_choice_text()
         self.weapons_box.ranged_weapons_box.update_choice_text()
