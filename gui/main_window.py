@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QTabWidget, QMainWindow, QScrollArea, QWidget, QSizePolicy
 
 import core
-from gui.frames.qt_menu_bar import MenuBar
 from gui.frames.tab_1.qt_attributes import AttributesBox
 from gui.frames.tab_1.qt_basic_info import BasicInfoBox
 from gui.frames.tab_1.qt_combat import CombatBox
@@ -40,7 +39,6 @@ class CoreWindow(QMainWindow):
         scroll.setWidgetResizable(True)
         self.setCentralWidget(scroll)
 
-        self.menu_bar = MenuBar(self)
 
 
 class Tab1(CoreWindow):
