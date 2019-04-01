@@ -29,11 +29,10 @@ class BasicInfoBox(BoxType, DefaultBox):
                     "experience_divide_label": "/",
                 }
         }
-        qlabel_dict_1 = dict(parent=self.container,
-                             )
-        qlabel_dict_2 = dict(parent=self.container,
-                             )
-        qline_dict_1 = dict(parent=self.container, )  # min_size=(100, 23))
+        self.root.setTitle("Basic info")
+        qlabel_dict_1 = dict(parent=self.container)
+        qlabel_dict_2 = dict(parent=self.container)
+        qline_dict_1 = dict(parent=self.container)  # min_size=(100, 23))
         qline_dict_2 = dict(parent=self.container, max_size=(40, None))  # min_size=(50, 23))
 
         self.class_label = create_qlabel(**qlabel_dict_1)
@@ -74,7 +73,6 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.translate("EN")
         self.set_default()
 
-
     def add_to_layout(self):
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
         second_row_input = [self.char_class, self.race, self.alignement, self.faith]
@@ -109,25 +107,7 @@ class BasicInfoBox(BoxType, DefaultBox):
         set_text_of_children(self, self.translate_reference[language])
 
     def set_default(self):
-        default_values = {
-            "root": {
-                "title": "Basic Info"
-            },
-            "race": "Lorem ipsum",
-            "alignement": "Lorem ipsum",
-            "char_class": "Lorem ipsum",
-            "faith": "Lorem ipsum",
-            "name": "Lorem ipsum",
-            "height": "10",
-            "weight": "10",
-            "hair": "Lorem ipsum",
-            "player_name": "Lorem ipsum",
-            "eyes": "Lorem ipsum",
-            "gender": "Lorem ipsum",
-            "age": "10",
-            "size": "Lorem ipsum",
-            "level": "10",
-            "current_experience": "0",
-            "next_experience": "1000",
-        }
+        default_values = {"race": "", "alignement": "", "char_class": "", "faith": "", "name": "", "height": "",
+                          "weight": "", "hair": "", "player_name": "", "eyes": "", "gender": "", "age": "", "size": "",
+                          "level": "", "current_experience": "", "next_experience": ""}
         set_text_of_children(self, default_values)
