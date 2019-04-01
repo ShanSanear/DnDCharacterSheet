@@ -1,6 +1,5 @@
-This template is used **ONLY** for reporting bugs. 
-
-Check [contributing](CONTRIBUTING.md) if you want to request enhancement or have a question.
+<!--- This template is used **ONLY** for reporting bugs. -->
+<!--- Check [contributing](CONTRIBUTING.md) if you want to request enhancement or have a question. -->
 
 <!--- Provide a general summary of the issue in the Title above -->
 <!--- In case you don't know possible solution or implementation - just delete those headers -->
