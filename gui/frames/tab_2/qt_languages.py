@@ -28,6 +28,3 @@ class LanguagesBox(BoxType, DefaultBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
-    def set_default_state(self):
-        self.known_languages.setPlainText("")

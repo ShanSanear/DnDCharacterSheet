@@ -78,7 +78,6 @@ class CombatBox(BoxType, DefaultBox):
 
         self.add_to_layout()
         self.translate("EN")
-        self.set_default_values()
         self.set_values_from_attributes()
 
     def add_to_layout(self):
@@ -104,12 +103,6 @@ class CombatBox(BoxType, DefaultBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
-    def set_default_values(self):
-        defaults = {"melee_total": "", "melee_base": "", "melee_attr_mod": "", "melee_size": "", "melee_misc": "",
-                    "ranged_total": "", "ranged_base": "", "ranged_attr_mod": "", "ranged_size": "", "ranged_misc": "",
-                    "speed_total": "", "initiative_misc_bonus": ""}
-        set_text_of_children(self, defaults)
 
     def set_values_from_attributes(self):
         self.melee_attr_mod.setText(str(self.char_core.attributes.str['mod']))

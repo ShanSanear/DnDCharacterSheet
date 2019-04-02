@@ -104,9 +104,3 @@ class BasicInfoBox(BoxType, DefaultBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
-    def set_default_state(self):
-        default_values = {"race": "", "alignement": "", "char_class": "", "faith": "", "name": "", "height": "",
-                          "weight": "", "hair": "", "player_name": "", "eyes": "", "gender": "", "age": "", "size": "",
-                          "level": "", "current_experience": "", "next_experience": ""}
-        set_text_of_children(self, default_values)

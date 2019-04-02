@@ -90,18 +90,3 @@ class HpAcBox(BoxType, DefaultBox):
     def _update_ac(self):
         update_texts(self, "ac_total",
                      ["ac_base", "ac_armor_bonus", "ac_size_bonus", "ac_misc_bonus", "ac_dex_bonus"])
-
-    def set_default_state(self):
-        default = {
-            "hp_total": "",
-            "ac_total": "",
-            "ac_base": "",
-            "ac_armor_bonus": "",
-            "ac_dex_bonus": "",
-            "ac_size_bonus": "",
-            "ac_misc_bonus": "",
-            "hp_hp_wounds_current_hp": "",
-            "hp_dice": "",
-            "hp_contusion": "",
-        }
-        set_text_of_children(self, default)

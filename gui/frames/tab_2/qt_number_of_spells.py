@@ -66,18 +66,3 @@ class NumberOfSpellsBox(BoxType, DefaultBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
-    def set_default_state(self):
-        defaults = {
-            "number_of_spells_1": "",
-            "number_of_spells_2": "",
-            "number_of_spells_3": "",
-            "number_of_spells_4": "",
-            "number_of_spells_5": "",
-            "number_of_spells_6": "",
-            "number_of_spells_7": "",
-            "number_of_spells_8": "",
-            "number_of_spells_9": "",
-            "number_of_spells_0": "",
-        }
-        set_text_of_children(self, defaults)
