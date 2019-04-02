@@ -26,12 +26,12 @@ class FeatsBox(ScrollableBox):
             "EN":
                 {
                     "root":
-                {
-                    "title": "Feats / Special abilities"
-                },
-                "description_label": "Desc",
-                "name_label": "Feat name",
-            }
+                        {
+                            "title": "Feats / Special abilities"
+                        },
+                    "description_label": "Desc",
+                    "name_label": "Feat name",
+                }
         }
 
         self.add_to_layout()
