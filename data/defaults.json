@@ -138,5 +138,57 @@
     },
     "notes_box": {
         "notes": ""
+    },
+    "armor_items_box": {
+        "armors": [
+            {
+                "test_penalty": "",
+                "type": "",
+                "max_dex_bonus": "",
+                "name": "",
+                "ac_bonus": "",
+                "weight": "",
+                "spell_fail": "",
+                "speed": "",
+                "equipped": false,
+                "special": ""
+            },
+            {
+                "test_penalty": "",
+                "type": "",
+                "max_dex_bonus": "",
+                "name": "",
+                "ac_bonus": "",
+                "weight": "",
+                "spell_fail": "",
+                "speed": "",
+                "equipped": false,
+                "special": ""
+            },
+            {
+                "test_penalty": "",
+                "type": "",
+                "max_dex_bonus": "",
+                "name": "",
+                "ac_bonus": "",
+                "weight": "",
+                "spell_fail": "",
+                "speed": "",
+                "equipped": false,
+                "special": ""
+            },
+            {
+                "test_penalty": "",
+                "type": "",
+                "max_dex_bonus": "",
+                "name": "",
+                "ac_bonus": "",
+                "weight": "",
+                "spell_fail": "",
+                "speed": "",
+                "equipped": false,
+                "special": ""
+            }
+        ]
     }
 }
