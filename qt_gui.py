@@ -3,7 +3,7 @@ import logging
 from functools import partial
 from pathlib import Path
 
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 from gui.frames.qt_generic_functions import set_text_of_children
 from gui.main_window import MainWindowUi
@@ -18,6 +18,13 @@ class MyApp(MainWindowUi):
         self.connect_attrs()
 
     def open_file(self):
+        if self.character_file:
+            proceed = QMessageBox.question(self,
+                                           "Overwriting old data",
+                                           "Opening new character file will overwrite all data in sheet. Continue?",
+                                           QMessageBox.Yes, QMessageBox.No)
+            if proceed == QMessageBox.No:
+                return
         logging.info("Opening file")
         fname = QFileDialog.getOpenFileName(self.tabs, 'Open file', Path().cwd().as_posix(),
                                             "Character file (*.json)")[0]
@@ -28,6 +35,7 @@ class MyApp(MainWindowUi):
         self.character_file = fname
 
         data_to_read = json.load(Path(fname).open())
+        self._clean_character_sheet()
         try:
             set_text_of_children(self, data_to_read)
         except (AttributeError, TypeError, IndexError) as e:
@@ -38,8 +46,14 @@ class MyApp(MainWindowUi):
         self.weapons_box.ranged_weapons_box.update_choice_text()
 
     def create_new_character(self):
-        # TODO Logic and data for this
+        proceed = QMessageBox.question(self, "Continue?",
+                                       "This will clear character sheet. Continue?", QMessageBox.Yes, QMessageBox.No)
+        if proceed == QMessageBox.Yes:
+            self._clean_character_sheet()
+
+    def _clean_character_sheet(self):
         logging.debug("Cleaning character sheet")
+        self.character_file = ""
         self.feats_box.set_default_state()
         self.known_spells_box.set_default_state()
         self.items_box.set_default_state()
