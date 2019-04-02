@@ -108,3 +108,14 @@ class SavingThrowsBox(BoxType, DefaultBox):
     def _update_will_text(self):
         update_texts(self, to_set="will_total", to_get_from=["will_class_bonus", "will_attr_bonus",
                                                              "will_size_bonus", "will_misc_bonus"])
+
+    def set_default_state(self):
+        defaults = {
+            "fortitude_total": "",
+            "will_total": "",
+            "reflex_total": "",
+            "fortitude_class_bonus": "",
+            "will_class_bonus": "",
+            "reflex_class_bonus": ""
+        }
+        set_text_of_children(self, defaults)

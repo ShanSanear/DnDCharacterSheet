@@ -123,6 +123,7 @@ class ResizeableBox(DefaultBox, ResizeType):
             for widget in subwidgets:
                 self.layout.removeWidget(widget)
 
+
     def update_layout(self):
         self.remove_widgets_from_layout()
         self.add_widgets_again()
@@ -233,3 +234,16 @@ class ScrollableBox(ResizeableBox):
     def _remove_element(self, element):
         super(ScrollableBox, self)._remove_element(element)
         self.decrease_height()
+
+    def delete_dynamic_widgets(self):
+        for idx, item in reversed(list(enumerate(self.elements_list))):
+            subwidgets = self.elements_for_layout(item)
+            for widget in subwidgets:
+                self.layout.removeWidget(widget)
+                widget.deleteLater()
+
+    def set_default_state(self):
+        self.delete_dynamic_widgets()
+        self.elements_list = []
+        self.height_increments = 0
+        self.add_new_element()

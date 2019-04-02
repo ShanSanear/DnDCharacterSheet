@@ -91,3 +91,36 @@ class SpellsPerDayBox(BoxType, DefaultBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translation_reference[language])
+
+    def set_default_state(self):
+        defaults = {"extra_spells_lvl_0": "",
+                    "extra_spells_lvl_1": "",
+                    "extra_spells_lvl_2": "",
+                    "extra_spells_lvl_3": "",
+                    "extra_spells_lvl_4": "",
+                    "extra_spells_lvl_5": "",
+                    "extra_spells_lvl_6": "",
+                    "extra_spells_lvl_7": "",
+                    "extra_spells_lvl_8": "",
+                    "extra_spells_lvl_9": "",
+                    "spells_per_day_lvl_0": "",
+                    "spells_per_day_lvl_1": "",
+                    "spells_per_day_lvl_2": "",
+                    "spells_per_day_lvl_3": "",
+                    "spells_per_day_lvl_4": "",
+                    "spells_per_day_lvl_5": "",
+                    "spells_per_day_lvl_6": "",
+                    "spells_per_day_lvl_7": "",
+                    "spells_per_day_lvl_8": "",
+                    "spells_per_day_lvl_9": "",
+                    "dc_lvl_0": "",
+                    "dc_lvl_1": "",
+                    "dc_lvl_2": "",
+                    "dc_lvl_3": "",
+                    "dc_lvl_4": "",
+                    "dc_lvl_5": "",
+                    "dc_lvl_6": "",
+                    "dc_lvl_7": "",
+                    "dc_lvl_8": "",
+                    "dc_lvl_9": ""}
+        set_text_of_children(self, defaults)

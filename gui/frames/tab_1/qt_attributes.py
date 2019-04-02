@@ -104,3 +104,10 @@ class AttributesBox(BoxType, DefaultBox):
             attr_gui = getattr(self, attr)
             attr_gui.val.setText(str(attr_core['value']))
             attr_gui.mod.setText(str(attr_core['mod']))
+
+    def set_default_state(self):
+        attr_default = {"val": "10", "mod": "0", "temp_val": "", "temp_mod": ""}
+
+        default_attribute_values = dict(str=dict(attr_default), dex=dict(attr_default), con=dict(attr_default),
+                                        int=dict(attr_default), wis=dict(attr_default), cha=dict(attr_default), )
+        set_text_of_children(self, default_attribute_values)

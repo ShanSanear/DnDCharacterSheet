@@ -71,7 +71,6 @@ class BasicInfoBox(BoxType, DefaultBox):
 
         self.add_to_layout()
         self.translate("EN")
-        self.set_default()
 
     def add_to_layout(self):
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
@@ -106,7 +105,7 @@ class BasicInfoBox(BoxType, DefaultBox):
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
 
-    def set_default(self):
+    def set_default_state(self):
         default_values = {"race": "", "alignement": "", "char_class": "", "faith": "", "name": "", "height": "",
                           "weight": "", "hair": "", "player_name": "", "eyes": "", "gender": "", "age": "", "size": "",
                           "level": "", "current_experience": "", "next_experience": ""}

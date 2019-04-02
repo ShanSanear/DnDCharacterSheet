@@ -40,6 +40,20 @@ class MyApp(MainWindowUi):
     def create_new_character(self):
         # TODO Logic and data for this
         logging.debug("Cleaning character sheet")
+        self.feats_box.set_default_state()
+        self.known_spells_box.set_default_state()
+        self.items_box.set_default_state()
+        self.skills_box.set_default_state()
+        self.weapons_box.melee_weapons_box.set_default_state()
+        self.weapons_box.ranged_weapons_box.set_default_state()
+        self.hp_ac_box.set_default_state()
+        self.languages_box.set_default_state()
+        self.number_of_spells_box.set_default_state()
+        self.spells_per_day_box.set_default_state()
+        self.basic_info_box.set_default_state()
+        self.saving_throws_box.set_default_state()
+        self.combat_box.set_default_values()
+        self.attributes_box.set_default_state()
 
 
     def save_file(self):

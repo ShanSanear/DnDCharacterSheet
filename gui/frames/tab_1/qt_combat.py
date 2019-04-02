@@ -107,7 +107,8 @@ class CombatBox(BoxType, DefaultBox):
 
     def set_default_values(self):
         defaults = {"melee_total": "", "melee_base": "", "melee_attr_mod": "", "melee_size": "", "melee_misc": "",
-                    "ranged_total": "", "ranged_base": "", "ranged_attr_mod": "", "ranged_size": "", "ranged_misc": ""}
+                    "ranged_total": "", "ranged_base": "", "ranged_attr_mod": "", "ranged_size": "", "ranged_misc": "",
+                    "speed_total": "", "initiative_misc_bonus": ""}
         set_text_of_children(self, defaults)
 
     def set_values_from_attributes(self):
