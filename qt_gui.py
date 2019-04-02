@@ -46,15 +46,8 @@ class MyApp(MainWindowUi):
         self.skills_box.set_default_state()
         self.weapons_box.melee_weapons_box.set_default_state()
         self.weapons_box.ranged_weapons_box.set_default_state()
-        self.hp_ac_box.set_default_state()
-        self.languages_box.set_default_state()
-        self.number_of_spells_box.set_default_state()
-        self.spells_per_day_box.set_default_state()
-        self.basic_info_box.set_default_state()
-        self.saving_throws_box.set_default_state()
-        self.combat_box.set_default_values()
-        self.attributes_box.set_default_state()
-
+        defaults_data = json.load(Path("data/defaults.json").open('r', encoding='utf-8'))
+        set_text_of_children(self, defaults_data)
 
     def save_file(self):
         if not self.character_file:

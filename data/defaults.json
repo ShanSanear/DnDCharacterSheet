@@ -1,0 +1,142 @@
+{
+    "hp_ac_box": {
+        "hp_total": "",
+        "ac_total": "",
+        "ac_base": "",
+        "ac_armor_bonus": "",
+        "ac_dex_bonus": "",
+        "ac_size_bonus": "",
+        "ac_misc_bonus": "",
+        "hp_hp_wounds_current_hp": "",
+        "hp_dice": "",
+        "hp_contusion": ""
+    },
+    "languages_box": {
+        "known_languages": ""
+    },
+    "number_of_spells_box": {
+        "number_of_spells_1": "",
+        "number_of_spells_2": "",
+        "number_of_spells_3": "",
+        "number_of_spells_4": "",
+        "number_of_spells_5": "",
+        "number_of_spells_6": "",
+        "number_of_spells_7": "",
+        "number_of_spells_8": "",
+        "number_of_spells_9": "",
+        "number_of_spells_0": ""
+    },
+    "spells_per_day_box": {
+        "extra_spells_lvl_0": "",
+        "extra_spells_lvl_1": "",
+        "extra_spells_lvl_2": "",
+        "extra_spells_lvl_3": "",
+        "extra_spells_lvl_4": "",
+        "extra_spells_lvl_5": "",
+        "extra_spells_lvl_6": "",
+        "extra_spells_lvl_7": "",
+        "extra_spells_lvl_8": "",
+        "extra_spells_lvl_9": "",
+        "spells_per_day_lvl_0": "",
+        "spells_per_day_lvl_1": "",
+        "spells_per_day_lvl_2": "",
+        "spells_per_day_lvl_3": "",
+        "spells_per_day_lvl_4": "",
+        "spells_per_day_lvl_5": "",
+        "spells_per_day_lvl_6": "",
+        "spells_per_day_lvl_7": "",
+        "spells_per_day_lvl_8": "",
+        "spells_per_day_lvl_9": "",
+        "dc_lvl_0": "",
+        "dc_lvl_1": "",
+        "dc_lvl_2": "",
+        "dc_lvl_3": "",
+        "dc_lvl_4": "",
+        "dc_lvl_5": "",
+        "dc_lvl_6": "",
+        "dc_lvl_7": "",
+        "dc_lvl_8": "",
+        "dc_lvl_9": ""
+    },
+    "basic_info_box": {
+        "race": "",
+        "alignement": "",
+        "char_class": "",
+        "faith": "",
+        "name": "",
+        "height": "",
+        "weight": "",
+        "hair": "",
+        "player_name": "",
+        "eyes": "",
+        "gender": "",
+        "age": "",
+        "size": "",
+        "level": "",
+        "current_experience": "",
+        "next_experience": ""
+    },
+    "saving_throws_box": {
+        "fortitude_total": "",
+        "will_total": "",
+        "reflex_total": "",
+        "fortitude_class_bonus": "",
+        "will_class_bonus": "",
+        "reflex_class_bonus": ""
+    },
+    "combat_box": {
+        "melee_total": "",
+        "melee_base": "",
+        "melee_attr_mod": "",
+        "melee_size": "",
+        "melee_misc": "",
+        "ranged_total": "",
+        "ranged_base": "",
+        "ranged_attr_mod": "",
+        "ranged_size": "",
+        "ranged_misc": "",
+        "speed_total": "",
+        "initiative_misc_bonus": ""
+    },
+    "attributes_box": {
+        "str": {
+            "val": "10",
+            "mod": "0",
+            "temp_val": "",
+            "temp_mod": ""
+        },
+        "dex": {
+            "val": "10",
+            "mod": "0",
+            "temp_val": "",
+            "temp_mod": ""
+        },
+        "con": {
+            "val": "10",
+            "mod": "0",
+            "temp_val": "",
+            "temp_mod": ""
+        },
+        "int": {
+            "val": "10",
+            "mod": "0",
+            "temp_val": "",
+            "temp_mod": ""
+        },
+        "wis": {
+            "val": "10",
+            "mod": "0",
+            "temp_val": "",
+            "temp_mod": ""
+        },
+        "cha": {
+            "val": "10",
+            "mod": "0",
+            "temp_val": "",
+            "temp_mod": ""
+        }
+    },
+    "notes_box": {
+        "notes": ""
+    }
+}
