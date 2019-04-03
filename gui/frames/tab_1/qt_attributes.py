@@ -1,11 +1,11 @@
 from types import SimpleNamespace
 
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row
 
 
 class AttributesBox(BoxType, DefaultBox):
@@ -18,39 +18,6 @@ class AttributesBox(BoxType, DefaultBox):
         self.attrs_references = []
         self.head = SimpleNamespace()
 
-        self.translate_reference = {
-            "EN":
-                {
-                    "root": {
-                        "title": "Attributes"
-                    },
-                    "head": {
-                        "label": "Attr",
-                        "val": "Val",
-                        "mod": "Mod",
-                        "temp_val": "T. Val",
-                        "temp_mod": "T. Mod",
-                    },
-                    "str": {
-                        "label": "STR"
-                    },
-                    "dex": {
-                        "label": "DEX"
-                    },
-                    "con": {
-                        "label": "CON"
-                    },
-                    "int": {
-                        "label": "INT"
-                    },
-                    "wis": {
-                        "label": "WIS"
-                    },
-                    "cha": {
-                        "label": "CHA"
-                    }
-                }
-        }
         for attr in self.attrs_names:
             setattr(self, attr, SimpleNamespace())
             self.attrs_references.append(getattr(self, attr))
@@ -65,8 +32,8 @@ class AttributesBox(BoxType, DefaultBox):
         self.generate_head_labels()
         self.generate_attributes_elements()
         self.add_to_layout()
-        self.translate("EN")
         self.set_values_from_attributes()
+        self.retranslate()
 
     def generate_head_labels(self):
         elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
@@ -95,12 +62,23 @@ class AttributesBox(BoxType, DefaultBox):
         for idx, attribute_row in enumerate(attributes_elements):
             add_multiple_elements_to_layout_by_row(self.layout, attribute_row, row=idx + 1)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
-
     def set_values_from_attributes(self):
         for attr in self.attrs_names:
             attr_core = getattr(self.char_core.attributes, attr)
             attr_gui = getattr(self, attr)
             attr_gui.val.setText(str(attr_core['value']))
             attr_gui.mod.setText(str(attr_core['mod']))
+
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Attributes", "Attributes"))
+        self.head.label.setText(QApplication.translate("Attributes", "Attr"))
+        self.head.val.setText(QApplication.translate("Attributes", "Val"))
+        self.head.mod.setText(QApplication.translate("Attributes", "Mod"))
+        self.head.temp_val.setText(QApplication.translate("Attributes", "T. Val"))
+        self.head.temp_mod.setText(QApplication.translate("Attributes", "T. Mod"))
+        self.str.label.setText(QApplication.translate("Attributes", "STR"))
+        self.dex.label.setText(QApplication.translate("Attributes", "DEX"))
+        self.con.label.setText(QApplication.translate("Attributes", "CON"))
+        self.int.label.setText(QApplication.translate("Attributes", "INT"))
+        self.wis.label.setText(QApplication.translate("Attributes", "WIS"))
+        self.cha.label.setText(QApplication.translate("Attributes", "CHA"))

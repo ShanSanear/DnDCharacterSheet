@@ -2,6 +2,69 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pl_PL" sourcelanguage="en_GB">
 <context>
+    <name>Attributes</name>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="74"/>
+        <source>Attributes</source>
+        <translation>Atrybuty</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="75"/>
+        <source>Attr</source>
+        <translation>Atr.</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="76"/>
+        <source>Val</source>
+        <translation>Wart.</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="77"/>
+        <source>Mod</source>
+        <translation>Mod.</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="78"/>
+        <source>T. Val</source>
+        <translation>T. Wart.</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="79"/>
+        <source>T. Mod</source>
+        <translation>T. Mod.</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="80"/>
+        <source>STR</source>
+        <translation>SIŁ</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="81"/>
+        <source>DEX</source>
+        <translation>ZRC</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="82"/>
+        <source>CON</source>
+        <translation>BD</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="83"/>
+        <source>INT</source>
+        <translation>INT</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="84"/>
+        <source>WIS</source>
+        <translation>RZT</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_attributes.py" line="85"/>
+        <source>CHA</source>
+        <translation>CHA</translation>
+    </message>
+</context>
+<context>
     <name>BasicInfo</name>
     <message>
         <location filename="gui/frames/tab_1/qt_basic_info.py" line="85"/>
@@ -87,19 +150,19 @@
 <context>
     <name>Tabs</name>
     <message>
-        <location filename="gui/main_window.py" line="64"/>
+        <location filename="gui/main_window.py" line="101"/>
         <source>Basic information / Combat / Skills / Feats</source>
-        <translation type="obsolete">Bazowe info / Walka / Umiejętności / Atuty</translation>
+        <translation>Bazowe info / Walka / Umiejętności / Atuty</translation>
     </message>
     <message>
-        <location filename="gui/main_window.py" line="77"/>
+        <location filename="gui/main_window.py" line="102"/>
         <source>Items / Spells / Languages</source>
-        <translation type="obsolete">Przedmioty / Czary / Języki</translation>
+        <translation>Przedmioty / Czary / Języki</translation>
     </message>
     <message>
-        <location filename="gui/main_window.py" line="91"/>
+        <location filename="gui/main_window.py" line="103"/>
         <source>Weapons / Armor / Notes</source>
-        <translation type="obsolete">Bronie / Pancerz / Notatki</translation>
+        <translation>Bronie / Pancerz / Notatki</translation>
     </message>
 </context>
 </TS>

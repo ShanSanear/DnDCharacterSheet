@@ -102,3 +102,4 @@ class MainWindowUi(Tab3):
         self.tabs.setTabText(1, QApplication.translate("Tabs", "Items / Spells / Languages"))
         self.tabs.setTabText(2, QApplication.translate("Tabs", "Weapons / Armor / Notes"))
         self.basic_info_box.retranslate()
+        self.attributes_box.retranslate()
