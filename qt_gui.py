@@ -31,11 +31,9 @@ class MyApp(MainWindowUi):
         if not fname:
             logging.debug("No file opened.")
             return
-
-        self.character_file = fname
-
         data_to_read = json.load(Path(fname).open())
         self._clean_character_sheet()
+        self.character_file = fname
         try:
             set_text_of_children(self, data_to_read)
         except (AttributeError, TypeError, IndexError) as e:
