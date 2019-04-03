@@ -97,6 +97,7 @@ class WeaponBox(BoxType, DefaultBox):
         return weapon
 
     def add_new_element(self):
+        logging.debug("Adding new weapon")
         new_weapon = self.create_weapon()
         new_name_count = sum(["New weapon" in weapon.name for weapon in self.weapons])
         new_name = f"New weapon {new_name_count}"
@@ -143,6 +144,13 @@ class WeaponBox(BoxType, DefaultBox):
 
     def update_total_weight(self):
         pass
+
+    def set_default_state(self):
+        count = self.choice.count()
+        for idx in reversed(range(count)):
+            self.choice.removeItem(idx)
+        self.weapons = []
+        self.add_new_element()
 
 
 

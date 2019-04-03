@@ -66,7 +66,6 @@ class AttributesBox(BoxType, DefaultBox):
         self.generate_attributes_elements()
         self.add_to_layout()
         self.translate("EN")
-        self.set_default_values()
         self.set_values_from_attributes()
 
     def generate_head_labels(self):
@@ -98,13 +97,6 @@ class AttributesBox(BoxType, DefaultBox):
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
-
-    def set_default_values(self):
-        attr_default = {"val": "10", "mod": "0"}
-
-        default_attribute_values = dict(str=dict(attr_default), dex=dict(attr_default), con=dict(attr_default),
-                                        int=dict(attr_default), wis=dict(attr_default), cha=dict(attr_default), )
-        set_text_of_children(self, default_attribute_values)
 
     def set_values_from_attributes(self):
         for attr in self.attrs_names:

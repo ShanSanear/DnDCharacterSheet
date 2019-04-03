@@ -25,14 +25,10 @@ class CombatBox(BoxType, DefaultBox):
                     "misc_label": "Misc",
                     "melee_label": "Melee",
                     "ranged_label": "Ranged",
-                    "initiative_total": "10",
-                    "initiative_misc_bonus": "10",
-                    "initiative_dex_bonus": "10",
                     "initiative_misc_bonus_label": "Misc",
                     "initiative_dex_bonus_label": "Dex",
                     "initiative_label": "Initiative",
                     "speed_label": "Speed",
-                    "speed_total": "10",
                     "total_label_init": "Total",
                     "attacks_type_label": "Type",
                 }
@@ -55,7 +51,7 @@ class CombatBox(BoxType, DefaultBox):
 
         self.melee_total = create_qline_edit(str_format="{:+d}", **qline_dict_disabled)
         self.melee_base = create_qline_edit(**qline_dict_melee)
-        self.melee_attr_mod = create_qline_edit( **qline_dict_disabled)
+        self.melee_attr_mod = create_qline_edit(**qline_dict_disabled)
         self.melee_size = create_qline_edit(**qline_dict_melee)
         self.melee_misc = create_qline_edit(**qline_dict_melee)
 
@@ -82,7 +78,6 @@ class CombatBox(BoxType, DefaultBox):
 
         self.add_to_layout()
         self.translate("EN")
-        self.set_default_values()
         self.set_values_from_attributes()
 
     def add_to_layout(self):
@@ -109,20 +104,6 @@ class CombatBox(BoxType, DefaultBox):
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
 
-    def set_default_values(self):
-        defaults = {"melee_total": "10",
-                    "melee_base": "10",
-                    "melee_attr_mod": "10",
-                    "melee_size": "10",
-                    "melee_misc": "10",
-                    "ranged_total": "10",
-                    "ranged_base": "10",
-                    "ranged_attr_mod": "10",
-                    "ranged_size": "10",
-                    "ranged_misc": "10", }
-        set_text_of_children(self, defaults)
-
-
     def set_values_from_attributes(self):
         self.melee_attr_mod.setText(str(self.char_core.attributes.str['mod']))
         self.ranged_attr_mod.setText(str(self.char_core.attributes.dex['mod']))
@@ -130,15 +111,14 @@ class CombatBox(BoxType, DefaultBox):
         self._update_ranged_attack()
         self.initiative_dex_bonus.setText(str(self.char_core.attributes.dex['mod']))
         self._update_initiative()
-    
+
     def _update_ranged_attack(self):
         update_texts(root_object=self, to_set="ranged_total",
                      to_get_from=["ranged_base", "ranged_attr_mod", "ranged_size", "ranged_misc"])
-    
+
     def _update_melee_attack(self):
         update_texts(root_object=self, to_set="melee_total",
                      to_get_from=["melee_base", "melee_attr_mod", "melee_size", "melee_misc"])
-
 
     def _update_initiative(self):
         update_texts(root_object=self, to_set="initiative_total",

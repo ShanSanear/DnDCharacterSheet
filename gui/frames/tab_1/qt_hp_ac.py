@@ -19,24 +19,14 @@ class HpAcBox(BoxType, DefaultBox):
                     "hp_total_label": "Total",
                     "hp_hp_wounds_current_hp_label": "Wounds",
                     "hp_label": "HP",
-                    "hp_total": "10",
                     "ac_label": "AC",
-                    "ac_total": "10",
-                    "ac_base": "10",
-                    "ac_armor_bonus": "10",
-                    "ac_dex_bonus": "10",
-                    "ac_size_bonus": "10",
-                    "ac_misc_bonus": "10",
                     "ac_total_label": "Total",
                     "ac_base_bonus_label": "Base",
                     "ac_armor_bonus_label": "Armor",
                     "ac_dex_bonus_label": "Dex",
                     "ac_size_bonus_label": "Size",
                     "ac_misc_bonus_label": "Misc",
-                    "hp_hp_wounds_current_hp": "10/10",
                     "hp_dice_label": "Dice",
-                    "hp_dice": "d10",
-                    "hp_contusion": "10",
                     "contusion_label": "Contusion",
                 }
         }
@@ -89,14 +79,6 @@ class HpAcBox(BoxType, DefaultBox):
                       self.ac_dex_bonus_label, self.ac_size_bonus_label,
                       self.ac_misc_bonus_label, ]
         add_multiple_elements_to_layout_by_row(self.layout, fourth_row, start_column=1, row=3)
-
-        # self.layout.addWidget(self.ac_total_label, 3, 1, 1, 1)
-        # self.layout.addWidget(self.ac_base_bonus_label, 3, 2, 1, 1)
-        # self.layout.addWidget(self.ac_armor_bonus_label, 3, 3, 1, 1)
-        # self.layout.addWidget(self.ac_shield_bonus_label, 3, 4, 1, 1)
-        # self.layout.addWidget(self.ac_dex_bonus_label, 3, 5, 1, 1)
-        # self.layout.addWidget(self.ac_size_bonus_label, 3, 6, 1, 1)
-        # self.layout.addWidget(self.ac_misc_bonus_label, 3, 7, 1, 1)
 
     def translate(self, language):
         set_text_of_children(self, self.translate_reference[language])
