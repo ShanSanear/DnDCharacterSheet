@@ -8,28 +8,6 @@ from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, ad
 class BasicInfoBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size):
         BoxType.__init__(self, parent=parent, position=position, size=size)
-        self.translate_reference = {
-            "EN":
-                {
-                    "class_label": "Class",
-                    "faith_label": "Faith",
-                    "race_label": "Race",
-                    "alignement_label": "Alignement",
-                    "player_name_label": "Player",
-                    "name_label": "Name",
-                    "height_label": "Height",
-                    "weight_label": "Weight",
-                    "experience_label": "Experience",
-                    "eyes_label": "Eyes",
-                    "hair_label": "Hair",
-                    "size_label": "Size",
-                    "age_label": "Age",
-                    "gender_label": "Gender",
-                    "level_label": "Level",
-                    "experience_divide_label": "/",
-                }
-        }
-        self.root.setTitle("Basic info")
         qlabel_dict_1 = dict(parent=self.container)
         qlabel_dict_2 = dict(parent=self.container)
         qline_dict_1 = dict(parent=self.container)  # min_size=(100, 23))
@@ -103,6 +81,7 @@ class BasicInfoBox(BoxType, DefaultBox):
                                                width=2)
 
     def retranslate(self):
+        self.root.setTitle(QApplication.translate("BasicInfo", "Basic info"))
         self.class_label.setText(QApplication.translate("BasicInfo", "Class"))
         self.faith_label.setText(QApplication.translate("BasicInfo", "Faith"))
         self.race_label.setText(QApplication.translate("BasicInfo", "Race"))

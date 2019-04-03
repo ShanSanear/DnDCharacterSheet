@@ -4,79 +4,84 @@
 <context>
     <name>BasicInfo</name>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="112"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="85"/>
         <source>Class</source>
         <translation>Klasa</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="113"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="86"/>
         <source>Faith</source>
         <translation>Wiara</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="114"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="87"/>
         <source>Race</source>
         <translation>Rasa</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="115"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="88"/>
         <source>Alignement</source>
         <translation>Charakter</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="116"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="89"/>
         <source>Player</source>
         <translation>Gracz</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="117"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="90"/>
         <source>Name</source>
         <translation>Imię</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="118"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="91"/>
         <source>Height</source>
         <translation>Wzrost</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="119"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="92"/>
         <source>Weight</source>
         <translation>Waga</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="120"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="93"/>
         <source>Experience</source>
         <translation>Doświadczenie</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="121"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="94"/>
         <source>Eyes</source>
         <translation>Oczy</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="122"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="95"/>
         <source>Hair</source>
         <translation>Włosy</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="123"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="96"/>
         <source>Size</source>
         <translation>Rozm.</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="124"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="97"/>
         <source>Age</source>
         <translation>Wiek</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="125"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="98"/>
         <source>Gender</source>
         <translation>Płeć</translation>
     </message>
     <message>
-        <location filename="gui/frames/tab_1/qt_basic_info.py" line="126"/>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="99"/>
         <source>Level</source>
         <translation>Poziom</translation>
+    </message>
+    <message>
+        <location filename="gui/frames/tab_1/qt_basic_info.py" line="84"/>
+        <source>Basic info</source>
+        <translation>Podstawowe informacje</translation>
     </message>
 </context>
 <context>
