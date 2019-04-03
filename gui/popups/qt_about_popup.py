@@ -8,7 +8,7 @@ class AboutDialog(QMessageBox):
         super(AboutDialog, self).__init__(parent=parent)
         self.setWindowTitle(name)
         self.findChild(QGridLayout).setColumnMinimumWidth(1, 550)
-        self.version = 0.1 
+        self.version = 0.2
         self.setText(f"<h3>Dungeon and Dragons 3.5 Character Sheet version {self.version}</h3>"
                      f"<h3>Copyright (C) 2019 by Mateusz Pruski</h3>"
                      f"<h3>Github repository: <a href='https://github.com/ShanSanear/DnDCharacterSheet'>Click here</a></h3>"
