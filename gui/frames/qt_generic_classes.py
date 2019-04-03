@@ -54,10 +54,6 @@ class DefaultBox(ABC):
     def add_to_layout(self, **kwargs):
         pass
 
-    @abstractmethod
-    def translate(self, **kwargs):
-        pass
-
     def get_dict_repr(self):
         elements = self.__dict__.keys()
         elements = collect_editable_data(elements)

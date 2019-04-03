@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row
 
 
 class BasicInfoBox(BoxType, DefaultBox):
@@ -42,7 +42,7 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.player_name_label = create_qlabel(**qlabel_dict_1)
         self.name_label = create_qlabel(**qlabel_dict_1)
         self.experience_label = create_qlabel(**qlabel_dict_1, align=Qt.AlignVCenter | Qt.AlignCenter)
-        self.experience_divide_label = create_qlabel(**qlabel_dict_1)
+        self.experience_divide_label = create_qlabel(**qlabel_dict_1, text="/")
         self.height_label = create_qlabel(**qlabel_dict_2)
         self.weight_label = create_qlabel(**qlabel_dict_2)
         self.eyes_label = create_qlabel(**qlabel_dict_2)
@@ -70,7 +70,7 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.level = create_qline_edit(**qline_dict_2)
 
         self.add_to_layout()
-        self.translate("EN")
+        self.retranslate()
 
     def add_to_layout(self):
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
@@ -102,5 +102,19 @@ class BasicInfoBox(BoxType, DefaultBox):
         add_multiple_elements_to_layout_by_row(self.layout, [third_row_input_part_2[-1]], row=5, start_column=7,
                                                width=2)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
+    def retranslate(self):
+        self.class_label.setText(QApplication.translate("BasicInfo", "Class"))
+        self.faith_label.setText(QApplication.translate("BasicInfo", "Faith"))
+        self.race_label.setText(QApplication.translate("BasicInfo", "Race"))
+        self.alignement_label.setText(QApplication.translate("BasicInfo", "Alignement"))
+        self.player_name_label.setText(QApplication.translate("BasicInfo", "Player"))
+        self.name_label.setText(QApplication.translate("BasicInfo", "Name"))
+        self.height_label.setText(QApplication.translate("BasicInfo", "Height"))
+        self.weight_label.setText(QApplication.translate("BasicInfo", "Weight"))
+        self.experience_label.setText(QApplication.translate("BasicInfo", "Experience"))
+        self.eyes_label.setText(QApplication.translate("BasicInfo", "Eyes"))
+        self.hair_label.setText(QApplication.translate("BasicInfo", "Hair"))
+        self.size_label.setText(QApplication.translate("BasicInfo", "Size"))
+        self.age_label.setText(QApplication.translate("BasicInfo", "Age"))
+        self.gender_label.setText(QApplication.translate("BasicInfo", "Gender"))
+        self.level_label.setText(QApplication.translate("BasicInfo", "Level"))
