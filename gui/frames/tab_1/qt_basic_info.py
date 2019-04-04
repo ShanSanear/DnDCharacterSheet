@@ -48,7 +48,6 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.level = create_qline_edit(**qline_dict_2)
 
         self.add_to_layout()
-        self.retranslate()
 
     def add_to_layout(self):
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]

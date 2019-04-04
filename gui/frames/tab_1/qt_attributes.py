@@ -33,7 +33,6 @@ class AttributesBox(BoxType, DefaultBox):
         self.generate_attributes_elements()
         self.add_to_layout()
         self.set_values_from_attributes()
-        self.retranslate()
 
     def generate_head_labels(self):
         elements = ['label', 'val', 'mod', 'temp_val', 'temp_mod']
