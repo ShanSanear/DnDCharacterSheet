@@ -14,6 +14,7 @@ class SingleCharApp(MyApp):
         super(SingleCharApp, self).__init__()
         self.about_popup = AboutDialog("About", self)
         self.menu_bar = MenuBar(self)
+        self.menu_bar.retranslate()
         self.connect_menu_bar()
 
     def connect_menu_bar(self):
