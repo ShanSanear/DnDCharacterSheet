@@ -28,13 +28,9 @@ class SingleCharApp(MyApp):
 
     def change_language(self, english_language_action):
         logging.debug("Changing language")
-        # language_data = json.load(Path("data/languages.json").open(encoding='utf-8'))
         language = "EN" if english_language_action.isChecked() else "PL"
-        # menu_bar_language_data = language_data["menu_bar"][language]
-        # set_text_of_children(self, language_data[language])
-        # set_text_of_children(self, menu_bar_language_data)
         if language == "PL":
-            self.trans.load("eng-pl")
+            self.trans.load("data/languages/eng-pl")
             QApplication.instance().installTranslator(self.trans)
             logging.debug("Setting to polish")
         else:
