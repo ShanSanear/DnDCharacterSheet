@@ -63,6 +63,16 @@ class Tab1(CoreWindow):
         self.feats_box = FeatsBox(self.tab1, position=[520, 220], size=[300, 570])
         self.tabs.addTab(self.tab1, "")
 
+    def retranslate_tab_1(self):
+        self.basic_info_box.retranslate()
+        self.skills_box.retranslate()
+        self.attributes_box.retranslate()
+        self.weapons_statistics_box.retranslate()
+        self.combat_box.retranslate()
+        self.saving_throws_box.retranslate()
+        self.hp_ac_box.retranslate()
+        self.feats_box.retranslate()
+
 
 class Tab2(Tab1):
 
@@ -75,6 +85,9 @@ class Tab2(Tab1):
         self.spells_per_day_box = SpellsPerDayBox(self.tab2, position=[1090, 10], size=[150, 350])
         self.known_spells_box = KnownSpellsBox(self.tab2, position=[520, 120], size=[550, 670])
         self.tabs.addTab(self.tab2, "")
+
+    def retranslate_tab_2(self):
+        self.items_box.retranslate()
 
 
 class Tab3(Tab2):
@@ -90,6 +103,9 @@ class Tab3(Tab2):
                                       weapons_statistics_box=self.weapons_statistics_box, items_box=self.items_box)
         self.tabs.addTab(self.tab3, "")
 
+    def retranslate_tab_3(self):
+        pass
+
 
 class MainWindowUi(Tab3):
 
@@ -102,11 +118,6 @@ class MainWindowUi(Tab3):
         self.tabs.setTabText(0, QApplication.translate("Tabs", "Basic information / Combat / Skills / Feats"))
         self.tabs.setTabText(1, QApplication.translate("Tabs", "Items / Spells / Languages"))
         self.tabs.setTabText(2, QApplication.translate("Tabs", "Weapons / Armor / Notes"))
-        self.basic_info_box.retranslate()
-        self.attributes_box.retranslate()
-        self.weapons_statistics_box.retranslate()
-        self.skills_box.retranslate()
-        self.combat_box.retranslate()
-        self.saving_throws_box.retranslate()
-        self.hp_ac_box.retranslate()
-        self.feats_box.retranslate()
+        self.retranslate_tab_1()
+        self.retranslate_tab_2()
+        self.retranslate_tab_3()
