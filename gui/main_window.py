@@ -109,3 +109,4 @@ class MainWindowUi(Tab3):
         self.combat_box.retranslate()
         self.saving_throws_box.retranslate()
         self.hp_ac_box.retranslate()
+        self.feats_box.retranslate()
