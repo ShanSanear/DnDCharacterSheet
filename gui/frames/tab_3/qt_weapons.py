@@ -198,7 +198,7 @@ class MeleeWeapon(Weapons):
 
     def retranslate(self):
         super(MeleeWeapon, self).retranslate()
-        self.root.setTitle(QApplication.translate("Attributes", "Currently chose melee weapon"))
+        self.root.setTitle(QApplication.translate("Weapons", "Currently chose melee weapon"))
 
 
 class RangedWeapon(Weapons):

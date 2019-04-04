@@ -63,4 +63,4 @@ class NumberOfSpellsBox(BoxType, DefaultBox):
         self.number_of_spells_8th_label.setText(QApplication.translate("NumberOfSpells", "8th lvl"))
         self.number_of_spells_9th_label.setText(QApplication.translate("NumberOfSpells", "9th lvl"))
         self.known_spells_title.setText(QApplication.translate("NumberOfSpells",
-                                                               "Known number of spells (Warlock / Bard"))
+                                                               "Known number of spells (Warlock / Bard)"))

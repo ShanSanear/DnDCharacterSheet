@@ -71,6 +71,6 @@ class KnownSpellsBox(ScrollableBox):
     def retranslate(self):
         self.root.setTitle(QApplication.translate("KnownLanguage", "Known spells"))
         self.lvl_label.setText(QApplication.translate("KnownLanguage", "LVL"))
-        self.name_label.setText(QApplication.translate("KnownLanguage", "Spell namne"))
+        self.name_label.setText(QApplication.translate("KnownLanguage", "Spell name"))
         self.description_button_label.setText(QApplication.translate("KnownLanguage", "Desc"))
         self.short_description_label.setText(QApplication.translate("KnownLanguage", "DESC"))
