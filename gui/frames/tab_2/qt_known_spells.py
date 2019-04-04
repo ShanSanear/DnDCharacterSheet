@@ -1,8 +1,10 @@
 from types import SimpleNamespace
 
+from PyQt5.QtWidgets import QApplication
+
 from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
-    set_text_of_children, add_multiple_elements_to_layout_by_row
+    add_multiple_elements_to_layout_by_row
 from gui.popups.qt_full_description import DescriptionDialog
 
 
@@ -27,24 +29,12 @@ class KnownSpellsBox(ScrollableBox):
         self.description_button_label = create_qlabel(**qlabel_dict_2)
         self.short_description_label = create_qlabel(**qlabel_dict_2)
 
-        self.translate_reference = {
-            "EN": {
-                "root": {
-                    "title": "Known spells"
-                },
-                "lvl_label": "LVL",
-                "name_label": "Spell name",
-                "description_button_label": "Desc",
-                "short_description_label": "DESC",
-            }
-        }
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         self.add_spell = self.add_new_element
         self.add_new.clicked.connect(self.add_spell)
         self.add_spell()
 
         self.add_to_layout()
-        self.translate("EN")
 
 
     def create_spell(self):
@@ -78,5 +68,9 @@ class KnownSpellsBox(ScrollableBox):
         dialog = DescriptionDialog("Spell description", self.root, spell)
         dialog.show()
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("KnownLanguage", "Known spells"))
+        self.lvl_label.setText(QApplication.translate("KnownLanguage", "LVL"))
+        self.name_label.setText(QApplication.translate("KnownLanguage", "Spell namne"))
+        self.description_button_label.setText(QApplication.translate("KnownLanguage", "Desc"))
+        self.short_description_label.setText(QApplication.translate("KnownLanguage", "DESC"))
