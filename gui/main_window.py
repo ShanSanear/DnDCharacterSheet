@@ -91,6 +91,7 @@ class Tab2(Tab1):
         self.number_of_spells_box.retranslate()
         self.languages_box.retranslate()
         self.known_spells_box.retranslate()
+        self.spells_per_day_box.retranslate()
 
 class Tab3(Tab2):
 
