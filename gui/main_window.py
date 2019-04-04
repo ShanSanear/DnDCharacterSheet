@@ -110,6 +110,7 @@ class Tab3(Tab2):
     def retranslate_tab_3(self):
         self.notes_box.retranslate()
         self.cheathseet_box.retranslate()
+        self.weapons_box.retranslate()
 
 
 class MainWindowUi(Tab3):
