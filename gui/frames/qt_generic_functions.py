@@ -190,7 +190,7 @@ def set_text_of_children(root_object, to_set: dict):
 
 def collect_editable_data(elements_to_clean_up):
     tmp = {element for element in elements_to_clean_up if "label" not in element}
-    commons = ["root", "container", "layout", "translate_reference", "melee_box", "ranged_box", "melee_container",
+    commons = ["root", "container", "layout", "melee_box", "ranged_box", "melee_container",
                "ranged_container", "melee_layout", "ranged_layout", "last_row", "original_size",
                "original_smaller_size", "position", "size", "smaller_size", "first_row_label", "second_row_label",
                "first_row_edit", "second_row_edit", "weapon_attributes"]

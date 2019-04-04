@@ -14,14 +14,6 @@ class WeaponStatisticsBox(BoxType, DefaultBox):
         BoxType.__init__(self, parent=parent, position=position, size=size)
         self.bonus_from_melee = 0
         self.bonus_from_ranged = 0
-        self.translate_reference = {
-            "EN":
-                {
-                    "root": {"title": "Current weapon statistics"},
-                    "attack_bonus_label": "Att. bonus", "damage_label": "Dmg",
-                    "range_label": "Range", "melee_range": "1 m", "crit_label": "Crit",
-                    "melee_label": "Melee", "ranged_label": "Ranged",
-                    "weapon_name_label": "Weapon name"}}
         qline_dict = dict(parent=self.container, enabled=False)
         qlabel_dict = dict(parent=self.container)
         qlabel_dict_centered = dict(parent=self.container, align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
