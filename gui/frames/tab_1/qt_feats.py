@@ -42,7 +42,7 @@ class FeatsBox(ScrollableBox):
         self.add_last_row()
 
     def show_description(self, feat):
-        dialog = DescriptionDialog("Feat description", self.root, feat)
+        dialog = DescriptionDialog(QApplication.translate("Feats", "Feat description"), self.root, feat)
         dialog.show()
 
     def create_feat(self):

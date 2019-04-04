@@ -65,7 +65,7 @@ class KnownSpellsBox(ScrollableBox):
         add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=self.labels)
 
     def show_description(self, spell):
-        dialog = DescriptionDialog("Spell description", self.root, spell)
+        dialog = DescriptionDialog(QApplication.translate("KnownLanguage", "Spell description"), self.root, spell)
         dialog.show()
 
     def retranslate(self):
