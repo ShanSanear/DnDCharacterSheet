@@ -56,7 +56,7 @@ class MenuBar:
     def retranslate(self):
         self.file_menu.setTitle(QApplication.translate("Menu", "File"))
         self.help_menu.setTitle(QApplication.translate("Menu", "Help"))
-        self.language_menu.setTitle(QApplication.translate("Menu", "File"))
+        self.language_menu.setTitle(QApplication.translate("Menu", "Language"))
         self.new_character.setText(QApplication.translate("Menu", "New character..."))
         self.open_character.setText(QApplication.translate("Menu", "Open"))
         self.save_character.setText(QApplication.translate("Menu", "Save"))
