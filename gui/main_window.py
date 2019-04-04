@@ -88,6 +88,7 @@ class Tab2(Tab1):
 
     def retranslate_tab_2(self):
         self.items_box.retranslate()
+        self.number_of_spells_box.retranslate()
 
 
 class Tab3(Tab2):
