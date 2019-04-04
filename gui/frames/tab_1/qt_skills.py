@@ -2,10 +2,11 @@ import logging
 from types import SimpleNamespace
 
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication
 
 from core.character import Character
 from gui.frames.qt_generic_classes import ScrollableBox
-from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, set_text_of_children, create_qlabel, \
+from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, create_qlabel, \
     add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
 
 
@@ -64,7 +65,6 @@ class SkillsBox(ScrollableBox):
         self.add_skill()
 
         self.add_to_layout()
-        self.translate("EN")
         self.set_values_from_attributes()
 
 
@@ -102,8 +102,6 @@ class SkillsBox(ScrollableBox):
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, self.labels)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
 
     def calculate_ranks(self):
         total_ranks = 0
@@ -135,3 +133,17 @@ class SkillsBox(ScrollableBox):
         update_texts(skill, to_set="total", to_get_from=["attr_mod", "rank", "misc_mod"],
                      with_decimal_point=True)
         self.calculate_ranks()
+
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Skills", "Skills"))
+        self.cross_class_label.setText(QApplication.translate("Skills", "CC"))
+        self.rank_label.setText(QApplication.translate("Skills", "Rank"))
+        self.attr_mod_label.setText(QApplication.translate("Skills", "Mod"))
+        self.misc_label.setText(QApplication.translate("Skills", "Misc"))
+        self.skill_name_label.setText(QApplication.translate("Skills", "Skill name"))
+        self.attr_choice_label.setText(QApplication.translate("Skills", "Attr"))
+        self.total_label.setText(QApplication.translate("Skills", "Total"))
+        self.used_skill_points_label.setText(QApplication.translate("Skills", "Used skill points:"))
+        for skill in self.elements_list:
+            for idx, attr_name in enumerate(("STR", "DEX", "CON", "INT", "WIS", "CHA")):
+                skill.attr_choice.setItemText(idx, QApplication.translate("Attributes", attr_name))

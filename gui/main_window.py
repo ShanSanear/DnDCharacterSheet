@@ -96,6 +96,7 @@ class MainWindowUi(Tab3):
     def __init__(self):
         super(MainWindowUi, self).__init__()
         self.tabs.setCurrentIndex(0)
+        self.retranslate()
 
     def retranslate(self):
         self.tabs.setTabText(0, QApplication.translate("Tabs", "Basic information / Combat / Skills / Feats"))
@@ -103,3 +104,5 @@ class MainWindowUi(Tab3):
         self.tabs.setTabText(2, QApplication.translate("Tabs", "Weapons / Armor / Notes"))
         self.basic_info_box.retranslate()
         self.attributes_box.retranslate()
+        self.weapons_statistics_box.retranslate()
+        self.skills_box.retranslate()
