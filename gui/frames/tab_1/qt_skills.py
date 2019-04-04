@@ -20,21 +20,6 @@ class SkillsBox(ScrollableBox):
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
                                original_size=size,
                                height_increment=height_increment, row_offset=1, last_row_column=7)
-        self.translate_reference = {
-            "EN": {
-                "root": {
-                     "title": "Skills"
-                },
-                "cross_class_label": "CC",
-                "rank_label": "Rank",
-                "attr_mod_label": "Mod",
-                "misc_label": "Misc",
-                "skill_name_label": "Skill name",
-                "attr_choice_label": "Attr",
-                "total_label": "Total",
-                "used_skill_points_label": "Used skill points:"
-            }
-        }
         self._map_choice_to_attr = {0: "str", 1: "dex", 2: "con", 3: "int", 4: "wis", 5: "cha"}
 
         self.char_core = char_core
