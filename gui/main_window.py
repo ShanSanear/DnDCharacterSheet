@@ -90,8 +90,9 @@ class Tab2(Tab1):
         self.items_box.retranslate()
         self.number_of_spells_box.retranslate()
         self.languages_box.retranslate()
-        self.known_spells_box.retranslate()
         self.spells_per_day_box.retranslate()
+        self.known_spells_box.retranslate()
+
 
 class Tab3(Tab2):
 
@@ -107,7 +108,8 @@ class Tab3(Tab2):
         self.tabs.addTab(self.tab3, "")
 
     def retranslate_tab_3(self):
-        pass
+        self.notes_box.retranslate()
+        self.cheathseet_box.retranslate()
 
 
 class MainWindowUi(Tab3):

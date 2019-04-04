@@ -4,10 +4,10 @@ from pathlib import Path
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QGroupBox, QGridLayout, QWidget
+from PyQt5.QtWidgets import QGroupBox, QGridLayout, QWidget, QApplication
 
 from gui.frames.qt_generic_classes import DefaultBox
-from gui.frames.qt_generic_functions import set_text_of_children, create_qlabel, \
+from gui.frames.qt_generic_functions import create_qlabel, \
     add_multiple_elements_to_layout_by_column, add_multiple_elements_to_layout_by_row
 
 
@@ -19,13 +19,6 @@ class ExperienceSheet(DefaultBox):
         self.container = QWidget(self.root)
         self.layout = QGridLayout(self.container)
         self.root.setLayout(self.layout)
-
-        self.translate_reference = {
-            "EN": {
-                "root": {"title": "Experience"}
-            }
-
-        }
 
         levels_file = Path("data/cheatsheet_levels.json")
         levels_data = json.load(levels_file.open())
@@ -41,7 +34,6 @@ class ExperienceSheet(DefaultBox):
             self.exps.append(exp)
 
         self.add_to_layout()
-        self.translate("EN")
 
     def add_to_layout(self):
         lvl_label_1 = create_qlabel(self.container, text="lvl", align=Qt.AlignRight | Qt.AlignVCenter)
@@ -59,5 +51,5 @@ class ExperienceSheet(DefaultBox):
         add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=self.exps[10:],
                                                   column=3, start_row=1)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Experience", "Experience"))
