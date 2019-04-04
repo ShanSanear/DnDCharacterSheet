@@ -111,6 +111,7 @@ class Tab3(Tab2):
         self.notes_box.retranslate()
         self.cheathseet_box.retranslate()
         self.weapons_box.retranslate()
+        self.armor_items_box.retranslate()
 
 
 class MainWindowUi(Tab3):
