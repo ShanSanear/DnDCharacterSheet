@@ -106,3 +106,4 @@ class MainWindowUi(Tab3):
         self.attributes_box.retranslate()
         self.weapons_statistics_box.retranslate()
         self.skills_box.retranslate()
+        self.combat_box.retranslate()
