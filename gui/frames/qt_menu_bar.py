@@ -35,21 +35,6 @@ class MenuBar:
         self.root.addAction(self.file_menu.menuAction())
         self.root.addAction(self.language_menu.menuAction())
         self.root.addAction(self.help_menu.menuAction())
-        self.translate_reference = {
-            "EN": {
-                "file_menu": {"title": "File"},
-                "help_menu": {"title": "Help"},
-                "language_menu": {"title": "Language"},
-                "new_character": "New character...",
-                "open_character": "Open",
-                "save_character": "Save",
-                "save_character_as": "Save as...",
-                "change_language_en": "English",
-                "change_language_pl": "polski",
-                "about": "About",
-                "exit": "Exit",
-            }
-        }
         self.change_language_en.setText("English")
         self.change_language_pl.setText("polski")
 
