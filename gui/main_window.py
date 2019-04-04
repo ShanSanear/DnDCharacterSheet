@@ -107,3 +107,4 @@ class MainWindowUi(Tab3):
         self.weapons_statistics_box.retranslate()
         self.skills_box.retranslate()
         self.combat_box.retranslate()
+        self.saving_throws_box.retranslate()
