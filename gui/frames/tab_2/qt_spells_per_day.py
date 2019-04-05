@@ -1,19 +1,13 @@
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, set_text_of_children, \
-    add_multiple_elements_to_layout_by_column
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_column
 
 
 class SpellsPerDayBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size):
         BoxType.__init__(self, parent=parent, position=position, size=size, defaults=True)
-        self.translation_reference = {"EN": {
-            "root": {"title": "Spells per day / Spells DC"},
-            "level_label": "Lvl", "per_day_label": "/Day", "extra_spells_label": "Extra", "base_spell_dc_label": "DC",
-            "_num_0": "0", "_num_1": "1", "_num_2": "2", "_num_3": "3", "_num_4": "4", "_num_5": "5", "_num_6": "6",
-            "_num_7": "7", "_num_8": "8", "_num_9": "9", }}
-
         qline_dict = dict(parent=self.container, min_size=(0, 23), align=QtCore.Qt.AlignCenter)
         qlabel_dict = dict(parent=self.container, align=QtCore.Qt.AlignCenter)
 
@@ -30,16 +24,16 @@ class SpellsPerDayBox(BoxType, DefaultBox):
         self.dc_lvl_9 = create_qline_edit(**qline_dict)
 
         self.level_label = create_qlabel(**qlabel_dict)
-        self._num_0 = create_qlabel(**qlabel_dict)
-        self._num_1 = create_qlabel(**qlabel_dict)
-        self._num_2 = create_qlabel(**qlabel_dict)
-        self._num_3 = create_qlabel(**qlabel_dict)
-        self._num_4 = create_qlabel(**qlabel_dict)
-        self._num_5 = create_qlabel(**qlabel_dict)
-        self._num_6 = create_qlabel(**qlabel_dict)
-        self._num_7 = create_qlabel(**qlabel_dict)
-        self._num_8 = create_qlabel(**qlabel_dict)
-        self._num_9 = create_qlabel(**qlabel_dict)
+        self._num_0 = create_qlabel(**qlabel_dict, text="0")
+        self._num_1 = create_qlabel(**qlabel_dict, text="1")
+        self._num_2 = create_qlabel(**qlabel_dict, text="2")
+        self._num_3 = create_qlabel(**qlabel_dict, text="3")
+        self._num_4 = create_qlabel(**qlabel_dict, text="4")
+        self._num_5 = create_qlabel(**qlabel_dict, text="5")
+        self._num_6 = create_qlabel(**qlabel_dict, text="6")
+        self._num_7 = create_qlabel(**qlabel_dict, text="7")
+        self._num_8 = create_qlabel(**qlabel_dict, text="8")
+        self._num_9 = create_qlabel(**qlabel_dict, text="9")
 
         self.per_day_label = create_qlabel(**qlabel_dict)
         self.spells_per_day_lvl_0 = create_qline_edit(**qline_dict)
@@ -66,7 +60,6 @@ class SpellsPerDayBox(BoxType, DefaultBox):
         self.extra_spells_lvl_9 = create_qline_edit(**qline_dict)
 
         self.add_to_layout()
-        self.translate("EN")
 
     def add_to_layout(self):
         first_column = [self.base_spell_dc_label, self.dc_lvl_0, self.dc_lvl_1, self.dc_lvl_2, self.dc_lvl_3,
@@ -89,5 +82,9 @@ class SpellsPerDayBox(BoxType, DefaultBox):
                          self.extra_spells_lvl_8, self.extra_spells_lvl_9]
         add_multiple_elements_to_layout_by_column(layout=self.layout, elements_to_add=fourth_column, column=3)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translation_reference[language])
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("SpellsPerDay", "Spells per day / Spells DC"))
+        self.level_label.setText(QApplication.translate("SpellsPerDay", "Lvl"))
+        self.per_day_label.setText(QApplication.translate("SpellsPerDay", "/Day"))
+        self.extra_spells_label.setText(QApplication.translate("SpellsPerDay", "Extra"))
+        self.base_spell_dc_label.setText(QApplication.translate("SpellsPerDay", "DC"))

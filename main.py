@@ -1,12 +1,9 @@
-import json
 import logging
 import sys
 from functools import partial
-from pathlib import Path
 
 from PyQt5.QtWidgets import QApplication
 
-from gui.frames.qt_generic_functions import set_text_of_children
 from gui.frames.qt_menu_bar import MenuBar
 from gui.popups.qt_about_popup import AboutDialog
 from qt_gui import MyApp, config_logger
@@ -17,6 +14,7 @@ class SingleCharApp(MyApp):
         super(SingleCharApp, self).__init__()
         self.about_popup = AboutDialog("About", self)
         self.menu_bar = MenuBar(self)
+        self.menu_bar.retranslate()
         self.connect_menu_bar()
 
     def connect_menu_bar(self):
@@ -30,12 +28,15 @@ class SingleCharApp(MyApp):
 
     def change_language(self, english_language_action):
         logging.debug("Changing language")
-        language_data = json.load(Path("data/languages.json").open(encoding='utf-8'))
         language = "EN" if english_language_action.isChecked() else "PL"
-        menu_bar_language_data = language_data["menu_bar"][language]
-        set_text_of_children(self, language_data[language])
-        set_text_of_children(self, menu_bar_language_data)
-
+        if language == "PL":
+            self.trans.load("data/languages/eng-pl")
+            QApplication.instance().installTranslator(self.trans)
+            logging.debug("Setting to polish")
+        else:
+            QApplication.instance().removeTranslator(self.trans)
+            logging.debug("Setting to english")
+        self.retranslate()
 
 def init_gui():
     app = QApplication(sys.argv)

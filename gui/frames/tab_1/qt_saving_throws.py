@@ -1,9 +1,10 @@
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, update_texts, \
-    add_multiple_elements_to_layout_by_row, set_text_of_children
+    add_multiple_elements_to_layout_by_row
 
 
 class SavingThrowsBox(BoxType, DefaultBox):
@@ -12,18 +13,6 @@ class SavingThrowsBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
         BoxType.__init__(self, parent=parent, position=position, size=size)
-        self.translate_reference = {
-            "EN":
-                {
-                    "root": {"title": "Saving throws"},
-                    "total_label": "Total",
-                    "class_base_label": "Base",
-                    "attr_bonus_label": "Attr",
-                    "size_bonus_label": "Size",
-                    "misc_bonus_label": "Misc",
-                    "fortitude_label": "Fortitude",
-                    "reflex_label": "Reflex",
-                    "will_label": "Will"}}
         qlabel_dict = dict(parent=self.container)
         qlabel_dict_centered = dict(parent=self.container, align=QtCore.Qt.AlignVCenter | QtCore.Qt.AlignCenter)
         qline_dict_disabled = dict(parent=self.container, min_size=(15, 23), enabled=False)
@@ -63,7 +52,6 @@ class SavingThrowsBox(BoxType, DefaultBox):
         self.misc_bonus_label = create_qlabel(**qlabel_dict_centered)
 
         self.add_to_layout()
-        self.translate("EN")
         self.set_values_from_attributes()
 
     def add_to_layout(self):
@@ -82,9 +70,6 @@ class SavingThrowsBox(BoxType, DefaultBox):
         fourth_row = [self.will_label, self.will_total, self.will_class_bonus, self.will_attr_bonus,
                       self.will_size_bonus, self.will_misc_bonus]
         add_multiple_elements_to_layout_by_row(self.layout, fourth_row, row=3)
-
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
 
     def set_values_from_attributes(self):
         self.reflex_attr_bonus.setText(str(self.char_core.attributes.dex['mod']))
@@ -108,3 +93,14 @@ class SavingThrowsBox(BoxType, DefaultBox):
     def _update_will_text(self):
         update_texts(self, to_set="will_total", to_get_from=["will_class_bonus", "will_attr_bonus",
                                                              "will_size_bonus", "will_misc_bonus"])
+
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("SavingThrows", "Saving throws"))
+        self.total_label.setText(QApplication.translate("SavingThrows", "Total"))
+        self.class_base_label.setText(QApplication.translate("SavingThrows", "Base"))
+        self.attr_bonus_label.setText(QApplication.translate("SavingThrows", "Attr"))
+        self.size_bonus_label.setText(QApplication.translate("SavingThrows", "Size"))
+        self.misc_bonus_label.setText(QApplication.translate("SavingThrows", "Misc"))
+        self.fortitude_label.setText(QApplication.translate("SavingThrows", "Fortitude"))
+        self.reflex_label.setText(QApplication.translate("SavingThrows", "Reflex"))
+        self.will_label.setText(QApplication.translate("SavingThrows", "Will"))

@@ -1,10 +1,11 @@
 from types import SimpleNamespace
 
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication
 
 from core.character import Character
 from gui.frames.qt_generic_classes import ScrollableBox
-from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children, create_qline_edit, \
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, \
     add_multiple_elements_to_layout_by_row, create_push_button, get_int_from_widget, get_float_from_widget, \
     add_element_to_layout
 
@@ -38,23 +39,13 @@ class ItemsBox(ScrollableBox):
         self.total_encumbrance_label = create_qlabel(self.container,
                                                      align=QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
         self.weight_separator_label = create_qlabel(self.container,
-                                                    align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
+                                                    align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter, text="/")
         self.max_encumbrance = create_qline_edit(self.container, max_size=[30, None], enabled=False,
                                                  align=QtCore.Qt.AlignCenter)
-        self.translate_reference = {"EN": {
-            "root": {"title": "Items"},
-            "items_weight_label": "Weight",
-            "items_name_label": "Item name",
-            "items_count_label": "Count",
-            "items_description_label": "Description",
-            "total_encumbrance_label": "Total encumbrance:",
-            "weight_separator_label": "/"
-        }}
         self.last_row = [self.add_new]
         self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label,
                        self.items_description_label]
         self.add_to_layout()
-        self.translate("EN")
         self.add_item = self.add_new_element
         self.add_new.clicked.connect(self.add_item)
         self.melee_weapons_weight = 0
@@ -97,9 +88,6 @@ class ItemsBox(ScrollableBox):
         add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5)
         self.add_last_row()
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
-
     def set_values_from_attributes(self):
         str_ref_core = getattr(self.char_core.attributes, "str")
         str_value = str_ref_core['value']
@@ -129,3 +117,11 @@ class ItemsBox(ScrollableBox):
         add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5, row=self.row_offset + element_idx)
         if hasattr(self, "add_new"):
             self.add_last_row()
+
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Items", "Items"))
+        self.items_weight_label.setText(QApplication.translate("Items", "Weight"))
+        self.items_name_label.setText(QApplication.translate("Items", "Item name"))
+        self.items_count_label.setText(QApplication.translate("Items", "Count"))
+        self.items_description_label.setText(QApplication.translate("Items", "Description"))
+        self.total_encumbrance_label.setText(QApplication.translate("Items", "Total encumbrance:"))

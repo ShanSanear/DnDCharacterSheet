@@ -1,35 +1,13 @@
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children
+from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_multiple_elements_to_layout_by_row
 
 
 class BasicInfoBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size):
         BoxType.__init__(self, parent=parent, position=position, size=size)
-        self.translate_reference = {
-            "EN":
-                {
-                    "class_label": "Class",
-                    "faith_label": "Faith",
-                    "race_label": "Race",
-                    "alignement_label": "Alignement",
-                    "player_name_label": "Player",
-                    "name_label": "Name",
-                    "height_label": "Height",
-                    "weight_label": "Weight",
-                    "experience_label": "Experience",
-                    "eyes_label": "Eyes",
-                    "hair_label": "Hair",
-                    "size_label": "Size",
-                    "age_label": "Age",
-                    "gender_label": "Gender",
-                    "level_label": "Level",
-                    "experience_divide_label": "/",
-                }
-        }
-        self.root.setTitle("Basic info")
         qlabel_dict_1 = dict(parent=self.container)
         qlabel_dict_2 = dict(parent=self.container)
         qline_dict_1 = dict(parent=self.container)  # min_size=(100, 23))
@@ -42,7 +20,7 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.player_name_label = create_qlabel(**qlabel_dict_1)
         self.name_label = create_qlabel(**qlabel_dict_1)
         self.experience_label = create_qlabel(**qlabel_dict_1, align=Qt.AlignVCenter | Qt.AlignCenter)
-        self.experience_divide_label = create_qlabel(**qlabel_dict_1)
+        self.experience_divide_label = create_qlabel(**qlabel_dict_1, text="/")
         self.height_label = create_qlabel(**qlabel_dict_2)
         self.weight_label = create_qlabel(**qlabel_dict_2)
         self.eyes_label = create_qlabel(**qlabel_dict_2)
@@ -70,7 +48,6 @@ class BasicInfoBox(BoxType, DefaultBox):
         self.level = create_qline_edit(**qline_dict_2)
 
         self.add_to_layout()
-        self.translate("EN")
 
     def add_to_layout(self):
         second_row_labels = [self.class_label, self.race_label, self.alignement_label, self.faith_label]
@@ -102,5 +79,20 @@ class BasicInfoBox(BoxType, DefaultBox):
         add_multiple_elements_to_layout_by_row(self.layout, [third_row_input_part_2[-1]], row=5, start_column=7,
                                                width=2)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("BasicInfo", "Basic info"))
+        self.class_label.setText(QApplication.translate("BasicInfo", "Class"))
+        self.faith_label.setText(QApplication.translate("BasicInfo", "Faith"))
+        self.race_label.setText(QApplication.translate("BasicInfo", "Race"))
+        self.alignement_label.setText(QApplication.translate("BasicInfo", "Alignement"))
+        self.player_name_label.setText(QApplication.translate("BasicInfo", "Player"))
+        self.name_label.setText(QApplication.translate("BasicInfo", "Name"))
+        self.height_label.setText(QApplication.translate("BasicInfo", "Height"))
+        self.weight_label.setText(QApplication.translate("BasicInfo", "Weight"))
+        self.experience_label.setText(QApplication.translate("BasicInfo", "Experience"))
+        self.eyes_label.setText(QApplication.translate("BasicInfo", "Eyes"))
+        self.hair_label.setText(QApplication.translate("BasicInfo", "Hair"))
+        self.size_label.setText(QApplication.translate("BasicInfo", "Size"))
+        self.age_label.setText(QApplication.translate("BasicInfo", "Age"))
+        self.gender_label.setText(QApplication.translate("BasicInfo", "Gender"))
+        self.level_label.setText(QApplication.translate("BasicInfo", "Level"))

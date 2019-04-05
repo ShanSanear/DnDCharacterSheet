@@ -1,9 +1,10 @@
 from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication
 
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, add_multiple_elements_to_layout_by_row, \
-    set_text_of_children, update_texts
+    update_texts
 
 
 class CombatBox(BoxType, DefaultBox):
@@ -12,27 +13,6 @@ class CombatBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
         BoxType.__init__(self, parent=parent, position=position, size=size)
-        self.translate_reference = {
-            "EN":
-                {
-                    "root": {
-                        "title": "Combat"
-                    },
-                    "total_label": "Total",
-                    "base_label": "Base",
-                    "attr_mod_label": "Attr mod",
-                    "size_label": "Size",
-                    "misc_label": "Misc",
-                    "melee_label": "Melee",
-                    "ranged_label": "Ranged",
-                    "initiative_misc_bonus_label": "Misc",
-                    "initiative_dex_bonus_label": "Dex",
-                    "initiative_label": "Initiative",
-                    "speed_label": "Speed",
-                    "total_label_init": "Total",
-                    "attacks_type_label": "Type",
-                }
-        }
         qline_dict_disabled = dict(parent=self.container, enabled=False)
         qline_dict_ranged = dict(parent=self.container, function_on_text_changed=self._update_ranged_attack)
         qline_dict_melee = dict(parent=self.container, function_on_text_changed=self._update_melee_attack)
@@ -77,7 +57,6 @@ class CombatBox(BoxType, DefaultBox):
                        self.size_label, self.misc_label]
 
         self.add_to_layout()
-        self.translate("EN")
         self.set_values_from_attributes()
 
     def add_to_layout(self):
@@ -101,8 +80,6 @@ class CombatBox(BoxType, DefaultBox):
         fith_row = [self.speed_label, self.speed_total]
         add_multiple_elements_to_layout_by_row(self.layout, fith_row, row=5)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
 
     def set_values_from_attributes(self):
         self.melee_attr_mod.setText(str(self.char_core.attributes.str['mod']))
@@ -123,3 +100,19 @@ class CombatBox(BoxType, DefaultBox):
     def _update_initiative(self):
         update_texts(root_object=self, to_set="initiative_total",
                      to_get_from=["initiative_misc_bonus", "initiative_dex_bonus"])
+
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Combat", "Combat"))
+        self.total_label.setText(QApplication.translate("Combat", "Total"))
+        self.base_label.setText(QApplication.translate("Combat", "Base"))
+        self.attr_mod_label.setText(QApplication.translate("Combat", "Attr mod"))
+        self.size_label.setText(QApplication.translate("Combat", "Size"))
+        self.misc_label.setText(QApplication.translate("Combat", "Misc"))
+        self.melee_label.setText(QApplication.translate("Combat", "Melee"))
+        self.ranged_label.setText(QApplication.translate("Combat", "Ranged"))
+        self.initiative_misc_bonus_label.setText(QApplication.translate("Combat", "Misc"))
+        self.initiative_dex_bonus_label.setText(QApplication.translate("Combat", "Dex"))
+        self.initiative_label.setText(QApplication.translate("Combat", "Initiative"))
+        self.speed_label.setText(QApplication.translate("Combat", "Speed"))
+        self.total_label_init.setText(QApplication.translate("Combat", "Total"))
+        self.attacks_type_label.setText(QApplication.translate("Combat", "Type"))

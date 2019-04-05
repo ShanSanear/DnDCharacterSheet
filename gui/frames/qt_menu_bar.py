@@ -1,7 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QActionGroup
-
-from gui.frames.qt_generic_functions import set_text_of_children
+from PyQt5.QtWidgets import QActionGroup, QApplication
 
 
 class MenuBar:
@@ -18,7 +16,6 @@ class MenuBar:
         self.new_character.setShortcut("Ctrl+n")
         self.open_character.setShortcut("Ctrl+o")
         self.save_character.setShortcut("Ctrl+s")
-        self.save_character_as.setShortcut("Ctrl+Alt+s")
         self.language_action_group = QActionGroup(main_window, exclusive=True)
         self.change_language_en = QtWidgets.QAction(main_window, checkable=True)
         self.change_language_pl = QtWidgets.QAction(main_window, checkable=True)
@@ -38,22 +35,15 @@ class MenuBar:
         self.root.addAction(self.file_menu.menuAction())
         self.root.addAction(self.language_menu.menuAction())
         self.root.addAction(self.help_menu.menuAction())
-        self.translate_reference = {
-            "EN": {
-                "file_menu": {"title": "File"},
-                "help_menu": {"title": "Help"},
-                "language_menu": {"title": "Language"},
-                "new_character": "New character...",
-                "open_character": "Open",
-                "save_character": "Save",
-                "save_character_as": "Save as...",
-                "change_language_en": "English",
-                "change_language_pl": "polski",
-                "about": "About",
-                "exit": "Exit",
-            }
-        }
-        self.translate("EN")
+        self.change_language_en.setText("English")
+        self.change_language_pl.setText("polski")
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
+    def retranslate(self):
+        self.file_menu.setTitle(QApplication.translate("Menu", "File"))
+        self.help_menu.setTitle(QApplication.translate("Menu", "Help"))
+        self.language_menu.setTitle(QApplication.translate("Menu", "Language"))
+        self.new_character.setText(QApplication.translate("Menu", "New character..."))
+        self.open_character.setText(QApplication.translate("Menu", "Open"))
+        self.save_character.setText(QApplication.translate("Menu", "Save"))
+        self.save_character_as.setText(QApplication.translate("Menu", "Save as..."))
+        self.exit.setText(QApplication.translate("Menu", "Exit"))
