@@ -40,8 +40,10 @@ class SingleCharApp(MyApp):
 
 def init_gui():
     app = QApplication(sys.argv)
+    app.setStyle("windowsvista")
     form = SingleCharApp()
     form.show()
+    form.setWindowTitle("Character Sheet")
     app.exec_()
 
 

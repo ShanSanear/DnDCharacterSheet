@@ -61,7 +61,8 @@ class SkillsBox(ScrollableBox):
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),
                                                  function_on_index_changed=self._set_attr_val_for_skill,
-                                                 args_on_index_changed=[new_skill], max_size=(69, None), )
+                                                 args_on_index_changed=[new_skill], max_size=(69, None),
+                                                 wheel_event=False)
 
         qdict = dict(parent=self.container, align=QtCore.Qt.AlignCenter, max_size=[30, None], min_size=[None, 23])
         new_skill.total = create_qline_edit(enabled=False, str_format="{:+d}", **qdict)

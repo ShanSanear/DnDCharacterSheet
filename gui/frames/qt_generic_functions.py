@@ -4,6 +4,8 @@ from functools import partial
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
 
+from gui.frames.qt_generic_classes import NoWheelComboBox
+
 
 def try_to_get_float(string, fallback):
     try:
@@ -111,8 +113,11 @@ def create_push_button(name: str, parent: QtWidgets.QWidget, min_size: (list, tu
 def create_combo_box(parent: QtWidgets.QWidget, number_of_choices: int = 1,
                      choices_text: (list, tuple) = None,
                      min_size: (list, tuple) = None, max_size: (list, tuple) = None, function_on_index_changed=None,
-                     args_on_index_changed=None):
-    combo_box: QComboBox = QtWidgets.QComboBox(parent)
+                     args_on_index_changed=None, wheel_event=True):
+    if wheel_event:
+        combo_box: QComboBox = QtWidgets.QComboBox(parent)
+    else:
+        combo_box: NoWheelComboBox = NoWheelComboBox(parent)
     for _ in range(number_of_choices):
         combo_box.addItem("")
     if choices_text:
