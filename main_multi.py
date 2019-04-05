@@ -65,6 +65,7 @@ class MultiCharApp(QMainWindow):
 def init_multi_gui():
     app = QApplication(sys.argv)
     form = MultiCharApp()
+    form.setWindowTitle("MultiCharacter Sheet")
     form.show()
     app.exec_()
 

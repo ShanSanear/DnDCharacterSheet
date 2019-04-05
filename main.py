@@ -42,6 +42,7 @@ def init_gui():
     app = QApplication(sys.argv)
     form = SingleCharApp()
     form.show()
+    form.setWindowTitle("Character Sheet")
     app.exec_()
 
 
