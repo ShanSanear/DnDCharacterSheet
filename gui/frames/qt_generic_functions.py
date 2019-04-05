@@ -2,9 +2,8 @@ import logging
 from functools import partial
 
 from PyQt5 import QtWidgets
+from PyQt5.QtGui import QWheelEvent
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
-
-from gui.frames.qt_generic_classes import NoWheelComboBox
 
 
 def try_to_get_float(string, fallback):
@@ -26,7 +25,6 @@ def get_int_from_widget(widget, fallback):
 def get_float_from_widget(widget, fallback):
     val = try_to_get_float(widget.text(), fallback)
     return val
-
 
 
 def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size: (list, tuple)):
@@ -91,7 +89,7 @@ def create_qline_edit(parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
             qline.textEdited.connect(function_on_text_edited)
         else:
             qline.textEdited.connect(partial(function_on_text_edited, *args_on_text_edited))
-            
+
     return qline
 
 
@@ -117,7 +115,7 @@ def create_combo_box(parent: QtWidgets.QWidget, number_of_choices: int = 1,
     if wheel_event:
         combo_box: QComboBox = QtWidgets.QComboBox(parent)
     else:
-        combo_box: NoWheelComboBox = NoWheelComboBox(parent)
+        combo_box = NoWheelComboBox(parent)
     for _ in range(number_of_choices):
         combo_box.addItem("")
     if choices_text:
@@ -253,7 +251,8 @@ def update_texts(root_object, to_set, to_get_from, with_decimal_point=False):
 
 
 class MyQlineEdit(QLineEdit):
-    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}", is_float=False):
+    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}",
+                 is_float=False):
         self.function_on_unfocused = function_on_unfocused
         self.args_on_unfocused = args_on_unfocused
         self.str_format = str_format
@@ -284,3 +283,11 @@ class MyQlineEdit(QLineEdit):
             text = p_str
         super(MyQlineEdit, self).setText(text)
         self.setCursorPosition(0)
+
+
+class NoWheelComboBox(QtWidgets.QComboBox):
+    def __init__(self, *args, **kwargs):
+        super(NoWheelComboBox, self).__init__(*args, **kwargs)
+
+    def wheelEvent(self, e: QWheelEvent) -> None:
+        pass
