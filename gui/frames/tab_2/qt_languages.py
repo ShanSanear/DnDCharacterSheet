@@ -1,7 +1,8 @@
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QApplication
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
-from gui.frames.qt_generic_functions import create_qlabel, set_text_of_children
+from gui.frames.qt_generic_functions import create_qlabel
 
 
 class LanguagesBox(BoxType, DefaultBox):
@@ -12,19 +13,11 @@ class LanguagesBox(BoxType, DefaultBox):
         self.known_languages_label = create_qlabel(parent=self.container, align=QtCore.Qt.AlignCenter)
         self.known_languages = QtWidgets.QPlainTextEdit(self.container)
         self.add_to_layout()
-        self.translate_reference = {
-            "EN": {
-                "root": {
-                    "title": "Languages",
-                },
-                "known_languages_label": "Known Languages",
-            }
-        }
-        self.translate("EN")
 
     def add_to_layout(self):
         self.layout.addWidget(self.known_languages_label)
         self.layout.addWidget(self.known_languages)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Language", "Languages"))
+        self.known_languages_label.setText(QApplication.translate("Language", "Known languages"))

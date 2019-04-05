@@ -2,19 +2,19 @@ import logging
 from types import SimpleNamespace
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout, QComboBox
+from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout, QComboBox, QApplication
 
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qline_edit, create_qlabel, create_combo_box, \
-    add_multiple_elements_to_layout_by_row, set_text_of_children, create_push_button, try_to_get_float
+    add_multiple_elements_to_layout_by_row, create_push_button, try_to_get_float
 from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
 from gui.frames.tab_2.qt_items import ItemsBox
 
 
-class WeaponBox(BoxType, DefaultBox):
+class Weapons(BoxType, DefaultBox):
     choice: QComboBox
 
-    def __init__(self, parent, position, size, translation, weapons_statistics_box, label_dict, weapon_attributes, ):
+    def __init__(self, parent, position, size, weapons_statistics_box, label_dict, weapon_attributes, ):
         self.main_widget = QWidget(parent)
         self.main_widget.setGeometry(QtCore.QRect(*position, *size))
         logging.debug("Position: %s, class: %s", position, self.__class__)
@@ -24,18 +24,6 @@ class WeaponBox(BoxType, DefaultBox):
         logging.debug("Inner position: %s, class: %s", inner_position, self.__class__)
         logging.debug("Inner size: %s, class: %s", inner_size, self.__class__)
         BoxType.__init__(self, parent=self.main_widget, position=inner_position, size=inner_size, defaults=False)
-        default_translate = {"EN":
-            {
-                "name_label": "Name",
-                "attack_bonus_label": "Attack bonus",
-                "damage_roll_label": "Damage roll",
-                "crit_label": "Critical roll / multiplier",
-                "special_label": "Special",
-                "weight_label": "Weight",
-                "size_label": "Size",
-                "type_label": "Type", }}
-        self.translate_reference = dict(default_translate)
-        self.translate_reference["EN"].update(translation["EN"])
         self.weapon_attributes = weapon_attributes
         self.weapons_statistics_box = weapons_statistics_box
         self.qedit_dict = dict(parent=self.container,
@@ -112,9 +100,6 @@ class WeaponBox(BoxType, DefaultBox):
         add_multiple_elements_to_layout_by_row(self.layout, self.second_row_label, row=2)
         add_multiple_elements_to_layout_by_row(self.layout, self.second_row_edit, row=3)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
-
     def change_weapon(self):
         idx = self.choice.currentIndex()
         logging.debug("index of choice: %d in %s", idx, self.__class__)
@@ -128,7 +113,6 @@ class WeaponBox(BoxType, DefaultBox):
         chosen_weapon = self.weapons[self.choice.currentIndex()]
         self.weapons = sorted(self.weapons, key=lambda x: x.name)
         for idx, weapon in enumerate(self.weapons):
-            # self.choice.setItemText(idx, weapon.name)
             if chosen_weapon == weapon:
                 self.choice.setCurrentIndex(idx)
 
@@ -152,32 +136,28 @@ class WeaponBox(BoxType, DefaultBox):
         self.weapons = []
         self.add_new_element()
 
+    def retranslate(self):
+        self.name_label.setText(QApplication.translate("Weapons", "Name"))
+        self.attack_bonus_label.setText(QApplication.translate("Weapons", "Attack bonus"))
+        self.damage_roll_label.setText(QApplication.translate("Weapons", "Damage roll"))
+        self.crit_label.setText(QApplication.translate("Weapons", "Critical roll / multiplier"))
+        self.special_label.setText(QApplication.translate("Weapons", "Special"))
+        self.weight_label.setText(QApplication.translate("Weapons", "Weight"))
+        self.size_label.setText(QApplication.translate("Weapons", "Size"))
+        self.type_label.setText(QApplication.translate("Weapons", "Type"))
 
 
-class MeleeWeapon(WeaponBox):
+class MeleeWeapon(Weapons):
     def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox, items_box: ItemsBox):
         weapon_attributes = ["name", "attack_bonus", "damage_roll", "crit", "special", "weight", "size", "type"]
         melee_weapon_qlabel = dict(max_size=(138, 16))
-        translate = {
-            "EN":
-                {
-                    "root": {
-                        "title": "Currently chosen melee weapon"
-                    },
-                    "choice": {
-                        "choices": ["Melee weapon 1"]
-                    }
-                }
-        }
-        super(MeleeWeapon, self).__init__(parent=parent, position=position, size=size, translation=translate,
+        super(MeleeWeapon, self).__init__(parent=parent, position=position, size=size,
                                           label_dict=melee_weapon_qlabel, weapons_statistics_box=weapons_statistics_box,
                                           weapon_attributes=weapon_attributes)
         self.items_box = items_box
         self.create_current_weapon()
-        # self.elements_list = [self.current_weapon]
         self.fill_row_lists()
         self.add_to_layout()
-        self.translate("EN")
         self.weapons.append(self.create_weapon())
         self.change_weapon()
         self._sort_weapon_by_name()
@@ -216,36 +196,26 @@ class MeleeWeapon(WeaponBox):
             self.update_total_weight()
         self.update_choice_text()
 
+    def retranslate(self):
+        super(MeleeWeapon, self).retranslate()
+        self.root.setTitle(QApplication.translate("Weapons", "Currently chose melee weapon"))
 
-class RangedWeapon(WeaponBox):
+
+class RangedWeapon(Weapons):
     def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox, items_box: ItemsBox):
         weapon_attributes = ["name", "attack_bonus", "damage_roll", "crit", "range",
                              "special", "ammo", "weight", "size", "type"]
-        translate = {
-            "EN":
-                {
-                    "root": {
-                        "title": "Currently chosen ranged weapon"
-                    },
-                    "choice": {
-                        "choices": ["Ranged weapon 1"]
-                    },
-                    "ammo_label": "Ammo",
-                    "range_label": "Range",
-                }
-        }
         ranged_weapon_qlabel = {}
         super(RangedWeapon, self).__init__(parent=parent, position=position, size=size,
                                            label_dict=ranged_weapon_qlabel,
                                            weapons_statistics_box=weapons_statistics_box,
-                                           weapon_attributes=weapon_attributes, translation=translate)
+                                           weapon_attributes=weapon_attributes)
         self.range_label = create_qlabel(**ranged_weapon_qlabel)
         self.ammo_label = create_qlabel(**ranged_weapon_qlabel)
         self.items_box = items_box
         self.create_current_weapon()
         self.fill_row_lists()
         self.add_to_layout()
-        self.translate("EN")
         self.weapons.append(self.create_weapon())
         self.change_weapon()
         self._sort_weapon_by_name()
@@ -284,7 +254,6 @@ class RangedWeapon(WeaponBox):
         setattr(chosen_weapon, attribute, new_val)
         if attribute == "name":
             self.weapons_statistics_box.ranged_name.setText(new_val)
-            # self.choice.setItemText(idx, new_val)
         elif attribute == "damage_roll":
             self.weapons_statistics_box.ranged_damage.setText(new_val)
         elif attribute == "crit":
@@ -297,17 +266,17 @@ class RangedWeapon(WeaponBox):
             self.update_total_weight()
         self.update_choice_text()
 
+    def retranslate(self):
+        super(RangedWeapon, self).retranslate()
+        self.root.setTitle(QApplication.translate("Weapons", "Currently chosen ranged weapon"))
+        self.ammo_label.setText(QApplication.translate("Weapons", "Ammo"))
+        self.range_label.setText(QApplication.translate("Weapons", "Range"))
+
 
 class WeaponsBox:
     def __init__(self, parent, position, size, weapons_statistics_box: WeaponStatisticsBox, items_box: ItemsBox):
         self.root = QGroupBox(parent)
         self.root.setGeometry(QtCore.QRect(*position, *size))
-        self.translate_reference = {"EN": {
-            "root": {
-                "title": "Weapons"
-            }
-        }
-        }
         self.container = QWidget(self.root)
         self.container.setGeometry(QtCore.QRect(*position, size[0], size[1] / 2))
         self.layout = QVBoxLayout(self.root)
@@ -317,11 +286,12 @@ class WeaponsBox:
                                              weapons_statistics_box=weapons_statistics_box, items_box=items_box)
         self.ranged_weapons_box = RangedWeapon(parent=self.root, position=[0, size[1] / 2], size=box_size,
                                                weapons_statistics_box=weapons_statistics_box, items_box=items_box)
-        self.translate("EN")
 
     def get_dict_repr(self):
         return {"melee_weapons_box": self.melee_weapons_box.get_dict_repr(),
                 "ranged_weapons_box": self.ranged_weapons_box.get_dict_repr()}
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Weapons", "Weapons"))
+        self.melee_weapons_box.retranslate()
+        self.ranged_weapons_box.retranslate()

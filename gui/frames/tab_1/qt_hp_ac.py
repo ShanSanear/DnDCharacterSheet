@@ -1,7 +1,9 @@
+from PyQt5.QtWidgets import QApplication
+
 from core.character import Character
 from gui.frames.qt_generic_classes import DefaultBox, BoxType
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, add_element_to_layout, \
-    add_multiple_elements_to_layout_by_row, set_text_of_children, update_texts
+    add_multiple_elements_to_layout_by_row, update_texts
 
 
 class HpAcBox(BoxType, DefaultBox):
@@ -10,26 +12,6 @@ class HpAcBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size, char_core):
         self.char_core = char_core
         BoxType.__init__(self, parent=parent, position=position, size=size, defaults=True)
-        self.translate_reference = {
-            "EN":
-                {
-                    "root": {
-                        "title": "HP / AC"
-                    },
-                    "hp_total_label": "Total",
-                    "hp_hp_wounds_current_hp_label": "Wounds",
-                    "hp_label": "HP",
-                    "ac_label": "AC",
-                    "ac_total_label": "Total",
-                    "ac_base_bonus_label": "Base",
-                    "ac_armor_bonus_label": "Armor",
-                    "ac_dex_bonus_label": "Dex",
-                    "ac_size_bonus_label": "Size",
-                    "ac_misc_bonus_label": "Misc",
-                    "hp_dice_label": "Dice",
-                    "contusion_label": "Contusion",
-                }
-        }
         qline_editable = dict(parent=self.container, function_on_text_changed=self._update_ac)
         self.hp_total_label = create_qlabel(self.container)
         self.hp_hp_wounds_current_hp_label = create_qlabel(self.container)
@@ -56,7 +38,6 @@ class HpAcBox(BoxType, DefaultBox):
         self.contusion_label = create_qlabel(self.container)
 
         self.add_to_layout()
-        self.translate("EN")
         self.set_values_from_attributes()
 
     def add_to_layout(self):
@@ -80,9 +61,6 @@ class HpAcBox(BoxType, DefaultBox):
                       self.ac_misc_bonus_label, ]
         add_multiple_elements_to_layout_by_row(self.layout, fourth_row, start_column=1, row=3)
 
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
-
     def set_values_from_attributes(self):
         self.ac_dex_bonus.setText(str(self.char_core.attributes.dex['mod']))
         self._update_ac()
@@ -90,3 +68,18 @@ class HpAcBox(BoxType, DefaultBox):
     def _update_ac(self):
         update_texts(self, "ac_total",
                      ["ac_base", "ac_armor_bonus", "ac_size_bonus", "ac_misc_bonus", "ac_dex_bonus"])
+
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("HpAc", "HP / AC"))
+        self.hp_total_label.setText(QApplication.translate("HpAc", "Total"))
+        self.hp_hp_wounds_current_hp_label.setText(QApplication.translate("HpAc", "Wounds"))
+        self.hp_label.setText(QApplication.translate("HpAc", "HP"))
+        self.ac_label.setText(QApplication.translate("HpAc", "AC"))
+        self.ac_total_label.setText(QApplication.translate("HpAc", "Total"))
+        self.ac_base_bonus_label.setText(QApplication.translate("HpAc", "Base"))
+        self.ac_armor_bonus_label.setText(QApplication.translate("HpAc", "Armor"))
+        self.ac_dex_bonus_label.setText(QApplication.translate("HpAc", "Dex"))
+        self.ac_size_bonus_label.setText(QApplication.translate("HpAc", "Size"))
+        self.ac_misc_bonus_label.setText(QApplication.translate("HpAc", "Misc"))
+        self.hp_dice_label.setText(QApplication.translate("HpAc", "Dice"))
+        self.contusion_label.setText(QApplication.translate("HpAc", "Contusion"))

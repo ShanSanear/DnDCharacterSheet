@@ -1,9 +1,11 @@
 from functools import partial
 from types import SimpleNamespace
 
+from PyQt5.QtWidgets import QApplication
+
 from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
-    add_multiple_elements_to_layout_by_row, set_text_of_children
+    add_multiple_elements_to_layout_by_row
 from gui.popups.qt_full_description import DescriptionDialog
 
 
@@ -22,27 +24,11 @@ class FeatsBox(ScrollableBox):
         self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
                                           text="+")
         self.last_row = [self.add_new]
-        self.translate_reference = {
-            "EN":
-                {
-                    "root":
-                        {
-                            "title": "Feats / Special abilities"
-                        },
-                    "description_label": "Desc",
-                    "name_label": "Feat name",
-                }
-        }
-
         self.add_to_layout()
         self.add_feat = self.add_new_element
         self.add_new.clicked.connect(self.add_feat)
 
         self.add_feat()
-        self.translate("EN")
-
-    def translate(self, language):
-        set_text_of_children(self, self.translate_reference[language])
 
     def update_size(self):
         pass
@@ -56,7 +42,7 @@ class FeatsBox(ScrollableBox):
         self.add_last_row()
 
     def show_description(self, feat):
-        dialog = DescriptionDialog("Feat description", self.root, feat)
+        dialog = DescriptionDialog(QApplication.translate("Feats", "Feat description"), self.root, feat)
         dialog.show()
 
     def create_feat(self):
@@ -75,3 +61,8 @@ class FeatsBox(ScrollableBox):
                                                   function_on_clicked=self._remove_element, args_on_clicked=new_feat)
 
         return new_feat
+
+    def retranslate(self):
+        self.root.setTitle(QApplication.translate("Feats", "Feats / Special abilities"))
+        self.description_label.setText(QApplication.translate("Feats", "Desc"))
+        self.name_label.setText(QApplication.translate("Feats", "Feat name"))
