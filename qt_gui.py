@@ -42,6 +42,8 @@ class MyApp(MainWindowUi):
         logging.info("File opened: %s", fname)
         self.weapons_box.melee_weapons_box.update_choice_text()
         self.weapons_box.ranged_weapons_box.update_choice_text()
+        self.weapons_box.melee_weapons_box.change_weapon()
+        self.weapons_box.ranged_weapons_box.change_weapon()
 
     def create_new_character(self):
         proceed = QMessageBox.question(self, "Continue?",
