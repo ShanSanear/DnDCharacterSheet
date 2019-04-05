@@ -64,6 +64,7 @@ class MultiCharApp(QMainWindow):
 
 def init_multi_gui():
     app = QApplication(sys.argv)
+    app.setStyle("windowsvista")
     form = MultiCharApp()
     form.setWindowTitle("MultiCharacter Sheet")
     form.show()
