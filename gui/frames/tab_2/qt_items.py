@@ -19,10 +19,6 @@ class ItemsBox(ScrollableBox):
         ScrollableBox.__init__(self, parent=parent, position=position, original_size=size, base_size=base_size,
                                max_height=max_height, height_increment=height_increment, row_offset=1,
                                last_row_column=4)
-        # ResizeableBox.__init__(self, parent=parent, position=position, size=size,
-        #                        row_offset=1, last_row_column=4)
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
-                                          text="+")
 
         self.max_encumbrance_map = {1: 1.5, 2: 3, 3: 5, 4: 6.5, 5: 8, 6: 10, 7: 11.5, 8: 13, 9: 15, 10: 16.5, 11: 19,
                                     12: 21.5, 13: 25, 14: 29, 15: 33, 16: 38, 17: 43, 18: 50, 19: 58, 20: 66.5,
@@ -108,15 +104,13 @@ class ItemsBox(ScrollableBox):
         self.total_encumbrance.setText(str(total_weight))
 
     def adding_new_element_to_layout(self, element_idx, values):
-        if hasattr(self, "add_new"):
-            self.layout.removeWidget(self.add_new)
+        self.layout.removeWidget(self.add_new)
         item_name = values[0]
         rest = values[1:]
         add_element_to_layout(self.layout, item_name, row=self.row_offset + element_idx, column=0, height=1,
                               width=5)
         add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5, row=self.row_offset + element_idx)
-        if hasattr(self, "add_new"):
-            self.add_last_row()
+        self.add_last_row()
 
     def retranslate(self):
         self.root.setTitle(QApplication.translate("Items", "Items"))

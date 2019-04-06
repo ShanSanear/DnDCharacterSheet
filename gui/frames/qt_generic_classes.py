@@ -5,7 +5,7 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout, QScrollArea, QVBoxLayout
 
 from gui.frames.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
-    get_general_dict_repr, get_int_from_widget
+    get_general_dict_repr, get_int_from_widget, create_push_button
 
 
 class BoxType:
@@ -190,6 +190,8 @@ class ScrollableBox(ResizeableBox):
         self.exceed_height = False
         self.original_size = original_size
         self.original_smaller_size = [original_size[0] - 20, original_size[1] - 40]
+        self.add_new = create_push_button("add_new", self.container, min_size=[20, 20], max_size=[20, 20],
+                                          text="+")
 
     def increase_height(self):
         self.height_increments += 1

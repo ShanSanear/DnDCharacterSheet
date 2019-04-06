@@ -23,7 +23,6 @@ class SkillsBox(ScrollableBox):
         self._map_choice_to_attr = {0: "str", 1: "dex", 2: "con", 3: "int", 4: "wis", 5: "cha"}
 
         self.char_core = char_core
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20], text="+")
         self.skill_name_label = create_qlabel(self.container, max_size=(69, None))
         self.attr_choice_label = create_qlabel(self.container, align=QtCore.Qt.AlignCenter,
                                                max_size=(69, None))
