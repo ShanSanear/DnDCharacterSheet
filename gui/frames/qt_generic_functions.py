@@ -4,7 +4,7 @@ from functools import partial
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
 
-from gui.frames.qt_widget_wrapper_classes import NoWheelComboBox
+from gui.frames.qt_widget_wrapper_classes import NoWheelComboBox, MyQlineEdit
 
 
 def try_to_get_float(string, fallback):
@@ -250,37 +250,3 @@ def get_sum_of_elements(root_object, elements, with_decimal_point):
 def update_texts(root_object, to_set, to_get_from, with_decimal_point=False):
     obj_to_set = getattr(root_object, to_set)
     obj_to_set.setText(str(get_sum_of_elements(root_object, to_get_from, with_decimal_point)))
-
-
-class MyQlineEdit(QLineEdit):
-    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}", is_float=False):
-        self.function_on_unfocused = function_on_unfocused
-        self.args_on_unfocused = args_on_unfocused
-        self.str_format = str_format
-        self.is_float = is_float
-        super(MyQlineEdit, self).__init__(parent)
-
-    def focusOutEvent(self, q_focus_event):
-        if self.function_on_unfocused:
-            if not self.args_on_unfocused:
-                self.function_on_unfocused()
-            else:
-                self.function_on_unfocused(*self.args_on_unfocused)
-        self.setCursorPosition(0)
-        super(MyQlineEdit, self).focusOutEvent(q_focus_event)
-
-    def setText(self, p_str):
-        if self.str_format != "{}":
-            try:
-                if not self.is_float:
-                    # Float in case of some kind of sum being with decimal point
-                    text = self.str_format.format(int(float(p_str)))
-                else:
-                    text = self.str_format.format(float(p_str))
-            except ValueError:
-                text = p_str
-                logging.warning("Couldnt work with text: %s", p_str)
-        else:
-            text = p_str
-        super(MyQlineEdit, self).setText(text)
-        self.setCursorPosition(0)
