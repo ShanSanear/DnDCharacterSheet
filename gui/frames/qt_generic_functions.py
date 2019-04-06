@@ -4,7 +4,7 @@ from functools import partial
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
 
-from gui.frames.qt_generic_classes import NoWheelComboBox
+from gui.frames.qt_widget_wrapper_classes import NoWheelComboBox
 
 
 def try_to_get_float(string, fallback):

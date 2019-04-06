@@ -1,8 +1,7 @@
 import logging
 from abc import ABC, abstractmethod
 
-from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtGui import QWheelEvent
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import QGroupBox, QWidget, QGridLayout, QScrollArea, QVBoxLayout
 
 from gui.frames.qt_generic_functions import add_multiple_elements_to_layout_by_row, collect_editable_data, \
@@ -244,11 +243,3 @@ class ScrollableBox(ResizeableBox):
         self.elements_list = []
         self.height_increments = 0
         self.add_new_element()
-
-
-class NoWheelComboBox(QtWidgets.QComboBox):
-    def __init__(self, *args, **kwargs):
-        super(NoWheelComboBox, self).__init__(*args, **kwargs)
-
-    def wheelEvent(self, e: QWheelEvent) -> None:
-        pass
