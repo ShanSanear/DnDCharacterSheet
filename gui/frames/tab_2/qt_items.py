@@ -38,7 +38,6 @@ class ItemsBox(ScrollableBox):
                                                     align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter, text="/")
         self.max_encumbrance = create_qline_edit(self.container, max_size=[30, None], enabled=False,
                                                  align=QtCore.Qt.AlignCenter)
-        self.last_row = [self.add_new]
         self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label,
                        self.items_description_label]
         self.add_to_layout()

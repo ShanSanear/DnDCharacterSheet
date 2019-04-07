@@ -70,6 +70,11 @@ class ResizeableBox(DefaultBox, ResizeType):
         self.end_scroll = False
         self.scrollarea.verticalScrollBar().rangeChanged.connect(self._max_scroll)
         self.scrollarea.verticalScrollBar().valueChanged.connect(lambda value: self.scrolled(value))
+        self.add_new = create_push_button("add_new", self.container, min_size=[20, 20], max_size=[20, 20],
+                                          text="+")
+        self.sort_button = create_push_button("sort_it", self.container, min_size=[20, 20], max_size=[20, 20],
+                                              text="S")
+        self.last_row = [self.sort_button, self.add_new]
 
     def add_new_element(self):
         element_idx = len(self.elements_list)
@@ -82,12 +87,10 @@ class ResizeableBox(DefaultBox, ResizeType):
             self.set_values_from_attributes()
 
     def adding_new_element_to_layout(self, element_idx, values):
-        if hasattr(self, "add_new"):
-            self.layout.removeWidget(self.add_new)
+        self.layout.removeWidget(self.add_new)
         add_multiple_elements_to_layout_by_row(self.layout, values,
                                                row=self.row_offset + element_idx)
-        if hasattr(self, "add_new"):
-            self.add_last_row()
+        self.add_last_row()
 
     def elements_for_layout(self, new_element):
         return [new_element.__dict__[element] for element in new_element.__dict__ if
@@ -119,7 +122,6 @@ class ResizeableBox(DefaultBox, ResizeType):
             for widget in subwidgets:
                 self.layout.removeWidget(widget)
 
-
     def update_layout(self):
         self.remove_widgets_from_layout()
         self.add_widgets_again()
@@ -134,7 +136,10 @@ class ResizeableBox(DefaultBox, ResizeType):
             self.adding_new_element_to_layout(element_idx, values)
 
     def add_last_row(self):
-        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
+        logging.debug("Adding last row: %s", self.last_row)
+        logging.debug("Class for last row: %s", self.__class__)
+        add_multiple_elements_to_layout_by_row(self.layout, self.last_row, row=len(self.elements_list) + 1,
+                                               start_column=self.last_row_column, width=1, height=1)
 
     def sort_elements(self):
         self.elements_list = sorted(self.elements_list, key=self._sort_element)
@@ -190,8 +195,6 @@ class ScrollableBox(ResizeableBox):
         self.exceed_height = False
         self.original_size = original_size
         self.original_smaller_size = [original_size[0] - 20, original_size[1] - 40]
-        self.add_new = create_push_button("add_new", self.container, min_size=[20, 20], max_size=[20, 20],
-                                          text="+")
 
     def increase_height(self):
         self.height_increments += 1

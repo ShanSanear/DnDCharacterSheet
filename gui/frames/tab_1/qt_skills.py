@@ -7,7 +7,8 @@ from PyQt5.QtWidgets import QApplication
 from core.character import Character
 from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_combo_box, create_qline_edit, create_qlabel, \
-    add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget
+    add_multiple_elements_to_layout_by_row, update_texts, create_push_button, create_checkbox, get_float_from_widget, \
+    add_element_to_layout
 
 
 class SkillsBox(ScrollableBox):
@@ -42,7 +43,7 @@ class SkillsBox(ScrollableBox):
                                                  align=QtCore.Qt.AlignCenter, max_size=[30, None], is_float=True)
         self.labels = [self.skill_name_label, self.attr_choice_label, self.total_label, self.attr_mod_label,
                        self.rank_label, self.misc_label, self.cross_class_label, ]
-        self.last_row = [self.add_new, self.used_skill_points_label, self.total_rank_calc]
+        self.last_row = [self.used_skill_points_label, self.total_rank_calc, self.sort_button, self.add_new]
         self.add_to_layout()
         self.add_skill = self.add_new_element
         self.add_new.clicked.connect(self.add_skill)
@@ -99,7 +100,12 @@ class SkillsBox(ScrollableBox):
         self.total_rank_calc.setText(str(total_ranks))
 
     def add_last_row(self):
-        self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
+        last_row_index = len(self.elements_list) + 1
+        add_element_to_layout(self.layout, self.add_new, row=last_row_index,
+                              column=self.last_row_column, height=1, width=1)
+        add_element_to_layout(self.layout, self.used_skill_points_label, row=last_row_index, column=1, height=1, width=3)
+        add_element_to_layout(self.layout, self.total_rank_calc, row=last_row_index, column=4, width=1, height=1, )
+        #self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
         self.layout.addWidget(self.used_skill_points_label, len(self.elements_list) + 1, 1, 1, 3)
         self.layout.addWidget(self.total_rank_calc, len(self.elements_list) + 1, 4, 1, 1)
 
