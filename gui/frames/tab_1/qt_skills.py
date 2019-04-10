@@ -86,7 +86,7 @@ class SkillsBox(ScrollableBox):
 
 
     def add_to_layout(self):
-        add_multiple_elements_to_layout_by_row(self.layout, self.labels)
+        add_multiple_elements_to_layout_by_row(self.layout, self.labels + [self.sort_button])
 
 
     def calculate_ranks(self):
@@ -106,8 +106,6 @@ class SkillsBox(ScrollableBox):
         add_element_to_layout(self.layout, self.total_rank_calc, row=last_row_index, column=4, width=1, height=1, )
         add_element_to_layout(self.layout, self.used_skill_points_label, row=len(self.elements_list) + 1, column=1,
                               height=1, width=3)
-        add_element_to_layout(self.layout, self.sort_button, row=last_row_index,
-                              column=self.last_row_column, height=1, width=1)
         add_element_to_layout(self.layout, self.add_new, row=last_row_index,
                               column=self.last_row_column + 1, height=1, width=1)
 

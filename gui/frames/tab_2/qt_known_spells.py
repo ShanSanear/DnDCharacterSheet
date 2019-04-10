@@ -15,7 +15,7 @@ class KnownSpellsBox(ScrollableBox):
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
                                original_size=size,
-                               height_increment=height_increment, row_offset=1, last_row_column=3)
+                               height_increment=height_increment, row_offset=1, last_row_column=4)
         qlabel_dict = dict(parent=self.container, max_size=(20, None))
         qlabel_dict_2 = dict(parent=self.container)
 
@@ -57,7 +57,7 @@ class KnownSpellsBox(ScrollableBox):
         return self.create_spell()
 
     def add_to_layout(self):
-        add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=self.labels)
+        add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=self.labels + [self.sort_button])
 
     def show_description(self, spell):
         dialog = DescriptionDialog(QApplication.translate("KnownLanguage", "Spell description"), self.root, spell)

@@ -16,7 +16,7 @@ class FeatsBox(ScrollableBox):
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
                                original_size=size,
-                               height_increment=height_increment, row_offset=1, last_row_column=1)
+                               height_increment=height_increment, row_offset=1, last_row_column=2)
         self.name_label = create_qlabel(self.container)
         self.description_field_label = create_qlabel(self.container)
         self.description_label = create_qlabel(self.container)
@@ -35,7 +35,7 @@ class FeatsBox(ScrollableBox):
         return self.create_feat()
 
     def add_to_layout(self):
-        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label])
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label, self.sort_button])
         self.add_last_row()
 
     def show_description(self, feat):

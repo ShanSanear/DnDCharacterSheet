@@ -74,7 +74,7 @@ class ResizeableBox(DefaultBox, ResizeType):
                                           text="+")
         self.sort_button = create_push_button("sort_it", self.container, min_size=[20, 20], max_size=[20, 20],
                                               text="S", function_on_clicked=self.sort_elements)
-        self.last_row = [self.sort_button, self.add_new]
+        self.last_row = [self.add_new]
 
     def add_new_element(self):
         element_idx = len(self.elements_list)
