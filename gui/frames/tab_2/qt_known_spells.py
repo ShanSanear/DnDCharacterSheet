@@ -37,10 +37,8 @@ class KnownSpellsBox(ScrollableBox):
     def create_spell(self):
         idx = len(self.elements_list)
         new_spell = SimpleNamespace()
-        new_spell.lvl = create_qline_edit(parent=self.container, max_size=[20, None],
-                                          min_size=[None, 23], function_on_unfocused=self.sort_elements)
-        new_spell.name = create_qline_edit(parent=self.container, min_size=[120, 23],
-                                           function_on_unfocused=self.sort_elements)
+        new_spell.lvl = create_qline_edit(parent=self.container, max_size=[20, None], min_size=[None, 23])
+        new_spell.name = create_qline_edit(parent=self.container, min_size=[120, 23])
 
         new_spell.short_description = create_qline_edit(parent=self.container, min_size=[250, 23])
         new_spell.description_button = create_push_button(f"known_spells_{idx}_description_button",

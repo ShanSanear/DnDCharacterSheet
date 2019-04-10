@@ -56,8 +56,7 @@ class SkillsBox(ScrollableBox):
 
     def create_new_skill(self):
         new_skill = SimpleNamespace()
-        new_skill.name = create_qline_edit(self.container, min_size=(150, None),
-                                           function_on_unfocused=self.sort_elements)
+        new_skill.name = create_qline_edit(self.container, min_size=(150, None))
         new_skill.attr_choice = create_combo_box(parent=self.container,
                                                  number_of_choices=6,
                                                  choices_text=("STR", "DEX", "CON", "INT", "WIS", "CHA"),

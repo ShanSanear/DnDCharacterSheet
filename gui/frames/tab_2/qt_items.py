@@ -50,8 +50,7 @@ class ItemsBox(ScrollableBox):
 
     def create_new_item(self):
         new_item = SimpleNamespace()
-        new_item.name = create_qline_edit(self.container, min_size=[200, 23],
-                                          function_on_unfocused=self.sort_elements)
+        new_item.name = create_qline_edit(self.container, min_size=[200, 23])
         new_item.weight = create_qline_edit(self.container, min_size=[None, 23],
                                             max_size=[30, None], function_on_text_changed=self.calculate_weight)
 
