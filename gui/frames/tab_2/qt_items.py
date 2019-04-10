@@ -65,12 +65,13 @@ class ItemsBox(ScrollableBox):
         return new_item
 
     def add_last_row(self):
-        last_row = len(self.elements_list) + 1
-        self.layout.addWidget(self.total_encumbrance_label, last_row, 0, 1, 1)
-        self.layout.addWidget(self.total_encumbrance, last_row, 1, 1, 1)
-        self.layout.addWidget(self.weight_separator_label, last_row, 2, 1, 1)
-        self.layout.addWidget(self.max_encumbrance, last_row, 3, 1, 1)
-        self.layout.addWidget(self.add_new, last_row, 8, 1, 1)
+        last_row_idx = len(self.elements_list) + 1
+        add_element_to_layout(self.layout, self.total_encumbrance_label, row=last_row_idx, column=0, width=1, height=1)
+        add_element_to_layout(self.layout, self.total_encumbrance, row=last_row_idx, column=1, width=1, height=1)
+        add_element_to_layout(self.layout, self.weight_separator_label, row=last_row_idx, column=2, width=1, height=1)
+        add_element_to_layout(self.layout, self.max_encumbrance, row=last_row_idx, column=3, width=1, height=1)
+        add_element_to_layout(self.layout, self.sort_button, row=last_row_idx, column=8, width=1, height=1)
+        add_element_to_layout(self.layout, self.add_new, row=last_row_idx, column=9, width=1, height=1)
 
     def create_new_element(self):
         self.increase_height()
@@ -105,10 +106,16 @@ class ItemsBox(ScrollableBox):
     def adding_new_element_to_layout(self, element_idx, values):
         self.layout.removeWidget(self.add_new)
         item_name = values[0]
-        rest = values[1:]
+        rest = values[1:-2]
+        description_field = values[-2]
+        remove_item_button = values[-1]
         add_element_to_layout(self.layout, item_name, row=self.row_offset + element_idx, column=0, height=1,
                               width=5)
         add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5, row=self.row_offset + element_idx)
+        add_element_to_layout(self.layout, description_field, row=self.row_offset + element_idx, column=7, height=1,
+                              width=2)
+        add_element_to_layout(self.layout, remove_item_button, row=self.row_offset + element_idx, column=9, height=1,
+                              width=1)
         self.add_last_row()
 
     def retranslate(self):

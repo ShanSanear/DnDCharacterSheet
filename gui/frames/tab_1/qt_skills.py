@@ -20,7 +20,7 @@ class SkillsBox(ScrollableBox):
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
                                original_size=size,
-                               height_increment=height_increment, row_offset=1, last_row_column=7)
+                               height_increment=height_increment, row_offset=1, last_row_column=6)
         self._map_choice_to_attr = {0: "str", 1: "dex", 2: "con", 3: "int", 4: "wis", 5: "cha"}
 
         self.char_core = char_core
@@ -51,6 +51,7 @@ class SkillsBox(ScrollableBox):
 
         self.add_to_layout()
         self.set_values_from_attributes()
+        self.update_layout()
 
 
     def create_new_skill(self):
@@ -101,13 +102,15 @@ class SkillsBox(ScrollableBox):
 
     def add_last_row(self):
         last_row_index = len(self.elements_list) + 1
-        add_element_to_layout(self.layout, self.add_new, row=last_row_index,
-                              column=self.last_row_column, height=1, width=1)
-        add_element_to_layout(self.layout, self.used_skill_points_label, row=last_row_index, column=1, height=1, width=3)
+        add_element_to_layout(self.layout, self.used_skill_points_label, row=last_row_index, column=1,
+                              height=1, width=3)
         add_element_to_layout(self.layout, self.total_rank_calc, row=last_row_index, column=4, width=1, height=1, )
-        #self.layout.addWidget(self.add_new, len(self.elements_list) + 1, self.last_row_column, 1, 1)
-        self.layout.addWidget(self.used_skill_points_label, len(self.elements_list) + 1, 1, 1, 3)
-        self.layout.addWidget(self.total_rank_calc, len(self.elements_list) + 1, 4, 1, 1)
+        add_element_to_layout(self.layout, self.used_skill_points_label, row=len(self.elements_list) + 1, column=1,
+                              height=1, width=3)
+        add_element_to_layout(self.layout, self.sort_button, row=last_row_index,
+                              column=self.last_row_column, height=1, width=1)
+        add_element_to_layout(self.layout, self.add_new, row=last_row_index,
+                              column=self.last_row_column + 1, height=1, width=1)
 
     def set_values_from_attributes(self):
         for skill in self.elements_list:

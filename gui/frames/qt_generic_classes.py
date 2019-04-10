@@ -125,6 +125,7 @@ class ResizeableBox(DefaultBox, ResizeType):
     def update_layout(self):
         self.remove_widgets_from_layout()
         self.add_widgets_again()
+        self.add_last_row()
 
     def add_widgets_again(self):
         self.add_to_layout()
