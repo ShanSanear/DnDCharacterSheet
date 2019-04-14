@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication
 
 from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, create_push_button, \
-    add_multiple_elements_to_layout_by_row
+    add_multiple_elements_to_layout_by_row, add_element_to_layout
 from gui.popups.qt_full_description import DescriptionDialog
 
 
@@ -28,7 +28,7 @@ class KnownSpellsBox(ScrollableBox):
 
         self.labels = [self.lvl_label, self.name_label, self.short_description_label, self.description_button_label]
         self.add_spell = self.add_new_element
-        self.add_new.clicked.connect(self.add_spell)
+        self.add_new_button.clicked.connect(self.add_spell)
         self.add_spell()
 
         self.add_to_layout()
@@ -58,6 +58,8 @@ class KnownSpellsBox(ScrollableBox):
 
     def add_to_layout(self):
         add_multiple_elements_to_layout_by_row(self.layout, elements_to_add=self.labels + [self.sort_button])
+        add_element_to_layout(self.layout, self.add_new_button, row=1, column=4, height=1, width=1)
+        self.reraise_widgets()
 
     def show_description(self, spell):
         dialog = DescriptionDialog(QApplication.translate("KnownLanguage", "Spell description"), self.root, spell)
