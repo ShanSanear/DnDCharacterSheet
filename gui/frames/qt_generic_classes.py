@@ -70,26 +70,23 @@ class ResizeableBox(DefaultBox, ResizeType):
         self.end_scroll = False
         self.scrollarea.verticalScrollBar().rangeChanged.connect(self._max_scroll)
         self.scrollarea.verticalScrollBar().valueChanged.connect(lambda value: self.scrolled(value))
-        self.add_new = create_push_button("add_new", self.container, min_size=[20, 20], max_size=[20, 20],
-                                          text="+")
+        self.add_new_button = create_push_button("add_new", self.container, min_size=[20, 20], max_size=[20, 20],
+                                                 text="+")
         self.sort_button = create_push_button("sort_it", self.container, min_size=[20, 20], max_size=[20, 20],
                                               text="S", function_on_clicked=self.sort_elements)
-        self.last_row = [self.add_new]
+        self.last_row = []
 
     def add_new_element(self):
         element_idx = len(self.elements_list)
         new_element = self.create_new_element()
         self.elements_list.append(new_element)
         values = self.elements_for_layout(new_element)
-
         self.adding_new_element_to_layout(element_idx, values)
         if hasattr(self, "set_values_from_attributes"):
             self.set_values_from_attributes()
 
     def adding_new_element_to_layout(self, element_idx, values):
-        self.layout.removeWidget(self.add_new)
-        add_multiple_elements_to_layout_by_row(self.layout, values,
-                                               row=self.row_offset + element_idx)
+        add_multiple_elements_to_layout_by_row(self.layout, values, row=self.row_offset + element_idx)
         self.add_last_row()
 
     def elements_for_layout(self, new_element):
@@ -126,6 +123,7 @@ class ResizeableBox(DefaultBox, ResizeType):
         self.remove_widgets_from_layout()
         self.add_widgets_again()
         self.add_last_row()
+        self.reraise_widgets()
 
     def add_widgets_again(self):
         self.add_to_layout()
@@ -135,6 +133,9 @@ class ResizeableBox(DefaultBox, ResizeType):
         for element_idx, element in enumerate(self.elements_list):
             values = self.elements_for_layout(element)
             self.adding_new_element_to_layout(element_idx, values)
+
+    def reraise_widgets(self):
+        self.add_new_button.raise_()
 
     def add_last_row(self):
         logging.debug("Adding last row: %s", self.last_row)
