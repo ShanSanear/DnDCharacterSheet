@@ -111,7 +111,7 @@ class MulticharacterTabWidget(QTabWidget):
             self.tables.remove(self.tables[p_int])
             self.models.remove(self.models[p_int])
             self.series.remove(self.series[p_int])
-        except TypeError:  # TODO Need to know what this fragment of code does
+        except (TypeError, AttributeError):
             pass
 
         super(MulticharacterTabWidget, self).removeTab(p_int)
