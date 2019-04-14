@@ -11,7 +11,7 @@ from gui.popups.qt_full_description import DescriptionDialog
 
 class FeatsBox(ScrollableBox):
     def __init__(self, parent, position, size):
-        base_size = [size[0], 110]
+        base_size = [size[0], 100]
         height_increment = 26
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, base_size=base_size, max_height=max_height,
