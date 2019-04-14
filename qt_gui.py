@@ -5,6 +5,7 @@ from pathlib import Path
 
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
+from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import set_text_of_children
 from gui.main_window import MainWindowUi
 
@@ -44,6 +45,9 @@ class MyApp(MainWindowUi):
         self.weapons_box.ranged_weapons_box.update_choice_text()
         self.weapons_box.melee_weapons_box.change_weapon()
         self.weapons_box.ranged_weapons_box.change_weapon()
+        scrollabe_boxes = self._get_scrollable_boxes()
+        for box in scrollabe_boxes:
+            box.sort_elements()
 
     def create_new_character(self):
         proceed = QMessageBox.question(self, "Continue?",
@@ -136,6 +140,11 @@ class MyApp(MainWindowUi):
         self.hp_ac_box.set_values_from_attributes()
         self.skills_box.set_values_from_attributes()
         self.items_box.set_values_from_attributes()
+
+    def _get_scrollable_boxes(self):
+        refs = [getattr(self, obj_name) for obj_name in self.__dict__]
+        scrollable_boxes = [obj for obj in refs if isinstance(obj, ResizeableBox)]
+        return scrollable_boxes
 
 
 def config_logger(logging_level):

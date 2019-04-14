@@ -2,8 +2,9 @@ import logging
 from functools import partial
 
 from PyQt5 import QtWidgets
-from PyQt5.QtGui import QWheelEvent
 from PyQt5.QtWidgets import QComboBox, QPlainTextEdit, QLineEdit, QCheckBox
+
+from gui.frames.qt_widget_wrapper_classes import NoWheelComboBox, MyQlineEdit
 
 
 def try_to_get_float(string, fallback):
@@ -25,6 +26,7 @@ def get_int_from_widget(widget, fallback):
 def get_float_from_widget(widget, fallback):
     val = try_to_get_float(widget.text(), fallback)
     return val
+
 
 
 def resize_element(element: QtWidgets.QWidget, min_size: (list, tuple), max_size: (list, tuple)):
@@ -115,7 +117,7 @@ def create_combo_box(parent: QtWidgets.QWidget, number_of_choices: int = 1,
     if wheel_event:
         combo_box: QComboBox = QtWidgets.QComboBox(parent)
     else:
-        combo_box = NoWheelComboBox(parent)
+        combo_box: NoWheelComboBox = NoWheelComboBox(parent)
     for _ in range(number_of_choices):
         combo_box.addItem("")
     if choices_text:
@@ -248,46 +250,3 @@ def get_sum_of_elements(root_object, elements, with_decimal_point):
 def update_texts(root_object, to_set, to_get_from, with_decimal_point=False):
     obj_to_set = getattr(root_object, to_set)
     obj_to_set.setText(str(get_sum_of_elements(root_object, to_get_from, with_decimal_point)))
-
-
-class MyQlineEdit(QLineEdit):
-    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}",
-                 is_float=False):
-        self.function_on_unfocused = function_on_unfocused
-        self.args_on_unfocused = args_on_unfocused
-        self.str_format = str_format
-        self.is_float = is_float
-        super(MyQlineEdit, self).__init__(parent)
-
-    def focusOutEvent(self, q_focus_event):
-        if self.function_on_unfocused:
-            if not self.args_on_unfocused:
-                self.function_on_unfocused()
-            else:
-                self.function_on_unfocused(*self.args_on_unfocused)
-        self.setCursorPosition(0)
-        super(MyQlineEdit, self).focusOutEvent(q_focus_event)
-
-    def setText(self, p_str):
-        if self.str_format != "{}":
-            try:
-                if not self.is_float:
-                    # Float in case of some kind of sum being with decimal point
-                    text = self.str_format.format(int(float(p_str)))
-                else:
-                    text = self.str_format.format(float(p_str))
-            except ValueError:
-                text = p_str
-                logging.warning("Couldnt work with text: %s", p_str)
-        else:
-            text = p_str
-        super(MyQlineEdit, self).setText(text)
-        self.setCursorPosition(0)
-
-
-class NoWheelComboBox(QtWidgets.QComboBox):
-    def __init__(self, *args, **kwargs):
-        super(NoWheelComboBox, self).__init__(*args, **kwargs)
-
-    def wheelEvent(self, e: QWheelEvent) -> None:
-        pass

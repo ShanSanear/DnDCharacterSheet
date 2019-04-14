@@ -101,20 +101,21 @@ class MulticharacterTabWidget(QTabWidget):
         self.addTab(new_character, new_character.tab_name)
 
     def removeTab(self, p_int):
-        if self.count() > 1:
-            self.setTabsClosable(True)
-        else:
-            self.setTabsClosable(False)
 
         try:
             self.chart.removeSeries(self.series[p_int])
             self.tables.remove(self.tables[p_int])
             self.models.remove(self.models[p_int])
             self.series.remove(self.series[p_int])
-        except TypeError:  # TODO Need to know what this fragment of code does
+        except (TypeError, AttributeError):
             pass
 
         super(MulticharacterTabWidget, self).removeTab(p_int)
+
+        if self.count() > 1:
+            self.setTabsClosable(True)
+        else:
+            self.setTabsClosable(False)
 
     @pyqtSlot()
     def update_axes(self):

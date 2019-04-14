@@ -1,3 +1,4 @@
+import logging
 from types import SimpleNamespace
 
 from PyQt5 import QtCore
@@ -19,10 +20,6 @@ class ItemsBox(ScrollableBox):
         ScrollableBox.__init__(self, parent=parent, position=position, original_size=size, base_size=base_size,
                                max_height=max_height, height_increment=height_increment, row_offset=1,
                                last_row_column=4)
-        # ResizeableBox.__init__(self, parent=parent, position=position, size=size,
-        #                        row_offset=1, last_row_column=4)
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
-                                          text="+")
 
         self.max_encumbrance_map = {1: 1.5, 2: 3, 3: 5, 4: 6.5, 5: 8, 6: 10, 7: 11.5, 8: 13, 9: 15, 10: 16.5, 11: 19,
                                     12: 21.5, 13: 25, 14: 29, 15: 33, 16: 38, 17: 43, 18: 50, 19: 58, 20: 66.5,
@@ -42,21 +39,19 @@ class ItemsBox(ScrollableBox):
                                                     align=QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter, text="/")
         self.max_encumbrance = create_qline_edit(self.container, max_size=[30, None], enabled=False,
                                                  align=QtCore.Qt.AlignCenter)
-        self.last_row = [self.add_new]
         self.labels = [self.items_name_label, self.items_weight_label, self.items_count_label,
                        self.items_description_label]
-        self.add_to_layout()
         self.add_item = self.add_new_element
-        self.add_new.clicked.connect(self.add_item)
+        self.add_new_button.clicked.connect(self.add_item)
         self.melee_weapons_weight = 0
         self.ranged_weapons_weight = 0
         self.armor_weight = 0
         self.add_item()
+        self.add_to_layout()
 
     def create_new_item(self):
         new_item = SimpleNamespace()
-        new_item.name = create_qline_edit(self.container, min_size=[200, 23],
-                                          function_on_unfocused=self.sort_elements)
+        new_item.name = create_qline_edit(self.container, min_size=[200, 23])
         new_item.weight = create_qline_edit(self.container, min_size=[None, 23],
                                             max_size=[30, None], function_on_text_changed=self.calculate_weight)
 
@@ -70,12 +65,11 @@ class ItemsBox(ScrollableBox):
         return new_item
 
     def add_last_row(self):
-        last_row = len(self.elements_list) + 1
-        self.layout.addWidget(self.total_encumbrance_label, last_row, 0, 1, 1)
-        self.layout.addWidget(self.total_encumbrance, last_row, 1, 1, 1)
-        self.layout.addWidget(self.weight_separator_label, last_row, 2, 1, 1)
-        self.layout.addWidget(self.max_encumbrance, last_row, 3, 1, 1)
-        self.layout.addWidget(self.add_new, last_row, 8, 1, 1)
+        last_row_idx = len(self.elements_list) + 1
+        add_element_to_layout(self.layout, self.total_encumbrance_label, row=last_row_idx, column=0, width=1, height=1)
+        add_element_to_layout(self.layout, self.total_encumbrance, row=last_row_idx, column=1, width=1, height=1)
+        add_element_to_layout(self.layout, self.weight_separator_label, row=last_row_idx, column=2, width=1, height=1)
+        add_element_to_layout(self.layout, self.max_encumbrance, row=last_row_idx, column=3, width=1, height=1)
 
     def create_new_element(self):
         self.increase_height()
@@ -83,9 +77,12 @@ class ItemsBox(ScrollableBox):
 
     def add_to_layout(self):
         item_name_label = self.labels[0]
-        rest = self.labels[1:]
-        add_element_to_layout(self.layout, item_name_label, row=0, column=0, height=1, width=5)
-        add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5)
+        rest = self.labels[1:] + [self.sort_button]
+        logging.debug("Items label count: %s.", len(self.labels))
+        add_element_to_layout(self.layout, item_name_label, row=0, column=0, height=1, width=4)
+        add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=4)
+        add_element_to_layout(self.layout, self.add_new_button, row=1, column=7, height=1, width=1)
+        self.reraise_widgets()
         self.add_last_row()
 
     def set_values_from_attributes(self):
@@ -108,15 +105,11 @@ class ItemsBox(ScrollableBox):
         self.total_encumbrance.setText(str(total_weight))
 
     def adding_new_element_to_layout(self, element_idx, values):
-        if hasattr(self, "add_new"):
-            self.layout.removeWidget(self.add_new)
-        item_name = values[0]
-        rest = values[1:]
-        add_element_to_layout(self.layout, item_name, row=self.row_offset + element_idx, column=0, height=1,
-                              width=5)
-        add_multiple_elements_to_layout_by_row(self.layout, rest, start_column=5, row=self.row_offset + element_idx)
-        if hasattr(self, "add_new"):
-            self.add_last_row()
+        add_element_to_layout(self.layout, values[0], row=self.row_offset + element_idx, column=0, height=1,
+                              width=4)
+        add_multiple_elements_to_layout_by_row(self.layout, values[1:],
+                                               row=self.row_offset + element_idx, start_column=4)
+        self.add_last_row()
 
     def retranslate(self):
         self.root.setTitle(QApplication.translate("Items", "Items"))
