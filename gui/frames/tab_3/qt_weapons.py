@@ -102,8 +102,6 @@ class Weapons(BoxType, DefaultBox):
 
     def change_weapon(self):
         idx = self.choice.currentIndex()
-        logging.debug("index of choice: %d in %s", idx, self.__class__)
-        logging.debug("Len of weapons %s in %s", len(self.weapons), self.__class__)
         chosen_weapon = self.weapons[idx]
         for attribute, value in chosen_weapon.__dict__.items():
             obj_ref = getattr(self.current_weapon, attribute)

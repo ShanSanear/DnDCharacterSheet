@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication
 
 from gui.frames.qt_generic_classes import ScrollableBox
 from gui.frames.qt_generic_functions import create_qline_edit, create_push_button, create_qlabel, \
-    add_multiple_elements_to_layout_by_row
+    add_multiple_elements_to_layout_by_row, add_element_to_layout
 from gui.popups.qt_full_description import DescriptionDialog
 
 
@@ -21,14 +21,11 @@ class FeatsBox(ScrollableBox):
         self.description_field_label = create_qlabel(self.container)
         self.description_label = create_qlabel(self.container)
         self.labels = [self.name_label, self.description_field_label, self.description_label]
-        self.add_new = create_push_button("add_new_feat", self.container, min_size=[20, 20], max_size=[20, 20],
-                                          text="+")
-        self.last_row = [self.add_new]
-        self.add_to_layout()
         self.add_feat = self.add_new_element
-        self.add_new.clicked.connect(self.add_feat)
-
+        self.add_new_button.clicked.connect(self.add_feat)
         self.add_feat()
+        self.add_to_layout()
+
 
     def update_size(self):
         pass
@@ -38,7 +35,9 @@ class FeatsBox(ScrollableBox):
         return self.create_feat()
 
     def add_to_layout(self):
-        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label])
+        add_multiple_elements_to_layout_by_row(self.layout, [self.name_label, self.description_label, self.sort_button])
+        add_element_to_layout(self.layout, self.add_new_button, row=1, column=2, height=1, width=1)
+        self.reraise_widgets()
         self.add_last_row()
 
     def show_description(self, feat):
@@ -48,8 +47,7 @@ class FeatsBox(ScrollableBox):
     def create_feat(self):
         new_feat = SimpleNamespace()
         idx = len(self.elements_list)
-        new_feat.name = create_qline_edit(self.container, max_size=(150, None),
-                                          function_on_unfocused=self.sort_elements)
+        new_feat.name = create_qline_edit(self.container, max_size=(150, None))
 
         new_feat.description_button = create_push_button(f"feat_{idx}_description_button",
                                                          self.container, min_size=[20, 20], max_size=[20, 20],
