@@ -101,10 +101,6 @@ class MulticharacterTabWidget(QTabWidget):
         self.addTab(new_character, new_character.tab_name)
 
     def removeTab(self, p_int):
-        if self.count() > 1:
-            self.setTabsClosable(True)
-        else:
-            self.setTabsClosable(False)
 
         try:
             self.chart.removeSeries(self.series[p_int])
@@ -115,6 +111,11 @@ class MulticharacterTabWidget(QTabWidget):
             pass
 
         super(MulticharacterTabWidget, self).removeTab(p_int)
+
+        if self.count() > 1:
+            self.setTabsClosable(True)
+        else:
+            self.setTabsClosable(False)
 
     @pyqtSlot()
     def update_axes(self):
