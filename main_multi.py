@@ -22,6 +22,7 @@ class MultiCharApp(QMainWindow):
         self.main_tabs.currentChanged.connect(self.changed_tab)
         self.about_popup = AboutDialog("About", self)
         self.menu_bar = MenuBar(self)
+        self.menu_bar.retranslate()
         self.main_tabs.setMinimumSize(1340, 1000)
         self.resize(1360, 1020)
         initial_char = self.main_tabs.widget(0)
