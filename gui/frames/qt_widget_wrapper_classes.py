@@ -14,7 +14,8 @@ class NoWheelComboBox(QtWidgets.QComboBox):
 
 
 class MyQlineEdit(QLineEdit):
-    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}", is_float=False):
+    def __init__(self, parent=None, function_on_unfocused=None, args_on_unfocused=None, str_format="{}",
+                 is_float=False):
         self.function_on_unfocused = function_on_unfocused
         self.args_on_unfocused = args_on_unfocused
         self.str_format = str_format

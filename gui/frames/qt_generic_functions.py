@@ -91,7 +91,7 @@ def create_qline_edit(parent: QtWidgets.QWidget, min_size: (list, tuple) = None,
             qline.textEdited.connect(function_on_text_edited)
         else:
             qline.textEdited.connect(partial(function_on_text_edited, *args_on_text_edited))
-            
+
     return qline
 
 

@@ -46,4 +46,5 @@ class MenuBar:
         self.open_character.setText(QApplication.translate("Menu", "Open"))
         self.save_character.setText(QApplication.translate("Menu", "Save"))
         self.save_character_as.setText(QApplication.translate("Menu", "Save as..."))
+        self.about.setText(QApplication.translate("Menu", "About"))
         self.exit.setText(QApplication.translate("Menu", "Exit"))
