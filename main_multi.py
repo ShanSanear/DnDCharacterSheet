@@ -28,11 +28,18 @@ class MultiCharApp(QMainWindow):
         self.resize(1360, 1020)
         initial_char = self.main_tabs.widget(0)
         self.connect_menu_bar(initial_char)
+        self.general_connect_menu_bar()
 
     def changed_tab(self, tab_idx):
         char = self.main_tabs.widget(tab_idx)
         self.disconnect_menu_bar()
         self.connect_menu_bar(char)
+
+    def general_connect_menu_bar(self):
+        self.menu_bar.language_menu.triggered.connect(partial(self.change_language,
+                                                              self.menu_bar.change_language_en))
+        self.menu_bar.about.triggered.connect(self.about_popup.show)
+        self.menu_bar.open_settings.triggered.connect(self.settings_window.show)
 
     def disconnect_menu_bar(self):
         try:
