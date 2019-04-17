@@ -5,17 +5,19 @@ from functools import partial
 from PyQt5.QtCore import QTranslator
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
+from gui.common_window import CommonWindow
 from gui.frames.qt_menu_bar import MenuBar
 from gui.multi_character_tabs import MulticharacterTabWidget
 from gui.popups.qt_about_popup import AboutDialog
 from gui.popups.qt_settings import SettingsWindow
-from qt_gui import MyApp, config_logger
+from gui.qt_gui import MyApp, config_logger
 
 
-class MultiCharApp(QMainWindow):
+class MultiCharApp(QMainWindow, CommonWindow):
 
     def __init__(self):
-        super(MultiCharApp, self).__init__()
+        QMainWindow.__init__(self)
+        CommonWindow.__init__(self)
         self.main_tabs = MulticharacterTabWidget(self, MyApp)
         self.main_tabs.move(0, 20)
         self.main_tabs.currentChanged.connect(self.changed_tab)
@@ -24,8 +26,8 @@ class MultiCharApp(QMainWindow):
         self.trans = QTranslator(self)
         self.menu_bar = MenuBar(self)
         self.menu_bar.retranslate()
-        self.main_tabs.setMinimumSize(1340, 1000)
-        self.resize(1360, 1020)
+        self.main_tabs.setMinimumSize(1360, 1000)
+        self.resize(1380, 1020)
         initial_char = self.main_tabs.widget(0)
         self.connect_menu_bar(initial_char)
         self.general_connect_menu_bar()
@@ -36,10 +38,9 @@ class MultiCharApp(QMainWindow):
         self.connect_menu_bar(char)
 
     def general_connect_menu_bar(self):
+        self.common_connect_menu_bar()
         self.menu_bar.language_menu.triggered.connect(partial(self.change_language,
                                                               self.menu_bar.change_language_en))
-        self.menu_bar.about.triggered.connect(self.about_popup.show)
-        self.menu_bar.open_settings.triggered.connect(self.settings_window.show)
 
     def disconnect_menu_bar(self):
         try:
