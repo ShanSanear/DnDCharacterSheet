@@ -1,12 +1,10 @@
-import json
 import logging
 import sys
 from functools import partial
-from pathlib import Path
 
+from PyQt5.QtCore import QTranslator
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
-from gui.frames.qt_generic_functions import set_text_of_children
 from gui.frames.qt_menu_bar import MenuBar
 from gui.multi_character_tabs import MulticharacterTabWidget
 from gui.popups.qt_about_popup import AboutDialog
@@ -21,7 +19,9 @@ class MultiCharApp(QMainWindow):
         self.main_tabs.move(0, 20)
         self.main_tabs.currentChanged.connect(self.changed_tab)
         self.about_popup = AboutDialog("About", self)
+        self.trans = QTranslator(self)
         self.menu_bar = MenuBar(self)
+        self.menu_bar.retranslate()
         self.main_tabs.setMinimumSize(1340, 1000)
         self.resize(1360, 1020)
         initial_char = self.main_tabs.widget(0)
@@ -52,14 +52,18 @@ class MultiCharApp(QMainWindow):
 
     def change_language(self, english_language_action):
         logging.debug("Changing language")
-        language_data = json.load(Path("data/languages.json").open(encoding='utf-8'))
         language = "EN" if english_language_action.isChecked() else "PL"
-        menu_bar_language_data = language_data["menu_bar"][language]
         tabs_count = self.main_tabs.count()
+        if language == "PL":
+            self.trans.load("data/languages/eng-pl")
+            QApplication.instance().installTranslator(self.trans)
+        else:
+            QApplication.instance().removeTranslator(self.trans)
         for char_idx in range(tabs_count):
             char = self.main_tabs.widget(char_idx)
-            set_text_of_children(char, language_data[language])
-        set_text_of_children(self, menu_bar_language_data)
+            char.retranslate()
+        self.menu_bar.retranslate()
+
 
 
 def init_multi_gui():
