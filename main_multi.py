@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from gui.frames.qt_menu_bar import MenuBar
 from gui.multi_character_tabs import MulticharacterTabWidget
 from gui.popups.qt_about_popup import AboutDialog
+from gui.popups.qt_settings import SettingsWindow
 from qt_gui import MyApp, config_logger
 
 
@@ -19,6 +20,7 @@ class MultiCharApp(QMainWindow):
         self.main_tabs.move(0, 20)
         self.main_tabs.currentChanged.connect(self.changed_tab)
         self.about_popup = AboutDialog("About", self)
+        self.settings_window = SettingsWindow()
         self.trans = QTranslator(self)
         self.menu_bar = MenuBar(self)
         self.menu_bar.retranslate()
@@ -47,8 +49,6 @@ class MultiCharApp(QMainWindow):
         self.menu_bar.save_character_as.triggered.connect(char.save_file_as)
         self.menu_bar.save_character.triggered.connect(char.save_file)
         self.menu_bar.new_character.triggered.connect(char.create_new_character)
-        self.menu_bar.language_menu.triggered.connect(partial(self.change_language,
-                                                              self.menu_bar.change_language_en))
 
     def change_language(self, english_language_action):
         logging.debug("Changing language")

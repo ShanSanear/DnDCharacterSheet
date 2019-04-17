@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QApplication
 
 from gui.frames.qt_menu_bar import MenuBar
 from gui.popups.qt_about_popup import AboutDialog
+from gui.popups.qt_settings import SettingsWindow
 from qt_gui import MyApp, config_logger
 
 
@@ -13,6 +14,7 @@ class SingleCharApp(MyApp):
     def __init__(self):
         super(SingleCharApp, self).__init__()
         self.about_popup = AboutDialog("About", self)
+        self.settings_window = SettingsWindow()
         self.menu_bar = MenuBar(self)
         self.menu_bar.retranslate()
         self.connect_menu_bar()
@@ -25,6 +27,8 @@ class SingleCharApp(MyApp):
         self.menu_bar.language_menu.triggered.connect(partial(self.change_language,
                                                               self.menu_bar.change_language_en))
         self.menu_bar.about.triggered.connect(self.about_popup.show)
+        self.menu_bar.open_settings.triggered.connect(self.settings_window.show)
+
 
     def change_language(self, english_language_action):
         logging.debug("Changing language")
