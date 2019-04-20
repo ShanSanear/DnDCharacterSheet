@@ -76,14 +76,13 @@ class TabBarPlus(QTabBar):
 
 
 class MulticharacterTabWidget(QTabWidget):
-    layout = None
 
     def __init__(self, parent, single_character_gui):
         super(MulticharacterTabWidget, self).__init__(parent)
         self.layout = QVBoxLayout()
+        self.layout.setContentsMargins(0, 0, 0, 0)
         self.single_character_gui = single_character_gui
         self.setLayout(self.layout)
-        self.setMinimumSize(800, 400)
         self.tab = TabBarPlus(self)
         self.setTabBar(self.tab)
         self.tab.add_new_tab_sig.connect(self.add_tab)
