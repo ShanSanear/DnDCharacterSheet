@@ -1,5 +1,4 @@
-from PyQt5.QtCore import QTranslator
-from PyQt5.QtWidgets import QTabWidget, QMainWindow, QScrollArea, QWidget, QSizePolicy, QApplication
+from PyQt5.QtWidgets import QTabWidget, QScrollArea, QWidget, QSizePolicy, QApplication, QVBoxLayout
 
 import core
 from gui.frames.tab_1.qt_attributes import AttributesBox
@@ -21,28 +20,27 @@ from gui.frames.tab_3.qt_notes import NotesBox
 from gui.frames.tab_3.qt_weapons import WeaponsBox
 
 
-class CoreWindow(QMainWindow):
+class CoreSingleChar(QWidget):
 
     def __init__(self):
-        super(CoreWindow, self).__init__()
+        QWidget.__init__(self)
         self.char_core = core.character.Character("Shan")
-        self.trans = QTranslator(self)
+        self.layout = QVBoxLayout()
         self.tabs = QTabWidget(self)
         self.tabs.setMinimumSize(1340, 800)
-        self.resize(1360, 860)
         size_policy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         size_policy.setHeightForWidth(True)
         self.tabs.setSizePolicy(size_policy)
+        self.scroll = QScrollArea()
+        self.scroll.setEnabled(True)
+        self.scroll.setWidget(self.tabs)
+        self.scroll.setWidgetResizable(True)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.addWidget(self.scroll)
+        self.setLayout(self.layout)
 
-        scroll = QScrollArea()
-        scroll.setEnabled(True)
-        scroll.setWidget(self.tabs)
-        scroll.setWidgetResizable(True)
-        self.setCentralWidget(scroll)
 
-
-
-class Tab1(CoreWindow):
+class Tab1(CoreSingleChar):
 
     def __init__(self):
         super(Tab1, self).__init__()
