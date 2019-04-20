@@ -5,9 +5,9 @@ from pathlib import Path
 
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
+from gui.core_single_char import MainWindowUi
 from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import set_text_of_children
-from gui.main_window import MainWindowUi
 
 
 class MyApp(MainWindowUi):

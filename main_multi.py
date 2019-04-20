@@ -2,14 +2,11 @@ import logging
 import sys
 from functools import partial
 
-from PyQt5.QtCore import QTranslator
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from gui.common_window import CommonWindow
 from gui.frames.qt_menu_bar import MenuBar
 from gui.multi_character_tabs import MulticharacterTabWidget
-from gui.popups.qt_about_popup import AboutDialog
-from gui.popups.qt_settings import SettingsWindow
 from gui.qt_gui import MyApp, config_logger
 
 
@@ -21,16 +18,13 @@ class MultiCharApp(QMainWindow, CommonWindow):
         self.main_tabs = MulticharacterTabWidget(self, MyApp)
         self.main_tabs.move(0, 20)
         self.main_tabs.currentChanged.connect(self.changed_tab)
-        self.about_popup = AboutDialog("About", self)
-        self.settings_window = SettingsWindow()
-        self.trans = QTranslator(self)
         self.menu_bar = MenuBar(self)
         self.menu_bar.retranslate()
-        self.main_tabs.setMinimumSize(1360, 1000)
-        self.resize(1380, 1020)
+        self.resize(1380, 860)
         initial_char = self.main_tabs.widget(0)
         self.connect_menu_bar(initial_char)
         self.general_connect_menu_bar()
+        self.setCentralWidget(self.main_tabs)
 
     def changed_tab(self, tab_idx):
         char = self.main_tabs.widget(tab_idx)

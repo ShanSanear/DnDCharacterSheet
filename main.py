@@ -2,17 +2,19 @@ import logging
 import sys
 from functools import partial
 
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from gui.common_window import CommonWindow
 from gui.qt_gui import MyApp, config_logger
 
 
-class SingleCharApp(MyApp, CommonWindow):
+class SingleCharApp(MyApp, CommonWindow, QMainWindow):
     def __init__(self):
+        QMainWindow.__init__(self)
         MyApp.__init__(self)
         CommonWindow.__init__(self)
         self.connect_menu_bar()
+        self.resize(1360, 860)
 
     def connect_menu_bar(self):
         self.common_connect_menu_bar()
