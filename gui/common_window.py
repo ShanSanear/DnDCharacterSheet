@@ -1,3 +1,5 @@
+from PyQt5.QtCore import QTranslator
+
 from gui.frames.qt_menu_bar import MenuBar
 from gui.popups.qt_about_popup import AboutDialog
 from gui.popups.qt_settings import SettingsWindow
@@ -5,6 +7,7 @@ from gui.popups.qt_settings import SettingsWindow
 
 class CommonWindow:
     def __init__(self):
+        self.trans = QTranslator(self)
         self.about_popup = AboutDialog("About", self)
         self.settings_window = SettingsWindow()
         self.menu_bar = MenuBar(self)
