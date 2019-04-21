@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from gui.common_window import CommonWindow
 from gui.frames.qt_menu_bar import MenuBar
 from gui.multi_character_tabs import MulticharacterTabWidget
-from gui.qt_gui import MyApp, config_logger
+from gui.qt_gui import SingleCharCore, config_logger
 
 
 class MultiCharApp(QMainWindow, CommonWindow):
@@ -15,7 +15,7 @@ class MultiCharApp(QMainWindow, CommonWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         CommonWindow.__init__(self)
-        self.main_tabs = MulticharacterTabWidget(self, MyApp)
+        self.main_tabs = MulticharacterTabWidget(self, SingleCharCore)
         self.main_tabs.move(0, 20)
         self.main_tabs.currentChanged.connect(self.changed_tab)
         self.menu_bar = MenuBar(self)
@@ -70,7 +70,7 @@ class MultiCharApp(QMainWindow, CommonWindow):
 
 def init_multi_gui():
     app = QApplication(sys.argv)
-    app.setStyle("windowsvista")
+    app.setStyle("fusion")
     form = MultiCharApp()
     form.setWindowTitle("MultiCharacter Sheet")
     form.show()

@@ -5,16 +5,17 @@ from functools import partial
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from gui.common_window import CommonWindow
-from gui.qt_gui import MyApp, config_logger
+from gui.qt_gui import SingleCharCore, config_logger
 
 
-class SingleCharApp(MyApp, CommonWindow, QMainWindow):
+class SingleCharApp(SingleCharCore, CommonWindow, QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        MyApp.__init__(self)
+        SingleCharCore.__init__(self)
         CommonWindow.__init__(self)
         self.connect_menu_bar()
-        self.resize(1360, 860)
+        self.base_size = (1360, 860)
+        self.resize(*self.base_size)
 
     def connect_menu_bar(self):
         self.common_connect_menu_bar()

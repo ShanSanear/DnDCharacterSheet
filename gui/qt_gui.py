@@ -10,7 +10,7 @@ from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import set_text_of_children
 
 
-class MyApp(MainWindowUi):
+class SingleCharCore(MainWindowUi):
 
     def __init__(self):
         MainWindowUi.__init__(self)
