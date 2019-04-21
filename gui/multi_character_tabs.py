@@ -88,6 +88,7 @@ class MulticharacterTabWidget(QTabWidget):
         self.tab.add_new_tab_sig.connect(self.add_tab)
         self.tab.tabMoved.connect(self.tab.move_add_new_tab_button)
         self.tabCloseRequested.connect(self.removeTab)
+        self._characters = []
         self.add_tab()
 
     def add_tab(self):
@@ -97,10 +98,11 @@ class MulticharacterTabWidget(QTabWidget):
             self.setTabsClosable(False)
 
         new_character = self.single_character_gui()
-        self.addTab(new_character, new_character.tab_name)
+        self._characters.append(new_character)
+        self.addTab(new_character.container, new_character.tab_name)
 
     def removeTab(self, p_int):
-
+        del self._characters[p_int]
         try:
             self.chart.removeSeries(self.series[p_int])
             self.tables.remove(self.tables[p_int])
@@ -123,3 +125,6 @@ class MulticharacterTabWidget(QTabWidget):
             self.chart.removeSeries(s)
             self.chart.addSeries(s)
         self.chart.createDefaultAxes()
+
+    def get_character(self, pos):
+        return self._characters[pos]

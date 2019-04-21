@@ -2,32 +2,33 @@ import logging
 import sys
 from functools import partial
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication
 
-from gui.common_window import CommonWindow
 from gui.frames.qt_menu_bar import MenuBar
+from gui.main_window_wrapper import MainWindowWrapper
 from gui.multi_character_tabs import MulticharacterTabWidget
 from gui.qt_gui import SingleCharCore, config_logger
 
 
-class MultiCharApp(QMainWindow, CommonWindow):
+class MultiCharApp(MainWindowWrapper):
 
     def __init__(self):
-        QMainWindow.__init__(self)
-        CommonWindow.__init__(self)
+        default_size = [1380, 860]
+        MainWindowWrapper.__init__(self, default_size)
         self.main_tabs = MulticharacterTabWidget(self, SingleCharCore)
         self.main_tabs.move(0, 20)
         self.main_tabs.currentChanged.connect(self.changed_tab)
         self.menu_bar = MenuBar(self)
         self.menu_bar.retranslate()
-        self.resize(1380, 860)
-        initial_char = self.main_tabs.widget(0)
+
+        initial_char = self.main_tabs.get_character(0)
         self.connect_menu_bar(initial_char)
         self.general_connect_menu_bar()
         self.setCentralWidget(self.main_tabs)
+        self.restore_settings()
 
     def changed_tab(self, tab_idx):
-        char = self.main_tabs.widget(tab_idx)
+        char = self.main_tabs.get_character(tab_idx)
         self.disconnect_menu_bar()
         self.connect_menu_bar(char)
 
@@ -66,12 +67,14 @@ class MultiCharApp(QMainWindow, CommonWindow):
             char.retranslate()
         self.menu_bar.retranslate()
 
-
+    def restore_settings(self):
+        self.restore_window_settings()
 
 def init_multi_gui():
     app = QApplication(sys.argv)
     app.setStyle("fusion")
     form = MultiCharApp()
+    logging.debug("Post init size: %s", form.size())
     form.setWindowTitle("MultiCharacter Sheet")
     form.show()
     app.exec_()
