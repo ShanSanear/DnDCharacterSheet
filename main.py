@@ -2,20 +2,21 @@ import logging
 import sys
 from functools import partial
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication
 
-from gui.common_window import CommonWindow
+from gui.main_window_wrapper import MainWindowWrapper
 from gui.qt_gui import SingleCharCore, config_logger
 
 
-class SingleCharApp(SingleCharCore, CommonWindow, QMainWindow):
+class SingleCharApp(SingleCharCore, MainWindowWrapper):
     def __init__(self):
-        QMainWindow.__init__(self)
+        default_size = (1360, 860)
+        MainWindowWrapper.__init__(self, default_size)
         SingleCharCore.__init__(self)
-        CommonWindow.__init__(self)
         self.connect_menu_bar()
-        self.base_size = (1360, 860)
-        self.resize(*self.base_size)
+        self.setCentralWidget(self.container)
+        logging.debug("Menu: %s", self.menu_bar)
+        self.restore_settings()
 
     def connect_menu_bar(self):
         self.common_connect_menu_bar()
@@ -37,6 +38,9 @@ class SingleCharApp(SingleCharCore, CommonWindow, QMainWindow):
             QApplication.instance().removeTranslator(self.trans)
             logging.debug("Setting to english")
         self.retranslate()
+
+    def restore_settings(self):
+        self.restore_window_settings()
 
 
 def init_gui():

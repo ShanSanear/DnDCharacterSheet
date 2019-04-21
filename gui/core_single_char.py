@@ -20,13 +20,13 @@ from gui.frames.tab_3.qt_notes import NotesBox
 from gui.frames.tab_3.qt_weapons import WeaponsBox
 
 
-class CoreSingleChar(QWidget):
+class CoreSingleChar:
 
     def __init__(self):
-        QWidget.__init__(self)
+        self.container = QWidget()
         self.char_core = core.character.Character("Shan")
         self.layout = QVBoxLayout()
-        self.tabs = QTabWidget(self)
+        self.tabs = QTabWidget(self.container)
         self.tabs.setMinimumSize(1340, 800)
         size_policy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)
         size_policy.setHeightForWidth(True)
@@ -37,7 +37,7 @@ class CoreSingleChar(QWidget):
         self.scroll.setWidgetResizable(True)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.addWidget(self.scroll)
-        self.setLayout(self.layout)
+        self.container.setLayout(self.layout)
 
 
 class Tab1(CoreSingleChar):

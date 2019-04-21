@@ -20,7 +20,7 @@ class SingleCharCore(MainWindowUi):
 
     def open_file(self):
         if self.character_file:
-            proceed = QMessageBox.question(self,
+            proceed = QMessageBox.question(self.container,
                                            "Overwriting old data",
                                            "Opening new character file will overwrite all data in sheet. Continue?",
                                            QMessageBox.Yes, QMessageBox.No)
@@ -50,7 +50,7 @@ class SingleCharCore(MainWindowUi):
             box.sort_elements()
 
     def create_new_character(self):
-        proceed = QMessageBox.question(self, "Continue?",
+        proceed = QMessageBox.question(self.container, "Continue?",
                                        "This will clear character sheet. Continue?", QMessageBox.Yes, QMessageBox.No)
         if proceed == QMessageBox.Yes:
             self._clean_character_sheet()
