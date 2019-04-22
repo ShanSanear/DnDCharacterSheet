@@ -3,8 +3,10 @@ import logging
 from functools import partial
 from pathlib import Path
 
+from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
+from gui.constants import LAST_OPENED_CHARACTER_FILE
 from gui.core_single_char import MainWindowUi
 from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import set_text_of_children
@@ -17,6 +19,8 @@ class SingleCharCore(MainWindowUi):
         self.character_file = ""
         self.tab_name = "New char"
         self.connect_attrs()
+        self.settings = QSettings("settings.ini", QSettings.IniFormat, None)
+        self.settings.setFallbacksEnabled(False)
 
     def open_file(self):
         if self.character_file:
@@ -32,6 +36,20 @@ class SingleCharCore(MainWindowUi):
         if not fname:
             logging.debug("No file opened.")
             return
+        self._open_file(fname)
+
+        self._refresh_gui()
+
+    def _refresh_gui(self):
+        self.weapons_box.melee_weapons_box.update_choice_text()
+        self.weapons_box.ranged_weapons_box.update_choice_text()
+        self.weapons_box.melee_weapons_box.change_weapon()
+        self.weapons_box.ranged_weapons_box.change_weapon()
+        scrollabe_boxes = self._get_scrollable_boxes()
+        for box in scrollabe_boxes:
+            box.sort_elements()
+
+    def _open_file(self, fname):
         data_to_read = json.load(Path(fname).open())
         self._clean_character_sheet()
         self.character_file = fname
@@ -41,13 +59,9 @@ class SingleCharCore(MainWindowUi):
             logging.error("Couldnt load file: %s. Error: %s", self.character_file, e)
             return
         logging.info("File opened: %s", fname)
-        self.weapons_box.melee_weapons_box.update_choice_text()
-        self.weapons_box.ranged_weapons_box.update_choice_text()
-        self.weapons_box.melee_weapons_box.change_weapon()
-        self.weapons_box.ranged_weapons_box.change_weapon()
-        scrollabe_boxes = self._get_scrollable_boxes()
-        for box in scrollabe_boxes:
-            box.sort_elements()
+        self.settings.setValue(LAST_OPENED_CHARACTER_FILE, self.character_file)
+        self.settings.sync()
+        self._refresh_gui()
 
     def create_new_character(self):
         proceed = QMessageBox.question(self.container, "Continue?",
@@ -107,7 +121,8 @@ class SingleCharCore(MainWindowUi):
                         }
         json.dump(data_to_save, Path(self.character_file).open('w'), indent=4)
         logging.debug("Saved character to file: %s", self.character_file)
-
+        self.settings.setValue(LAST_OPENED_CHARACTER_FILE, self.character_file)
+        self.settings.sync()
 
     def connect_attrs(self):
         for attr in self.attributes_box.__dict__:

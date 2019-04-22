@@ -3,9 +3,9 @@ import sys
 from functools import partial
 
 from PyQt5.QtCore import QTimerEvent
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
-from gui.constants import AUTOSAVE_INTERVAL
+from gui.constants import AUTOSAVE_INTERVAL, LAST_OPENED_CHARACTER_FILE, APP_LANGUAGE
 from gui.main_window_wrapper import MainWindowWrapper
 from gui.qt_gui import SingleCharCore, config_logger
 
@@ -17,11 +17,40 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
         SingleCharCore.__init__(self)
         self.connect_menu_bar()
         self.setCentralWidget(self.container)
-        logging.debug("Menu: %s", self.menu_bar)
+        self.load_predefined_language()
         self.autosave_interval = self.settings.value(AUTOSAVE_INTERVAL, 1, type=int) * 1000
         self.autosave_timer_id = self.startTimer(self.autosave_interval)
         self.restore_settings()
         self.settings_window.buttons_box.accepted.connect(self.setting_new_autosave_interval)
+        self.load_last_saved()
+
+    def load_predefined_language(self):
+        language = self.settings.value(APP_LANGUAGE, 'PL', type=str)
+        if language == 'PL':
+            self._set_lang_pl()
+            self.menu_bar.change_language_pl.setChecked(True)
+        else:
+            self._set_lang_en()
+            self.menu_bar.change_language_en.setChecked(True)
+        self.retranslate()
+        self.menu_bar.retranslate()
+
+    def load_last_saved(self):
+        self.character_file = self.get_character_file()
+        if self.character_file:
+            proceed = QMessageBox.question(self.container,
+                                           QApplication.translate("Open last", "Opening last file"),
+                                           QApplication.translate("Open last", "Do you want to open last opened file?"),
+                                           QMessageBox.Yes, QMessageBox.No)
+            if proceed == QMessageBox.Yes:
+                self._open_file(self.character_file)
+            else:
+                self.character_file = ''
+
+    def get_character_file(self):
+        char_file = self.settings.value(LAST_OPENED_CHARACTER_FILE, '', type=str)
+        logging.debug("Char file: %s", char_file)
+        return char_file
 
     def setting_new_autosave_interval(self):
         logging.debug("Checking if autosave value changed")
@@ -48,13 +77,22 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
         logging.debug("Changing language")
         language = "EN" if english_language_action.isChecked() else "PL"
         if language == "PL":
-            self.trans.load("data/languages/eng-pl")
-            QApplication.instance().installTranslator(self.trans)
-            logging.debug("Setting to polish")
+            self._set_lang_pl()
         else:
-            QApplication.instance().removeTranslator(self.trans)
-            logging.debug("Setting to english")
+            self._set_lang_en()
+
+        self.settings.setValue(APP_LANGUAGE, language)
+        self.settings.sync()
         self.retranslate()
+
+    def _set_lang_en(self):
+        QApplication.instance().removeTranslator(self.trans)
+        logging.debug("Setting to english")
+
+    def _set_lang_pl(self):
+        self.trans.load("data/languages/eng-pl")
+        QApplication.instance().installTranslator(self.trans)
+        logging.debug("Setting to polish")
 
     def restore_settings(self):
         self.restore_window_settings()
