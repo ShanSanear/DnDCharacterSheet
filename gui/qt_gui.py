@@ -50,7 +50,7 @@ class SingleCharCore(MainWindowUi):
             box.sort_elements()
 
     def _open_file(self, fname):
-        data_to_read = json.load(Path(fname).open())
+        data_to_read = json.load(Path(fname).open(encoding='utf-8'))
         self._clean_character_sheet()
         self.character_file = fname
         try:
@@ -119,7 +119,7 @@ class SingleCharCore(MainWindowUi):
                         "armor_items_box": self.armor_items_box.get_dict_repr(),
                         "weapons_box": self.weapons_box.get_dict_repr(),
                         }
-        json.dump(data_to_save, Path(self.character_file).open('w'), indent=4)
+        json.dump(data_to_save, Path(self.character_file).open('w', encoding='utf-8'), indent=4, ensure_ascii=False)
         logging.debug("Saved character to file: %s", self.character_file)
         self.settings.setValue(LAST_OPENED_CHARACTER_FILE, self.character_file)
         self.settings.sync()
