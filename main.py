@@ -18,7 +18,7 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
         self.connect_menu_bar()
         self.setCentralWidget(self.container)
         self.load_predefined_language()
-        self.autosave_interval = self.settings.value(AUTOSAVE_INTERVAL, 1, type=int) * 1000
+        self.autosave_interval = self.settings.value(AUTOSAVE_INTERVAL, 1, type=int) * 60000  # 60k ms = 1 min
         self.ask_about_loading_last = self.settings.value(ASK_ABOUT_LOADING, False, type=bool)
         self.autosave_timer_id = self.startTimer(self.autosave_interval)
         self.restore_settings()
@@ -51,7 +51,6 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
             else:
                 self._open_file(self.character_file)
 
-
     def get_character_file(self):
         char_file = self.settings.value(LAST_OPENED_CHARACTER_FILE, '', type=str)
         logging.debug("Char file: %s", char_file)
@@ -59,7 +58,7 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
 
     def setting_new_autosave_interval(self):
         logging.debug("Checking if autosave value changed")
-        tmp = self.settings.value(AUTOSAVE_INTERVAL, 1, type=int) * 1000
+        tmp = self.settings.value(AUTOSAVE_INTERVAL, 1, type=int) * 60000
         if tmp != self.autosave_interval:
             self.autosave_interval = tmp
             self._set_new_autosave_timer()
