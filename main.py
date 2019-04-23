@@ -5,7 +5,7 @@ from functools import partial
 from PyQt5.QtCore import QTimerEvent
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-from gui.constants import AUTOSAVE_INTERVAL, LAST_OPENED_CHARACTER_FILE, APP_LANGUAGE
+from gui.constants import AUTOSAVE_INTERVAL, LAST_OPENED_CHARACTER_FILE, APP_LANGUAGE, ASK_ABOUT_LOADING
 from gui.main_window_wrapper import MainWindowWrapper
 from gui.qt_gui import SingleCharCore, config_logger
 
@@ -19,6 +19,7 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
         self.setCentralWidget(self.container)
         self.load_predefined_language()
         self.autosave_interval = self.settings.value(AUTOSAVE_INTERVAL, 1, type=int) * 1000
+        self.ask_about_loading_last = self.settings.value(ASK_ABOUT_LOADING, False, type=bool)
         self.autosave_timer_id = self.startTimer(self.autosave_interval)
         self.restore_settings()
         self.settings_window.buttons_box.accepted.connect(self.setting_new_autosave_interval)
@@ -38,14 +39,18 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
     def load_last_saved(self):
         self.character_file = self.get_character_file()
         if self.character_file:
-            proceed = QMessageBox.question(self.container,
-                                           QApplication.translate("Open last", "Opening last file"),
-                                           QApplication.translate("Open last", "Do you want to open last opened file?"),
-                                           QMessageBox.Yes, QMessageBox.No)
-            if proceed == QMessageBox.Yes:
-                self._open_file(self.character_file)
+            if self.ask_about_loading_last:
+                proceed = QMessageBox.question(self.container,
+                                               QApplication.translate("Open last",
+                                                                      "Opening last file"),
+                                               QApplication.translate("Open last",
+                                                                      "Do you want to open last opened file?"),
+                                               QMessageBox.Yes | QMessageBox.No)
+                if proceed == QMessageBox.Yes:
+                    self._open_file(self.character_file)
             else:
-                self.character_file = ''
+                self._open_file(self.character_file)
+
 
     def get_character_file(self):
         char_file = self.settings.value(LAST_OPENED_CHARACTER_FILE, '', type=str)
