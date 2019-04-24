@@ -9,7 +9,8 @@ from gui.constants import OPENED_CHARACTERS_COUNT, LAST_OPENED_CHARACTER_FILE, A
 from gui.frames.qt_menu_bar import MenuBar
 from gui.main_window_wrapper import MainWindowWrapper
 from gui.multi_character_tabs import MulticharacterTabWidget
-from gui.qt_gui import SingleCharCore, config_logger
+from gui.qt_gui import SingleCharCore
+from utils.console_logging import config_logger
 
 
 class MultiCharApp(MainWindowWrapper):

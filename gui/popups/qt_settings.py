@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QSpinBox, QVBoxLayout, QHBoxL
     QDialogButtonBox, QCheckBox
 
 from gui.constants import AUTOSAVE_INTERVAL, ASK_ABOUT_LOADING
-from gui.qt_gui import config_logger
+from utils.console_logging import config_logger
 
 
 class SettingsWindow(QDialog):

@@ -7,7 +7,8 @@ from PyQt5.QtWidgets import QApplication, QMessageBox
 
 from gui.constants import AUTOSAVE_INTERVAL, LAST_OPENED_CHARACTER_FILE, APP_LANGUAGE, ASK_ABOUT_LOADING
 from gui.main_window_wrapper import MainWindowWrapper
-from gui.qt_gui import SingleCharCore, config_logger
+from gui.qt_gui import SingleCharCore
+from utils.console_logging import config_logger
 
 
 class SingleCharApp(SingleCharCore, MainWindowWrapper):
