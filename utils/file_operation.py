@@ -4,7 +4,7 @@ import shutil
 from pathlib import Path
 
 
-def file_backup_same_dir(src_file_path: Path, max_backups: int = 5):
+def file_backup_same_dir(src_file_path: [Path, str], max_backups: int = 5):
     src_file_path = Path(src_file_path)
     backup_paths = [Path(src_file_path.with_suffix(f'.bak{idx}')) for idx in range(max_backups)]
     for file in backup_paths:
