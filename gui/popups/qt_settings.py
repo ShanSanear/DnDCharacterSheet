@@ -28,7 +28,7 @@ class SettingsWindow(QDialog):
 
     def load_settings(self):
         logging.debug("Loading settings")
-        interval_in_mins = self.settings.value(AUTOSAVE_INTERVAL, 60000, type=int) // 60000
+        interval_in_mins = self.settings.value(AUTOSAVE_INTERVAL, 5, type=int)
         self.autosave_interval.setValue(interval_in_mins)
         self.should_load_last_toggle.setChecked(self.settings.value(ASK_ABOUT_LOADING, False, type=bool))
 
@@ -56,7 +56,7 @@ class SettingsWindow(QDialog):
 
     def save_settings(self):
         logging.debug("Ok callback")
-        self.settings.setValue(AUTOSAVE_INTERVAL, self.autosave_interval.value() * 60000)
+        self.settings.setValue(AUTOSAVE_INTERVAL, self.autosave_interval.value())
         self.settings.setValue(ASK_ABOUT_LOADING, self.should_load_last_toggle.isChecked())
         self.close()
 
