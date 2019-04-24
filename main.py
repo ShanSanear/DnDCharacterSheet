@@ -47,9 +47,9 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
                                                                       "Do you want to open last opened file?"),
                                                QMessageBox.Yes | QMessageBox.No)
                 if proceed == QMessageBox.Yes:
-                    self._open_file(self.character_file)
+                    self.open_selected_file(self.character_file)
             else:
-                self._open_file(self.character_file)
+                self.open_selected_file(self.character_file)
 
     def get_character_file(self):
         char_file = self.settings.value(LAST_OPENED_CHARACTER_FILE, '', type=str)
