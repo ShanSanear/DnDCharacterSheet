@@ -176,8 +176,11 @@ class SingleCharCore(MainWindowUi):
         self.settings.sync()
 
     def backup_char_file(self):
+        if not self.character_file:
+            return
         file_backup_same_dir(self.character_file)
         self._save_file()
+
 
 def config_logger(logging_level):
     logging.basicConfig(level=logging_level, style="%",
