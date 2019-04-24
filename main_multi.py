@@ -72,7 +72,6 @@ class MultiCharApp(MainWindowWrapper):
 
 def init_multi_gui():
     app = QApplication(sys.argv)
-    app.setStyle("fusion")
     form = MultiCharApp()
     logging.debug("Post init size: %s", form.size())
     form.setWindowTitle("MultiCharacter Sheet")
