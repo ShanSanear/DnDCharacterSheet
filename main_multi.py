@@ -2,8 +2,10 @@ import logging
 import sys
 from functools import partial
 
+from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QApplication
 
+from gui.constants import OPENED_CHARACTERS_COUNT, LAST_OPENED_CHARACTER_FILE
 from gui.frames.qt_menu_bar import MenuBar
 from gui.main_window_wrapper import MainWindowWrapper
 from gui.multi_character_tabs import MulticharacterTabWidget
@@ -15,16 +17,16 @@ class MultiCharApp(MainWindowWrapper):
     def __init__(self):
         default_size = [1380, 860]
         MainWindowWrapper.__init__(self, default_size)
+        self.settings = QSettings("settings.ini", QSettings.IniFormat, None)
+        self.settings.setFallbacksEnabled(False)
         self.main_tabs = MulticharacterTabWidget(self, SingleCharCore)
         self.main_tabs.move(0, 20)
         self.main_tabs.currentChanged.connect(self.changed_tab)
         self.menu_bar = MenuBar(self)
         self.menu_bar.retranslate()
-
-        initial_char = self.main_tabs.get_character(0)
-        self.connect_menu_bar(initial_char)
         self.general_connect_menu_bar()
         self.setCentralWidget(self.main_tabs)
+        self.chars_count = self.settings.value(OPENED_CHARACTERS_COUNT, 0, type=int)
         self.restore_settings()
 
     def changed_tab(self, tab_idx):
@@ -69,6 +71,22 @@ class MultiCharApp(MainWindowWrapper):
 
     def restore_settings(self):
         self.restore_window_settings()
+        self.restore_opened_characters()
+        self.connect_menu_bar(self.main_tabs.get_character(0))
+
+    def restore_opened_characters(self):
+        for idx in range(self.chars_count):
+            logging.debug("Adding character tab at idx: %d", idx)
+            self.main_tabs.add_char_tab()
+            char_file_key = f'{LAST_OPENED_CHARACTER_FILE}_{idx}'
+            char_file_path = self.settings.value(char_file_key, '')
+            logging.debug("Character file path to load: %s", char_file_path)
+            if char_file_path:
+                char: SingleCharCore = self.main_tabs.get_character(idx)
+                char.open_selected_file(char_file_path)
+
+
+
 
 def init_multi_gui():
     app = QApplication(sys.argv)

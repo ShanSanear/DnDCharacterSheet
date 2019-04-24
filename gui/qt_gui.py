@@ -39,7 +39,7 @@ class SingleCharCore(MainWindowUi):
         if not fname:
             logging.debug("No file opened.")
             return
-        self._open_file(fname)
+        self.open_selected_file(fname)
 
         self._refresh_gui()
 
@@ -52,7 +52,7 @@ class SingleCharCore(MainWindowUi):
         for box in scrollabe_boxes:
             box.sort_elements()
 
-    def _open_file(self, fname):
+    def open_selected_file(self, fname):
         data_to_read = json.load(Path(fname).open(encoding='utf-8'))
         self._clean_character_sheet()
         self.character_file = fname

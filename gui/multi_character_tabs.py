@@ -90,13 +90,16 @@ class MulticharacterTabWidget(QTabWidget):
         self.setLayout(self.layout)
         self.tab = TabBarPlus(self)
         self.setTabBar(self.tab)
-        self.tab.add_new_tab_sig.connect(self.add_tab)
+        self.tab.add_new_tab_sig.connect(self.add_new_char_callback)
         self.tab.tabMoved.connect(self.tab.move_add_new_tab_button)
         self.tabCloseRequested.connect(self.removeTab)
         self._characters = []
-        self.add_tab()
 
-    def add_tab(self):
+    def add_new_char_callback(self):
+        self.add_char_tab()
+        self.setCurrentIndex(self.count() - 1)
+
+    def add_char_tab(self):
         if self.count() > 0:
             self.setTabsClosable(True)
         else:
