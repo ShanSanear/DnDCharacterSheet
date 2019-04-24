@@ -138,8 +138,6 @@ class ResizeableBox(DefaultBox, ResizeType):
         self.add_new_button.raise_()
 
     def add_last_row(self):
-        logging.debug("Adding last row: %s", self.last_row)
-        logging.debug("Class for last row: %s", self.__class__)
         add_multiple_elements_to_layout_by_row(self.layout, self.last_row, row=len(self.elements_list) + 1,
                                                start_column=self.last_row_column, width=1, height=1)
 
@@ -169,16 +167,6 @@ class ResizeableBox(DefaultBox, ResizeType):
             self.end_scroll = False
         logging.debug("Is at the end scroll: %s", self.end_scroll)
 
-    def log_height(self):
-        logging.debug("Getting heights for %s", self)
-        current_root_height = self.root.height()
-        logging.debug("Current root height: %s", current_root_height)
-        current_scrollarea_height = self.scrollarea.height()
-        logging.debug("Current scrollarea height: %s", current_scrollarea_height)
-        current_container_height = self.container.height()
-        logging.debug("Current container height: %s", current_container_height)
-        current_main_widget_height = self.main_widget.height()
-        logging.debug("Current main_widget height: %s", current_main_widget_height)
 
     @abstractmethod
     def create_new_element(self):
@@ -217,7 +205,6 @@ class ScrollableBox(ResizeableBox):
         self._change_size_of_widgets()
 
     def _change_size_of_widgets(self):
-        self.log_height()
         if not self.exceed_height:
             self.root.setGeometry(QtCore.QRect(*self.position, self.size[0],
                                                self.size[1] + (self.height_increments * self.height_increment)))
