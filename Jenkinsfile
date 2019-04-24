@@ -58,10 +58,10 @@ pipeline {
                     '''
                 echo "PEP8 style check"
                 sh  ''' source activate ${BUILD_TAG}
-                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero core > core.log
-                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero gui > gui.log
-                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero main.py > main.log
-                        pylint --disable=C --output-format=parseable --reports=no  --exit-zero qt_gui.py > qt_gui.log
+                        pylint --disable=C,E0611 --output-format=parseable --reports=no  --exit-zero core > core.log
+                        pylint --disable=C,E0611 --output-format=parseable --reports=no  --exit-zero gui > gui.log
+                        pylint --disable=C,E0611 --output-format=parseable --reports=no  --exit-zero main.py > main.log
+                        pylint --disable=C,E0611 --output-format=parseable --reports=no  --exit-zero qt_gui.py > qt_gui.log
                     '''
             }
             post{
