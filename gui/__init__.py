@@ -1,1 +1,1 @@
-from . import main_window
+from . import core_single_char

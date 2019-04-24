@@ -3,24 +3,31 @@ import logging
 from functools import partial
 from pathlib import Path
 
+from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
+from gui.constants import LAST_OPENED_CHARACTER_FILE
+from gui.core_single_char import MainWindowUi
 from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import set_text_of_children
-from gui.main_window import MainWindowUi
+from utils.file_operation import file_backup_same_dir
 
 
-class MyApp(MainWindowUi):
+class SingleCharCore(MainWindowUi):
 
-    def __init__(self):
+    def __init__(self, is_multi=False, idx=0):
         MainWindowUi.__init__(self)
         self.character_file = ""
         self.tab_name = "New char"
         self.connect_attrs()
+        self.settings = QSettings("settings.ini", QSettings.IniFormat, None)
+        self.settings.setFallbacksEnabled(False)
+        self.is_multi = is_multi
+        self.tab_idx = idx
 
     def open_file(self):
         if self.character_file:
-            proceed = QMessageBox.question(self,
+            proceed = QMessageBox.question(self.container,
                                            "Overwriting old data",
                                            "Opening new character file will overwrite all data in sheet. Continue?",
                                            QMessageBox.Yes, QMessageBox.No)
@@ -32,15 +39,11 @@ class MyApp(MainWindowUi):
         if not fname:
             logging.debug("No file opened.")
             return
-        data_to_read = json.load(Path(fname).open())
-        self._clean_character_sheet()
-        self.character_file = fname
-        try:
-            set_text_of_children(self, data_to_read)
-        except (AttributeError, TypeError, IndexError) as e:
-            logging.error("Couldnt load file: %s. Error: %s", self.character_file, e)
-            return
-        logging.info("File opened: %s", fname)
+        self.open_selected_file(fname)
+
+        self._refresh_gui()
+
+    def _refresh_gui(self):
         self.weapons_box.melee_weapons_box.update_choice_text()
         self.weapons_box.ranged_weapons_box.update_choice_text()
         self.weapons_box.melee_weapons_box.change_weapon()
@@ -49,8 +52,21 @@ class MyApp(MainWindowUi):
         for box in scrollabe_boxes:
             box.sort_elements()
 
+    def open_selected_file(self, fname):
+        data_to_read = json.load(Path(fname).open(encoding='utf-8'))
+        self._clean_character_sheet()
+        self.character_file = fname
+        try:
+            set_text_of_children(self, data_to_read)
+        except (AttributeError, TypeError, IndexError) as e:
+            logging.error("Couldnt load file: %s. Error: %s", self.character_file, e)
+            return
+        logging.info("File opened: %s", fname)
+        self._save_last_opened_setting()
+        self._refresh_gui()
+
     def create_new_character(self):
-        proceed = QMessageBox.question(self, "Continue?",
+        proceed = QMessageBox.question(self.container, "Continue?",
                                        "This will clear character sheet. Continue?", QMessageBox.Yes, QMessageBox.No)
         if proceed == QMessageBox.Yes:
             self._clean_character_sheet()
@@ -105,9 +121,9 @@ class MyApp(MainWindowUi):
                         "armor_items_box": self.armor_items_box.get_dict_repr(),
                         "weapons_box": self.weapons_box.get_dict_repr(),
                         }
-        json.dump(data_to_save, Path(self.character_file).open('w'), indent=4)
+        json.dump(data_to_save, Path(self.character_file).open('w', encoding='utf-8'), indent=4, ensure_ascii=False)
         logging.debug("Saved character to file: %s", self.character_file)
-
+        self._save_last_opened_setting()
 
     def connect_attrs(self):
         for attr in self.attributes_box.__dict__:
@@ -146,8 +162,23 @@ class MyApp(MainWindowUi):
         scrollable_boxes = [obj for obj in refs if isinstance(obj, ResizeableBox)]
         return scrollable_boxes
 
+    def set_tab_idx(self, idx):
+        self.tab_idx = idx
 
-def config_logger(logging_level):
-    logging.basicConfig(level=logging_level, style="%",
-                        format="%(asctime)s %(levelname)s %(module)s %(funcName)s: %(lineno)d %(message)s",
-                        datefmt="%H:%M:%S")
+    def update_settings(self):
+        self._save_last_opened_setting()
+
+    def _save_last_opened_setting(self):
+        if not self.is_multi:
+            self.settings.setValue(LAST_OPENED_CHARACTER_FILE, self.character_file)
+        else:
+            self.settings.setValue(f'{LAST_OPENED_CHARACTER_FILE}_{self.tab_idx}', self.character_file)
+        self.settings.sync()
+
+    def backup_char_file(self):
+        if not self.character_file:
+            return
+        file_backup_same_dir(self.character_file)
+        self._save_file()
+
+

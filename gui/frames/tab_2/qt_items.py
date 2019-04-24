@@ -14,7 +14,7 @@ from gui.frames.qt_generic_functions import create_qlabel, create_qline_edit, \
 class ItemsBox(ScrollableBox):
     def __init__(self, parent, position, size, char_core: Character):
         self.char_core = char_core
-        base_size = [size[0], 100]
+        base_size = [size[0], 110]
         height_increment = 29
         max_height = size[1]
         ScrollableBox.__init__(self, parent=parent, position=position, original_size=size, base_size=base_size,
