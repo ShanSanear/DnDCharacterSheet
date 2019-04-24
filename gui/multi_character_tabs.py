@@ -4,7 +4,7 @@ Kudos to yurisnm (https://stackoverflow.com/users/6801746/yurisnm) for sharing t
 """
 import logging
 
-from PyQt5.QtCore import QSize, pyqtSlot
+from PyQt5.QtCore import QSize, pyqtSlot, QSettings
 from PyQt5.QtCore import Qt
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QInputDialog
@@ -12,6 +12,9 @@ from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QTabBar
 from PyQt5.QtWidgets import QTabWidget
 from PyQt5.QtWidgets import QVBoxLayout
+
+from gui.constants import OPENED_CHARACTERS_COUNT
+from gui.qt_gui import SingleCharCore
 
 
 class TabBarPlus(QTabBar):
@@ -79,6 +82,8 @@ class MulticharacterTabWidget(QTabWidget):
 
     def __init__(self, parent, single_character_gui):
         super(MulticharacterTabWidget, self).__init__(parent)
+        self.settings = QSettings("settings.ini", QSettings.IniFormat, None)
+        self.settings.setFallbacksEnabled(False)
         self.layout = QVBoxLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.single_character_gui = single_character_gui
@@ -97,9 +102,12 @@ class MulticharacterTabWidget(QTabWidget):
         else:
             self.setTabsClosable(False)
 
-        new_character = self.single_character_gui()
+        new_character = self.single_character_gui(is_multi=True, idx=len(self._characters))
         self._characters.append(new_character)
         self.addTab(new_character.container, new_character.tab_name)
+        self.settings.setValue(OPENED_CHARACTERS_COUNT, self.count())
+        self.settings.sync()
+
 
     def removeTab(self, p_int):
         del self._characters[p_int]
@@ -117,6 +125,16 @@ class MulticharacterTabWidget(QTabWidget):
             self.setTabsClosable(True)
         else:
             self.setTabsClosable(False)
+
+        self.settings.setValue(OPENED_CHARACTERS_COUNT, self.count())
+        self.settings.sync()
+        self._update_characters_idx()
+
+    def _update_characters_idx(self):
+        for char_idx, char in enumerate(self._characters):
+            char: SingleCharCore
+            char.set_tab_idx(char_idx)
+            char.update_settings()
 
     @pyqtSlot()
     def update_axes(self):
