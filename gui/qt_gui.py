@@ -10,17 +10,20 @@ from gui.constants import LAST_OPENED_CHARACTER_FILE
 from gui.core_single_char import MainWindowUi
 from gui.frames.qt_generic_classes import ResizeableBox
 from gui.frames.qt_generic_functions import set_text_of_children
+from utils.file_operation import file_backup_same_dir
 
 
 class SingleCharCore(MainWindowUi):
 
-    def __init__(self):
+    def __init__(self, is_multi=False, idx=0):
         MainWindowUi.__init__(self)
         self.character_file = ""
         self.tab_name = "New char"
         self.connect_attrs()
         self.settings = QSettings("settings.ini", QSettings.IniFormat, None)
         self.settings.setFallbacksEnabled(False)
+        self.is_multi = is_multi
+        self.tab_idx = idx
 
     def open_file(self):
         if self.character_file:
@@ -59,8 +62,7 @@ class SingleCharCore(MainWindowUi):
             logging.error("Couldnt load file: %s. Error: %s", self.character_file, e)
             return
         logging.info("File opened: %s", fname)
-        self.settings.setValue(LAST_OPENED_CHARACTER_FILE, self.character_file)
-        self.settings.sync()
+        self._save_last_opened_setting()
         self._refresh_gui()
 
     def create_new_character(self):
@@ -121,8 +123,7 @@ class SingleCharCore(MainWindowUi):
                         }
         json.dump(data_to_save, Path(self.character_file).open('w', encoding='utf-8'), indent=4, ensure_ascii=False)
         logging.debug("Saved character to file: %s", self.character_file)
-        self.settings.setValue(LAST_OPENED_CHARACTER_FILE, self.character_file)
-        self.settings.sync()
+        self._save_last_opened_setting()
 
     def connect_attrs(self):
         for attr in self.attributes_box.__dict__:
@@ -161,6 +162,22 @@ class SingleCharCore(MainWindowUi):
         scrollable_boxes = [obj for obj in refs if isinstance(obj, ResizeableBox)]
         return scrollable_boxes
 
+    def set_tab_idx(self, idx):
+        self.tab_idx = idx
+
+    def update_settings(self):
+        self._save_last_opened_setting()
+
+    def _save_last_opened_setting(self):
+        if not self.is_multi:
+            self.settings.setValue(LAST_OPENED_CHARACTER_FILE, self.character_file)
+        else:
+            self.settings.setValue(f'{LAST_OPENED_CHARACTER_FILE}_{self.tab_idx}', self.character_file)
+        self.settings.sync()
+
+    def backup_char_file(self):
+        file_backup_same_dir(self.character_file)
+        self._save_file()
 
 def config_logger(logging_level):
     logging.basicConfig(level=logging_level, style="%",
