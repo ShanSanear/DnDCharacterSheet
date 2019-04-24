@@ -7,3 +7,4 @@ AUTOSAVE_INTERVAL = "autosave_interval"
 LAST_OPENED_CHARACTER_FILE = 'last_opened_file'
 APP_LANGUAGE = "language"
 ASK_ABOUT_LOADING = "ask_about_loading_last"
+OPENED_CHARACTERS_COUNT = 'opened_characters_count'
