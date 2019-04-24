@@ -149,3 +149,6 @@ class MulticharacterTabWidget(QTabWidget):
 
     def get_character(self, pos):
         return self._characters[pos]
+
+    def get_character_list(self):
+        return self._characters
