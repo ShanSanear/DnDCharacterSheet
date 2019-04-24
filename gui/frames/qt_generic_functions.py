@@ -156,7 +156,6 @@ def set_combo_box_choices(root_object, choices):
 
 
 def set_text_of_children(root_object, to_set: dict):
-    logging.debug("Current root object: %s", root_object)
     for name, data_to_set in to_set.items():
         if name == "title":
             root_object.setTitle(data_to_set)
@@ -166,7 +165,6 @@ def set_text_of_children(root_object, to_set: dict):
             continue
         obj_ref = getattr(root_object, name)
         if isinstance(data_to_set, dict):
-            logging.debug("Setting dict data for %s", name)
             set_text_of_children(obj_ref, data_to_set)
         elif isinstance(data_to_set, list):
             for idx, element_data in enumerate(data_to_set):
