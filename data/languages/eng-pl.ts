@@ -269,19 +269,6 @@
     </message>
 </context>
 <context>
-    <name>Demo</name>
-    <message>
-        <location filename="../../test_file.py" line="42"/>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../test_file.py" line="43"/>
-        <source>Hello, World</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Experience</name>
     <message>
         <location filename="../../gui/frames/tab_3/qt_experience.py" line="55"/>
@@ -505,6 +492,34 @@
         <location filename="../../gui/frames/qt_menu_bar.py" line="52"/>
         <source>About</source>
         <translation>O programie</translation>
+    </message>
+</context>
+<context>
+    <name>MoneyBox</name>
+    <message>
+        <location filename="../../gui/frames/tab_2/qt_currency.py" line="30"/>
+        <source>Currency</source>
+        <translation>Waluta</translation>
+    </message>
+    <message>
+        <location filename="../../gui/frames/tab_2/qt_currency.py" line="31"/>
+        <source>Copper (cp)</source>
+        <translation>Miedź</translation>
+    </message>
+    <message>
+        <location filename="../../gui/frames/tab_2/qt_currency.py" line="32"/>
+        <source>Silver (sp)</source>
+        <translation>Srebro</translation>
+    </message>
+    <message>
+        <location filename="../../gui/frames/tab_2/qt_currency.py" line="33"/>
+        <source>Gold (gp)</source>
+        <translation>Złoto</translation>
+    </message>
+    <message>
+        <location filename="../../gui/frames/tab_2/qt_currency.py" line="34"/>
+        <source>Platinum (pp)</source>
+        <translation>Platyna</translation>
     </message>
 </context>
 <context>
@@ -741,17 +756,17 @@
 <context>
     <name>Tabs</name>
     <message>
-        <location filename="../../gui/core_single_char.py" line="123"/>
+        <location filename="../../gui/core_single_char.py" line="126"/>
         <source>Basic information / Combat / Skills / Feats</source>
         <translation>Bazowe info / Walka / Umiejętności / Atuty</translation>
     </message>
     <message>
-        <location filename="../../gui/core_single_char.py" line="124"/>
+        <location filename="../../gui/core_single_char.py" line="127"/>
         <source>Items / Spells / Languages</source>
         <translation>Przedmioty / Czary / Języki</translation>
     </message>
     <message>
-        <location filename="../../gui/core_single_char.py" line="125"/>
+        <location filename="../../gui/core_single_char.py" line="128"/>
         <source>Weapons / Armor / Notes</source>
         <translation>Bronie / Pancerz / Notatki</translation>
     </message>
