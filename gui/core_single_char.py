@@ -9,6 +9,7 @@ from gui.frames.tab_1.qt_hp_ac import HpAcBox
 from gui.frames.tab_1.qt_saving_throws import SavingThrowsBox
 from gui.frames.tab_1.qt_skills import SkillsBox
 from gui.frames.tab_1.qt_weapon_statistics import WeaponStatisticsBox
+from gui.frames.tab_2.qt_currency import CurrencyBox
 from gui.frames.tab_2.qt_items import ItemsBox
 from gui.frames.tab_2.qt_known_spells import KnownSpellsBox
 from gui.frames.tab_2.qt_languages import LanguagesBox
@@ -79,7 +80,8 @@ class Tab2(Tab1):
         self.tab2 = QWidget(self.tabs)
         self.items_box = ItemsBox(self.tab2, position=[10, 10], size=[500, 780], char_core=self.char_core)
         self.number_of_spells_box = NumberOfSpellsBox(self.tab2, position=[520, 10], size=[450, 100])
-        self.languages_box = LanguagesBox(self.tab2, position=[1090, 380], size=[150, 250])
+        self.languages_box = LanguagesBox(self.tab2, position=[1090, 380], size=[150, 150])
+        self.currency_box = CurrencyBox(self.tab2, position=[1090, 550], size=[150, 150])
         self.spells_per_day_box = SpellsPerDayBox(self.tab2, position=[1090, 10], size=[150, 350])
         self.known_spells_box = KnownSpellsBox(self.tab2, position=[520, 120], size=[550, 670])
         self.tabs.addTab(self.tab2, "")
@@ -88,6 +90,7 @@ class Tab2(Tab1):
         self.items_box.retranslate()
         self.number_of_spells_box.retranslate()
         self.languages_box.retranslate()
+        self.currency_box.retranslate()
         self.spells_per_day_box.retranslate()
         self.known_spells_box.retranslate()
 
