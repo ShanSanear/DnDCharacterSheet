@@ -8,8 +8,8 @@ from gui.frames.qt_generic_functions import create_qlabel, add_multiple_elements
 class CurrencyBox(BoxType, DefaultBox):
     def __init__(self, parent, position, size):
         BoxType.__init__(self, parent=parent, position=position, size=size)
-        qlabel_dict = dict(parent=self.container, align=QtCore.Qt.AlignLeft)
-        qline_dict = dict(parent=self.container, max_size=[50, None])
+        qlabel_dict = dict(parent=self.container, align=QtCore.Qt.AlignRight)
+        qline_dict = dict(parent=self.container, max_size=[40, None])
         self.copper_label = create_qlabel(**qlabel_dict)
         self.silver_label = create_qlabel(**qlabel_dict)
         self.gold_label = create_qlabel(**qlabel_dict)
