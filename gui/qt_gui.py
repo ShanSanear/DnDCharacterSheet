@@ -120,6 +120,7 @@ class SingleCharCore(MainWindowUi):
                         "attributes_box": self.attributes_box.get_dict_repr(),
                         "armor_items_box": self.armor_items_box.get_dict_repr(),
                         "weapons_box": self.weapons_box.get_dict_repr(),
+                        "currency_box": self.currency_box.get_dict_repr()
                         }
         json.dump(data_to_save, Path(self.character_file).open('w', encoding='utf-8'), indent=4, ensure_ascii=False)
         logging.debug("Saved character to file: %s", self.character_file)
