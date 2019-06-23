@@ -19,6 +19,8 @@ class MainWindowWrapper(QMainWindow):
         self.settings_window = SettingsWindow()
         self.menu_bar = MenuBar(self)
         self.menu_bar.retranslate()
+        self.set_icon()
+
 
     def common_connect_menu_bar(self):
         self.menu_bar.about.triggered.connect(self.about_popup.show)
@@ -47,3 +49,6 @@ class MainWindowWrapper(QMainWindow):
 
     def change_main_window_title(self, new_title):
         self.setWindowTitle(new_title)
+
+    def set_icon(self):
+        self.setWindowIcon(QtGui.QIcon("data\\icon256.ico"))
