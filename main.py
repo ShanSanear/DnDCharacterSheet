@@ -24,7 +24,9 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
         self.autosave_timer_id = self.startTimer(self.autosave_interval)
         self.restore_settings()
         self.settings_window.buttons_box.accepted.connect(self.setting_new_autosave_interval)
+        self.change_main_window_title("Character Sheet")
         self.load_last_saved()
+
 
     def load_predefined_language(self):
         language = self.settings.value(APP_LANGUAGE, 'PL', type=str)
@@ -106,13 +108,19 @@ class SingleCharApp(SingleCharCore, MainWindowWrapper):
         logging.debug("Timer event")
         self.backup_char_file()
 
+    def title_bar_from_file(self):
+        self.change_main_window_title(f"Character Sheet: {self.character_file}")
+
+    def _refresh_gui(self):
+        super(SingleCharApp, self)._refresh_gui()
+        self.title_bar_from_file()
+
 
 def init_gui():
     app = QApplication(sys.argv)
     app.setStyle("windowsvista")
     form = SingleCharApp()
     form.show()
-    form.setWindowTitle("Character Sheet")
     app.exec_()
 
 
