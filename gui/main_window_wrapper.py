@@ -44,3 +44,6 @@ class MainWindowWrapper(QMainWindow):
     def restore_window_settings(self):
         self._load_size()
         self._load_position()
+
+    def change_main_window_title(self, new_title):
+        self.setWindowTitle(new_title)
